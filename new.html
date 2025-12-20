@@ -1,0 +1,1970 @@
+<!doctype html>
+<html lang="en" dir="ltr" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+  <!-- Theme boot (prevents flash) -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("theme");
+        document.documentElement.setAttribute("data-theme", t || "dark");
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+
+  <!-- Primary SEO -->
+  <title>Best Hytale Vanilla Servers (2026) | Curated List + IPs</title>
+  <meta name="description" content="Editor-ranked vanilla Hytale servers. Curated Hytale vanilla server list with IPs, rules, gameplay footprint, no pay-to-win notes, and last-checked dates." />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <link rel="canonical" href="https://vanillaminecraftservers.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Hytale Vanilla Servers | Curated Editor Picks" />
+  <meta property="og:description" content="Editor-ranked vanilla Hytale servers with IPs, rules, gameplay footprint, monetization notes, and last-checked dates." />
+  <meta property="og:url" content="https://vanillaminecraftservers.com/" />
+  <meta property="og:site_name" content="HytaleVanillaServers.com" />
+  <meta property="og:image" content="https://vanillaminecraftservers.com/img/vanillahytaleservers.jpg" />
+  <meta property="og:image:alt" content="Hytale Vanilla Servers curated list preview image" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Hytale Vanilla Servers | Curated Editor Picks" />
+  <meta name="twitter:description" content="Editor-ranked vanilla Hytale servers with IPs, rules, gameplay footprint, monetization notes, and last-checked dates." />
+  <meta name="twitter:image" content="https://vanillaminecraftservers.com/img/vanillahytaleservers.jpg" />
+
+  <meta name="theme-color" content="#0a0f1f" />
+  <meta name="color-scheme" content="dark light" />
+
+  <!-- Performance: preconnect for fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- Fonts: medieval for headings, clean body -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome (icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- GSAP + ScrollTrigger -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <style>
+    :root {
+      --bg: #070a13;
+      --bg-2: #0a0f1f;
+
+      --panel: rgba(255,255,255,0.05);
+      --panel-2: rgba(255,255,255,0.075);
+
+      --stroke: rgba(255,255,255,0.10);
+      --stroke-2: rgba(255,255,255,0.14);
+
+      --text: rgba(255,255,255,0.90);
+      --muted: rgba(255,255,255,0.70);
+      --muted-2: rgba(255,255,255,0.58);
+
+      --accent: #5ee6ff;
+      --accent-2: #7cffc8;
+
+      --radius: 18px;
+      --radius-sm: 12px;
+
+      --shadow: 0 18px 50px rgba(0,0,0,0.55);
+      --shadow-soft: 0 10px 30px rgba(0,0,0,0.35);
+
+      --max: 1120px;
+      --pad: 20px;
+
+      --h-font: "Cinzel Decorative", serif;
+      --b-font: "Nunito Sans", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    /* Light theme overrides */
+    :root[data-theme="light"] {
+      --bg: #f7fbff;
+      --bg-2: #eef6ff;
+
+      --panel: rgba(0,0,0,0.035);
+      --panel-2: rgba(0,0,0,0.05);
+
+      --stroke: rgba(0,0,0,0.10);
+      --stroke-2: rgba(0,0,0,0.14);
+
+      --text: rgba(10,15,31,0.92);
+      --muted: rgba(10,15,31,0.72);
+      --muted-2: rgba(10,15,31,0.58);
+
+      /* Hytale-ish: bright sky + mint */
+      --accent: #24b7ff;
+      --accent-2: #29e3a2;
+
+      --shadow: 0 18px 50px rgba(0,0,0,0.14);
+      --shadow-soft: 0 10px 30px rgba(0,0,0,0.10);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      position: relative;
+      font-family: var(--b-font);
+      color: var(--text);
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+      line-height: 1.55;
+      overflow-x: hidden;
+    }
+
+    /* Animated gradient layer (continuous slow rotation + gentle drift) */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: -22%;
+      z-index: 0;
+      background:
+        radial-gradient(1200px 640px at 18% 8%, rgba(94,230,255,0.14), transparent 60%),
+        radial-gradient(980px 560px at 88% 16%, rgba(124,255,200,0.10), transparent 58%),
+        radial-gradient(760px 520px at 55% 88%, rgba(94,230,255,0.06), transparent 60%),
+        linear-gradient(180deg, rgba(7,10,19,1) 0%, rgba(10,15,31,1) 100%);
+      filter: saturate(1.02);
+      transform-origin: 50% 50%;
+      animation: bgDrift 96s linear infinite;
+      will-change: transform;
+      pointer-events: none;
+    }
+
+    :root[data-theme="light"] body::before {
+      background:
+        radial-gradient(1100px 620px at 18% 10%, rgba(36,183,255,0.18), transparent 62%),
+        radial-gradient(980px 560px at 88% 18%, rgba(41,227,162,0.14), transparent 62%),
+        radial-gradient(760px 520px at 55% 88%, rgba(36,183,255,0.08), transparent 65%),
+        linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(238,246,255,1) 100%);
+      filter: saturate(1.02);
+    }
+
+    @keyframes bgDrift {
+      0%   { transform: translate3d(-2.2%, -1.4%, 0) scale(1.06) rotate(0deg); }
+      25%  { transform: translate3d( 1.6%, -0.6%, 0) scale(1.07) rotate(90deg); }
+      50%  { transform: translate3d( 2.2%,  1.8%, 0) scale(1.08) rotate(180deg); }
+      75%  { transform: translate3d(-1.2%,  2.4%, 0) scale(1.07) rotate(270deg); }
+      100% { transform: translate3d(-2.2%, -1.4%, 0) scale(1.06) rotate(360deg); }
+    }
+
+    header.site-header,
+    main,
+    footer,
+    .toast {
+      position: relative;
+      z-index: 1;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container {
+      width: 100%;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 var(--pad);
+    }
+
+    /* Accessibility */
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: 12px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: rgba(0,0,0,0.85);
+      border: 1px solid var(--stroke-2);
+      color: var(--text);
+      z-index: 9999;
+    }
+    .skip-link:focus { left: 12px; outline: none; }
+
+    /* Motion system */
+    .tilt, .pressable {
+      --tx: 0px;
+      --ty: 0px;
+      --rx: 0deg;
+      --ry: 0deg;
+      --scale: 1;
+      --revealY: 0px;
+
+      transform:
+        perspective(1200px)
+        translate3d(var(--tx), calc(var(--ty) + var(--revealY)), 0)
+        rotateX(var(--rx))
+        rotateY(var(--ry))
+        scale(var(--scale));
+
+      transform-style: preserve-3d;
+      will-change: transform;
+      backface-visibility: hidden;
+    }
+
+    /* Header */
+    header.site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      background: rgba(7,10,19,0.70);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    :root[data-theme="light"] header.site-header {
+      background: rgba(255,255,255,0.76);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 220px;
+    }
+    .brand:hover,
+    .brand:focus { text-decoration: none; }
+
+    .brand-badge {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(94,230,255,0.30), transparent 60%),
+        radial-gradient(circle at 70% 60%, rgba(124,255,200,0.22), transparent 60%),
+        rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: var(--shadow-soft);
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+    }
+    :root[data-theme="light"] .brand-badge {
+      background:
+        radial-gradient(circle at 30% 30%, rgba(36,183,255,0.24), transparent 60%),
+        radial-gradient(circle at 70% 60%, rgba(41,227,162,0.18), transparent 60%),
+        rgba(0,0,0,0.02);
+      border: 1px solid rgba(0,0,0,0.10);
+    }
+    .brand-badge i { color: var(--accent); font-size: 15px; }
+
+    .brand-title {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+    .brand-title strong {
+      font-family: var(--h-font);
+      letter-spacing: 0.02em;
+      font-weight: 900;
+      font-size: 13px;
+    }
+    .brand-title span {
+      font-size: 12px;
+      color: var(--muted-2);
+    }
+
+    nav.main-nav {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      font-weight: 800;
+      font-size: 13px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .btn:hover {
+      text-decoration: none;
+      border-color: rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.085);
+    }
+    .btn-primary {
+      border-color: rgba(94,230,255,0.35);
+      background: linear-gradient(180deg, rgba(94,230,255,0.20), rgba(94,230,255,0.08));
+    }
+    .btn-primary:hover {
+      border-color: rgba(94,230,255,0.55);
+      background: linear-gradient(180deg, rgba(94,230,255,0.26), rgba(94,230,255,0.10));
+    }
+
+    :root[data-theme="light"] .btn {
+      border-color: rgba(0,0,0,0.12);
+      background: rgba(0,0,0,0.03);
+      color: var(--text);
+    }
+    :root[data-theme="light"] .btn:hover {
+      border-color: rgba(0,0,0,0.18);
+      background: rgba(0,0,0,0.045);
+    }
+    :root[data-theme="light"] .btn-primary {
+      border-color: rgba(36,183,255,0.45);
+      background: linear-gradient(180deg, rgba(36,183,255,0.18), rgba(36,183,255,0.06));
+    }
+    :root[data-theme="light"] .btn-primary:hover {
+      border-color: rgba(36,183,255,0.70);
+      background: linear-gradient(180deg, rgba(36,183,255,0.22), rgba(36,183,255,0.08));
+    }
+
+    .nav-text {
+      font-size: 13px;
+      color: var(--muted);
+      padding: 10px 10px;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+    .nav-text:hover {
+      text-decoration: none;
+      color: var(--text);
+      background: rgba(255,255,255,0.05);
+    }
+    :root[data-theme="light"] .nav-text:hover {
+      background: rgba(0,0,0,0.03);
+    }
+
+    /* Theme toggle */
+    .theme-toggle {
+      padding: 10px 12px;
+      gap: 9px;
+      white-space: nowrap;
+    }
+    .theme-toggle i {
+      color: var(--accent);
+    }
+    .theme-toggle span {
+      font-weight: 900;
+      font-size: 12.5px;
+      color: var(--muted);
+    }
+
+    /* Hero */
+    section { padding: 26px 0; }
+    .hero { padding: 36px 0 18px; }
+
+    .hero-panel {
+      border-radius: calc(var(--radius) + 4px);
+      border: 1px solid rgba(255,255,255,0.10);
+      background:
+        radial-gradient(620px 260px at 20% 30%, rgba(94,230,255,0.14), transparent 65%),
+        radial-gradient(520px 240px at 80% 20%, rgba(124,255,200,0.10), transparent 65%),
+        rgba(255,255,255,0.05);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    :root[data-theme="light"] .hero-panel {
+      border-color: rgba(0,0,0,0.10);
+      background:
+        radial-gradient(620px 260px at 20% 30%, rgba(36,183,255,0.18), transparent 68%),
+        radial-gradient(520px 240px at 80% 20%, rgba(41,227,162,0.12), transparent 68%),
+        rgba(255,255,255,0.70);
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1.35fr 0.65fr;
+      gap: 18px;
+      padding: 22px;
+      align-items: start;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-family: var(--h-font);
+      font-size: clamp(30px, 4vw, 44px);
+      letter-spacing: 0.02em;
+      line-height: 1.08;
+      font-weight: 900;
+    }
+
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 78ch;
+    }
+
+    .hero-meta {
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 14px;
+      color: var(--muted-2);
+      font-size: 13px;
+    }
+
+    .hero-meta a {
+      color: var(--text);
+      text-decoration: underline;
+      text-decoration-color: rgba(255,255,255,0.25);
+      text-underline-offset: 3px;
+    }
+    .hero-meta a:hover { text-decoration-color: rgba(94,230,255,0.45); }
+    :root[data-theme="light"] .hero-meta a {
+      text-decoration-color: rgba(0,0,0,0.20);
+    }
+    :root[data-theme="light"] .hero-meta a:hover {
+      text-decoration-color: rgba(36,183,255,0.55);
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .hero-cta .btn { width: 100%; justify-content: center; }
+    .hero-cta .btn-secondary {
+      border-color: rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+      font-weight: 800;
+    }
+    :root[data-theme="light"] .hero-cta .btn-secondary {
+      border-color: rgba(0,0,0,0.12);
+      background: rgba(0,0,0,0.03);
+    }
+
+    /* Section titles */
+    h2 {
+      margin: 0 0 12px;
+      font-family: var(--h-font);
+      letter-spacing: 0.02em;
+      font-weight: 900;
+      font-size: 22px;
+    }
+    .section-lead {
+      margin: 0 0 14px;
+      color: var(--muted);
+      max-width: 86ch;
+    }
+
+    /* Cards */
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    @media (min-width: 920px) {
+      .cards { grid-template-columns: 1fr 1fr; gap: 16px; }
+      .card.featured { grid-column: 1 / -1; }
+    }
+
+    .card {
+      border-radius: var(--radius);
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,0.05);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+    }
+    :root[data-theme="light"] .card {
+      background: rgba(255,255,255,0.72);
+      border-color: rgba(0,0,0,0.10);
+    }
+
+    .card-head {
+      padding: 16px 16px 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.03));
+    }
+    :root[data-theme="light"] .card-head {
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      background: linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.01));
+    }
+
+    .card-title-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .card h3 {
+      margin: 0;
+      font-family: var(--h-font);
+      font-size: 18px;
+      letter-spacing: 0.02em;
+      line-height: 1.2;
+      font-weight: 900;
+    }
+
+    .subtitle {
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: 13.5px;
+    }
+
+    .badges {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.05);
+      font-size: 12px;
+      font-weight: 900;
+      color: var(--text);
+      white-space: nowrap;
+    }
+    :root[data-theme="light"] .badge {
+      border: 1px solid rgba(0,0,0,0.12);
+      background: rgba(0,0,0,0.02);
+    }
+
+    .badge i { color: rgba(94,230,255,0.90); }
+    :root[data-theme="light"] .badge i { color: rgba(36,183,255,0.95); }
+
+    .badge.featured {
+      border-color: rgba(94,230,255,0.30);
+      background: linear-gradient(180deg, rgba(94,230,255,0.16), rgba(94,230,255,0.06));
+    }
+    :root[data-theme="light"] .badge.featured {
+      border-color: rgba(36,183,255,0.40);
+      background: linear-gradient(180deg, rgba(36,183,255,0.14), rgba(36,183,255,0.04));
+    }
+
+    .badge.score {
+      color: var(--muted);
+      border-color: rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.04);
+    }
+    :root[data-theme="light"] .badge.score {
+      border-color: rgba(0,0,0,0.12);
+      background: rgba(0,0,0,0.02);
+    }
+
+    .facts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 10px;
+      margin: 8px 0 10px;
+    }
+    .fact {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+      color: var(--muted);
+      font-size: 12.5px;
+    }
+    :root[data-theme="light"] .fact {
+      border-color: rgba(0,0,0,0.12);
+      background: rgba(0,0,0,0.02);
+    }
+    .fact i { color: rgba(255,255,255,0.82); }
+    :root[data-theme="light"] .fact i { color: rgba(10,15,31,0.72); }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+
+    .ip-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(0,0,0,0.18);
+      min-width: 260px;
+      flex: 1 1 260px;
+    }
+    :root[data-theme="light"] .ip-box {
+      border-color: rgba(0,0,0,0.12);
+      background: rgba(0,0,0,0.06);
+    }
+    .ip-box code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 13px;
+      color: rgba(255,255,255,0.92);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    :root[data-theme="light"] .ip-box code {
+      color: rgba(10,15,31,0.92);
+    }
+
+    .btn-copy {
+      margin-left: auto;
+      padding: 9px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(94,230,255,0.30);
+      background: rgba(94,230,255,0.10);
+      color: var(--text);
+      font-weight: 900;
+      font-size: 12.5px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-copy:hover {
+      border-color: rgba(94,230,255,0.55);
+      background: rgba(94,230,255,0.14);
+    }
+    :root[data-theme="light"] .btn-copy {
+      border-color: rgba(36,183,255,0.45);
+      background: rgba(36,183,255,0.10);
+    }
+    :root[data-theme="light"] .btn-copy:hover {
+      border-color: rgba(36,183,255,0.72);
+      background: rgba(36,183,255,0.14);
+    }
+
+    .links {
+      display: inline-flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      flex: 0 0 auto;
+    }
+
+    .link-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      font-weight: 900;
+      font-size: 12.5px;
+      cursor: pointer;
+    }
+    .link-pill:hover {
+      text-decoration: none;
+      border-color: rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.06);
+    }
+    :root[data-theme="light"] .link-pill {
+      border-color: rgba(0,0,0,0.12);
+      background: rgba(0,0,0,0.02);
+    }
+    :root[data-theme="light"] .link-pill:hover {
+      border-color: rgba(0,0,0,0.18);
+      background: rgba(0,0,0,0.035);
+    }
+
+    .card-body { padding: 12px 16px 16px; }
+
+    .why {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 13.5px;
+    }
+    .why strong { color: rgba(255,255,255,0.92); }
+    :root[data-theme="light"] .why strong { color: rgba(10,15,31,0.92); }
+
+    /* Details */
+    details {
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.09);
+      background: rgba(255,255,255,0.03);
+      padding: 10px 12px;
+      margin: 10px 0;
+    }
+    :root[data-theme="light"] details {
+      border-color: rgba(0,0,0,0.10);
+      background: rgba(0,0,0,0.015);
+    }
+
+    summary {
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-weight: 900;
+      color: rgba(255,255,255,0.92);
+      font-size: 13px;
+      user-select: none;
+    }
+    :root[data-theme="light"] summary { color: rgba(10,15,31,0.92); }
+    summary::-webkit-details-marker { display: none; }
+
+    summary .meta {
+      color: var(--muted-2);
+      font-weight: 800;
+      font-size: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+
+    .details-content {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 13.5px;
+      overflow: hidden;
+    }
+    .details-content ul { margin: 10px 0 0; padding-left: 18px; }
+    .details-content li { margin: 6px 0; }
+
+    /* Score bars */
+    .score-bars { display: grid; gap: 10px; margin-top: 8px; }
+    .bar { display: grid; gap: 10px; }
+    .bar-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-weight: 800;
+      color: rgba(255,255,255,0.86);
+      font-size: 12.5px;
+    }
+    :root[data-theme="light"] .bar-label { color: rgba(10,15,31,0.86); }
+
+    .bar-label span { color: var(--muted-2); font-weight: 800; white-space: nowrap; }
+    .bar-track {
+      height: 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(0,0,0,0.18);
+      overflow: hidden;
+    }
+    :root[data-theme="light"] .bar-track {
+      border-color: rgba(0,0,0,0.12);
+      background: rgba(0,0,0,0.06);
+    }
+    .bar-fill {
+      width: 0%;
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(94,230,255,0.85), rgba(124,255,200,0.75));
+      filter: saturate(1.08);
+      will-change: width;
+    }
+    :root[data-theme="light"] .bar-fill {
+      background: linear-gradient(90deg, rgba(36,183,255,0.92), rgba(41,227,162,0.78));
+    }
+
+    /* Panels */
+    .panel {
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.05);
+      box-shadow: var(--shadow-soft);
+      padding: 16px;
+    }
+    :root[data-theme="light"] .panel {
+      border-color: rgba(0,0,0,0.10);
+      background: rgba(255,255,255,0.72);
+    }
+
+    .panel h3 {
+      font-family: var(--h-font);
+      margin: 0 0 10px;
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    @media (min-width: 920px) { .grid-2 { grid-template-columns: 1fr 1fr; } }
+
+    .fineprint { margin-top: 10px; font-size: 12.5px; color: var(--muted-2); }
+
+    /* Footer */
+    footer {
+      padding: 30px 0 40px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      margin-top: 24px;
+    }
+    :root[data-theme="light"] footer {
+      border-top: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    @media (min-width: 920px) { .footer-grid { grid-template-columns: 1.2fr 0.8fr; } }
+    .footer-title { font-family: var(--h-font); margin: 0 0 8px; font-size: 16px; font-weight: 900; }
+    .footer-text { margin: 0; color: var(--muted); font-size: 13.5px; }
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 20px;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.85);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 14px;
+      padding: 10px 12px;
+      color: rgba(255,255,255,0.92);
+      font-size: 13px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.55);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 180ms ease;
+      z-index: 9999;
+      max-width: min(560px, calc(100% - 24px));
+      text-align: center;
+    }
+    :root[data-theme="light"] .toast {
+      background: rgba(255,255,255,0.88);
+      border-color: rgba(0,0,0,0.12);
+      color: rgba(10,15,31,0.92);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+    }
+    .toast.show { opacity: 1; }
+
+    /* Idle animation */
+    @keyframes glowPulse {
+      0%   { box-shadow: var(--shadow-soft); border-color: rgba(255,255,255,0.10); }
+      50%  { box-shadow: 0 14px 40px rgba(0,0,0,0.45); border-color: rgba(94,230,255,0.16); }
+      100% { box-shadow: var(--shadow-soft); border-color: rgba(255,255,255,0.10); }
+    }
+    :root[data-theme="light"] @keyframes glowPulse {
+      0%   { box-shadow: var(--shadow-soft); border-color: rgba(0,0,0,0.10); }
+      50%  { box-shadow: 0 14px 40px rgba(0,0,0,0.12); border-color: rgba(36,183,255,0.22); }
+      100% { box-shadow: var(--shadow-soft); border-color: rgba(0,0,0,0.10); }
+    }
+    .idle { animation: glowPulse 4.6s ease-in-out infinite; }
+
+    /* Mobile */
+    @media (max-width: 820px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-cta { align-items: stretch; }
+      .footer-links { justify-content: flex-start; }
+    }
+  </style>
+
+  <!-- Structured data: ItemList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Hytale Vanilla Servers (Editor Picks)",
+    "itemListOrder": "https://schema.org/ItemListOrderDescending",
+    "numberOfItems": 5,
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Peaceful Vanilla Club (Hytale)", "url": "https://vanillaminecraftservers.com/#pvc" },
+      { "@type": "ListItem", "position": 2, "name": "Submission Slot #2", "url": "https://vanillaminecraftservers.com/#slot2" },
+      { "@type": "ListItem", "position": 3, "name": "Submission Slot #3", "url": "https://vanillaminecraftservers.com/#slot3" },
+      { "@type": "ListItem", "position": 4, "name": "Submission Slot #4", "url": "https://vanillaminecraftservers.com/#slot4" },
+      { "@type": "ListItem", "position": 5, "name": "Submission Slot #5", "url": "https://vanillaminecraftservers.com/#slot5" }
+    ]
+  }
+  </script>
+
+  <!-- Structured data: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a vanilla Hytale server?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A vanilla Hytale server focuses on base gameplay and avoids changes that significantly alter progression, balance, loot, or economy. Some servers may still run minimal quality-of-life and moderation tooling, as long as it is disclosed and does not rewrite the core experience."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Vanilla vs semi-vanilla",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Semi-vanilla usually adds convenience systems. In this list, we prefer vanilla-first servers and we document any gameplay footprint clearly per server."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you accept pay-to-win servers?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Pay-to-win fails the exclusion rules and is not listed."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I suggest a server?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Send the server name, IP, region, language, and links to rules and monetization policy. If it passes the exclusion rules, we review it."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <a class="skip-link" href="#servers">Skip to server list</a>
+
+  <header class="site-header" role="banner">
+    <div class="container">
+      <div class="topbar" data-reveal>
+        <a class="brand" href="#top" aria-label="Home">
+          <span class="brand-badge idle" aria-hidden="true"><i class="fa-solid fa-gem"></i></span>
+          <span class="brand-title">
+            <strong>HytaleVanillaServers.com</strong>
+            <span>Curated editor picks</span>
+          </span>
+        </a>
+
+        <nav class="main-nav" aria-label="Primary navigation">
+          <!-- No tilt in the header menu -->
+          <a class="btn btn-primary pressable" href="#servers">
+            <i class="fa-solid fa-list" aria-hidden="true"></i>
+            Browse servers
+          </a>
+
+          <a class="nav-text pressable" href="#suggest">
+            Suggest a server
+          </a>
+
+          <button class="btn pressable theme-toggle" id="themeToggle" type="button" aria-label="Switch theme">
+            <i class="fa-solid fa-moon" aria-hidden="true"></i>
+            <span>Dark</span>
+          </button>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main id="top" role="main">
+    <section class="hero">
+      <div class="container">
+        <div class="hero-panel idle tilt" data-tilt-strength="1.05" data-reveal>
+          <div class="hero-inner">
+            <div>
+              <h1>Hytale Vanilla Servers</h1>
+
+              <p>
+                A curated <strong>Hytale vanilla server list</strong> with five editor-ranked picks. Discover the <strong>best vanilla Hytale servers</strong>
+                for SMP and survival, compare rules and gameplay footprint, check monetization and <strong>no pay-to-win</strong> notes, and copy the
+                <strong>Hytale server IP</strong> to join. Every listing includes an editor score, a last-checked date, and a clear review of what stays vanilla
+                and what is changed.
+              </p>
+
+              <div class="hero-meta">
+                <span><i class="fa-regular fa-calendar" aria-hidden="true"></i> Last updated: <strong>2025-12-19</strong></span>
+                <span><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i> <a class="pressable" href="#methodology">How scoring works</a></span>
+              </div>
+            </div>
+
+            <div class="hero-cta" aria-label="Primary actions">
+              <a class="btn btn-primary tilt pressable" data-tilt-strength="0.70" href="#servers">
+                <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+                Jump to servers
+              </a>
+              <a class="btn btn-secondary tilt pressable" data-tilt-strength="0.70" href="#faq">
+                <i class="fa-solid fa-circle-question" aria-hidden="true"></i>
+                Vanilla FAQ
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="servers" aria-labelledby="servers-title">
+      <div class="container">
+        <h2 id="servers-title" data-reveal>Top vanilla Hytale servers (editor picks)</h2>
+        <p class="section-lead" data-reveal>
+          Ranked by editor score. Expand any card to see how we evaluate vanilla purity, fairness, rules, stability, community, and transparency.
+        </p>
+
+        <div class="cards">
+          <!--
+            SERVER CARD QUICK EDIT GUIDE:
+            1) Change card id="..." (example: pvc) so anchors work.
+            2) Change <h3> title, <p class="subtitle">, and facts (Region, Language, Playstyle, Whitelist, Last checked).
+            3) Change IP in <code> and in data-copy="...".
+            4) For external links:
+               - Featured server: keep rel="noopener noreferrer" (follow).
+               - Non-featured servers: use rel="nofollow noopener noreferrer".
+          -->
+
+          <!-- #1 FEATURED (FOLLOW links) -->
+          <article class="card featured tilt idle" data-tilt-strength="1.05" id="pvc" data-reveal>
+            <div class="card-head">
+              <div class="card-title-row">
+                <div>
+                  <h3>#1 Peaceful Vanilla Club (Hytale)</h3>
+                  <p class="subtitle">Strict vanilla SMP with a calm, long-term community. Placeholder copy for now.</p>
+                </div>
+                <div class="badges">
+                  <span class="badge featured"><i class="fa-solid fa-star" aria-hidden="true"></i>Featured</span>
+                  <span class="badge score"><i class="fa-solid fa-chart-simple" aria-hidden="true"></i>Editor Score: <strong>92</strong>/100</span>
+                </div>
+              </div>
+
+              <div class="facts" aria-label="Quick facts">
+                <span class="fact"><i class="fa-solid fa-globe" aria-hidden="true"></i><strong>Region:</strong>&nbsp;EU</span>
+                <span class="fact"><i class="fa-solid fa-language" aria-hidden="true"></i><strong>Language:</strong>&nbsp;EN</span>
+                <span class="fact"><i class="fa-solid fa-tree" aria-hidden="true"></i><strong>Playstyle:</strong>&nbsp;Vanilla SMP</span>
+                <span class="fact"><i class="fa-solid fa-user-shield" aria-hidden="true"></i><strong>Whitelist:</strong>&nbsp;No</span>
+                <span class="fact"><i class="fa-regular fa-clock" aria-hidden="true"></i><strong>Last checked:</strong>&nbsp;2025-12-19</span>
+              </div>
+
+              <div class="cta-row">
+                <div class="ip-box" aria-label="Server IP">
+                  <i class="fa-solid fa-network-wired" aria-hidden="true"></i>
+                  <code>play.pvchytale.example</code>
+                  <button class="btn-copy pressable" type="button" data-copy="play.pvchytale.example" data-tilt-strength="0.40">
+                    <i class="fa-regular fa-copy" aria-hidden="true"></i>Copy IP
+                  </button>
+                </div>
+
+                <div class="links" aria-label="Server links">
+                  <a class="link-pill tilt pressable" data-tilt-strength="0.55" href="https://discord.example" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-discord" aria-hidden="true"></i>Discord
+                  </a>
+                  <a class="link-pill tilt pressable" data-tilt-strength="0.55" href="https://example.com" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>Website
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <p class="why">
+                <strong>Why it’s vanilla-first:</strong> Placeholder. Close to base gameplay, minimal quality-of-life, and clear policies.
+              </p>
+
+              <details class="glance" data-bars data-reveal>
+                <summary>
+                  In a glance
+                  <span class="meta"><i class="fa-solid fa-bars-progress" aria-hidden="true"></i>Score breakdown</span>
+                </summary>
+                <div class="details-content">
+                  <p>These bars summarize how the editor score is built for this server.</p>
+
+                  <div class="score-bars" aria-label="Score breakdown">
+                    <div class="bar" data-value="32" data-max="35">
+                      <div class="bar-label">Vanilla purity <span>32/35</span></div>
+                      <div class="bar-track"><div class="bar-fill"></div></div>
+                    </div>
+                    <div class="bar" data-value="20" data-max="20">
+                      <div class="bar-label">Fairness and no P2W <span>20/20</span></div>
+                      <div class="bar-track"><div class="bar-fill"></div></div>
+                    </div>
+                    <div class="bar" data-value="14" data-max="15">
+                      <div class="bar-label">Stability and last checked <span>14/15</span></div>
+                      <div class="bar-track"><div class="bar-fill"></div></div>
+                    </div>
+                    <div class="bar" data-value="13" data-max="15">
+                      <div class="bar-label">Rules and moderation <span>13/15</span></div>
+                      <div class="bar-track"><div class="bar-fill"></div></div>
+                    </div>
+                    <div class="bar" data-value="9" data-max="10">
+                      <div class="bar-label">Community and longevity <span>9/10</span></div>
+                      <div class="bar-track"><div class="bar-fill"></div></div>
+                    </div>
+                    <div class="bar" data-value="4" data-max="5">
+                      <div class="bar-label">Transparency <span>4/5</span></div>
+                      <div class="bar-track"><div class="bar-fill"></div></div>
+                    </div>
+                  </div>
+                </div>
+              </details>
+
+              <details data-reveal>
+                <summary>
+                  Vanilla purity
+                  <span class="meta"><i class="fa-solid fa-leaf" aria-hidden="true"></i>What stays vanilla</span>
+                </summary>
+                <div class="details-content">
+                  <p>
+                    Placeholder. This section will explain how close the gameplay stays to base Hytale, and which changes (if any) exist without altering progression.
+                  </p>
+                </div>
+              </details>
+
+              <details data-reveal>
+                <summary>
+                  Rules and moderation
+                  <span class="meta"><i class="fa-solid fa-scroll" aria-hidden="true"></i>Grief, PvP, resets</span>
+                </summary>
+                <div class="details-content">
+                  <p>
+                    Placeholder. This section will summarize the server rules (griefing, stealing, PvP policy, reset schedule) and how moderation is enforced.
+                  </p>
+                </div>
+              </details>
+
+              <details data-reveal>
+                <summary>
+                  Fair play and monetization
+                  <span class="meta"><i class="fa-solid fa-shield-heart" aria-hidden="true"></i>No P2W notes</span>
+                </summary>
+                <div class="details-content">
+                  <p>
+                    Placeholder. This section will document what the store sells (if any), what is cosmetic, and confirm no pay-to-win progression advantages.
+                  </p>
+                </div>
+              </details>
+
+              <details data-reveal>
+                <summary>
+                  Stability and last checked
+                  <span class="meta"><i class="fa-solid fa-microchip" aria-hidden="true"></i>Uptime and checks</span>
+                </summary>
+                <div class="details-content">
+                  <p>
+                    Placeholder. This section will report the last verified check date, region notes, and any stability observations relevant to joining.
+                  </p>
+                </div>
+              </details>
+
+              <details data-reveal>
+                <summary>
+                  Community and onboarding
+                  <span class="meta"><i class="fa-solid fa-people-group" aria-hidden="true"></i>Start here</span>
+                </summary>
+                <div class="details-content">
+                  <p>
+                    Placeholder. This section will describe onboarding steps, Discord requirements, and the intended community playstyle.
+                  </p>
+                </div>
+              </details>
+
+              <details data-reveal>
+                <summary>
+                  Transparency
+                  <span class="meta"><i class="fa-solid fa-eye" aria-hidden="true"></i>Disclosures</span>
+                </summary>
+                <div class="details-content">
+                  <p>
+                    Placeholder. This section will link to policies and changelogs when available, and list any declared gameplay changes in a clear, readable format.
+                  </p>
+                </div>
+              </details>
+            </div>
+          </article>
+
+          <!-- SLOT #2 (NOFOLLOW links) -->
+          <article class="card tilt idle" data-tilt-strength="1.00" id="slot2" data-reveal>
+            <div class="card-head">
+              <div class="card-title-row">
+                <div>
+                  <h3>#2 Submission Slot</h3>
+                  <p class="subtitle">Want your server here? Submit it for review. This card is a neutral template placeholder.</p>
+                </div>
+                <div class="badges">
+                  <span class="badge score"><i class="fa-solid fa-chart-simple" aria-hidden="true"></i>Editor Score: <strong>88</strong>/100</span>
+                </div>
+              </div>
+
+              <div class="facts" aria-label="Quick facts">
+                <span class="fact"><i class="fa-solid fa-globe" aria-hidden="true"></i><strong>Region:</strong>&nbsp;TBD</span>
+                <span class="fact"><i class="fa-solid fa-language" aria-hidden="true"></i><strong>Language:</strong>&nbsp;TBD</span>
+                <span class="fact"><i class="fa-solid fa-tree" aria-hidden="true"></i><strong>Playstyle:</strong>&nbsp;Vanilla SMP</span>
+                <span class="fact"><i class="fa-solid fa-user-shield" aria-hidden="true"></i><strong>Whitelist:</strong>&nbsp;TBD</span>
+                <span class="fact"><i class="fa-regular fa-clock" aria-hidden="true"></i><strong>Last checked:</strong>&nbsp;TBD</span>
+              </div>
+
+              <div class="cta-row">
+                <div class="ip-box" aria-label="Server IP">
+                  <i class="fa-solid fa-network-wired" aria-hidden="true"></i>
+                  <code>your.server.ip.example</code>
+                  <button class="btn-copy pressable" type="button" data-copy="your.server.ip.example" data-tilt-strength="0.40">
+                    <i class="fa-regular fa-copy" aria-hidden="true"></i>Copy IP
+                  </button>
+                </div>
+
+                <div class="links" aria-label="Server links">
+                  <a class="link-pill tilt pressable" data-tilt-strength="0.55" href="https://discord.example" target="_blank" rel="nofollow noopener noreferrer">
+                    <i class="fa-brands fa-discord" aria-hidden="true"></i>Discord
+                  </a>
+                  <a class="link-pill tilt pressable" data-tilt-strength="0.55" href="https://example.com" target="_blank" rel="nofollow noopener noreferrer">
+                    <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>Website
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <p class="why">
+                <strong>Template:</strong> This listing will be replaced by a real vanilla Hytale server after editorial review.
+              </p>
+
+              <details class="glance" data-bars>
+                <summary>
+                  In a glance
+                  <span class="meta"><i class="fa-solid fa-bars-progress" aria-hidden="true"></i>Score breakdown</span>
+                </summary>
+                <div class="details-content">
+                  <p>Example breakdown bars. Real values will be filled after review.</p>
+                  <div class="score-bars" aria-label="Score breakdown">
+                    <div class="bar" data-value="30" data-max="35"><div class="bar-label">Vanilla purity <span>30/35</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+                    <div class="bar" data-value="19" data-max="20"><div class="bar-label">Fairness and no P2W <span>19/20</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+                    <div class="bar" data-value="13" data-max="15"><div class="bar-label">Stability and last checked <span>13/15</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+                    <div class="bar" data-value="14" data-max="15"><div class="bar-label">Rules and moderation <span>14/15</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+                    <div class="bar" data-value="8" data-max="10"><div class="bar-label">Community and longevity <span>8/10</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+                    <div class="bar" data-value="4" data-max="5"><div class="bar-label">Transparency <span>4/5</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+                  </div>
+                </div>
+              </details>
+
+              <details>
+                <summary>Vanilla purity <span class="meta"><i class="fa-solid fa-leaf" aria-hidden="true"></i>What stays vanilla</span></summary>
+                <div class="details-content"><p>This section will describe the vanilla gameplay experience on this server, including any minimal QoL and what is intentionally avoided.</p></div>
+              </details>
+
+              <details>
+                <summary>Rules and moderation <span class="meta"><i class="fa-solid fa-scroll" aria-hidden="true"></i>Grief, PvP, resets</span></summary>
+                <div class="details-content"><p>This section will summarize rules, moderation expectations, and how enforcement works in practice.</p></div>
+              </details>
+
+              <details>
+                <summary>Fair play and monetization <span class="meta"><i class="fa-solid fa-shield-heart" aria-hidden="true"></i>No P2W notes</span></summary>
+                <div class="details-content"><p>This section will document monetization and confirm whether the server avoids pay-to-win progression advantages.</p></div>
+              </details>
+
+              <details>
+                <summary>Stability and last checked <span class="meta"><i class="fa-solid fa-microchip" aria-hidden="true"></i>Uptime and checks</span></summary>
+                <div class="details-content"><p>This section will include last-checked date, region notes, and any relevant performance observations.</p></div>
+              </details>
+
+              <details>
+                <summary>Community and onboarding <span class="meta"><i class="fa-solid fa-people-group" aria-hidden="true"></i>Start here</span></summary>
+                <div class="details-content"><p>This section will outline onboarding steps, Discord requirements, and the intended community style.</p></div>
+              </details>
+
+              <details>
+                <summary>Transparency <span class="meta"><i class="fa-solid fa-eye" aria-hidden="true"></i>Disclosures</span></summary>
+                <div class="details-content"><p>This section will link to policies, changelogs, and clearly list declared gameplay changes.</p></div>
+              </details>
+            </div>
+          </article>
+
+          <!-- SLOT #3 (NOFOLLOW links) -->
+          <article class="card tilt idle" data-tilt-strength="1.00" id="slot3" data-reveal>
+            <div class="card-head">
+              <div class="card-title-row">
+                <div>
+                  <h3>#3 Submission Slot</h3>
+                  <p class="subtitle">This slot is reserved for a top-tier vanilla server. Submit yours to be considered.</p>
+                </div>
+                <div class="badges">
+                  <span class="badge score"><i class="fa-solid fa-chart-simple" aria-hidden="true"></i>Editor Score: <strong>84</strong>/100</span>
+                </div>
+              </div>
+
+              <div class="facts">
+                <span class="fact"><i class="fa-solid fa-globe" aria-hidden="true"></i><strong>Region:</strong>&nbsp;TBD</span>
+                <span class="fact"><i class="fa-solid fa-language" aria-hidden="true"></i><strong>Language:</strong>&nbsp;TBD</span>
+                <span class="fact"><i class="fa-solid fa-tree" aria-hidden="true"></i><strong>Playstyle:</strong>&nbsp;Vanilla Survival</span>
+                <span class="fact"><i class="fa-solid fa-user-shield" aria-hidden="true"></i><strong>Whitelist:</strong>&nbsp;TBD</span>
+                <span class="fact"><i class="fa-regular fa-clock" aria-hidden="true"></i><strong>Last checked:</strong>&nbsp;TBD</span>
+              </div>
+
+              <div class="cta-row">
+                <div class="ip-box" aria-label="Server IP">
+                  <i class="fa-solid fa-network-wired" aria-hidden="true"></i>
+                  <code>your.server.ip.example</code>
+                  <button class="btn-copy pressable" type="button" data-copy="your.server.ip.example" data-tilt-strength="0.40">
+                    <i class="fa-regular fa-copy" aria-hidden="true"></i>Copy IP
+                  </button>
+                </div>
+                <div class="links" aria-label="Server links">
+                  <a class="link-pill tilt pressable" data-tilt-strength="0.55" href="https://discord.example" target="_blank" rel="nofollow noopener noreferrer">
+                    <i class="fa-brands fa-discord" aria-hidden="true"></i>Discord
+                  </a>
+                  <a class="link-pill tilt pressable" data-tilt-strength="0.55" href="https://example.com" target="_blank" rel="nofollow noopener noreferrer">
+                    <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>Website
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <p class="why"><strong>Template:</strong> Replace this with a real listing after review.</p>
+
+              <details class="glance" data-bars>
+                <summary>In a glance <span class="meta"><i class="fa-solid fa-bars-progress" aria-hidden="true"></i>Score breakdown</span></summary>
+                <div class="details-content">
+                  <div class="score-bars">
+                    <div class="bar" data-value="28" data-max="35"><div class="bar-label">Vanilla purity <span>28/35</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+                    <div class="bar" data-value="19" data-max="20"><div class="bar-label">Fairness and no P2W <span>19/20</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+                    <div class="bar" data-value="12" data-max="15"><div class="bar-label">Stability and last checked <span>12/15</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+                    <div class="bar" data-value="13" data-max="15"><div class="bar-label">Rules and moderation <span>13/15</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+                    <div class="bar" data-value="8" data-max="10"><div class="bar-label">Community and longevity <span>8/10</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+                    <div class="bar" data-value="4" data-max="5"><div class="bar-label">Transparency <span>4/5</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+                  </div>
+                </div>
+              </details>
+
+              <details><summary>Vanilla purity <span class="meta"><i class="fa-solid fa-leaf" aria-hidden="true"></i>What stays vanilla</span></summary><div class="details-content"><p>Describe vanilla experience, allowed QoL, and what is avoided.</p></div></details>
+              <details><summary>Rules and moderation <span class="meta"><i class="fa-solid fa-scroll" aria-hidden="true"></i>Grief, PvP, resets</span></summary><div class="details-content"><p>Summarize rules, enforcement, and reset policy.</p></div></details>
+              <details><summary>Fair play and monetization <span class="meta"><i class="fa-solid fa-shield-heart" aria-hidden="true"></i>No P2W notes</span></summary><div class="details-content"><p>Document store policy and confirm fairness.</p></div></details>
+              <details><summary>Stability and last checked <span class="meta"><i class="fa-solid fa-microchip" aria-hidden="true"></i>Uptime and checks</span></summary><div class="details-content"><p>Include last checked date and stability notes.</p></div></details>
+              <details><summary>Community and onboarding <span class="meta"><i class="fa-solid fa-people-group" aria-hidden="true"></i>Start here</span></summary><div class="details-content"><p>Explain onboarding steps and community expectations.</p></div></details>
+              <details><summary>Transparency <span class="meta"><i class="fa-solid fa-eye" aria-hidden="true"></i>Disclosures</span></summary><div class="details-content"><p>Link policies and list declared gameplay changes.</p></div></details>
+            </div>
+          </article>
+
+          <!-- SLOT #4 (NOFOLLOW links) -->
+          <article class="card tilt idle" data-tilt-strength="1.00" id="slot4" data-reveal>
+            <div class="card-head">
+              <div class="card-title-row">
+                <div>
+                  <h3>#4 Submission Slot</h3>
+                  <p class="subtitle">A placeholder listing. If your vanilla server belongs here, submit it for editorial review.</p>
+                </div>
+                <div class="badges">
+                  <span class="badge score"><i class="fa-solid fa-chart-simple" aria-hidden="true"></i>Editor Score: <strong>81</strong>/100</span>
+                </div>
+              </div>
+
+              <div class="facts">
+                <span class="fact"><i class="fa-solid fa-globe" aria-hidden="true"></i><strong>Region:</strong>&nbsp;TBD</span>
+                <span class="fact"><i class="fa-solid fa-language" aria-hidden="true"></i><strong>Language:</strong>&nbsp;TBD</span>
+                <span class="fact"><i class="fa-solid fa-tree" aria-hidden="true"></i><strong>Playstyle:</strong>&nbsp;Vanilla SMP</span>
+                <span class="fact"><i class="fa-solid fa-user-shield" aria-hidden="true"></i><strong>Whitelist:</strong>&nbsp;TBD</span>
+                <span class="fact"><i class="fa-regular fa-clock" aria-hidden="true"></i><strong>Last checked:</strong>&nbsp;TBD</span>
+              </div>
+
+              <div class="cta-row">
+                <div class="ip-box" aria-label="Server IP">
+                  <i class="fa-solid fa-network-wired" aria-hidden="true"></i>
+                  <code>your.server.ip.example</code>
+                  <button class="btn-copy pressable" type="button" data-copy="your.server.ip.example" data-tilt-strength="0.40">
+                    <i class="fa-regular fa-copy" aria-hidden="true"></i>Copy IP
+                  </button>
+                </div>
+                <div class="links" aria-label="Server links">
+                  <a class="link-pill tilt pressable" data-tilt-strength="0.55" href="https://discord.example" target="_blank" rel="nofollow noopener noreferrer">
+                    <i class="fa-brands fa-discord" aria-hidden="true"></i>Discord
+                  </a>
+                  <a class="link-pill tilt pressable" data-tilt-strength="0.55" href="https://example.com" target="_blank" rel="nofollow noopener noreferrer">
+                    <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>Website
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <p class="why"><strong>Template:</strong> Replace with a real listing once reviewed.</p>
+
+              <details class="glance" data-bars>
+                <summary>In a glance <span class="meta"><i class="fa-solid fa-bars-progress" aria-hidden="true"></i>Score breakdown</span></summary>
+                <div class="details-content">
+                  <div class="score-bars">
+                    <div class="bar" data-value="27" data-max="35"><div class="bar-label">Vanilla purity <span>27/35</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+                    <div class="bar" data-value="18" data-max="20"><div class="bar-label">Fairness and no P2W <span>18/20</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+                    <div class="bar" data-value="12" data-max="15"><div class="bar-label">Stability and last checked <span>12/15</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+                    <div class="bar" data-value="12" data-max="15"><div class="bar-label">Rules and moderation <span>12/15</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+                    <div class="bar" data-value="8" data-max="10"><div class="bar-label">Community and longevity <span>8/10</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+                    <div class="bar" data-value="4" data-max="5"><div class="bar-label">Transparency <span>4/5</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+                  </div>
+                </div>
+              </details>
+
+              <details><summary>Vanilla purity <span class="meta"><i class="fa-solid fa-leaf" aria-hidden="true"></i>What stays vanilla</span></summary><div class="details-content"><p>Explain vanilla experience and minimal QoL, if any.</p></div></details>
+              <details><summary>Rules and moderation <span class="meta"><i class="fa-solid fa-scroll" aria-hidden="true"></i>Grief, PvP, resets</span></summary><div class="details-content"><p>Summarize rules and moderation approach.</p></div></details>
+              <details><summary>Fair play and monetization <span class="meta"><i class="fa-solid fa-shield-heart" aria-hidden="true"></i>No P2W notes</span></summary><div class="details-content"><p>Document monetization policy and fairness statement.</p></div></details>
+              <details><summary>Stability and last checked <span class="meta"><i class="fa-solid fa-microchip" aria-hidden="true"></i>Uptime and checks</span></summary><div class="details-content"><p>Include last-checked date and stability notes.</p></div></details>
+              <details><summary>Community and onboarding <span class="meta"><i class="fa-solid fa-people-group" aria-hidden="true"></i>Start here</span></summary><div class="details-content"><p>Outline onboarding and community style.</p></div></details>
+              <details><summary>Transparency <span class="meta"><i class="fa-solid fa-eye" aria-hidden="true"></i>Disclosures</span></summary><div class="details-content"><p>Link policies and list declared changes.</p></div></details>
+            </div>
+          </article>
+
+          <!-- SLOT #5 (NOFOLLOW links) -->
+          <article class="card tilt idle" data-tilt-strength="1.00" id="slot5" data-reveal>
+            <div class="card-head">
+              <div class="card-title-row">
+                <div>
+                  <h3>#5 Submission Slot</h3>
+                  <p class="subtitle">Final placeholder slot. Submit your vanilla Hytale server to be considered for the list.</p>
+                </div>
+                <div class="badges">
+                  <span class="badge score"><i class="fa-solid fa-chart-simple" aria-hidden="true"></i>Editor Score: <strong>78</strong>/100</span>
+                </div>
+              </div>
+
+              <div class="facts">
+                <span class="fact"><i class="fa-solid fa-globe" aria-hidden="true"></i><strong>Region:</strong>&nbsp;TBD</span>
+                <span class="fact"><i class="fa-solid fa-language" aria-hidden="true"></i><strong>Language:</strong>&nbsp;TBD</span>
+                <span class="fact"><i class="fa-solid fa-tree" aria-hidden="true"></i><strong>Playstyle:</strong>&nbsp;Vanilla SMP</span>
+                <span class="fact"><i class="fa-solid fa-user-shield" aria-hidden="true"></i><strong>Whitelist:</strong>&nbsp;TBD</span>
+                <span class="fact"><i class="fa-regular fa-clock" aria-hidden="true"></i><strong>Last checked:</strong>&nbsp;TBD</span>
+              </div>
+
+              <div class="cta-row">
+                <div class="ip-box" aria-label="Server IP">
+                  <i class="fa-solid fa-network-wired" aria-hidden="true"></i>
+                  <code>your.server.ip.example</code>
+                  <button class="btn-copy pressable" type="button" data-copy="your.server.ip.example" data-tilt-strength="0.40">
+                    <i class="fa-regular fa-copy" aria-hidden="true"></i>Copy IP
+                  </button>
+                </div>
+                <div class="links" aria-label="Server links">
+                  <a class="link-pill tilt pressable" data-tilt-strength="0.55" href="https://discord.example" target="_blank" rel="nofollow noopener noreferrer">
+                    <i class="fa-brands fa-discord" aria-hidden="true"></i>Discord
+                  </a>
+                  <a class="link-pill tilt pressable" data-tilt-strength="0.55" href="https://example.com" target="_blank" rel="nofollow noopener noreferrer">
+                    <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>Website
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <p class="why"><strong>Template:</strong> This will become a real listing after review.</p>
+
+              <details class="glance" data-bars>
+                <summary>In a glance <span class="meta"><i class="fa-solid fa-bars-progress" aria-hidden="true"></i>Score breakdown</span></summary>
+                <div class="details-content">
+                  <div class="score-bars">
+                    <div class="bar" data-value="26" data-max="35"><div class="bar-label">Vanilla purity <span>26/35</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+                    <div class="bar" data-value="18" data-max="20"><div class="bar-label">Fairness and no P2W <span>18/20</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+                    <div class="bar" data-value="12" data-max="15"><div class="bar-label">Stability and last checked <span>12/15</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+                    <div class="bar" data-value="11" data-max="15"><div class="bar-label">Rules and moderation <span>11/15</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+                    <div class="bar" data-value="7" data-max="10"><div class="bar-label">Community and longevity <span>7/10</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+                    <div class="bar" data-value="4" data-max="5"><div class="bar-label">Transparency <span>4/5</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+                  </div>
+                </div>
+              </details>
+
+              <details><summary>Vanilla purity <span class="meta"><i class="fa-solid fa-leaf" aria-hidden="true"></i>What stays vanilla</span></summary><div class="details-content"><p>Describe how vanilla the gameplay feels and list any minimal QoL.</p></div></details>
+              <details><summary>Rules and moderation <span class="meta"><i class="fa-solid fa-scroll" aria-hidden="true"></i>Grief, PvP, resets</span></summary><div class="details-content"><p>Summarize rules and enforcement.</p></div></details>
+              <details><summary>Fair play and monetization <span class="meta"><i class="fa-solid fa-shield-heart" aria-hidden="true"></i>No P2W notes</span></summary><div class="details-content"><p>Document store policy and fairness statement.</p></div></details>
+              <details><summary>Stability and last checked <span class="meta"><i class="fa-solid fa-microchip" aria-hidden="true"></i>Uptime and checks</span></summary><div class="details-content"><p>Include last checked date and stability notes.</p></div></details>
+              <details><summary>Community and onboarding <span class="meta"><i class="fa-solid fa-people-group" aria-hidden="true"></i>Start here</span></summary><div class="details-content"><p>Outline onboarding and intended community style.</p></div></details>
+              <details><summary>Transparency <span class="meta"><i class="fa-solid fa-eye" aria-hidden="true"></i>Disclosures</span></summary><div class="details-content"><p>Link policies and list declared changes.</p></div></details>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="methodology" aria-labelledby="methodology-title">
+      <div class="container">
+        <h2 id="methodology-title" data-reveal>How scoring works</h2>
+        <p class="section-lead" data-reveal>
+          The editor score is a simple sum. Each category is scored from 0 up to its maximum points, then we add them together to get a final score out of 100.
+          The sections inside each server card mirror these same categories, so the rubric and the review topics match one to one.
+        </p>
+
+        <div class="grid-2">
+          <div class="panel tilt idle" data-tilt-strength="1.00" data-reveal>
+            <h3>Exclusion rules (must pass)</h3>
+            <ul style="margin:0; padding-left:18px; color: var(--muted);">
+              <li><strong>No pay-to-win:</strong> no progression advantages sold for money.</li>
+              <li><strong>Clear vanilla-first statement:</strong> changes and additions must be disclosed.</li>
+              <li><strong>Public rules:</strong> griefing, PvP, resets, and moderation expectations.</li>
+              <li><strong>Contact exists:</strong> at least an active Discord or website.</li>
+              <li><strong>Verifiable access:</strong> IP and availability can be checked (we show “last checked”).</li>
+            </ul>
+          </div>
+
+          <div class="panel tilt idle" data-tilt-strength="1.00" data-reveal>
+            <h3>Editor score (0 to 100)</h3>
+            <ul style="margin:0; padding-left:18px; color: var(--muted);">
+              <li><strong>35</strong> Vanilla purity</li>
+              <li><strong>20</strong> Fairness and no P2W</li>
+              <li><strong>15</strong> Stability and last checked</li>
+              <li><strong>15</strong> Rules and moderation</li>
+              <li><strong>10</strong> Community and longevity</li>
+              <li><strong>5</strong> Transparency</li>
+            </ul>
+            <p class="fineprint">
+              Example: if a server scores 30/35 for purity and 18/20 for fairness, those points are added directly into the final score.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" aria-labelledby="faq-title">
+      <div class="container">
+        <h2 id="faq-title" data-reveal>Vanilla Hytale server FAQ</h2>
+        <p class="section-lead" data-reveal>
+          Definitions stay simple on purpose, so “vanilla” remains useful as a label and not just a marketing word.
+        </p>
+
+        <div class="panel tilt idle" data-tilt-strength="1.00" data-reveal>
+          <details open>
+            <summary>What is a vanilla Hytale server? <span class="meta"><i class="fa-solid fa-circle-question" aria-hidden="true"></i>Definition</span></summary>
+            <div class="details-content">
+              <p>
+                A vanilla Hytale server focuses on base gameplay and avoids changes that significantly alter progression, balance, loot, or economy.
+                Some servers may still run minimal quality-of-life and moderation tooling, as long as it is disclosed and does not rewrite the core experience.
+              </p>
+            </div>
+          </details>
+
+          <details>
+            <summary>Vanilla vs semi-vanilla <span class="meta"><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i>Difference</span></summary>
+            <div class="details-content">
+              <p>
+                Semi-vanilla usually adds convenience systems. In this list, we prefer vanilla-first servers and we document any gameplay footprint clearly per server.
+              </p>
+            </div>
+          </details>
+
+          <details>
+            <summary>Do you accept pay-to-win servers? <span class="meta"><i class="fa-solid fa-shield-heart" aria-hidden="true"></i>Fair play</span></summary>
+            <div class="details-content"><p>No. Pay-to-win fails the exclusion rules and is not listed.</p></div>
+          </details>
+
+          <details>
+            <summary>Can I suggest a server? <span class="meta"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i>Submissions</span></summary>
+            <div class="details-content">
+              <p>
+                Yes. Send the server name, IP, region, language, and links to rules and monetization policy. If it passes the exclusion rules, we review it.
+              </p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section id="suggest" aria-labelledby="suggest-title">
+      <div class="container">
+        <h2 id="suggest-title" data-reveal>Suggest a server (manual review)</h2>
+        <p class="section-lead" data-reveal>
+          If you want to be listed, make it easy for us to verify the server’s vanilla purity, rules, stability, and monetization policy.
+        </p>
+
+        <div class="panel tilt idle" data-tilt-strength="1.00" data-reveal>
+          <p class="footer-text" style="margin-top:0;">
+            Email: <a class="pressable" href="mailto:submit@hytalevanillaservers.com">submit@hytalevanillaservers.com</a>
+          </p>
+          <ul style="margin:10px 0 0; padding-left:18px; color: var(--muted);">
+            <li>Server name and IP</li>
+            <li>Region and primary language</li>
+            <li>Website and Discord link</li>
+            <li>Rules link (grief, PvP, resets)</li>
+            <li>Monetization policy link (store, perks)</li>
+            <li>Short vanilla-first statement (what is changed, if anything)</li>
+          </ul>
+
+          <p class="fineprint">
+            Disclaimer: this site is not affiliated with Hytale or Hypixel Studios. All trademarks belong to their respective owners.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <div class="container">
+      <div class="footer-grid" data-reveal>
+        <div>
+          <p class="footer-title">About</p>
+          <p class="footer-text">
+            HytaleVanillaServers.com is a curated, editor-ranked list of vanilla-first Hytale servers. The goal is clarity and comparability, not popularity.
+          </p>
+          <p class="footer-text" style="margin-top:10px;">
+            Contact: <a class="pressable" href="mailto:hello@hytalevanillaservers.com">hello@hytalevanillaservers.com</a>
+          </p>
+        </div>
+        <div class="footer-links" aria-label="Footer links">
+          <a class="link-pill tilt pressable" data-tilt-strength="0.55" href="#servers"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i>Servers</a>
+          <a class="link-pill tilt pressable" data-tilt-strength="0.55" href="#methodology"><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i>Scoring</a>
+          <a class="link-pill tilt pressable" data-tilt-strength="0.55" href="#suggest"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i>Submit</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    // Theme switcher (dark <-> light), persisted.
+    (function () {
+      const root = document.documentElement;
+      const btn = document.getElementById("themeToggle");
+      if (!btn) return;
+
+      function applyUI() {
+        const theme = root.getAttribute("data-theme") || "dark";
+        const icon = btn.querySelector("i");
+        const label = btn.querySelector("span");
+        const isLight = theme === "light";
+
+        if (icon) icon.className = isLight ? "fa-solid fa-sun" : "fa-solid fa-moon";
+        if (label) label.textContent = isLight ? "Light" : "Dark";
+
+        btn.setAttribute("aria-label", isLight ? "Switch to dark theme" : "Switch to light theme");
+        btn.setAttribute("title", isLight ? "Switch to dark theme" : "Switch to light theme");
+      }
+
+      btn.addEventListener("click", () => {
+        const current = root.getAttribute("data-theme") || "dark";
+        const next = current === "light" ? "dark" : "light";
+        root.setAttribute("data-theme", next);
+        try { localStorage.setItem("theme", next); } catch (e) {}
+        applyUI();
+      });
+
+      applyUI();
+    })();
+
+    // Minimal JS for "Copy IP" buttons.
+    (function () {
+      const toast = document.getElementById("toast");
+
+      function showToast(message) {
+        toast.textContent = message;
+        toast.classList.add("show");
+        window.clearTimeout(showToast._t);
+        showToast._t = window.setTimeout(() => toast.classList.remove("show"), 1600);
+      }
+
+      async function copyText(text) {
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(text);
+            return true;
+          }
+        } catch (e) {}
+        try {
+          const ta = document.createElement("textarea");
+          ta.value = text;
+          ta.setAttribute("readonly", "");
+          ta.style.position = "fixed";
+          ta.style.left = "-9999px";
+          document.body.appendChild(ta);
+          ta.select();
+          const ok = document.execCommand("copy");
+          document.body.removeChild(ta);
+          return ok;
+        } catch (e) {
+          return false;
+        }
+      }
+
+      document.addEventListener("click", async (ev) => {
+        const btn = ev.target.closest("[data-copy]");
+        if (!btn) return;
+        const value = btn.getAttribute("data-copy");
+        const ok = await copyText(value);
+        showToast(ok ? ("Copied: " + value) : "Copy failed. Please copy manually.");
+      });
+    })();
+
+    // Motion: scroll reveal, press feedback, animated details, and smooth proximity tilt.
+    window.addEventListener("DOMContentLoaded", () => {
+      if (!window.gsap) return;
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Scroll reveal
+      const revealEls = Array.from(document.querySelectorAll("[data-reveal]"));
+      revealEls.forEach((el) => {
+        gsap.fromTo(
+          el,
+          { opacity: 0, "--revealY": "54px", filter: "blur(12px)" },
+          {
+            opacity: 1,
+            "--revealY": "0px",
+            filter: "blur(0px)",
+            duration: 0.95,
+            ease: "back.out(1.6)",
+            scrollTrigger: { trigger: el, start: "top 88%", once: true }
+          }
+        );
+      });
+
+      // Press animation for all buttons/links with .pressable
+      (function pressFeedback() {
+        const pressables = Array.from(document.querySelectorAll(".pressable"));
+        pressables.forEach((el) => {
+          const down = () => gsap.to(el, { "--scale": 0.985, duration: 0.10, ease: "power2.out" });
+          const up   = () => gsap.to(el, { "--scale": 1, duration: 0.55, ease: "elastic.out(1, 0.65)" });
+
+          el.addEventListener("pointerdown", down, { passive: true });
+          el.addEventListener("pointerup", up, { passive: true });
+          el.addEventListener("pointercancel", up, { passive: true });
+          el.addEventListener("pointerleave", up, { passive: true });
+        });
+      })();
+
+      // Details + bar animation
+      function animateBars(detailsEl) {
+        const bars = Array.from(detailsEl.querySelectorAll(".bar"));
+        const fills = [];
+        const targets = [];
+
+        bars.forEach((bar) => {
+          const fill = bar.querySelector(".bar-fill");
+          const v = Number(bar.getAttribute("data-value") || "0");
+          const m = Number(bar.getAttribute("data-max") || "1");
+          const pct = Math.max(0, Math.min(100, (v / m) * 100));
+          fills.push(fill);
+          targets.push(pct);
+        });
+
+        gsap.set(fills, { width: "0%" });
+
+        const tl = gsap.timeline();
+        fills.forEach((fill, i) => {
+          tl.to(fill, {
+            width: targets[i] + "%",
+            duration: 0.85,
+            ease: "expo.out"
+          }, i * 0.12);
+        });
+      }
+
+      (function detailsMotion() {
+        const detailsEls = Array.from(document.querySelectorAll("details"));
+        detailsEls.forEach((d) => {
+          const summary = d.querySelector("summary");
+          const content = d.querySelector(".details-content");
+          if (!summary || !content) return;
+
+          if (!d.open) {
+            gsap.set(content, { height: 0, opacity: 0, display: "none" });
+          } else {
+            gsap.set(content, { height: "auto", opacity: 1, display: "block" });
+          }
+
+          const openDetails = () => {
+            if (d.hasAttribute("data-animating")) return;
+            d.setAttribute("data-animating", "1");
+            d.open = true;
+
+            content.style.display = "block";
+            const h = content.scrollHeight;
+
+            gsap.fromTo(
+              content,
+              { height: 0, opacity: 0 },
+              {
+                height: h,
+                opacity: 1,
+                duration: 0.48,
+                ease: "power3.out",
+                onComplete: () => {
+                  content.style.height = "auto";
+                  d.removeAttribute("data-animating");
+
+                  if (d.hasAttribute("data-bars")) {
+                    gsap.delayedCall(0.10, () => animateBars(d));
+                  }
+                }
+              }
+            );
+          };
+
+          const closeDetails = () => {
+            if (d.hasAttribute("data-animating")) return;
+            d.setAttribute("data-animating", "1");
+
+            const currentH = content.scrollHeight;
+            gsap.fromTo(
+              content,
+              { height: currentH, opacity: 1 },
+              {
+                height: 0,
+                opacity: 0,
+                duration: 0.36,
+                ease: "power3.inOut",
+                onComplete: () => {
+                  d.open = false;
+                  content.style.display = "none";
+                  d.removeAttribute("data-animating");
+                }
+              }
+            );
+          };
+
+          summary.addEventListener("click", (e) => {
+            e.preventDefault();
+            if (d.open) closeDetails();
+            else openDetails();
+          });
+
+          if (d.open && d.hasAttribute("data-bars")) {
+            animateBars(d);
+          }
+        });
+      })();
+
+      // Smooth global proximity tilt (delicate spring), excludes header items by not selecting them.
+      (function smoothProximityTilt() {
+        const canTilt = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+        if (!canTilt) return;
+
+        const els = Array.from(document.querySelectorAll(".tilt"));
+        if (!els.length) return;
+
+        const safeNum = (n) => (Number.isFinite(n) ? n : 0);
+
+        const items = els.map((el) => {
+          const raw = parseFloat(el.getAttribute("data-tilt-strength"));
+          const strength = Number.isFinite(raw) ? raw : 1;
+
+          return {
+            el,
+            strength,
+            setTx: gsap.quickSetter(el, "--tx", "px"),
+            setTy: gsap.quickSetter(el, "--ty", "px"),
+            setRx: gsap.quickSetter(el, "--rx", "deg"),
+            setRy: gsap.quickSetter(el, "--ry", "deg"),
+
+            cur: { tx: 0, ty: 0, rx: 0, ry: 0 },
+            vel: { tx: 0, ty: 0, rx: 0, ry: 0 },
+            tgt: { tx: 0, ty: 0, rx: 0, ry: 0 }
+          };
+        });
+
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let pointerInside = true;
+
+        function computeTargets() {
+          const w = window.innerWidth || 1;
+          const falloff = Math.max(520, Math.min(980, w * 0.62));
+
+          for (const it of items) {
+            if (!pointerInside) {
+              it.tgt.tx = 0; it.tgt.ty = 0; it.tgt.rx = 0; it.tgt.ry = 0;
+              continue;
+            }
+
+            const r = it.el.getBoundingClientRect();
+            const cx = r.left + r.width / 2;
+            const cy = r.top + r.height / 2;
+
+            const dx = mouseX - cx;
+            const dy = mouseY - cy;
+
+            const d = Math.hypot(dx, dy);
+            const influence = Math.exp(-d / falloff);
+
+            const denomX = Math.max(320, r.width || 0);
+            const denomY = Math.max(320, r.height || 0);
+
+            const nx = dx / denomX;
+            const ny = dy / denomY;
+
+            const maxTiltDeg = 4.2 * it.strength;
+            const maxMovePx  = 3.2 * it.strength;
+
+            const rotY = (nx * 2) * maxTiltDeg * influence;
+            const rotX = -(ny * 2) * maxTiltDeg * influence;
+
+            const tx = (nx * 2) * maxMovePx * influence;
+            const ty = (ny * 2) * maxMovePx * influence;
+
+            it.tgt.tx = safeNum(tx);
+            it.tgt.ty = safeNum(ty);
+            it.tgt.rx = safeNum(rotX);
+            it.tgt.ry = safeNum(rotY);
+          }
+        }
+
+        const stiffness = 0.055;
+        const damping = 0.86;
+
+        function stepSpring(it) {
+          const axes = ["tx", "ty", "rx", "ry"];
+          for (const k of axes) {
+            const cur = it.cur[k];
+            const tgt = it.tgt[k];
+            let vel = it.vel[k];
+
+            vel += (tgt - cur) * stiffness;
+            vel *= damping;
+
+            const next = cur + vel;
+
+            it.vel[k] = safeNum(vel);
+            it.cur[k] = safeNum(next);
+          }
+
+          it.setTx(it.cur.tx);
+          it.setTy(it.cur.ty);
+          it.setRx(it.cur.rx);
+          it.setRy(it.cur.ry);
+        }
+
+        function tick() {
+          computeTargets();
+          for (const it of items) stepSpring(it);
+          requestAnimationFrame(tick);
+        }
+
+        window.addEventListener("mousemove", (e) => {
+          pointerInside = true;
+          mouseX = e.clientX;
+          mouseY = e.clientY;
+        }, { passive: true });
+
+        window.addEventListener("mouseout", (e) => {
+          if (e.relatedTarget || e.toElement) return;
+          pointerInside = false;
+        });
+
+        window.addEventListener("mouseenter", () => {
+          pointerInside = true;
+        });
+
+        tick();
+      })();
+    });
+  </script>
+</body>
+</html>
