@@ -964,22 +964,29 @@
       nav.main-nav{
         width: 100%;
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 7fr 3fr; /* 70% Browse, 30% Theme */
         gap: 10px;
-        justify-content: stretch;     /* non serve più in grid, ma ok */
+        align-items: center;
       }
-    
-      /* Il bottone principale (Browse) a tutta larghezza */
+      
+      /* Browse a sinistra, piena altezza, centrato */
       nav.main-nav .btn.btn-primary{
-        grid-column: 1 / -1;
+        grid-column: 1;
+        width: 100%;
         justify-content: center;
       }
-    
-      /* Suggest e Theme affiancati e puliti */
-      nav.main-nav .nav-text,
+      
+      /* Theme a destra */
       nav.main-nav .theme-toggle{
-        justify-content: center;
+        grid-column: 2;
         width: 100%;
+        justify-content: center;
+        padding: 10px 10px; /* un filo più compatto */
+      }
+      
+      /* Suggerisci server: sparisce su mobile */
+      nav.main-nav .nav-text{
+        display: none;
       }
   }
 
