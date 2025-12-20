@@ -1,8 +1,20 @@
 <!doctype html>
-<html lang="en" dir="ltr">
+<html lang="en" dir="ltr" data-theme="dark">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+  <!-- Theme boot (prevents flash) -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("theme");
+        document.documentElement.setAttribute("data-theme", t || "dark");
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
 
   <!-- Primary SEO -->
   <title>Best Hytale Vanilla Servers (2026) | Curated List + IPs</title>
@@ -70,11 +82,34 @@
       --b-font: "Nunito Sans", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
     }
 
+    /* Light theme overrides */
+    :root[data-theme="light"] {
+      --bg: #f7fbff;
+      --bg-2: #eef6ff;
+
+      --panel: rgba(0,0,0,0.035);
+      --panel-2: rgba(0,0,0,0.05);
+
+      --stroke: rgba(0,0,0,0.10);
+      --stroke-2: rgba(0,0,0,0.14);
+
+      --text: rgba(10,15,31,0.92);
+      --muted: rgba(10,15,31,0.72);
+      --muted-2: rgba(10,15,31,0.58);
+
+      /* Hytale-ish: bright sky + mint */
+      --accent: #24b7ff;
+      --accent-2: #29e3a2;
+
+      --shadow: 0 18px 50px rgba(0,0,0,0.14);
+      --shadow-soft: 0 10px 30px rgba(0,0,0,0.10);
+    }
+
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      position: relative; /* needed so the animated background layer can sit behind content reliably */
+      position: relative;
       font-family: var(--b-font);
       color: var(--text);
       background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
@@ -82,12 +117,12 @@
       overflow-x: hidden;
     }
 
-    /* Animated gradient layer (reliable stacking, always visible) */
+    /* Animated gradient layer */
     body::before {
       content: "";
       position: fixed;
       inset: -22%;
-      z-index: 0; /* not negative, so it doesn't disappear behind the root in some browsers */
+      z-index: 0;
       background:
         radial-gradient(1200px 640px at 18% 8%, rgba(94,230,255,0.14), transparent 60%),
         radial-gradient(980px 560px at 88% 16%, rgba(124,255,200,0.10), transparent 58%),
@@ -100,13 +135,21 @@
       pointer-events: none;
     }
 
+    :root[data-theme="light"] body::before {
+      background:
+        radial-gradient(1100px 620px at 18% 10%, rgba(36,183,255,0.18), transparent 62%),
+        radial-gradient(980px 560px at 88% 18%, rgba(41,227,162,0.14), transparent 62%),
+        radial-gradient(760px 520px at 55% 88%, rgba(36,183,255,0.08), transparent 65%),
+        linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(238,246,255,1) 100%);
+      filter: saturate(1.02);
+    }
+
     @keyframes bgDrift {
       0%   { transform: translate3d(-1.6%, -0.8%, 0) scale(1.04); }
       50%  { transform: translate3d(1.2%, 1.0%, 0)  scale(1.06); }
       100% { transform: translate3d(-0.6%, 1.6%, 0) scale(1.05); }
     }
 
-    /* Ensure content always stays above the background layer */
     header.site-header,
     main,
     footer,
@@ -139,7 +182,7 @@
     }
     .skip-link:focus { left: 12px; outline: none; }
 
-    /* Motion system using CSS variables (reveal + tilt + press compose cleanly) */
+    /* Motion system */
     .tilt, .pressable {
       --tx: 0px;
       --ty: 0px;
@@ -148,7 +191,6 @@
       --scale: 1;
       --revealY: 0px;
 
-      /* REAL 3D: perspective must be present in the transform chain */
       transform:
         perspective(1200px)
         translate3d(var(--tx), calc(var(--ty) + var(--revealY)), 0)
@@ -171,6 +213,10 @@
       background: rgba(7,10,19,0.70);
       border-bottom: 1px solid rgba(255,255,255,0.08);
     }
+    :root[data-theme="light"] header.site-header {
+      background: rgba(255,255,255,0.76);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
 
     .topbar {
       display: flex;
@@ -186,7 +232,6 @@
       gap: 10px;
       min-width: 220px;
     }
-    /* Prevent default underline on brand hover */
     .brand:hover,
     .brand:focus { text-decoration: none; }
 
@@ -203,6 +248,13 @@
       display: grid;
       place-items: center;
       flex: 0 0 auto;
+    }
+    :root[data-theme="light"] .brand-badge {
+      background:
+        radial-gradient(circle at 30% 30%, rgba(36,183,255,0.24), transparent 60%),
+        radial-gradient(circle at 70% 60%, rgba(41,227,162,0.18), transparent 60%),
+        rgba(0,0,0,0.02);
+      border: 1px solid rgba(0,0,0,0.10);
     }
     .brand-badge i { color: var(--accent); font-size: 15px; }
 
@@ -259,6 +311,24 @@
       background: linear-gradient(180deg, rgba(94,230,255,0.26), rgba(94,230,255,0.10));
     }
 
+    :root[data-theme="light"] .btn {
+      border-color: rgba(0,0,0,0.12);
+      background: rgba(0,0,0,0.03);
+      color: var(--text);
+    }
+    :root[data-theme="light"] .btn:hover {
+      border-color: rgba(0,0,0,0.18);
+      background: rgba(0,0,0,0.045);
+    }
+    :root[data-theme="light"] .btn-primary {
+      border-color: rgba(36,183,255,0.45);
+      background: linear-gradient(180deg, rgba(36,183,255,0.18), rgba(36,183,255,0.06));
+    }
+    :root[data-theme="light"] .btn-primary:hover {
+      border-color: rgba(36,183,255,0.70);
+      background: linear-gradient(180deg, rgba(36,183,255,0.22), rgba(36,183,255,0.08));
+    }
+
     .nav-text {
       font-size: 13px;
       color: var(--muted);
@@ -274,6 +344,24 @@
       color: var(--text);
       background: rgba(255,255,255,0.05);
     }
+    :root[data-theme="light"] .nav-text:hover {
+      background: rgba(0,0,0,0.03);
+    }
+
+    /* Theme toggle */
+    .theme-toggle {
+      padding: 10px 12px;
+      gap: 9px;
+      white-space: nowrap;
+    }
+    .theme-toggle i {
+      color: var(--accent);
+    }
+    .theme-toggle span {
+      font-weight: 900;
+      font-size: 12.5px;
+      color: var(--muted);
+    }
 
     /* Hero */
     section { padding: 26px 0; }
@@ -288,6 +376,13 @@
         rgba(255,255,255,0.05);
       box-shadow: var(--shadow);
       overflow: hidden;
+    }
+    :root[data-theme="light"] .hero-panel {
+      border-color: rgba(0,0,0,0.10);
+      background:
+        radial-gradient(620px 260px at 20% 30%, rgba(36,183,255,0.18), transparent 68%),
+        radial-gradient(520px 240px at 80% 20%, rgba(41,227,162,0.12), transparent 68%),
+        rgba(255,255,255,0.70);
     }
 
     .hero-inner {
@@ -330,6 +425,12 @@
       text-underline-offset: 3px;
     }
     .hero-meta a:hover { text-decoration-color: rgba(94,230,255,0.45); }
+    :root[data-theme="light"] .hero-meta a {
+      text-decoration-color: rgba(0,0,0,0.20);
+    }
+    :root[data-theme="light"] .hero-meta a:hover {
+      text-decoration-color: rgba(36,183,255,0.55);
+    }
 
     .hero-cta {
       display: flex;
@@ -342,6 +443,10 @@
       border-color: rgba(255,255,255,0.10);
       background: rgba(255,255,255,0.04);
       font-weight: 800;
+    }
+    :root[data-theme="light"] .hero-cta .btn-secondary {
+      border-color: rgba(0,0,0,0.12);
+      background: rgba(0,0,0,0.03);
     }
 
     /* Section titles */
@@ -376,11 +481,19 @@
       box-shadow: var(--shadow-soft);
       overflow: hidden;
     }
+    :root[data-theme="light"] .card {
+      background: rgba(255,255,255,0.72);
+      border-color: rgba(0,0,0,0.10);
+    }
 
     .card-head {
       padding: 16px 16px 12px;
       border-bottom: 1px solid rgba(255,255,255,0.08);
       background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.03));
+    }
+    :root[data-theme="light"] .card-head {
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      background: linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.01));
     }
 
     .card-title-row {
@@ -427,15 +540,31 @@
       color: var(--text);
       white-space: nowrap;
     }
+    :root[data-theme="light"] .badge {
+      border: 1px solid rgba(0,0,0,0.12);
+      background: rgba(0,0,0,0.02);
+    }
+
     .badge i { color: rgba(94,230,255,0.90); }
+    :root[data-theme="light"] .badge i { color: rgba(36,183,255,0.95); }
+
     .badge.featured {
       border-color: rgba(94,230,255,0.30);
       background: linear-gradient(180deg, rgba(94,230,255,0.16), rgba(94,230,255,0.06));
     }
+    :root[data-theme="light"] .badge.featured {
+      border-color: rgba(36,183,255,0.40);
+      background: linear-gradient(180deg, rgba(36,183,255,0.14), rgba(36,183,255,0.04));
+    }
+
     .badge.score {
       color: var(--muted);
       border-color: rgba(255,255,255,0.14);
       background: rgba(255,255,255,0.04);
+    }
+    :root[data-theme="light"] .badge.score {
+      border-color: rgba(0,0,0,0.12);
+      background: rgba(0,0,0,0.02);
     }
 
     .facts {
@@ -455,7 +584,12 @@
       color: var(--muted);
       font-size: 12.5px;
     }
+    :root[data-theme="light"] .fact {
+      border-color: rgba(0,0,0,0.12);
+      background: rgba(0,0,0,0.02);
+    }
     .fact i { color: rgba(255,255,255,0.82); }
+    :root[data-theme="light"] .fact i { color: rgba(10,15,31,0.72); }
 
     .cta-row {
       display: flex;
@@ -477,6 +611,10 @@
       min-width: 260px;
       flex: 1 1 260px;
     }
+    :root[data-theme="light"] .ip-box {
+      border-color: rgba(0,0,0,0.12);
+      background: rgba(0,0,0,0.06);
+    }
     .ip-box code {
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
       font-size: 13px;
@@ -484,6 +622,9 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+    }
+    :root[data-theme="light"] .ip-box code {
+      color: rgba(10,15,31,0.92);
     }
 
     .btn-copy {
@@ -503,6 +644,14 @@
     .btn-copy:hover {
       border-color: rgba(94,230,255,0.55);
       background: rgba(94,230,255,0.14);
+    }
+    :root[data-theme="light"] .btn-copy {
+      border-color: rgba(36,183,255,0.45);
+      background: rgba(36,183,255,0.10);
+    }
+    :root[data-theme="light"] .btn-copy:hover {
+      border-color: rgba(36,183,255,0.72);
+      background: rgba(36,183,255,0.14);
     }
 
     .links {
@@ -531,6 +680,14 @@
       border-color: rgba(255,255,255,0.16);
       background: rgba(255,255,255,0.06);
     }
+    :root[data-theme="light"] .link-pill {
+      border-color: rgba(0,0,0,0.12);
+      background: rgba(0,0,0,0.02);
+    }
+    :root[data-theme="light"] .link-pill:hover {
+      border-color: rgba(0,0,0,0.18);
+      background: rgba(0,0,0,0.035);
+    }
 
     .card-body { padding: 12px 16px 16px; }
 
@@ -540,14 +697,19 @@
       font-size: 13.5px;
     }
     .why strong { color: rgba(255,255,255,0.92); }
+    :root[data-theme="light"] .why strong { color: rgba(10,15,31,0.92); }
 
-    /* Details (tabs) */
+    /* Details */
     details {
       border-radius: 14px;
       border: 1px solid rgba(255,255,255,0.09);
       background: rgba(255,255,255,0.03);
       padding: 10px 12px;
       margin: 10px 0;
+    }
+    :root[data-theme="light"] details {
+      border-color: rgba(0,0,0,0.10);
+      background: rgba(0,0,0,0.015);
     }
 
     summary {
@@ -562,6 +724,7 @@
       font-size: 13px;
       user-select: none;
     }
+    :root[data-theme="light"] summary { color: rgba(10,15,31,0.92); }
     summary::-webkit-details-marker { display: none; }
 
     summary .meta {
@@ -578,12 +741,12 @@
       margin-top: 10px;
       color: var(--muted);
       font-size: 13.5px;
-      overflow: hidden; /* needed for height animation */
+      overflow: hidden;
     }
     .details-content ul { margin: 10px 0 0; padding-left: 18px; }
     .details-content li { margin: 6px 0; }
 
-    /* Score bars (animated on open) */
+    /* Score bars */
     .score-bars { display: grid; gap: 10px; margin-top: 8px; }
     .bar { display: grid; gap: 10px; }
     .bar-label {
@@ -595,6 +758,8 @@
       color: rgba(255,255,255,0.86);
       font-size: 12.5px;
     }
+    :root[data-theme="light"] .bar-label { color: rgba(10,15,31,0.86); }
+
     .bar-label span { color: var(--muted-2); font-weight: 800; white-space: nowrap; }
     .bar-track {
       height: 10px;
@@ -603,6 +768,10 @@
       background: rgba(0,0,0,0.18);
       overflow: hidden;
     }
+    :root[data-theme="light"] .bar-track {
+      border-color: rgba(0,0,0,0.12);
+      background: rgba(0,0,0,0.06);
+    }
     .bar-fill {
       width: 0%;
       height: 100%;
@@ -610,6 +779,9 @@
       background: linear-gradient(90deg, rgba(94,230,255,0.85), rgba(124,255,200,0.75));
       filter: saturate(1.08);
       will-change: width;
+    }
+    :root[data-theme="light"] .bar-fill {
+      background: linear-gradient(90deg, rgba(36,183,255,0.92), rgba(41,227,162,0.78));
     }
 
     /* Panels */
@@ -620,6 +792,11 @@
       box-shadow: var(--shadow-soft);
       padding: 16px;
     }
+    :root[data-theme="light"] .panel {
+      border-color: rgba(0,0,0,0.10);
+      background: rgba(255,255,255,0.72);
+    }
+
     .panel h3 {
       font-family: var(--h-font);
       margin: 0 0 10px;
@@ -642,6 +819,10 @@
       border-top: 1px solid rgba(255,255,255,0.08);
       margin-top: 24px;
     }
+    :root[data-theme="light"] footer {
+      border-top: 1px solid rgba(0,0,0,0.08);
+    }
+
     .footer-grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -658,7 +839,7 @@
       align-items: center;
     }
 
-    /* Toast for copy feedback */
+    /* Toast */
     .toast {
       position: fixed;
       left: 50%;
@@ -678,6 +859,12 @@
       max-width: min(560px, calc(100% - 24px));
       text-align: center;
     }
+    :root[data-theme="light"] .toast {
+      background: rgba(255,255,255,0.88);
+      border-color: rgba(0,0,0,0.12);
+      color: rgba(10,15,31,0.92);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+    }
     .toast.show { opacity: 1; }
 
     /* Idle animation */
@@ -685,6 +872,11 @@
       0%   { box-shadow: var(--shadow-soft); border-color: rgba(255,255,255,0.10); }
       50%  { box-shadow: 0 14px 40px rgba(0,0,0,0.45); border-color: rgba(94,230,255,0.16); }
       100% { box-shadow: var(--shadow-soft); border-color: rgba(255,255,255,0.10); }
+    }
+    :root[data-theme="light"] @keyframes glowPulse {
+      0%   { box-shadow: var(--shadow-soft); border-color: rgba(0,0,0,0.10); }
+      50%  { box-shadow: 0 14px 40px rgba(0,0,0,0.12); border-color: rgba(36,183,255,0.22); }
+      100% { box-shadow: var(--shadow-soft); border-color: rgba(0,0,0,0.10); }
     }
     .idle { animation: glowPulse 4.6s ease-in-out infinite; }
 
@@ -696,7 +888,7 @@
     }
   </style>
 
-  <!-- Structured data: ItemList (editor-curated list) -->
+  <!-- Structured data: ItemList -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -730,13 +922,20 @@
         </a>
 
         <nav class="main-nav" aria-label="Primary navigation">
-          <a class="btn btn-primary tilt pressable" data-tilt-strength="0.70" href="#servers">
+          <!-- No tilt in the header menu -->
+          <a class="btn btn-primary pressable" href="#servers">
             <i class="fa-solid fa-list" aria-hidden="true"></i>
             Browse servers
           </a>
-          <a class="nav-text tilt pressable" data-tilt-strength="0.55" href="#suggest">
+
+          <a class="nav-text pressable" href="#suggest">
             Suggest a server
           </a>
+
+          <button class="btn pressable theme-toggle" id="themeToggle" type="button" aria-label="Switch theme">
+            <i class="fa-solid fa-moon" aria-hidden="true"></i>
+            <span>Dark</span>
+          </button>
         </nav>
       </div>
     </div>
@@ -759,7 +958,7 @@
 
               <div class="hero-meta">
                 <span><i class="fa-regular fa-calendar" aria-hidden="true"></i> Last updated: <strong>2025-12-19</strong></span>
-                <span><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i> <a class="tilt pressable" data-tilt-strength="0.45" href="#methodology">How scoring works</a></span>
+                <span><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i> <a class="pressable" href="#methodology">How scoring works</a></span>
               </div>
             </div>
 
@@ -1051,21 +1250,25 @@
               </div>
 
               <div class="facts">
-                <span class="fact"><i class="fa-solid fa-globe"></i><strong>Region:</strong>&nbsp;TBD</span>
-                <span class="fact"><i class="fa-solid fa-language"></i><strong>Language:</strong>&nbsp;TBD</span>
-                <span class="fact"><i class="fa-solid fa-tree"></i><strong>Playstyle:</strong>&nbsp;Vanilla Survival</span>
-                <span class="fact"><i class="fa-solid fa-user-shield"></i><strong>Whitelist:</strong>&nbsp;TBD</span>
-                <span class="fact"><i class="fa-regular fa-clock"></i><strong>Last checked:</strong>&nbsp;TBD</span>
+                <span class="fact"><i class="fa-solid fa-globe" aria-hidden="true"></i><strong>Region:</strong>&nbsp;TBD</span>
+                <span class="fact"><i class="fa-solid fa-language" aria-hidden="true"></i><strong>Language:</strong>&nbsp;TBD</span>
+                <span class="fact"><i class="fa-solid fa-tree" aria-hidden="true"></i><strong>Playstyle:</strong>&nbsp;Vanilla Survival</span>
+                <span class="fact"><i class="fa-solid fa-user-shield" aria-hidden="true"></i><strong>Whitelist:</strong>&nbsp;TBD</span>
+                <span class="fact"><i class="fa-regular fa-clock" aria-hidden="true"></i><strong>Last checked:</strong>&nbsp;TBD</span>
               </div>
 
               <div class="cta-row">
-                <div class="ip-box">
-                  <i class="fa-solid fa-network-wired"></i>
+                <div class="ip-box" aria-label="Server IP">
+                  <i class="fa-solid fa-network-wired" aria-hidden="true"></i>
                   <code>your.server.ip.example</code>
-                  <button class="btn-copy pressable" type="button" data-copy="your.server.ip.example" data-tilt-strength="0.40"><i class="fa-regular fa-copy"></i>Copy IP</button>
+                  <button class="btn-copy pressable" type="button" data-copy="your.server.ip.example" data-tilt-strength="0.40">
+                    <i class="fa-regular fa-copy" aria-hidden="true"></i>Copy IP
+                  </button>
                 </div>
-                <div class="links">
-                  <a class="link-pill tilt pressable" data-tilt-strength="0.55" href="#suggest"><i class="fa-solid fa-paper-plane"></i>Submit</a>
+                <div class="links" aria-label="Server links">
+                  <a class="link-pill tilt pressable" data-tilt-strength="0.55" href="#suggest">
+                    <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>Submit
+                  </a>
                 </div>
               </div>
             </div>
@@ -1074,7 +1277,7 @@
               <p class="why"><strong>Template:</strong> Replace this with a real listing after review.</p>
 
               <details class="glance" data-bars>
-                <summary>In a glance <span class="meta"><i class="fa-solid fa-bars-progress"></i>Score breakdown</span></summary>
+                <summary>In a glance <span class="meta"><i class="fa-solid fa-bars-progress" aria-hidden="true"></i>Score breakdown</span></summary>
                 <div class="details-content">
                   <div class="score-bars">
                     <div class="bar" data-value="28" data-max="35"><div class="bar-label">Vanilla purity <span>28/35</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
@@ -1087,12 +1290,12 @@
                 </div>
               </details>
 
-              <details><summary>Vanilla purity <span class="meta"><i class="fa-solid fa-leaf"></i>What stays vanilla</span></summary><div class="details-content"><p>Describe vanilla experience, allowed QoL, and what is avoided.</p></div></details>
-              <details><summary>Rules and moderation <span class="meta"><i class="fa-solid fa-scroll"></i>Grief, PvP, resets</span></summary><div class="details-content"><p>Summarize rules, enforcement, and reset policy.</p></div></details>
-              <details><summary>Fair play and monetization <span class="meta"><i class="fa-solid fa-shield-heart"></i>No P2W notes</span></summary><div class="details-content"><p>Document store policy and confirm fairness.</p></div></details>
-              <details><summary>Stability and last checked <span class="meta"><i class="fa-solid fa-microchip"></i>Uptime and checks</span></summary><div class="details-content"><p>Include last checked date and stability notes.</p></div></details>
-              <details><summary>Community and onboarding <span class="meta"><i class="fa-solid fa-people-group"></i>Start here</span></summary><div class="details-content"><p>Explain onboarding steps and community expectations.</p></div></details>
-              <details><summary>Transparency <span class="meta"><i class="fa-solid fa-eye"></i>Disclosures</span></summary><div class="details-content"><p>Link policies and list declared gameplay changes.</p></div></details>
+              <details><summary>Vanilla purity <span class="meta"><i class="fa-solid fa-leaf" aria-hidden="true"></i>What stays vanilla</span></summary><div class="details-content"><p>Describe vanilla experience, allowed QoL, and what is avoided.</p></div></details>
+              <details><summary>Rules and moderation <span class="meta"><i class="fa-solid fa-scroll" aria-hidden="true"></i>Grief, PvP, resets</span></summary><div class="details-content"><p>Summarize rules, enforcement, and reset policy.</p></div></details>
+              <details><summary>Fair play and monetization <span class="meta"><i class="fa-solid fa-shield-heart" aria-hidden="true"></i>No P2W notes</span></summary><div class="details-content"><p>Document store policy and confirm fairness.</p></div></details>
+              <details><summary>Stability and last checked <span class="meta"><i class="fa-solid fa-microchip" aria-hidden="true"></i>Uptime and checks</span></summary><div class="details-content"><p>Include last checked date and stability notes.</p></div></details>
+              <details><summary>Community and onboarding <span class="meta"><i class="fa-solid fa-people-group" aria-hidden="true"></i>Start here</span></summary><div class="details-content"><p>Explain onboarding steps and community expectations.</p></div></details>
+              <details><summary>Transparency <span class="meta"><i class="fa-solid fa-eye" aria-hidden="true"></i>Disclosures</span></summary><div class="details-content"><p>Link policies and list declared gameplay changes.</p></div></details>
             </div>
           </article>
 
@@ -1105,26 +1308,30 @@
                   <p class="subtitle">A placeholder listing. If your vanilla server belongs here, submit it for editorial review.</p>
                 </div>
                 <div class="badges">
-                  <span class="badge score"><i class="fa-solid fa-chart-simple"></i>Editor Score: <strong>81</strong>/100</span>
+                  <span class="badge score"><i class="fa-solid fa-chart-simple" aria-hidden="true"></i>Editor Score: <strong>81</strong>/100</span>
                 </div>
               </div>
 
               <div class="facts">
-                <span class="fact"><i class="fa-solid fa-globe"></i><strong>Region:</strong>&nbsp;TBD</span>
-                <span class="fact"><i class="fa-solid fa-language"></i><strong>Language:</strong>&nbsp;TBD</span>
-                <span class="fact"><i class="fa-solid fa-tree"></i><strong>Playstyle:</strong>&nbsp;Vanilla SMP</span>
-                <span class="fact"><i class="fa-solid fa-user-shield"></i><strong>Whitelist:</strong>&nbsp;TBD</span>
-                <span class="fact"><i class="fa-regular fa-clock"></i><strong>Last checked:</strong>&nbsp;TBD</span>
+                <span class="fact"><i class="fa-solid fa-globe" aria-hidden="true"></i><strong>Region:</strong>&nbsp;TBD</span>
+                <span class="fact"><i class="fa-solid fa-language" aria-hidden="true"></i><strong>Language:</strong>&nbsp;TBD</span>
+                <span class="fact"><i class="fa-solid fa-tree" aria-hidden="true"></i><strong>Playstyle:</strong>&nbsp;Vanilla SMP</span>
+                <span class="fact"><i class="fa-solid fa-user-shield" aria-hidden="true"></i><strong>Whitelist:</strong>&nbsp;TBD</span>
+                <span class="fact"><i class="fa-regular fa-clock" aria-hidden="true"></i><strong>Last checked:</strong>&nbsp;TBD</span>
               </div>
 
               <div class="cta-row">
-                <div class="ip-box">
-                  <i class="fa-solid fa-network-wired"></i>
+                <div class="ip-box" aria-label="Server IP">
+                  <i class="fa-solid fa-network-wired" aria-hidden="true"></i>
                   <code>your.server.ip.example</code>
-                  <button class="btn-copy pressable" type="button" data-copy="your.server.ip.example" data-tilt-strength="0.40"><i class="fa-regular fa-copy"></i>Copy IP</button>
+                  <button class="btn-copy pressable" type="button" data-copy="your.server.ip.example" data-tilt-strength="0.40">
+                    <i class="fa-regular fa-copy" aria-hidden="true"></i>Copy IP
+                  </button>
                 </div>
-                <div class="links">
-                  <a class="link-pill tilt pressable" data-tilt-strength="0.55" href="#suggest"><i class="fa-solid fa-paper-plane"></i>Submit</a>
+                <div class="links" aria-label="Server links">
+                  <a class="link-pill tilt pressable" data-tilt-strength="0.55" href="#suggest">
+                    <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>Submit
+                  </a>
                 </div>
               </div>
             </div>
@@ -1133,7 +1340,7 @@
               <p class="why"><strong>Template:</strong> Replace with a real listing once reviewed.</p>
 
               <details class="glance" data-bars>
-                <summary>In a glance <span class="meta"><i class="fa-solid fa-bars-progress"></i>Score breakdown</span></summary>
+                <summary>In a glance <span class="meta"><i class="fa-solid fa-bars-progress" aria-hidden="true"></i>Score breakdown</span></summary>
                 <div class="details-content">
                   <div class="score-bars">
                     <div class="bar" data-value="27" data-max="35"><div class="bar-label">Vanilla purity <span>27/35</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
@@ -1146,12 +1353,12 @@
                 </div>
               </details>
 
-              <details><summary>Vanilla purity <span class="meta"><i class="fa-solid fa-leaf"></i>What stays vanilla</span></summary><div class="details-content"><p>Explain vanilla experience and minimal QoL, if any.</p></div></details>
-              <details><summary>Rules and moderation <span class="meta"><i class="fa-solid fa-scroll"></i>Grief, PvP, resets</span></summary><div class="details-content"><p>Summarize rules and moderation approach.</p></div></details>
-              <details><summary>Fair play and monetization <span class="meta"><i class="fa-solid fa-shield-heart"></i>No P2W notes</span></summary><div class="details-content"><p>Document monetization policy and fairness statement.</p></div></details>
-              <details><summary>Stability and last checked <span class="meta"><i class="fa-solid fa-microchip"></i>Uptime and checks</span></summary><div class="details-content"><p>Include last-checked date and stability notes.</p></div></details>
-              <details><summary>Community and onboarding <span class="meta"><i class="fa-solid fa-people-group"></i>Start here</span></summary><div class="details-content"><p>Outline onboarding and community style.</p></div></details>
-              <details><summary>Transparency <span class="meta"><i class="fa-solid fa-eye"></i>Disclosures</span></summary><div class="details-content"><p>Link policies and list declared changes.</p></div></details>
+              <details><summary>Vanilla purity <span class="meta"><i class="fa-solid fa-leaf" aria-hidden="true"></i>What stays vanilla</span></summary><div class="details-content"><p>Explain vanilla experience and minimal QoL, if any.</p></div></details>
+              <details><summary>Rules and moderation <span class="meta"><i class="fa-solid fa-scroll" aria-hidden="true"></i>Grief, PvP, resets</span></summary><div class="details-content"><p>Summarize rules and moderation approach.</p></div></details>
+              <details><summary>Fair play and monetization <span class="meta"><i class="fa-solid fa-shield-heart" aria-hidden="true"></i>No P2W notes</span></summary><div class="details-content"><p>Document monetization policy and fairness statement.</p></div></details>
+              <details><summary>Stability and last checked <span class="meta"><i class="fa-solid fa-microchip" aria-hidden="true"></i>Uptime and checks</span></summary><div class="details-content"><p>Include last-checked date and stability notes.</p></div></details>
+              <details><summary>Community and onboarding <span class="meta"><i class="fa-solid fa-people-group" aria-hidden="true"></i>Start here</span></summary><div class="details-content"><p>Outline onboarding and community style.</p></div></details>
+              <details><summary>Transparency <span class="meta"><i class="fa-solid fa-eye" aria-hidden="true"></i>Disclosures</span></summary><div class="details-content"><p>Link policies and list declared changes.</p></div></details>
             </div>
           </article>
 
@@ -1164,26 +1371,30 @@
                   <p class="subtitle">Final placeholder slot. Submit your vanilla Hytale server to be considered for the list.</p>
                 </div>
                 <div class="badges">
-                  <span class="badge score"><i class="fa-solid fa-chart-simple"></i>Editor Score: <strong>78</strong>/100</span>
+                  <span class="badge score"><i class="fa-solid fa-chart-simple" aria-hidden="true"></i>Editor Score: <strong>78</strong>/100</span>
                 </div>
               </div>
 
               <div class="facts">
-                <span class="fact"><i class="fa-solid fa-globe"></i><strong>Region:</strong>&nbsp;TBD</span>
-                <span class="fact"><i class="fa-solid fa-language"></i><strong>Language:</strong>&nbsp;TBD</span>
-                <span class="fact"><i class="fa-solid fa-tree"></i><strong>Playstyle:</strong>&nbsp;Vanilla SMP</span>
-                <span class="fact"><i class="fa-solid fa-user-shield"></i><strong>Whitelist:</strong>&nbsp;TBD</span>
-                <span class="fact"><i class="fa-regular fa-clock"></i><strong>Last checked:</strong>&nbsp;TBD</span>
+                <span class="fact"><i class="fa-solid fa-globe" aria-hidden="true"></i><strong>Region:</strong>&nbsp;TBD</span>
+                <span class="fact"><i class="fa-solid fa-language" aria-hidden="true"></i><strong>Language:</strong>&nbsp;TBD</span>
+                <span class="fact"><i class="fa-solid fa-tree" aria-hidden="true"></i><strong>Playstyle:</strong>&nbsp;Vanilla SMP</span>
+                <span class="fact"><i class="fa-solid fa-user-shield" aria-hidden="true"></i><strong>Whitelist:</strong>&nbsp;TBD</span>
+                <span class="fact"><i class="fa-regular fa-clock" aria-hidden="true"></i><strong>Last checked:</strong>&nbsp;TBD</span>
               </div>
 
               <div class="cta-row">
-                <div class="ip-box">
-                  <i class="fa-solid fa-network-wired"></i>
+                <div class="ip-box" aria-label="Server IP">
+                  <i class="fa-solid fa-network-wired" aria-hidden="true"></i>
                   <code>your.server.ip.example</code>
-                  <button class="btn-copy pressable" type="button" data-copy="your.server.ip.example" data-tilt-strength="0.40"><i class="fa-regular fa-copy"></i>Copy IP</button>
+                  <button class="btn-copy pressable" type="button" data-copy="your.server.ip.example" data-tilt-strength="0.40">
+                    <i class="fa-regular fa-copy" aria-hidden="true"></i>Copy IP
+                  </button>
                 </div>
-                <div class="links">
-                  <a class="link-pill tilt pressable" data-tilt-strength="0.55" href="#suggest"><i class="fa-solid fa-paper-plane"></i>Submit</a>
+                <div class="links" aria-label="Server links">
+                  <a class="link-pill tilt pressable" data-tilt-strength="0.55" href="#suggest">
+                    <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>Submit
+                  </a>
                 </div>
               </div>
             </div>
@@ -1192,7 +1403,7 @@
               <p class="why"><strong>Template:</strong> This will become a real listing after review.</p>
 
               <details class="glance" data-bars>
-                <summary>In a glance <span class="meta"><i class="fa-solid fa-bars-progress"></i>Score breakdown</span></summary>
+                <summary>In a glance <span class="meta"><i class="fa-solid fa-bars-progress" aria-hidden="true"></i>Score breakdown</span></summary>
                 <div class="details-content">
                   <div class="score-bars">
                     <div class="bar" data-value="26" data-max="35"><div class="bar-label">Vanilla purity <span>26/35</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
@@ -1205,12 +1416,12 @@
                 </div>
               </details>
 
-              <details><summary>Vanilla purity <span class="meta"><i class="fa-solid fa-leaf"></i>What stays vanilla</span></summary><div class="details-content"><p>Describe how vanilla the gameplay feels and list any minimal QoL.</p></div></details>
-              <details><summary>Rules and moderation <span class="meta"><i class="fa-solid fa-scroll"></i>Grief, PvP, resets</span></summary><div class="details-content"><p>Summarize rules and enforcement.</p></div></details>
-              <details><summary>Fair play and monetization <span class="meta"><i class="fa-solid fa-shield-heart"></i>No P2W notes</span></summary><div class="details-content"><p>Document store policy and fairness statement.</p></div></details>
-              <details><summary>Stability and last checked <span class="meta"><i class="fa-solid fa-microchip"></i>Uptime and checks</span></summary><div class="details-content"><p>Include last checked date and stability notes.</p></div></details>
-              <details><summary>Community and onboarding <span class="meta"><i class="fa-solid fa-people-group"></i>Start here</span></summary><div class="details-content"><p>Outline onboarding and intended community style.</p></div></details>
-              <details><summary>Transparency <span class="meta"><i class="fa-solid fa-eye"></i>Disclosures</span></summary><div class="details-content"><p>Link policies and list declared changes.</p></div></details>
+              <details><summary>Vanilla purity <span class="meta"><i class="fa-solid fa-leaf" aria-hidden="true"></i>What stays vanilla</span></summary><div class="details-content"><p>Describe how vanilla the gameplay feels and list any minimal QoL.</p></div></details>
+              <details><summary>Rules and moderation <span class="meta"><i class="fa-solid fa-scroll" aria-hidden="true"></i>Grief, PvP, resets</span></summary><div class="details-content"><p>Summarize rules and enforcement.</p></div></details>
+              <details><summary>Fair play and monetization <span class="meta"><i class="fa-solid fa-shield-heart" aria-hidden="true"></i>No P2W notes</span></summary><div class="details-content"><p>Document store policy and fairness statement.</p></div></details>
+              <details><summary>Stability and last checked <span class="meta"><i class="fa-solid fa-microchip" aria-hidden="true"></i>Uptime and checks</span></summary><div class="details-content"><p>Include last checked date and stability notes.</p></div></details>
+              <details><summary>Community and onboarding <span class="meta"><i class="fa-solid fa-people-group" aria-hidden="true"></i>Start here</span></summary><div class="details-content"><p>Outline onboarding and intended community style.</p></div></details>
+              <details><summary>Transparency <span class="meta"><i class="fa-solid fa-eye" aria-hidden="true"></i>Disclosures</span></summary><div class="details-content"><p>Link policies and list declared changes.</p></div></details>
             </div>
           </article>
         </div>
@@ -1308,7 +1519,7 @@
 
         <div class="panel tilt idle" data-tilt-strength="1.00" data-reveal>
           <p class="footer-text" style="margin-top:0;">
-            Email: <a class="tilt pressable" data-tilt-strength="0.45" href="mailto:submit@hytalevanillaservers.com">submit@hytalevanillaservers.com</a>
+            Email: <a class="pressable" href="mailto:submit@hytalevanillaservers.com">submit@hytalevanillaservers.com</a>
           </p>
           <ul style="margin:10px 0 0; padding-left:18px; color: var(--muted);">
             <li>Server name and IP</li>
@@ -1336,7 +1547,7 @@
             HytaleVanillaServers.com is a curated, editor-ranked list of vanilla-first Hytale servers. The goal is clarity and comparability, not popularity.
           </p>
           <p class="footer-text" style="margin-top:10px;">
-            Contact: <a class="tilt pressable" data-tilt-strength="0.45" href="mailto:hello@hytalevanillaservers.com">hello@hytalevanillaservers.com</a>
+            Contact: <a class="pressable" href="mailto:hello@hytalevanillaservers.com">hello@hytalevanillaservers.com</a>
           </p>
         </div>
         <div class="footer-links" aria-label="Footer links">
@@ -1351,6 +1562,36 @@
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script>
+    // Theme switcher (dark <-> light), persisted.
+    (function () {
+      const root = document.documentElement;
+      const btn = document.getElementById("themeToggle");
+      if (!btn) return;
+
+      function applyUI() {
+        const theme = root.getAttribute("data-theme") || "dark";
+        const icon = btn.querySelector("i");
+        const label = btn.querySelector("span");
+        const isLight = theme === "light";
+
+        if (icon) icon.className = isLight ? "fa-solid fa-sun" : "fa-solid fa-moon";
+        if (label) label.textContent = isLight ? "Light" : "Dark";
+
+        btn.setAttribute("aria-label", isLight ? "Switch to dark theme" : "Switch to light theme");
+        btn.setAttribute("title", isLight ? "Switch to dark theme" : "Switch to light theme");
+      }
+
+      btn.addEventListener("click", () => {
+        const current = root.getAttribute("data-theme") || "dark";
+        const next = current === "light" ? "dark" : "light";
+        root.setAttribute("data-theme", next);
+        try { localStorage.setItem("theme", next); } catch (e) {}
+        applyUI();
+      });
+
+      applyUI();
+    })();
+
     // Minimal JS for "Copy IP" buttons.
     (function () {
       const toast = document.getElementById("toast");
@@ -1394,14 +1635,12 @@
       });
     })();
 
-    // Motion: scroll reveal, global proximity tilt, press feedback, animated details, and sequential bars.
+    // Motion: scroll reveal, press feedback, animated details, and smooth proximity tilt.
     window.addEventListener("DOMContentLoaded", () => {
       if (!window.gsap) return;
       gsap.registerPlugin(ScrollTrigger);
 
-      // NOTE: motion is always enabled by design (ignores prefers-reduced-motion).
-
-      // Scroll reveal: animate CSS var --revealY (so it composes with tilt and press).
+      // Scroll reveal
       const revealEls = Array.from(document.querySelectorAll("[data-reveal]"));
       revealEls.forEach((el) => {
         gsap.fromTo(
@@ -1422,8 +1661,8 @@
       (function pressFeedback() {
         const pressables = Array.from(document.querySelectorAll(".pressable"));
         pressables.forEach((el) => {
-          const down = () => gsap.to(el, { "--scale": 0.965, duration: 0.10, ease: "power2.out" });
-          const up   = () => gsap.to(el, { "--scale": 1, duration: 0.55, ease: "elastic.out(1, 0.55)" });
+          const down = () => gsap.to(el, { "--scale": 0.985, duration: 0.10, ease: "power2.out" });
+          const up   = () => gsap.to(el, { "--scale": 1, duration: 0.55, ease: "elastic.out(1, 0.65)" });
 
           el.addEventListener("pointerdown", down, { passive: true });
           el.addEventListener("pointerup", up, { passive: true });
@@ -1432,8 +1671,7 @@
         });
       })();
 
-      // Smooth details expansion and collapse (height animation).
-      // Also triggers sequential bar animation for data-bars sections once opened.
+      // Details + bar animation
       function animateBars(detailsEl) {
         const bars = Array.from(detailsEl.querySelectorAll(".bar"));
         const fills = [];
@@ -1456,7 +1694,7 @@
             width: targets[i] + "%",
             duration: 0.85,
             ease: "expo.out"
-          }, i * 0.12); // progressive delay
+          }, i * 0.12);
         });
       }
 
@@ -1467,7 +1705,6 @@
           const content = d.querySelector(".details-content");
           if (!summary || !content) return;
 
-          // Initial state
           if (!d.open) {
             gsap.set(content, { height: 0, opacity: 0, display: "none" });
           } else {
@@ -1530,16 +1767,14 @@
             else openDetails();
           });
 
-          // If open by default and has bars, animate once.
           if (d.open && d.hasAttribute("data-bars")) {
             animateBars(d);
           }
         });
       })();
 
-      // Global proximity tilt:
-      // Always active, even when not hovering. Influence decays exponentially with distance.
-      (function globalProximityTilt() {
+      // Smooth global proximity tilt (delicate spring), excludes header items by not selecting them.
+      (function smoothProximityTilt() {
         const canTilt = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
         if (!canTilt) return;
 
@@ -1548,7 +1783,6 @@
 
         const safeNum = (n) => (Number.isFinite(n) ? n : 0);
 
-        // Use quickSetter with explicit units to prevent NaNpx propagation.
         const items = els.map((el) => {
           const raw = parseFloat(el.getAttribute("data-tilt-strength"));
           const strength = Number.isFinite(raw) ? raw : 1;
@@ -1556,26 +1790,32 @@
           return {
             el,
             strength,
-            qtx: gsap.quickSetter(el, "--tx", "px"),
-            qty: gsap.quickSetter(el, "--ty", "px"),
-            qrx: gsap.quickSetter(el, "--rx", "deg"),
-            qry: gsap.quickSetter(el, "--ry", "deg")
+            setTx: gsap.quickSetter(el, "--tx", "px"),
+            setTy: gsap.quickSetter(el, "--ty", "px"),
+            setRx: gsap.quickSetter(el, "--rx", "deg"),
+            setRy: gsap.quickSetter(el, "--ry", "deg"),
+
+            cur: { tx: 0, ty: 0, rx: 0, ry: 0 },
+            vel: { tx: 0, ty: 0, rx: 0, ry: 0 },
+            tgt: { tx: 0, ty: 0, rx: 0, ry: 0 }
           };
         });
 
         let mouseX = window.innerWidth / 2;
         let mouseY = window.innerHeight / 2;
-        let ticking = false;
+        let pointerInside = true;
 
-        function apply() {
-          ticking = false;
-
+        function computeTargets() {
           const w = window.innerWidth || 1;
-          // Bigger falloff so the effect is visible across the grid, not only under the cursor.
-          const falloff = Math.max(420, Math.min(780, w * 0.48));
+          const falloff = Math.max(520, Math.min(980, w * 0.62));
 
-          items.forEach(({ el, strength, qtx, qty, qrx, qry }) => {
-            const r = el.getBoundingClientRect();
+          for (const it of items) {
+            if (!pointerInside) {
+              it.tgt.tx = 0; it.tgt.ty = 0; it.tgt.rx = 0; it.tgt.ry = 0;
+              continue;
+            }
+
+            const r = it.el.getBoundingClientRect();
             const cx = r.left + r.width / 2;
             const cy = r.top + r.height / 2;
 
@@ -1585,15 +1825,15 @@
             const d = Math.hypot(dx, dy);
             const influence = Math.exp(-d / falloff);
 
-            const denomX = Math.max(240, r.width || 0);
-            const denomY = Math.max(240, r.height || 0);
+            const denomX = Math.max(320, r.width || 0);
+            const denomY = Math.max(320, r.height || 0);
 
             const nx = dx / denomX;
             const ny = dy / denomY;
 
-            // Stronger, clearly perceivable 3D.
-            const maxTiltDeg = 16 * strength;
-            const maxMovePx  = 14 * strength;
+            // Much more delicate limits
+            const maxTiltDeg = 4.2 * it.strength;
+            const maxMovePx  = 3.2 * it.strength;
 
             const rotY = (nx * 2) * maxTiltDeg * influence;
             const rotX = -(ny * 2) * maxTiltDeg * influence;
@@ -1601,37 +1841,63 @@
             const tx = (nx * 2) * maxMovePx * influence;
             const ty = (ny * 2) * maxMovePx * influence;
 
-            qtx(safeNum(tx));
-            qty(safeNum(ty));
-            qrx(safeNum(rotX));
-            qry(safeNum(rotY));
-          });
+            it.tgt.tx = safeNum(tx);
+            it.tgt.ty = safeNum(ty);
+            it.tgt.rx = safeNum(rotX);
+            it.tgt.ry = safeNum(rotY);
+          }
         }
 
-        function requestApply() {
-          if (ticking) return;
-          ticking = true;
-          requestAnimationFrame(apply);
+        // Gentle spring (elastic but subtle)
+        const stiffness = 0.055;
+        const damping = 0.86;
+
+        function stepSpring(it) {
+          const axes = ["tx", "ty", "rx", "ry"];
+          for (const k of axes) {
+            const cur = it.cur[k];
+            const tgt = it.tgt[k];
+            let vel = it.vel[k];
+
+            vel += (tgt - cur) * stiffness;
+            vel *= damping;
+
+            const next = cur + vel;
+
+            it.vel[k] = safeNum(vel);
+            it.cur[k] = safeNum(next);
+          }
+
+          it.setTx(it.cur.tx);
+          it.setTy(it.cur.ty);
+          it.setRx(it.cur.rx);
+          it.setRy(it.cur.ry);
+        }
+
+        function tick() {
+          computeTargets();
+          for (const it of items) stepSpring(it);
+          requestAnimationFrame(tick);
         }
 
         window.addEventListener("mousemove", (e) => {
+          pointerInside = true;
           mouseX = e.clientX;
           mouseY = e.clientY;
-          requestApply();
         }, { passive: true });
 
-        window.addEventListener("scroll", requestApply, { passive: true });
-        window.addEventListener("resize", requestApply, { passive: true });
-
-        // When pointer leaves window, gently reset.
+        // When the pointer leaves the window, drift back to zero smoothly
         window.addEventListener("mouseout", (e) => {
           if (e.relatedTarget || e.toElement) return;
-          items.forEach(({ qtx, qty, qrx, qry }) => {
-            qtx(0); qty(0); qrx(0); qry(0);
-          });
+          pointerInside = false;
         });
 
-        requestApply();
+        // If it comes back in without mousemove (rare), re-enable on enter
+        window.addEventListener("mouseenter", () => {
+          pointerInside = true;
+        });
+
+        tick();
       })();
     });
   </script>
