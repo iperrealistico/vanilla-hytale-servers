@@ -119,55 +119,24 @@
       position: relative;
       font-family: var(--b-font);
       color: var(--text);
-      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+      background:
+        radial-gradient(1200px 680px at 18% 10%, rgba(94,230,255,0.14), transparent 62%),
+        radial-gradient(980px 580px at 88% 18%, rgba(124,255,200,0.10), transparent 60%),
+        radial-gradient(820px 560px at 56% 86%, rgba(94,230,255,0.06), transparent 64%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
       line-height: 1.55;
       overflow-x: hidden;
     }
 
-    /* Animated gradient layer (continuous slow rotation, no visible edge) */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: -65%;
-      z-index: 0;
+    :root[data-theme="light"] body {
       background:
-        radial-gradient(1200px 680px at 18% 10%, rgba(94,230,255,0.22), transparent 62%),
-        radial-gradient(980px 580px at 88% 18%, rgba(124,255,200,0.18), transparent 60%),
-        radial-gradient(820px 560px at 56% 86%, rgba(94,230,255,0.10), transparent 64%),
-        linear-gradient(180deg, rgba(7,10,19,1) 0%, rgba(10,15,31,1) 100%);
-      filter: blur(12px) saturate(1.05);
-      opacity: 0.95;
-      transform-origin: 50% 50%;
-      transform: translate3d(0,0,0) rotate(0deg) scale(1.10);
-      animation: bgOrbit 140s linear infinite;
-      will-change: transform;
-      pointer-events: none;
-
-      /* fades out edges so no hard rotating rectangle line appears */
-      -webkit-mask-image: radial-gradient(circle at 50% 50%, rgba(0,0,0,1) 52%, rgba(0,0,0,0) 74%);
-      mask-image: radial-gradient(circle at 50% 50%, rgba(0,0,0,1) 52%, rgba(0,0,0,0) 74%);
-    }
-
-    :root[data-theme="light"] body::before {
-      background:
-        radial-gradient(1100px 640px at 18% 12%, rgba(36,183,255,0.24), transparent 64%),
-        radial-gradient(980px 580px at 88% 18%, rgba(41,227,162,0.18), transparent 64%),
-        radial-gradient(820px 560px at 56% 86%, rgba(36,183,255,0.12), transparent 66%),
-        linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(238,246,255,1) 100%);
-      filter: blur(12px) saturate(1.05);
-      opacity: 0.92;
-    }
-
-    @keyframes bgOrbit {
-      0%   { transform: translate3d(-2%, -1%, 0) rotate(0deg)   scale(1.10); }
-      25%  { transform: translate3d( 2%, -1%, 0) rotate(90deg)  scale(1.12); }
-      50%  { transform: translate3d( 2%,  2%, 0) rotate(180deg) scale(1.10); }
-      75%  { transform: translate3d(-2%,  2%, 0) rotate(270deg) scale(1.12); }
-      100% { transform: translate3d(-2%, -1%, 0) rotate(360deg) scale(1.10); }
+        radial-gradient(1100px 640px at 18% 12%, rgba(36,183,255,0.14), transparent 68%),
+        radial-gradient(980px 580px at 88% 18%, rgba(41,227,162,0.10), transparent 68%),
+        radial-gradient(820px 560px at 56% 86%, rgba(36,183,255,0.06), transparent 70%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
     }
 
     @media (prefers-reduced-motion: reduce) {
-      body::before { animation: none; }
       html { scroll-behavior: auto; }
     }
 
@@ -570,7 +539,7 @@
     }
 
     .card-head {
-      padding: 16px 16px 12px;
+      padding: 54px 16px 12px;
       border-bottom: 1px solid rgba(255,255,255,0.08);
       background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.03));
     }
@@ -1048,7 +1017,6 @@
         </a>
 
         <nav class="main-nav" aria-label="Primary navigation">
-          <!-- No tilt in the header menu -->
           <a class="btn btn-primary pressable" href="#servers">
             <i class="fa-solid fa-list" aria-hidden="true"></i>
             Browse servers
@@ -1169,7 +1137,7 @@
 
             <div class="card-body">
               <p class="why">
-                <strong>Why it’s vanilla-first:</strong> A calm survival world with strong guardrails: no griefing, no random PvP, no pay-to-win, and a long-term mindset for towns and community builds.
+                <strong>Why it’s vanilla-first:</strong> A calm survival world with strong guardrails: no griefing, no unsolicited PvP, no pay-to-win, and a long-term mindset for towns and community builds.
               </p>
 
               <details class="glance" data-bars data-reveal>
@@ -1216,11 +1184,11 @@
                 </summary>
                 <div class="details-content">
                   <p>
-                    The server aims to keep the survival loop intact: explore, gather, craft, build, and collaborate, without “feature spam” that turns survival into menus.
+                    The server aims to keep the survival loop intact: explore, gather, craft, build, and collaborate, without systems that replace the world with menus.
                     It describes itself as semi-vanilla: minimal quality-of-life choices plus strict moderation to protect builders and long-term projects, while keeping progression meaningful.
                   </p>
                   <ul>
-                    <li>No teleport spam designed to replace exploration and distance.</li>
+                    <li>No fast-travel spam designed to replace exploration and distance.</li>
                     <li>One shared survival world optimized for long-term towns and community infrastructure.</li>
                     <li>Changes are introduced slowly, with stability prioritized over hype.</li>
                   </ul>
@@ -1306,11 +1274,11 @@
                 </summary>
                 <div class="details-content">
                   <p>
-                    The server’s messaging is clear about what it is optimizing for (peaceful survival) and what it avoids (pay-to-win, random PvP, fast travel spam).
+                    The server’s messaging is clear about what it is optimizing for (peaceful survival) and what it avoids (pay-to-win, unsolicited PvP, fast travel spam).
                     Any semi-vanilla choices should be disclosed in a way that stays readable for real players.
                   </p>
                   <ul>
-                    <li>Explicit positioning: no grief, no random PvP, no pay-to-win.</li>
+                    <li>Explicit positioning: no grief, no unsolicited PvP, no pay-to-win.</li>
                     <li>Semi-vanilla intent stated: protect the experience without rewriting it.</li>
                     <li>Discord-first approach for current connection info and announcements.</li>
                   </ul>
@@ -1352,7 +1320,6 @@
                 </div>
 
                 <div class="links" aria-label="Server links">
-                  <!-- Non-featured external links should be nofollow -->
                   <a class="link-pill tilt pressable" data-tilt-strength="0.55" href="https://discord.example" target="_blank" rel="nofollow noopener noreferrer">
                     <i class="fa-brands fa-discord" aria-hidden="true"></i>Discord
                   </a>
@@ -1450,7 +1417,6 @@
                   </button>
                 </div>
                 <div class="links" aria-label="Server links">
-                  <!-- Non-featured external links should be nofollow -->
                   <a class="link-pill tilt pressable" data-tilt-strength="0.55" href="https://discord.example" target="_blank" rel="nofollow noopener noreferrer">
                     <i class="fa-brands fa-discord" aria-hidden="true"></i>Discord
                   </a>
@@ -1519,7 +1485,6 @@
                   </button>
                 </div>
                 <div class="links" aria-label="Server links">
-                  <!-- Non-featured external links should be nofollow -->
                   <a class="link-pill tilt pressable" data-tilt-strength="0.55" href="https://discord.example" target="_blank" rel="nofollow noopener noreferrer">
                     <i class="fa-brands fa-discord" aria-hidden="true"></i>Discord
                   </a>
@@ -1588,7 +1553,6 @@
                   </button>
                 </div>
                 <div class="links" aria-label="Server links">
-                  <!-- Non-featured external links should be nofollow -->
                   <a class="link-pill tilt pressable" data-tilt-strength="0.55" href="https://discord.example" target="_blank" rel="nofollow noopener noreferrer">
                     <i class="fa-brands fa-discord" aria-hidden="true"></i>Discord
                   </a>
@@ -2031,7 +1995,6 @@
             const nx = dx / denomX;
             const ny = dy / denomY;
 
-            // Much more delicate limits
             const maxTiltDeg = 4.2 * it.strength;
             const maxMovePx  = 3.2 * it.strength;
 
@@ -2048,7 +2011,6 @@
           }
         }
 
-        // Gentle spring (elastic but subtle)
         const stiffness = 0.055;
         const damping = 0.86;
 
@@ -2086,13 +2048,11 @@
           mouseY = e.clientY;
         }, { passive: true });
 
-        // When the pointer leaves the window, drift back to zero smoothly
         window.addEventListener("mouseout", (e) => {
           if (e.relatedTarget || e.toElement) return;
           pointerInside = false;
         });
 
-        // If it comes back in without mousemove (rare), re-enable on enter
         window.addEventListener("mouseenter", () => {
           pointerInside = true;
         });
