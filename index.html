@@ -68,10 +68,14 @@
 
       --h-font: "Cinzel Decorative", serif;
       --b-font: "Nunito Sans", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+
+      /* More visible 3D perspective for all tilt transforms */
+      --persp: 1200px;
     }
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+
     body {
       margin: 0;
       font-family: var(--b-font);
@@ -79,6 +83,10 @@
       background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
       line-height: 1.55;
       overflow-x: hidden;
+
+      /* Create a stacking context so body::before (z-index:-1) stays visible above the background */
+      position: relative;
+      z-index: 0;
     }
 
     /* Subtle animated gradient layer (responsive for all resolutions) */
@@ -87,6 +95,7 @@
       position: fixed;
       inset: -22%;
       z-index: -1;
+      pointer-events: none;
       background:
         radial-gradient(1200px 640px at 18% 8%, rgba(94,230,255,0.14), transparent 60%),
         radial-gradient(980px 560px at 88% 16%, rgba(124,255,200,0.10), transparent 58%),
@@ -94,14 +103,14 @@
         linear-gradient(180deg, rgba(7,10,19,1) 0%, rgba(10,15,31,1) 100%);
       filter: saturate(1.02);
       transform: translate3d(0,0,0) scale(1.03);
-      animation: bgDrift 18s ease-in-out infinite alternate;
+      animation: bgDrift 14s ease-in-out infinite alternate;
       will-change: transform;
     }
 
     @keyframes bgDrift {
-      0%   { transform: translate3d(-1.6%, -0.8%, 0) scale(1.04); }
-      50%  { transform: translate3d(1.2%, 1.0%, 0)  scale(1.06); }
-      100% { transform: translate3d(-0.6%, 1.6%, 0) scale(1.05); }
+      0%   { transform: translate3d(-3.0%, -1.6%, 0) scale(1.05); }
+      50%  { transform: translate3d(2.3%,  2.0%, 0) scale(1.08); }
+      100% { transform: translate3d(-1.2%, 3.2%, 0) scale(1.06); }
     }
 
     a { color: inherit; text-decoration: none; }
@@ -138,6 +147,7 @@
       --revealY: 0px;
 
       transform:
+        perspective(var(--persp))
         translate3d(var(--tx), calc(var(--ty) + var(--revealY)), 0)
         rotateX(var(--rx))
         rotateY(var(--ry))
@@ -680,14 +690,6 @@
       .hero-inner { grid-template-columns: 1fr; }
       .hero-cta { align-items: stretch; }
       .footer-links { justify-content: flex-start; }
-    }
-
-    /* Reduced motion */
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      body::before { animation: none; }
-      .toast { transition: none; }
-      .idle { animation: none; }
     }
   </style>
 
@@ -1396,35 +1398,31 @@
       if (!window.gsap) return;
       gsap.registerPlugin(ScrollTrigger);
 
-      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
       // Scroll reveal: animate CSS var --revealY (so it composes with tilt and press).
-      if (!prefersReduced) {
+      (function revealMotion() {
         const revealEls = Array.from(document.querySelectorAll("[data-reveal]"));
         revealEls.forEach((el) => {
           gsap.fromTo(
             el,
-            { opacity: 0, "--revealY": "44px", filter: "blur(10px)" },
+            { opacity: 0, "--revealY": "54px", filter: "blur(12px)" },
             {
               opacity: 1,
               "--revealY": "0px",
               filter: "blur(0px)",
-              duration: 0.95,
-              ease: "back.out(1.55)",
+              duration: 1.05,
+              ease: "back.out(1.75)",
               scrollTrigger: { trigger: el, start: "top 88%", once: true }
             }
           );
         });
-      }
+      })();
 
       // Press animation for all buttons/links with .pressable
       (function pressFeedback() {
         const pressables = Array.from(document.querySelectorAll(".pressable"));
-        if (prefersReduced) return;
-
         pressables.forEach((el) => {
-          const down = () => gsap.to(el, { "--scale": 0.965, duration: 0.10, ease: "power2.out" });
-          const up   = () => gsap.to(el, { "--scale": 1, duration: 0.55, ease: "elastic.out(1, 0.55)" });
+          const down = () => gsap.to(el, { "--scale": 0.955, duration: 0.10, ease: "power2.out" });
+          const up   = () => gsap.to(el, { "--scale": 1, duration: 0.60, ease: "elastic.out(1, 0.55)" });
 
           el.addEventListener("pointerdown", down, { passive: true });
           el.addEventListener("pointerup", up, { passive: true });
@@ -1455,9 +1453,9 @@
         fills.forEach((fill, i) => {
           tl.to(fill, {
             width: targets[i] + "%",
-            duration: 0.85,
+            duration: 0.90,
             ease: "expo.out"
-          }, i * 0.11); // progressive delay (one after the other)
+          }, i * 0.13); // progressive delay: one bar after the other
         });
       }
 
@@ -1489,15 +1487,15 @@
               {
                 height: h,
                 opacity: 1,
-                duration: prefersReduced ? 0 : 0.46,
+                duration: 0.52,
                 ease: "power3.out",
                 onComplete: () => {
                   content.style.height = "auto";
                   d.removeAttribute("data-animating");
 
-                  if (d.hasAttribute("data-bars") && !prefersReduced) {
-                    // Slight delay so the user feels the section expand, then bars begin.
-                    gsap.delayedCall(0.08, () => animateBars(d));
+                  if (d.hasAttribute("data-bars")) {
+                    // Small pause so the user perceives the panel expansion first.
+                    gsap.delayedCall(0.10, () => animateBars(d));
                   }
                 }
               }
@@ -1515,7 +1513,7 @@
               {
                 height: 0,
                 opacity: 0,
-                duration: prefersReduced ? 0 : 0.34,
+                duration: 0.38,
                 ease: "power3.inOut",
                 onComplete: () => {
                   d.open = false;
@@ -1533,7 +1531,7 @@
           });
 
           // If open by default and has bars, animate once.
-          if (d.open && d.hasAttribute("data-bars") && !prefersReduced) {
+          if (d.open && d.hasAttribute("data-bars")) {
             animateBars(d);
           }
         });
@@ -1543,7 +1541,7 @@
       // Always active, even when not hovering. Influence decays exponentially with distance.
       (function globalProximityTilt() {
         const canTilt = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-        if (!canTilt || prefersReduced) return;
+        if (!canTilt) return;
 
         const els = Array.from(document.querySelectorAll(".tilt"));
         if (!els.length) return;
@@ -1554,10 +1552,10 @@
           return {
             el,
             strength,
-            qtx: gsap.quickTo(el, "--tx", { duration: 0.35, ease: "power3.out" }),
-            qty: gsap.quickTo(el, "--ty", { duration: 0.35, ease: "power3.out" }),
-            qrx: gsap.quickTo(el, "--rx", { duration: 0.45, ease: "power3.out" }),
-            qry: gsap.quickTo(el, "--ry", { duration: 0.45, ease: "power3.out" })
+            qtx: gsap.quickTo(el, "--tx", { duration: 0.28, ease: "power3.out" }),
+            qty: gsap.quickTo(el, "--ty", { duration: 0.28, ease: "power3.out" }),
+            qrx: gsap.quickTo(el, "--rx", { duration: 0.34, ease: "power3.out" }),
+            qry: gsap.quickTo(el, "--ry", { duration: 0.34, ease: "power3.out" })
           };
         });
 
@@ -1568,8 +1566,9 @@
         function apply() {
           ticking = false;
 
-          // Falloff controls how quickly the effect fades with distance (bigger = affects farther panels).
-          const falloff = Math.max(340, Math.min(520, window.innerWidth * 0.35));
+          // Higher falloff means more elements react at medium distance (still exponential).
+          const falloff = Math.max(420, Math.min(740, window.innerWidth * 0.55));
+          const gain = 1.75; // overall intensity multiplier for visibility
 
           items.forEach(({ el, strength, qtx, qty, qrx, qry }) => {
             const r = el.getBoundingClientRect();
@@ -1581,15 +1580,17 @@
 
             const d = Math.hypot(dx, dy);
 
-            // Exponential decay: influence is always > 0, but becomes tiny far away.
-            const influence = Math.exp(-d / falloff);
+            // Exponential decay: always active, but fades fast at distance.
+            let influence = Math.exp(-d / falloff) * gain;
+            influence = Math.max(0, Math.min(1, influence));
 
-            // Normalize by element size so small items do not overreact.
-            const nx = dx / Math.max(220, r.width);
-            const ny = dy / Math.max(220, r.height);
+            // Normalize by size so small elements do not overreact.
+            const nx = dx / Math.max(240, r.width);
+            const ny = dy / Math.max(240, r.height);
 
-            const maxTiltDeg = 10 * strength;  // degrees
-            const maxMovePx  = 10 * strength;  // px
+            // Stronger 3D effect (more noticeable).
+            const maxTiltDeg = 16 * strength;  // degrees
+            const maxMovePx  = 14 * strength;  // px
 
             const rotY = (nx * 2) * maxTiltDeg * influence;
             const rotX = -(ny * 2) * maxTiltDeg * influence;
@@ -1622,7 +1623,7 @@
 
         // When pointer leaves window, gently reset.
         window.addEventListener("mouseout", (e) => {
-          if (e.relatedTarget || e.toElement) return; // still inside
+          if (e.relatedTarget || e.toElement) return;
           items.forEach(({ qtx, qty, qrx, qry }) => {
             qtx("0px"); qty("0px"); qrx("0deg"); qry("0deg");
           });
