@@ -6,58 +6,62 @@
 
   <!-- Primary SEO -->
   <title>Best Hytale Vanilla Servers (2026) | Curated List + IPs</title>
-  <meta name="description" content="A curated list of vanilla Hytale servers. Editor-ranked picks with IPs, rules, gameplay additions, monetization notes, and last checked dates." />
+  <meta name="description" content="Editor-ranked vanilla Hytale servers. Curated Hytale vanilla server list with IPs, rules, gameplay footprint, no pay-to-win notes, and last-checked dates." />
   <meta name="robots" content="index,follow,max-image-preview:large" />
   <link rel="canonical" href="https://hytalevanillaservers.com/" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Hytale Vanilla Servers | Curated Editor Picks" />
-  <meta property="og:description" content="Editor-ranked vanilla Hytale servers with IPs, rules, and transparent criteria." />
+  <meta property="og:description" content="Editor-ranked vanilla Hytale servers with IPs, rules, gameplay footprint, monetization notes, and last-checked dates." />
   <meta property="og:url" content="https://hytalevanillaservers.com/" />
   <meta property="og:site_name" content="HytaleVanillaServers.com" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Hytale Vanilla Servers | Curated Editor Picks" />
-  <meta name="twitter:description" content="Editor-ranked vanilla Hytale servers with IPs, rules, and transparent criteria." />
+  <meta name="twitter:description" content="Editor-ranked vanilla Hytale servers with IPs, rules, gameplay footprint, monetization notes, and last-checked dates." />
+
+  <meta name="theme-color" content="#0a0f1f" />
+  <meta name="color-scheme" content="dark light" />
 
   <!-- Performance: preconnect for fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-  <!-- Fonts: Hytale-like headings + clean UI body -->
-  <!-- Note: The exact Hytale heading font may not be available on Google Fonts. Cinzel is a close, incised-style alternative. -->
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Nunito+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Fonts: more medieval for headings (Google Fonts), clean body -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
 
   <!-- Font Awesome (icons) -->
-  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-  <meta name="theme-color" content="#0a0f1f" />
-  <meta name="color-scheme" content="dark light" />
+  <!-- GSAP + ScrollTrigger (industry-standard animation library) -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
   <style>
     /* ==========================================================================
        HytaleVanillaServers.com
-       Single-file HTML intended for GitHub Pages. Minimal JS, fast CSS.
+       Single-file HTML intended for GitHub Pages.
+       Minimal layout, cleaner UI, pronounced motion.
        ========================================================================== */
 
     :root {
       --bg: #070a13;
       --bg-2: #0a0f1f;
-      --panel: rgba(255,255,255,0.06);
-      --panel-2: rgba(255,255,255,0.085);
+
+      --panel: rgba(255,255,255,0.05);
+      --panel-2: rgba(255,255,255,0.075);
+
       --stroke: rgba(255,255,255,0.10);
       --stroke-2: rgba(255,255,255,0.14);
 
       --text: rgba(255,255,255,0.90);
-      --muted: rgba(255,255,255,0.72);
-      --muted-2: rgba(255,255,255,0.60);
+      --muted: rgba(255,255,255,0.70);
+      --muted-2: rgba(255,255,255,0.58);
 
-      --accent: #5ee6ff;      /* cold cyan */
-      --accent-2: #7cffc8;    /* mint */
-      --warn: #ffd27a;
+      --accent: #5ee6ff;
+      --accent-2: #7cffc8;
 
       --radius: 18px;
       --radius-sm: 12px;
@@ -68,7 +72,7 @@
       --max: 1120px;
       --pad: 20px;
 
-      --h-font: "Cinzel", serif;
+      --h-font: "Cinzel Decorative", serif;
       --b-font: "Nunito Sans", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
     }
 
@@ -79,9 +83,8 @@
       font-family: var(--b-font);
       color: var(--text);
       background:
-        radial-gradient(1200px 600px at 20% 0%, rgba(94,230,255,0.14), transparent 60%),
-        radial-gradient(900px 500px at 85% 10%, rgba(124,255,200,0.10), transparent 55%),
-        radial-gradient(1200px 800px at 50% 120%, rgba(94,230,255,0.08), transparent 65%),
+        radial-gradient(1200px 600px at 20% 0%, rgba(94,230,255,0.12), transparent 60%),
+        radial-gradient(900px 500px at 85% 10%, rgba(124,255,200,0.09), transparent 55%),
         linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
       line-height: 1.55;
     }
@@ -125,7 +128,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 14px;
+      gap: 12px;
       padding: 14px 0;
     }
 
@@ -133,16 +136,19 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      min-width: 260px;
+      min-width: 220px;
     }
+    /* Prevent default underline on brand hover */
+    .brand:hover,
+    .brand:focus { text-decoration: none; }
 
     .brand-badge {
-      width: 36px;
-      height: 36px;
+      width: 34px;
+      height: 34px;
       border-radius: 12px;
       background:
-        radial-gradient(circle at 30% 30%, rgba(94,230,255,0.35), transparent 60%),
-        radial-gradient(circle at 70% 60%, rgba(124,255,200,0.25), transparent 60%),
+        radial-gradient(circle at 30% 30%, rgba(94,230,255,0.30), transparent 60%),
+        radial-gradient(circle at 70% 60%, rgba(124,255,200,0.22), transparent 60%),
         rgba(255,255,255,0.06);
       border: 1px solid rgba(255,255,255,0.12);
       box-shadow: var(--shadow-soft);
@@ -150,7 +156,7 @@
       place-items: center;
       flex: 0 0 auto;
     }
-    .brand-badge i { color: var(--accent); font-size: 16px; }
+    .brand-badge i { color: var(--accent); font-size: 15px; }
 
     .brand-title {
       display: flex;
@@ -160,8 +166,8 @@
     .brand-title strong {
       font-family: var(--h-font);
       letter-spacing: 0.02em;
-      font-weight: 700;
-      font-size: 14px;
+      font-weight: 900;
+      font-size: 13px;
     }
     .brand-title span {
       font-size: 12px;
@@ -171,28 +177,9 @@
     nav.main-nav {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 10px;
       flex-wrap: wrap;
       justify-content: flex-end;
-    }
-
-    .nav-link {
-      font-size: 13px;
-      color: var(--muted);
-      padding: 8px 10px;
-      border-radius: 10px;
-    }
-    .nav-link:hover {
-      text-decoration: none;
-      background: rgba(255,255,255,0.05);
-      color: var(--text);
-    }
-
-    .nav-cta {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-left: 8px;
     }
 
     .btn {
@@ -204,7 +191,7 @@
       border: 1px solid rgba(255,255,255,0.12);
       background: rgba(255,255,255,0.06);
       color: var(--text);
-      font-weight: 700;
+      font-weight: 800;
       font-size: 13px;
       cursor: pointer;
       user-select: none;
@@ -223,17 +210,30 @@
       background: linear-gradient(180deg, rgba(94,230,255,0.26), rgba(94,230,255,0.10));
     }
 
+    .nav-text {
+      font-size: 13px;
+      color: var(--muted);
+      padding: 10px 10px;
+      border-radius: 10px;
+    }
+    .nav-text:hover {
+      text-decoration: none;
+      color: var(--text);
+      background: rgba(255,255,255,0.05);
+    }
+
     /* Hero */
+    section { padding: 26px 0; }
+
     .hero {
-      position: relative;
-      padding: 44px 0 24px;
+      padding: 36px 0 18px;
     }
 
     .hero-panel {
       border-radius: calc(var(--radius) + 4px);
       border: 1px solid rgba(255,255,255,0.10);
       background:
-        radial-gradient(600px 260px at 20% 30%, rgba(94,230,255,0.14), transparent 65%),
+        radial-gradient(620px 260px at 20% 30%, rgba(94,230,255,0.14), transparent 65%),
         radial-gradient(520px 240px at 80% 20%, rgba(124,255,200,0.10), transparent 65%),
         rgba(255,255,255,0.05);
       box-shadow: var(--shadow);
@@ -242,21 +242,10 @@
 
     .hero-inner {
       display: grid;
-      grid-template-columns: 1.3fr 0.7fr;
+      grid-template-columns: 1.35fr 0.65fr;
       gap: 18px;
-      padding: 26px;
-      align-items: center;
-    }
-
-    .kicker {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 12px;
-      color: var(--muted);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      margin-bottom: 10px;
+      padding: 22px;
+      align-items: start;
     }
 
     h1 {
@@ -265,17 +254,18 @@
       font-size: clamp(30px, 4vw, 44px);
       letter-spacing: 0.02em;
       line-height: 1.08;
+      font-weight: 900;
     }
 
     .hero p {
       margin: 0;
       color: var(--muted);
       font-size: 15px;
-      max-width: 70ch;
+      max-width: 78ch;
     }
 
     .hero-meta {
-      margin-top: 14px;
+      margin-top: 12px;
       display: flex;
       flex-wrap: wrap;
       gap: 10px 14px;
@@ -297,47 +287,27 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
-      justify-content: center;
       align-items: flex-start;
     }
-
     .hero-cta .btn { width: 100%; justify-content: center; }
-
-    /* Quick chips */
-    .chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 16px;
-    }
-
-    .chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.10);
+    .hero-cta .btn-secondary {
+      border-color: rgba(255,255,255,0.10);
       background: rgba(255,255,255,0.04);
-      color: var(--muted);
-      font-size: 12px;
-      white-space: nowrap;
+      font-weight: 800;
     }
-    .chip i { color: rgba(94,230,255,0.85); }
 
-    /* Section */
-    section { padding: 26px 0; }
+    /* Section titles */
     h2 {
-      margin: 0 0 14px;
+      margin: 0 0 12px;
       font-family: var(--h-font);
       letter-spacing: 0.02em;
-      font-weight: 700;
+      font-weight: 900;
       font-size: 22px;
     }
     .section-lead {
-      margin: 0 0 16px;
+      margin: 0 0 14px;
       color: var(--muted);
-      max-width: 78ch;
+      max-width: 86ch;
     }
 
     /* Cards */
@@ -346,15 +316,17 @@
       grid-template-columns: 1fr;
       gap: 14px;
     }
-
     @media (min-width: 920px) {
       .cards {
         grid-template-columns: 1fr 1fr;
         gap: 16px;
       }
-      .card.featured {
-        grid-column: 1 / -1;
-      }
+      .card.featured { grid-column: 1 / -1; }
+    }
+
+    .card, .panel, .hero-panel {
+      transform-style: preserve-3d;
+      will-change: transform;
     }
 
     .card {
@@ -366,7 +338,7 @@
     }
 
     .card-head {
-      padding: 18px 18px 14px;
+      padding: 16px 16px 12px;
       border-bottom: 1px solid rgba(255,255,255,0.08);
       background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.03));
     }
@@ -385,6 +357,13 @@
       font-size: 18px;
       letter-spacing: 0.02em;
       line-height: 1.2;
+      font-weight: 900;
+    }
+
+    .subtitle {
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: 13.5px;
     }
 
     .badges {
@@ -404,7 +383,7 @@
       border: 1px solid rgba(255,255,255,0.14);
       background: rgba(255,255,255,0.05);
       font-size: 12px;
-      font-weight: 800;
+      font-weight: 900;
       color: var(--text);
       white-space: nowrap;
     }
@@ -414,25 +393,17 @@
       background: linear-gradient(180deg, rgba(94,230,255,0.16), rgba(94,230,255,0.06));
     }
     .badge.score {
+      color: var(--muted);
       border-color: rgba(255,255,255,0.14);
-      background: rgba(255,255,255,0.05);
-      color: var(--muted);
-      font-weight: 800;
-    }
-
-    .subtitle {
-      margin: 0 0 12px;
-      color: var(--muted);
-      font-size: 13.5px;
+      background: rgba(255,255,255,0.04);
     }
 
     .facts {
       display: flex;
       flex-wrap: wrap;
       gap: 8px 10px;
-      margin: 10px 0 12px;
+      margin: 8px 0 10px;
     }
-
     .fact {
       display: inline-flex;
       align-items: center;
@@ -444,7 +415,7 @@
       color: var(--muted);
       font-size: 12.5px;
     }
-    .fact i { color: rgba(255,255,255,0.80); }
+    .fact i { color: rgba(255,255,255,0.82); }
 
     .cta-row {
       display: flex;
@@ -452,7 +423,7 @@
       gap: 10px;
       align-items: center;
       justify-content: space-between;
-      margin-top: 12px;
+      margin-top: 10px;
     }
 
     .ip-box {
@@ -511,7 +482,7 @@
       border: 1px solid rgba(255,255,255,0.10);
       background: rgba(255,255,255,0.04);
       color: var(--text);
-      font-weight: 800;
+      font-weight: 900;
       font-size: 12.5px;
     }
     .link-pill:hover {
@@ -519,18 +490,15 @@
       border-color: rgba(255,255,255,0.16);
       background: rgba(255,255,255,0.06);
     }
-    .link-pill i { color: rgba(255,255,255,0.85); }
 
-    .card-body {
-      padding: 14px 18px 18px;
-    }
+    .card-body { padding: 12px 16px 16px; }
 
     .why {
-      margin: 0 0 14px;
+      margin: 0 0 12px;
       color: var(--muted);
       font-size: 13.5px;
     }
-    .why strong { color: rgba(255,255,255,0.90); }
+    .why strong { color: rgba(255,255,255,0.92); }
 
     details {
       border-radius: 14px;
@@ -548,14 +516,14 @@
       justify-content: space-between;
       gap: 10px;
       font-weight: 900;
-      color: rgba(255,255,255,0.90);
+      color: rgba(255,255,255,0.92);
       font-size: 13px;
     }
     summary::-webkit-details-marker { display: none; }
 
     summary .meta {
       color: var(--muted-2);
-      font-weight: 700;
+      font-weight: 800;
       font-size: 12px;
       display: inline-flex;
       align-items: center;
@@ -568,31 +536,65 @@
       color: var(--muted);
       font-size: 13.5px;
     }
-
-    .details-content ul {
-      margin: 10px 0 0;
-      padding-left: 18px;
-    }
+    .details-content ul { margin: 10px 0 0; padding-left: 18px; }
     .details-content li { margin: 6px 0; }
 
-    .fineprint {
-      margin-top: 10px;
+    /* Score bars (animated on expand) */
+    .score-bars {
+      display: grid;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .bar {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: center;
+    }
+    .bar-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-weight: 800;
+      color: rgba(255,255,255,0.86);
       font-size: 12.5px;
+    }
+    .bar-label span {
       color: var(--muted-2);
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .bar-track {
+      grid-column: 1 / -1;
+      height: 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(0,0,0,0.18);
+      overflow: hidden;
+    }
+    .bar-fill {
+      width: 0%;
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(94,230,255,0.85), rgba(124,255,200,0.75));
+      filter: saturate(1.08);
+      will-change: width;
     }
 
-    /* Methodology, Join, FAQ cards */
+    /* Panels */
     .panel {
       border-radius: var(--radius);
       border: 1px solid rgba(255,255,255,0.10);
       background: rgba(255,255,255,0.05);
       box-shadow: var(--shadow-soft);
-      padding: 18px;
+      padding: 16px;
     }
     .panel h3 {
       font-family: var(--h-font);
       margin: 0 0 10px;
       font-size: 18px;
+      font-weight: 900;
     }
 
     .grid-2 {
@@ -600,34 +602,17 @@
       grid-template-columns: 1fr;
       gap: 14px;
     }
-    @media (min-width: 920px) {
-      .grid-2 { grid-template-columns: 1fr 1fr; }
-    }
+    @media (min-width: 920px) { .grid-2 { grid-template-columns: 1fr 1fr; } }
 
-    .callout {
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-      padding: 14px;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.10);
-      background: rgba(0,0,0,0.16);
-      margin-top: 12px;
-    }
-    .callout i {
-      color: rgba(94,230,255,0.90);
-      margin-top: 2px;
-      font-size: 16px;
-    }
-    .callout p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 13.5px;
+    .fineprint {
+      margin-top: 10px;
+      font-size: 12.5px;
+      color: var(--muted-2);
     }
 
     /* Footer */
     footer {
-      padding: 34px 0 40px;
+      padding: 30px 0 40px;
       border-top: 1px solid rgba(255,255,255,0.08);
       margin-top: 24px;
     }
@@ -636,13 +621,12 @@
       grid-template-columns: 1fr;
       gap: 12px;
     }
-    @media (min-width: 920px) {
-      .footer-grid { grid-template-columns: 1.2fr 0.8fr; }
-    }
+    @media (min-width: 920px) { .footer-grid { grid-template-columns: 1.2fr 0.8fr; } }
     .footer-title {
       font-family: var(--h-font);
       margin: 0 0 8px;
       font-size: 16px;
+      font-weight: 900;
     }
     .footer-text {
       margin: 0;
@@ -679,21 +663,25 @@
     }
     .toast.show { opacity: 1; }
 
-    /* Reduced motion */
+    /* Idle animation: pulse border and glow (does not touch transform, so it plays well with tilt) */
+    @keyframes glowPulse {
+      0%   { box-shadow: var(--shadow-soft); border-color: rgba(255,255,255,0.10); }
+      50%  { box-shadow: 0 14px 40px rgba(0,0,0,0.45); border-color: rgba(94,230,255,0.16); }
+      100% { box-shadow: var(--shadow-soft); border-color: rgba(255,255,255,0.10); }
+    }
+    .idle { animation: glowPulse 4.6s ease-in-out infinite; }
+
+    /* Mobile layout */
+    @media (max-width: 820px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-cta { align-items: stretch; }
+      .footer-links { justify-content: flex-start; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       .toast { transition: none; }
-    }
-
-    /* Mobile hero layout */
-    @media (max-width: 820px) {
-      .hero-inner {
-        grid-template-columns: 1fr;
-      }
-      .hero-cta { align-items: stretch; }
-      nav.main-nav { display: none; }
-      .brand { min-width: unset; }
-      .footer-links { justify-content: flex-start; }
+      .idle { animation: none; }
     }
   </style>
 
@@ -706,36 +694,11 @@
     "itemListOrder": "https://schema.org/ItemListOrderDescending",
     "numberOfItems": 5,
     "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Peaceful Vanilla Club (Hytale)",
-        "url": "https://hytalevanillaservers.com/#pvc"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Aurora Vanilla SMP",
-        "url": "https://hytalevanillaservers.com/#aurora"
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "name": "Ironpine Classic",
-        "url": "https://hytalevanillaservers.com/#ironpine"
-      },
-      {
-        "@type": "ListItem",
-        "position": 4,
-        "name": "Northwind Vanilla",
-        "url": "https://hytalevanillaservers.com/#northwind"
-      },
-      {
-        "@type": "ListItem",
-        "position": 5,
-        "name": "Cobalt Shores SMP",
-        "url": "https://hytalevanillaservers.com/#cobalt"
-      }
+      { "@type": "ListItem", "position": 1, "name": "Peaceful Vanilla Club (Hytale)", "url": "https://hytalevanillaservers.com/#pvc" },
+      { "@type": "ListItem", "position": 2, "name": "Submission Slot #2", "url": "https://hytalevanillaservers.com/#slot2" },
+      { "@type": "ListItem", "position": 3, "name": "Submission Slot #3", "url": "https://hytalevanillaservers.com/#slot3" },
+      { "@type": "ListItem", "position": 4, "name": "Submission Slot #4", "url": "https://hytalevanillaservers.com/#slot4" },
+      { "@type": "ListItem", "position": 5, "name": "Submission Slot #5", "url": "https://hytalevanillaservers.com/#slot5" }
     ]
   }
   </script>
@@ -746,31 +709,22 @@
 
   <header class="site-header" role="banner">
     <div class="container">
-      <div class="topbar">
+      <div class="topbar" data-reveal>
         <a class="brand" href="#top" aria-label="Home">
-          <span class="brand-badge" aria-hidden="true"><i class="fa-solid fa-gem"></i></span>
+          <span class="brand-badge idle" aria-hidden="true"><i class="fa-solid fa-gem"></i></span>
           <span class="brand-title">
             <strong>HytaleVanillaServers.com</strong>
-            <span>Editor-curated vanilla Hytale servers</span>
+            <span>Curated editor picks</span>
           </span>
         </a>
 
         <nav class="main-nav" aria-label="Primary navigation">
-          <a class="nav-link" href="#servers">Servers</a>
-          <a class="nav-link" href="#methodology">Methodology</a>
-          <a class="nav-link" href="#join">How to Join</a>
-          <a class="nav-link" href="#faq">FAQ</a>
-          <a class="nav-link" href="#suggest">Suggest a Server</a>
-          <span class="nav-cta">
-            <a class="btn btn-primary" href="#servers"><i class="fa-solid fa-list" aria-hidden="true"></i>Browse servers</a>
-          </span>
+          <a class="btn btn-primary tilt" href="#servers">
+            <i class="fa-solid fa-list" aria-hidden="true"></i>
+            Browse servers
+          </a>
+          <a class="nav-text" href="#suggest">Suggest a server</a>
         </nav>
-
-        <!-- Mobile: single CTA (nav hidden for speed and simplicity) -->
-        <a class="btn btn-primary" href="#servers" aria-label="Browse servers">
-          <i class="fa-solid fa-list" aria-hidden="true"></i>
-          Browse
-        </a>
       </div>
     </div>
   </header>
@@ -778,61 +732,55 @@
   <main id="top" role="main">
     <section class="hero">
       <div class="container">
-        <div class="hero-panel">
+        <div class="hero-panel idle tilt" data-reveal>
           <div class="hero-inner">
             <div>
-              <div class="kicker">
-                <i class="fa-solid fa-compass" aria-hidden="true"></i>
-                Curated list • No votes • Editorial ranking
-              </div>
-
               <h1>Hytale Vanilla Servers</h1>
 
               <p>
-                A curated list of <strong>vanilla Hytale servers</strong> (5 picks) with direct IPs, rules, gameplay additions,
-                monetization notes, and an editor score based on a transparent rubric.
+                A curated <strong>Hytale vanilla server list</strong> with five editor-ranked picks. Discover the <strong>best vanilla Hytale servers</strong>
+                for SMP and survival, compare rules and gameplay footprint, check monetization and <strong>no pay-to-win</strong> notes, and copy the
+                <strong>Hytale server IP</strong> to join. Every listing includes an editor score, a last-checked date, and a clear review of what stays vanilla
+                and what is changed.
               </p>
 
               <div class="hero-meta">
                 <span><i class="fa-regular fa-calendar" aria-hidden="true"></i> Last updated: <strong>2025-12-19</strong></span>
-                <span><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i> <a href="#methodology">Selection criteria</a></span>
-                <span><i class="fa-solid fa-shield" aria-hidden="true"></i> Focus: vanilla-first, fair-play servers</span>
-              </div>
-
-              <div class="chips" aria-label="Highlights">
-                <span class="chip"><i class="fa-solid fa-check" aria-hidden="true"></i>Manual curation</span>
-                <span class="chip"><i class="fa-solid fa-bolt" aria-hidden="true"></i>Fast page, minimal JS</span>
-                <span class="chip"><i class="fa-solid fa-scroll" aria-hidden="true"></i>Clear rules breakdown</span>
-                <span class="chip"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>Vanilla definition per server</span>
+                <span><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i> <a href="#methodology">How scoring works</a></span>
               </div>
             </div>
 
             <div class="hero-cta" aria-label="Primary actions">
-              <a class="btn btn-primary" href="#servers"><i class="fa-solid fa-arrow-down" aria-hidden="true"></i>Jump to servers</a>
-              <a class="btn" href="#faq"><i class="fa-solid fa-circle-question" aria-hidden="true"></i>What is vanilla here?</a>
-              <a class="btn" href="#suggest"><i class="fa-solid fa-envelope" aria-hidden="true"></i>Suggest a server</a>
+              <a class="btn btn-primary tilt" href="#servers">
+                <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+                Jump to servers
+              </a>
+              <a class="btn btn-secondary tilt" href="#faq">
+                <i class="fa-solid fa-circle-question" aria-hidden="true"></i>
+                Vanilla FAQ
+              </a>
             </div>
           </div>
         </div>
 
-        <p class="fineprint">
-          This page is intentionally small: only 5 vanilla-focused Hytale servers, added manually and reviewed using the same rubric.
+        <p class="fineprint" data-reveal>
+          Tip: If you run a vanilla-first Hytale server, make your rules, monetization policy, and any gameplay changes easy to verify.
         </p>
       </div>
     </section>
 
     <section id="servers" aria-labelledby="servers-title">
       <div class="container">
-        <h2 id="servers-title">Top vanilla Hytale servers (editor picks)</h2>
-        <p class="section-lead">
-          Ranked by editor score. Each entry includes IP, rules summary, allowed additions, fairness notes, and the last date we checked availability.
+        <h2 id="servers-title" data-reveal>Top vanilla Hytale servers (editor picks)</h2>
+        <p class="section-lead" data-reveal>
+          Ranked by editor score. Expand any card to see how we evaluate vanilla purity, fairness, rules, stability, community, and transparency.
         </p>
 
         <div class="cards">
           <!-- ==========================================================
                #1 FEATURED
                ========================================================== -->
-          <article class="card featured" id="pvc">
+          <article class="card featured tilt idle" id="pvc" data-reveal>
             <div class="card-head">
               <div class="card-title-row">
                 <div>
@@ -875,115 +823,129 @@
 
             <div class="card-body">
               <p class="why">
-                <strong>Why it’s vanilla:</strong> Placeholder. Keep gameplay close to base Hytale, with only minimal quality-of-life and moderation tooling.
+                <strong>Why it’s vanilla-first:</strong> Placeholder. Close to base gameplay, minimal quality-of-life, and clear policies.
               </p>
 
-              <details>
+              <details class="glance" data-bars data-reveal>
                 <summary>
-                  Snapshot
-                  <span class="meta"><i class="fa-solid fa-bolt" aria-hidden="true"></i>Quick view</span>
+                  In a glance
+                  <span class="meta"><i class="fa-solid fa-bars-progress" aria-hidden="true"></i>Score breakdown</span>
                 </summary>
                 <div class="details-content">
-                  <p>Placeholder overview for fast scanning.</p>
-                  <ul>
-                    <li><strong>Best for:</strong> builders, explorers, and long-term worlds.</li>
-                    <li><strong>Not for:</strong> heavy economy, kits, or fast progression.</li>
-                  </ul>
+                  <p>These bars summarize how the editor score is built for this server.</p>
+
+                  <div class="score-bars" aria-label="Score breakdown">
+                    <div class="bar" data-value="32" data-max="35">
+                      <div class="bar-label">Vanilla purity <span>32/35</span></div>
+                      <div class="bar-track"><div class="bar-fill"></div></div>
+                    </div>
+                    <div class="bar" data-value="20" data-max="20">
+                      <div class="bar-label">Fairness and no P2W <span>20/20</span></div>
+                      <div class="bar-track"><div class="bar-fill"></div></div>
+                    </div>
+                    <div class="bar" data-value="14" data-max="15">
+                      <div class="bar-label">Stability and last checked <span>14/15</span></div>
+                      <div class="bar-track"><div class="bar-fill"></div></div>
+                    </div>
+                    <div class="bar" data-value="13" data-max="15">
+                      <div class="bar-label">Rules and moderation <span>13/15</span></div>
+                      <div class="bar-track"><div class="bar-fill"></div></div>
+                    </div>
+                    <div class="bar" data-value="9" data-max="10">
+                      <div class="bar-label">Community and longevity <span>9/10</span></div>
+                      <div class="bar-track"><div class="bar-fill"></div></div>
+                    </div>
+                    <div class="bar" data-value="4" data-max="5">
+                      <div class="bar-label">Transparency <span>4/5</span></div>
+                      <div class="bar-track"><div class="bar-fill"></div></div>
+                    </div>
+                  </div>
                 </div>
               </details>
 
-              <details>
+              <details data-reveal>
                 <summary>
-                  Vanilla definition
-                  <span class="meta"><i class="fa-solid fa-seedling" aria-hidden="true"></i>Allowed vs forbidden</span>
+                  Vanilla purity
+                  <span class="meta"><i class="fa-solid fa-leaf" aria-hidden="true"></i>What stays vanilla</span>
                 </summary>
                 <div class="details-content">
                   <p>
-                    Placeholder definition. Explain what “vanilla” means on this server, what QoL is allowed, and what is explicitly avoided.
+                    Placeholder. This section will explain how close the gameplay stays to base Hytale, and which changes (if any) exist without altering progression.
                   </p>
-                  <ul>
-                    <li><strong>Allowed QoL:</strong> moderation, anti-cheat, minor UI improvements.</li>
-                    <li><strong>Forbidden:</strong> kits, pay-to-skip, progression boosts, gameplay-rebalancing packs.</li>
-                  </ul>
                 </div>
               </details>
 
-              <details>
+              <details data-reveal>
                 <summary>
-                  Rules
+                  Rules and moderation
                   <span class="meta"><i class="fa-solid fa-scroll" aria-hidden="true"></i>Grief, PvP, resets</span>
                 </summary>
                 <div class="details-content">
-                  <ul>
-                    <li><strong>Griefing:</strong> Placeholder policy.</li>
-                    <li><strong>PvP:</strong> Placeholder policy.</li>
-                    <li><strong>Resets:</strong> Placeholder schedule and rationale.</li>
-                    <li><strong>Appeals:</strong> Placeholder ban appeal flow.</li>
-                  </ul>
-                </div>
-              </details>
-
-              <details>
-                <summary>
-                  Gameplay additions
-                  <span class="meta"><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>QoL vs changing</span>
-                </summary>
-                <div class="details-content">
-                  <p><strong>QoL:</strong> Placeholder list of non-invasive additions.</p>
-                  <p><strong>Gameplay-changing:</strong> Placeholder. Disclose any systems that alter progression, loot, or combat.</p>
-                </div>
-              </details>
-
-              <details>
-                <summary>
-                  Fairness and monetization
-                  <span class="meta"><i class="fa-solid fa-shield-heart" aria-hidden="true"></i>No P2W</span>
-                </summary>
-                <div class="details-content">
                   <p>
-                    Placeholder. Explain store policy, what is sold, and why it does not impact gameplay progression.
+                    Placeholder. This section will summarize the server rules (griefing, stealing, PvP policy, reset schedule) and how moderation is enforced.
                   </p>
                 </div>
               </details>
 
-              <details>
+              <details data-reveal>
                 <summary>
-                  Technical and performance
-                  <span class="meta"><i class="fa-solid fa-microchip" aria-hidden="true"></i>Stability</span>
+                  Fair play and monetization
+                  <span class="meta"><i class="fa-solid fa-shield-heart" aria-hidden="true"></i>No P2W notes</span>
                 </summary>
                 <div class="details-content">
-                  <ul>
-                    <li><strong>Last checked:</strong> 2025-12-19 (placeholder verification).</li>
-                    <li><strong>Notes:</strong> Placeholder stability notes.</li>
-                  </ul>
+                  <p>
+                    Placeholder. This section will document what the store sells (if any), what is cosmetic, and confirm no pay-to-win progression advantages.
+                  </p>
                 </div>
               </details>
 
-              <details>
+              <details data-reveal>
+                <summary>
+                  Stability and last checked
+                  <span class="meta"><i class="fa-solid fa-microchip" aria-hidden="true"></i>Uptime and checks</span>
+                </summary>
+                <div class="details-content">
+                  <p>
+                    Placeholder. This section will report the last verified check date, region notes, and any stability observations relevant to joining.
+                  </p>
+                </div>
+              </details>
+
+              <details data-reveal>
                 <summary>
                   Community and onboarding
                   <span class="meta"><i class="fa-solid fa-people-group" aria-hidden="true"></i>Start here</span>
                 </summary>
                 <div class="details-content">
-                  <p>Placeholder. Discord onboarding, rules summary, and first-session tips.</p>
+                  <p>
+                    Placeholder. This section will describe onboarding steps, Discord requirements, and the intended community playstyle.
+                  </p>
                 </div>
               </details>
 
-              <p class="fineprint">
-                Score recap (example): Purity 32/35, Fairness 20/20, Stability 14/15, Rules 13/15, Longevity 9/10, Transparency 4/5.
-              </p>
+              <details data-reveal>
+                <summary>
+                  Transparency
+                  <span class="meta"><i class="fa-solid fa-eye" aria-hidden="true"></i>Disclosures</span>
+                </summary>
+                <div class="details-content">
+                  <p>
+                    Placeholder. This section will link to policies and changelogs when available, and list any declared gameplay changes in a clear, readable format.
+                  </p>
+                </div>
+              </details>
             </div>
           </article>
 
           <!-- ==========================================================
-               #2
+               SLOT #2 (template placeholder encouraging submissions)
                ========================================================== -->
-          <article class="card" id="aurora">
+          <article class="card tilt idle" id="slot2" data-reveal>
             <div class="card-head">
               <div class="card-title-row">
                 <div>
-                  <h3>#2 Aurora Vanilla SMP</h3>
-                  <p class="subtitle">Vanilla-first survival with clear rules and minimal additions. Placeholder copy.</p>
+                  <h3>#2 Submission Slot</h3>
+                  <p class="subtitle">Want your server here? Submit it for review. This card is a neutral template placeholder.</p>
                 </div>
                 <div class="badges">
                   <span class="badge score"><i class="fa-solid fa-chart-simple" aria-hidden="true"></i>Editor Score: <strong>88</strong>/100</span>
@@ -991,28 +953,25 @@
               </div>
 
               <div class="facts" aria-label="Quick facts">
-                <span class="fact"><i class="fa-solid fa-globe" aria-hidden="true"></i><strong>Region:</strong>&nbsp;NA</span>
-                <span class="fact"><i class="fa-solid fa-language" aria-hidden="true"></i><strong>Language:</strong>&nbsp;EN</span>
-                <span class="fact"><i class="fa-solid fa-tree" aria-hidden="true"></i><strong>Playstyle:</strong>&nbsp;Vanilla Survival</span>
-                <span class="fact"><i class="fa-solid fa-user-shield" aria-hidden="true"></i><strong>Whitelist:</strong>&nbsp;Yes</span>
-                <span class="fact"><i class="fa-regular fa-clock" aria-hidden="true"></i><strong>Last checked:</strong>&nbsp;2025-12-19</span>
+                <span class="fact"><i class="fa-solid fa-globe" aria-hidden="true"></i><strong>Region:</strong>&nbsp;TBD</span>
+                <span class="fact"><i class="fa-solid fa-language" aria-hidden="true"></i><strong>Language:</strong>&nbsp;TBD</span>
+                <span class="fact"><i class="fa-solid fa-tree" aria-hidden="true"></i><strong>Playstyle:</strong>&nbsp;Vanilla SMP</span>
+                <span class="fact"><i class="fa-solid fa-user-shield" aria-hidden="true"></i><strong>Whitelist:</strong>&nbsp;TBD</span>
+                <span class="fact"><i class="fa-regular fa-clock" aria-hidden="true"></i><strong>Last checked:</strong>&nbsp;TBD</span>
               </div>
 
               <div class="cta-row">
                 <div class="ip-box" aria-label="Server IP">
                   <i class="fa-solid fa-network-wired" aria-hidden="true"></i>
-                  <code>play.aurora.example</code>
-                  <button class="btn-copy" type="button" data-copy="play.aurora.example">
+                  <code>your.server.ip.example</code>
+                  <button class="btn-copy" type="button" data-copy="your.server.ip.example">
                     <i class="fa-regular fa-copy" aria-hidden="true"></i>Copy IP
                   </button>
                 </div>
 
                 <div class="links" aria-label="Server links">
-                  <a class="link-pill" href="https://discord.example" target="_blank" rel="noopener noreferrer">
-                    <i class="fa-brands fa-discord" aria-hidden="true"></i>Discord
-                  </a>
-                  <a class="link-pill" href="https://example.com" target="_blank" rel="noopener noreferrer">
-                    <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>Website
+                  <a class="link-pill" href="#suggest">
+                    <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>Submit
                   </a>
                 </div>
               </div>
@@ -1020,345 +979,263 @@
 
             <div class="card-body">
               <p class="why">
-                <strong>Why it’s vanilla:</strong> Placeholder. This vanilla Hytale server limits additions to moderation and anti-abuse systems.
+                <strong>Template:</strong> This listing will be replaced by a real vanilla Hytale server after editorial review.
               </p>
 
-              <details>
-                <summary>Snapshot <span class="meta"><i class="fa-solid fa-bolt" aria-hidden="true"></i>Quick view</span></summary>
+              <details class="glance" data-bars>
+                <summary>
+                  In a glance
+                  <span class="meta"><i class="fa-solid fa-bars-progress" aria-hidden="true"></i>Score breakdown</span>
+                </summary>
                 <div class="details-content">
-                  <ul>
-                    <li><strong>Best for:</strong> players who like strict rules and a stable world.</li>
-                    <li><strong>Onboarding:</strong> whitelist application (placeholder).</li>
-                  </ul>
+                  <p>Example breakdown bars. Real values will be filled after review.</p>
+                  <div class="score-bars" aria-label="Score breakdown">
+                    <div class="bar" data-value="30" data-max="35">
+                      <div class="bar-label">Vanilla purity <span>30/35</span></div>
+                      <div class="bar-track"><div class="bar-fill"></div></div>
+                    </div>
+                    <div class="bar" data-value="19" data-max="20">
+                      <div class="bar-label">Fairness and no P2W <span>19/20</span></div>
+                      <div class="bar-track"><div class="bar-fill"></div></div>
+                    </div>
+                    <div class="bar" data-value="13" data-max="15">
+                      <div class="bar-label">Stability and last checked <span>13/15</span></div>
+                      <div class="bar-track"><div class="bar-fill"></div></div>
+                    </div>
+                    <div class="bar" data-value="14" data-max="15">
+                      <div class="bar-label">Rules and moderation <span>14/15</span></div>
+                      <div class="bar-track"><div class="bar-fill"></div></div>
+                    </div>
+                    <div class="bar" data-value="8" data-max="10">
+                      <div class="bar-label">Community and longevity <span>8/10</span></div>
+                      <div class="bar-track"><div class="bar-fill"></div></div>
+                    </div>
+                    <div class="bar" data-value="4" data-max="5">
+                      <div class="bar-label">Transparency <span>4/5</span></div>
+                      <div class="bar-track"><div class="bar-fill"></div></div>
+                    </div>
+                  </div>
                 </div>
               </details>
 
               <details>
-                <summary>Vanilla definition <span class="meta"><i class="fa-solid fa-seedling" aria-hidden="true"></i>Allowed vs forbidden</span></summary>
+                <summary>Vanilla purity <span class="meta"><i class="fa-solid fa-leaf" aria-hidden="true"></i>What stays vanilla</span></summary>
                 <div class="details-content">
-                  <p>Placeholder: define vanilla, disclose any QoL, and list what is avoided.</p>
+                  <p>This section will describe the vanilla gameplay experience on this server, including any minimal QoL and what is intentionally avoided.</p>
                 </div>
               </details>
 
               <details>
-                <summary>Rules <span class="meta"><i class="fa-solid fa-scroll" aria-hidden="true"></i>Grief, PvP, resets</span></summary>
+                <summary>Rules and moderation <span class="meta"><i class="fa-solid fa-scroll" aria-hidden="true"></i>Grief, PvP, resets</span></summary>
                 <div class="details-content">
-                  <p>Placeholder rules summary.</p>
+                  <p>This section will summarize rules, moderation expectations, and how enforcement works in practice.</p>
                 </div>
               </details>
 
               <details>
-                <summary>Gameplay additions <span class="meta"><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>QoL vs changing</span></summary>
+                <summary>Fair play and monetization <span class="meta"><i class="fa-solid fa-shield-heart" aria-hidden="true"></i>No P2W notes</span></summary>
                 <div class="details-content">
-                  <p>Placeholder additions list.</p>
+                  <p>This section will document monetization and confirm whether the server avoids pay-to-win progression advantages.</p>
                 </div>
               </details>
 
               <details>
-                <summary>Fairness and monetization <span class="meta"><i class="fa-solid fa-shield-heart" aria-hidden="true"></i>No P2W</span></summary>
+                <summary>Stability and last checked <span class="meta"><i class="fa-solid fa-microchip" aria-hidden="true"></i>Uptime and checks</span></summary>
                 <div class="details-content">
-                  <p>Placeholder store policy.</p>
-                </div>
-              </details>
-
-              <details>
-                <summary>Technical and performance <span class="meta"><i class="fa-solid fa-microchip" aria-hidden="true"></i>Stability</span></summary>
-                <div class="details-content">
-                  <p>Placeholder: last checked notes.</p>
+                  <p>This section will include last-checked date, region notes, and any relevant performance observations.</p>
                 </div>
               </details>
 
               <details>
                 <summary>Community and onboarding <span class="meta"><i class="fa-solid fa-people-group" aria-hidden="true"></i>Start here</span></summary>
                 <div class="details-content">
-                  <p>Placeholder community notes.</p>
+                  <p>This section will outline onboarding steps, Discord requirements, and the intended community style.</p>
                 </div>
               </details>
 
-              <p class="fineprint">
-                Score recap (example): Purity 30/35, Fairness 19/20, Stability 13/15, Rules 14/15, Longevity 8/10, Transparency 4/5.
-              </p>
+              <details>
+                <summary>Transparency <span class="meta"><i class="fa-solid fa-eye" aria-hidden="true"></i>Disclosures</span></summary>
+                <div class="details-content">
+                  <p>This section will link to policies, changelogs, and clearly list declared gameplay changes.</p>
+                </div>
+              </details>
             </div>
           </article>
 
-          <!-- ==========================================================
-               #3
-               ========================================================== -->
-          <article class="card" id="ironpine">
+          <!-- SLOT #3 -->
+          <article class="card tilt idle" id="slot3" data-reveal>
             <div class="card-head">
               <div class="card-title-row">
                 <div>
-                  <h3>#3 Ironpine Classic</h3>
-                  <p class="subtitle">Classic vanilla ruleset with a strong anti-P2W stance. Placeholder copy.</p>
+                  <h3>#3 Submission Slot</h3>
+                  <p class="subtitle">This slot is reserved for a top-tier vanilla server. Submit yours to be considered.</p>
                 </div>
                 <div class="badges">
                   <span class="badge score"><i class="fa-solid fa-chart-simple" aria-hidden="true"></i>Editor Score: <strong>84</strong>/100</span>
                 </div>
               </div>
 
-              <div class="facts" aria-label="Quick facts">
-                <span class="fact"><i class="fa-solid fa-globe" aria-hidden="true"></i><strong>Region:</strong>&nbsp;EU</span>
-                <span class="fact"><i class="fa-solid fa-language" aria-hidden="true"></i><strong>Language:</strong>&nbsp;EN</span>
-                <span class="fact"><i class="fa-solid fa-tree" aria-hidden="true"></i><strong>Playstyle:</strong>&nbsp;Vanilla SMP</span>
-                <span class="fact"><i class="fa-solid fa-user-shield" aria-hidden="true"></i><strong>Whitelist:</strong>&nbsp;No</span>
-                <span class="fact"><i class="fa-regular fa-clock" aria-hidden="true"></i><strong>Last checked:</strong>&nbsp;2025-12-19</span>
+              <div class="facts">
+                <span class="fact"><i class="fa-solid fa-globe"></i><strong>Region:</strong>&nbsp;TBD</span>
+                <span class="fact"><i class="fa-solid fa-language"></i><strong>Language:</strong>&nbsp;TBD</span>
+                <span class="fact"><i class="fa-solid fa-tree"></i><strong>Playstyle:</strong>&nbsp;Vanilla Survival</span>
+                <span class="fact"><i class="fa-solid fa-user-shield"></i><strong>Whitelist:</strong>&nbsp;TBD</span>
+                <span class="fact"><i class="fa-regular fa-clock"></i><strong>Last checked:</strong>&nbsp;TBD</span>
               </div>
 
               <div class="cta-row">
-                <div class="ip-box" aria-label="Server IP">
-                  <i class="fa-solid fa-network-wired" aria-hidden="true"></i>
-                  <code>play.ironpine.example</code>
-                  <button class="btn-copy" type="button" data-copy="play.ironpine.example">
-                    <i class="fa-regular fa-copy" aria-hidden="true"></i>Copy IP
-                  </button>
+                <div class="ip-box">
+                  <i class="fa-solid fa-network-wired"></i>
+                  <code>your.server.ip.example</code>
+                  <button class="btn-copy" type="button" data-copy="your.server.ip.example"><i class="fa-regular fa-copy"></i>Copy IP</button>
                 </div>
-
-                <div class="links" aria-label="Server links">
-                  <a class="link-pill" href="https://discord.example" target="_blank" rel="noopener noreferrer">
-                    <i class="fa-brands fa-discord" aria-hidden="true"></i>Discord
-                  </a>
-                  <a class="link-pill" href="https://example.com" target="_blank" rel="noopener noreferrer">
-                    <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>Website
-                  </a>
+                <div class="links">
+                  <a class="link-pill" href="#suggest"><i class="fa-solid fa-paper-plane"></i>Submit</a>
                 </div>
               </div>
             </div>
 
             <div class="card-body">
-              <p class="why">
-                <strong>Why it’s vanilla:</strong> Placeholder. Minimal changes, clear rules, and a stable vanilla Hytale server experience.
-              </p>
+              <p class="why"><strong>Template:</strong> Replace this with a real listing after review.</p>
 
-              <details>
-                <summary>Snapshot <span class="meta"><i class="fa-solid fa-bolt" aria-hidden="true"></i>Quick view</span></summary>
+              <details class="glance" data-bars>
+                <summary>In a glance <span class="meta"><i class="fa-solid fa-bars-progress"></i>Score breakdown</span></summary>
                 <div class="details-content">
-                  <p>Placeholder snapshot.</p>
+                  <div class="score-bars">
+                    <div class="bar" data-value="28" data-max="35"><div class="bar-label">Vanilla purity <span>28/35</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+                    <div class="bar" data-value="19" data-max="20"><div class="bar-label">Fairness and no P2W <span>19/20</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+                    <div class="bar" data-value="12" data-max="15"><div class="bar-label">Stability and last checked <span>12/15</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+                    <div class="bar" data-value="13" data-max="15"><div class="bar-label">Rules and moderation <span>13/15</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+                    <div class="bar" data-value="8" data-max="10"><div class="bar-label">Community and longevity <span>8/10</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+                    <div class="bar" data-value="4" data-max="5"><div class="bar-label">Transparency <span>4/5</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+                  </div>
                 </div>
               </details>
 
-              <details>
-                <summary>Vanilla definition <span class="meta"><i class="fa-solid fa-seedling" aria-hidden="true"></i>Allowed vs forbidden</span></summary>
-                <div class="details-content">
-                  <p>Placeholder vanilla definition and disclosures.</p>
-                </div>
-              </details>
-
-              <details>
-                <summary>Rules <span class="meta"><i class="fa-solid fa-scroll" aria-hidden="true"></i>Grief, PvP, resets</span></summary>
-                <div class="details-content">
-                  <p>Placeholder rules.</p>
-                </div>
-              </details>
-
-              <details>
-                <summary>Gameplay additions <span class="meta"><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>QoL vs changing</span></summary>
-                <div class="details-content">
-                  <p>Placeholder additions.</p>
-                </div>
-              </details>
-
-              <details>
-                <summary>Fairness and monetization <span class="meta"><i class="fa-solid fa-shield-heart" aria-hidden="true"></i>No P2W</span></summary>
-                <div class="details-content">
-                  <p>Placeholder monetization policy.</p>
-                </div>
-              </details>
-
-              <details>
-                <summary>Technical and performance <span class="meta"><i class="fa-solid fa-microchip" aria-hidden="true"></i>Stability</span></summary>
-                <div class="details-content">
-                  <p>Placeholder technical notes.</p>
-                </div>
-              </details>
-
-              <details>
-                <summary>Community and onboarding <span class="meta"><i class="fa-solid fa-people-group" aria-hidden="true"></i>Start here</span></summary>
-                <div class="details-content">
-                  <p>Placeholder onboarding notes.</p>
-                </div>
-              </details>
-
-              <p class="fineprint">
-                Score recap (example): Purity 28/35, Fairness 20/20, Stability 12/15, Rules 12/15, Longevity 8/10, Transparency 4/5.
-              </p>
+              <details><summary>Vanilla purity <span class="meta"><i class="fa-solid fa-leaf"></i>What stays vanilla</span></summary><div class="details-content"><p>Describe vanilla experience, allowed QoL, and what is avoided.</p></div></details>
+              <details><summary>Rules and moderation <span class="meta"><i class="fa-solid fa-scroll"></i>Grief, PvP, resets</span></summary><div class="details-content"><p>Summarize rules, enforcement, and reset policy.</p></div></details>
+              <details><summary>Fair play and monetization <span class="meta"><i class="fa-solid fa-shield-heart"></i>No P2W notes</span></summary><div class="details-content"><p>Document store policy and confirm fairness.</p></div></details>
+              <details><summary>Stability and last checked <span class="meta"><i class="fa-solid fa-microchip"></i>Uptime and checks</span></summary><div class="details-content"><p>Include last checked date and stability notes.</p></div></details>
+              <details><summary>Community and onboarding <span class="meta"><i class="fa-solid fa-people-group"></i>Start here</span></summary><div class="details-content"><p>Explain onboarding steps and community expectations.</p></div></details>
+              <details><summary>Transparency <span class="meta"><i class="fa-solid fa-eye"></i>Disclosures</span></summary><div class="details-content"><p>Link policies and list declared gameplay changes.</p></div></details>
             </div>
           </article>
 
-          <!-- ==========================================================
-               #4
-               ========================================================== -->
-          <article class="card" id="northwind">
+          <!-- SLOT #4 -->
+          <article class="card tilt idle" id="slot4" data-reveal>
             <div class="card-head">
               <div class="card-title-row">
                 <div>
-                  <h3>#4 Northwind Vanilla</h3>
-                  <p class="subtitle">Vanilla survival with strict moderation and a clear reset policy. Placeholder copy.</p>
+                  <h3>#4 Submission Slot</h3>
+                  <p class="subtitle">A placeholder listing. If your vanilla server belongs here, submit it for editorial review.</p>
                 </div>
                 <div class="badges">
-                  <span class="badge score"><i class="fa-solid fa-chart-simple" aria-hidden="true"></i>Editor Score: <strong>81</strong>/100</span>
+                  <span class="badge score"><i class="fa-solid fa-chart-simple"></i>Editor Score: <strong>81</strong>/100</span>
                 </div>
               </div>
 
-              <div class="facts" aria-label="Quick facts">
-                <span class="fact"><i class="fa-solid fa-globe" aria-hidden="true"></i><strong>Region:</strong>&nbsp;ASIA</span>
-                <span class="fact"><i class="fa-solid fa-language" aria-hidden="true"></i><strong>Language:</strong>&nbsp;EN</span>
-                <span class="fact"><i class="fa-solid fa-tree" aria-hidden="true"></i><strong>Playstyle:</strong>&nbsp;Vanilla Survival</span>
-                <span class="fact"><i class="fa-solid fa-user-shield" aria-hidden="true"></i><strong>Whitelist:</strong>&nbsp;No</span>
-                <span class="fact"><i class="fa-regular fa-clock" aria-hidden="true"></i><strong>Last checked:</strong>&nbsp;2025-12-19</span>
+              <div class="facts">
+                <span class="fact"><i class="fa-solid fa-globe"></i><strong>Region:</strong>&nbsp;TBD</span>
+                <span class="fact"><i class="fa-solid fa-language"></i><strong>Language:</strong>&nbsp;TBD</span>
+                <span class="fact"><i class="fa-solid fa-tree"></i><strong>Playstyle:</strong>&nbsp;Vanilla SMP</span>
+                <span class="fact"><i class="fa-solid fa-user-shield"></i><strong>Whitelist:</strong>&nbsp;TBD</span>
+                <span class="fact"><i class="fa-regular fa-clock"></i><strong>Last checked:</strong>&nbsp;TBD</span>
               </div>
 
               <div class="cta-row">
-                <div class="ip-box" aria-label="Server IP">
-                  <i class="fa-solid fa-network-wired" aria-hidden="true"></i>
-                  <code>play.northwind.example</code>
-                  <button class="btn-copy" type="button" data-copy="play.northwind.example">
-                    <i class="fa-regular fa-copy" aria-hidden="true"></i>Copy IP
-                  </button>
+                <div class="ip-box">
+                  <i class="fa-solid fa-network-wired"></i>
+                  <code>your.server.ip.example</code>
+                  <button class="btn-copy" type="button" data-copy="your.server.ip.example"><i class="fa-regular fa-copy"></i>Copy IP</button>
                 </div>
-
-                <div class="links" aria-label="Server links">
-                  <a class="link-pill" href="https://discord.example" target="_blank" rel="noopener noreferrer">
-                    <i class="fa-brands fa-discord" aria-hidden="true"></i>Discord
-                  </a>
-                  <a class="link-pill" href="https://example.com" target="_blank" rel="noopener noreferrer">
-                    <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>Website
-                  </a>
+                <div class="links">
+                  <a class="link-pill" href="#suggest"><i class="fa-solid fa-paper-plane"></i>Submit</a>
                 </div>
               </div>
             </div>
 
             <div class="card-body">
-              <p class="why">
-                <strong>Why it’s vanilla:</strong> Placeholder. Minimal additions, documented rules, and a focused vanilla Hytale server experience.
-              </p>
+              <p class="why"><strong>Template:</strong> Replace with a real listing once reviewed.</p>
 
-              <details>
-                <summary>Snapshot <span class="meta"><i class="fa-solid fa-bolt" aria-hidden="true"></i>Quick view</span></summary>
-                <div class="details-content"><p>Placeholder snapshot.</p></div>
+              <details class="glance" data-bars>
+                <summary>In a glance <span class="meta"><i class="fa-solid fa-bars-progress"></i>Score breakdown</span></summary>
+                <div class="details-content">
+                  <div class="score-bars">
+                    <div class="bar" data-value="27" data-max="35"><div class="bar-label">Vanilla purity <span>27/35</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+                    <div class="bar" data-value="18" data-max="20"><div class="bar-label">Fairness and no P2W <span>18/20</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+                    <div class="bar" data-value="12" data-max="15"><div class="bar-label">Stability and last checked <span>12/15</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+                    <div class="bar" data-value="12" data-max="15"><div class="bar-label">Rules and moderation <span>12/15</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+                    <div class="bar" data-value="8" data-max="10"><div class="bar-label">Community and longevity <span>8/10</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+                    <div class="bar" data-value="4" data-max="5"><div class="bar-label">Transparency <span>4/5</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+                  </div>
+                </div>
               </details>
 
-              <details>
-                <summary>Vanilla definition <span class="meta"><i class="fa-solid fa-seedling" aria-hidden="true"></i>Allowed vs forbidden</span></summary>
-                <div class="details-content"><p>Placeholder vanilla definition.</p></div>
-              </details>
-
-              <details>
-                <summary>Rules <span class="meta"><i class="fa-solid fa-scroll" aria-hidden="true"></i>Grief, PvP, resets</span></summary>
-                <div class="details-content"><p>Placeholder rules.</p></div>
-              </details>
-
-              <details>
-                <summary>Gameplay additions <span class="meta"><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>QoL vs changing</span></summary>
-                <div class="details-content"><p>Placeholder additions.</p></div>
-              </details>
-
-              <details>
-                <summary>Fairness and monetization <span class="meta"><i class="fa-solid fa-shield-heart" aria-hidden="true"></i>No P2W</span></summary>
-                <div class="details-content"><p>Placeholder monetization.</p></div>
-              </details>
-
-              <details>
-                <summary>Technical and performance <span class="meta"><i class="fa-solid fa-microchip" aria-hidden="true"></i>Stability</span></summary>
-                <div class="details-content"><p>Placeholder technical notes.</p></div>
-              </details>
-
-              <details>
-                <summary>Community and onboarding <span class="meta"><i class="fa-solid fa-people-group" aria-hidden="true"></i>Start here</span></summary>
-                <div class="details-content"><p>Placeholder onboarding notes.</p></div>
-              </details>
-
-              <p class="fineprint">
-                Score recap (example): Purity 28/35, Fairness 18/20, Stability 12/15, Rules 12/15, Longevity 7/10, Transparency 4/5.
-              </p>
+              <details><summary>Vanilla purity <span class="meta"><i class="fa-solid fa-leaf"></i>What stays vanilla</span></summary><div class="details-content"><p>Explain vanilla experience and minimal QoL, if any.</p></div></details>
+              <details><summary>Rules and moderation <span class="meta"><i class="fa-solid fa-scroll"></i>Grief, PvP, resets</span></summary><div class="details-content"><p>Summarize rules and moderation approach.</p></div></details>
+              <details><summary>Fair play and monetization <span class="meta"><i class="fa-solid fa-shield-heart"></i>No P2W notes</span></summary><div class="details-content"><p>Document monetization policy and fairness statement.</p></div></details>
+              <details><summary>Stability and last checked <span class="meta"><i class="fa-solid fa-microchip"></i>Uptime and checks</span></summary><div class="details-content"><p>Include last-checked date and stability notes.</p></div></details>
+              <details><summary>Community and onboarding <span class="meta"><i class="fa-solid fa-people-group"></i>Start here</span></summary><div class="details-content"><p>Outline onboarding and community style.</p></div></details>
+              <details><summary>Transparency <span class="meta"><i class="fa-solid fa-eye"></i>Disclosures</span></summary><div class="details-content"><p>Link policies and list declared changes.</p></div></details>
             </div>
           </article>
 
-          <!-- ==========================================================
-               #5
-               ========================================================== -->
-          <article class="card" id="cobalt">
+          <!-- SLOT #5 -->
+          <article class="card tilt idle" id="slot5" data-reveal>
             <div class="card-head">
               <div class="card-title-row">
                 <div>
-                  <h3>#5 Cobalt Shores SMP</h3>
-                  <p class="subtitle">Chill vanilla SMP with lightweight QoL and strong moderation. Placeholder copy.</p>
+                  <h3>#5 Submission Slot</h3>
+                  <p class="subtitle">Final placeholder slot. Submit your vanilla Hytale server to be considered for the list.</p>
                 </div>
                 <div class="badges">
-                  <span class="badge score"><i class="fa-solid fa-chart-simple" aria-hidden="true"></i>Editor Score: <strong>78</strong>/100</span>
+                  <span class="badge score"><i class="fa-solid fa-chart-simple"></i>Editor Score: <strong>78</strong>/100</span>
                 </div>
               </div>
 
-              <div class="facts" aria-label="Quick facts">
-                <span class="fact"><i class="fa-solid fa-globe" aria-hidden="true"></i><strong>Region:</strong>&nbsp;SA</span>
-                <span class="fact"><i class="fa-solid fa-language" aria-hidden="true"></i><strong>Language:</strong>&nbsp;EN</span>
-                <span class="fact"><i class="fa-solid fa-tree" aria-hidden="true"></i><strong>Playstyle:</strong>&nbsp;Vanilla SMP</span>
-                <span class="fact"><i class="fa-solid fa-user-shield" aria-hidden="true"></i><strong>Whitelist:</strong>&nbsp;No</span>
-                <span class="fact"><i class="fa-regular fa-clock" aria-hidden="true"></i><strong>Last checked:</strong>&nbsp;2025-12-19</span>
+              <div class="facts">
+                <span class="fact"><i class="fa-solid fa-globe"></i><strong>Region:</strong>&nbsp;TBD</span>
+                <span class="fact"><i class="fa-solid fa-language"></i><strong>Language:</strong>&nbsp;TBD</span>
+                <span class="fact"><i class="fa-solid fa-tree"></i><strong>Playstyle:</strong>&nbsp;Vanilla SMP</span>
+                <span class="fact"><i class="fa-solid fa-user-shield"></i><strong>Whitelist:</strong>&nbsp;TBD</span>
+                <span class="fact"><i class="fa-regular fa-clock"></i><strong>Last checked:</strong>&nbsp;TBD</span>
               </div>
 
               <div class="cta-row">
-                <div class="ip-box" aria-label="Server IP">
-                  <i class="fa-solid fa-network-wired" aria-hidden="true"></i>
-                  <code>play.cobalt.example</code>
-                  <button class="btn-copy" type="button" data-copy="play.cobalt.example">
-                    <i class="fa-regular fa-copy" aria-hidden="true"></i>Copy IP
-                  </button>
+                <div class="ip-box">
+                  <i class="fa-solid fa-network-wired"></i>
+                  <code>your.server.ip.example</code>
+                  <button class="btn-copy" type="button" data-copy="your.server.ip.example"><i class="fa-regular fa-copy"></i>Copy IP</button>
                 </div>
-
-                <div class="links" aria-label="Server links">
-                  <a class="link-pill" href="https://discord.example" target="_blank" rel="noopener noreferrer">
-                    <i class="fa-brands fa-discord" aria-hidden="true"></i>Discord
-                  </a>
-                  <a class="link-pill" href="https://example.com" target="_blank" rel="noopener noreferrer">
-                    <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>Website
-                  </a>
+                <div class="links">
+                  <a class="link-pill" href="#suggest"><i class="fa-solid fa-paper-plane"></i>Submit</a>
                 </div>
               </div>
             </div>
 
             <div class="card-body">
-              <p class="why">
-                <strong>Why it’s vanilla:</strong> Placeholder. QoL is limited and disclosed. Monetization is designed to avoid gameplay advantage.
-              </p>
+              <p class="why"><strong>Template:</strong> This will become a real listing after review.</p>
 
-              <details>
-                <summary>Snapshot <span class="meta"><i class="fa-solid fa-bolt" aria-hidden="true"></i>Quick view</span></summary>
-                <div class="details-content"><p>Placeholder snapshot.</p></div>
+              <details class="glance" data-bars>
+                <summary>In a glance <span class="meta"><i class="fa-solid fa-bars-progress"></i>Score breakdown</span></summary>
+                <div class="details-content">
+                  <div class="score-bars">
+                    <div class="bar" data-value="26" data-max="35"><div class="bar-label">Vanilla purity <span>26/35</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+                    <div class="bar" data-value="18" data-max="20"><div class="bar-label">Fairness and no P2W <span>18/20</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+                    <div class="bar" data-value="12" data-max="15"><div class="bar-label">Stability and last checked <span>12/15</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+                    <div class="bar" data-value="11" data-max="15"><div class="bar-label">Rules and moderation <span>11/15</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+                    <div class="bar" data-value="7" data-max="10"><div class="bar-label">Community and longevity <span>7/10</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+                    <div class="bar" data-value="4" data-max="5"><div class="bar-label">Transparency <span>4/5</span></div><div class="bar-track"><div class="bar-fill"></div></div></div>
+                  </div>
+                </div>
               </details>
 
-              <details>
-                <summary>Vanilla definition <span class="meta"><i class="fa-solid fa-seedling" aria-hidden="true"></i>Allowed vs forbidden</span></summary>
-                <div class="details-content"><p>Placeholder vanilla definition.</p></div>
-              </details>
-
-              <details>
-                <summary>Rules <span class="meta"><i class="fa-solid fa-scroll" aria-hidden="true"></i>Grief, PvP, resets</span></summary>
-                <div class="details-content"><p>Placeholder rules.</p></div>
-              </details>
-
-              <details>
-                <summary>Gameplay additions <span class="meta"><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>QoL vs changing</span></summary>
-                <div class="details-content"><p>Placeholder additions.</p></div>
-              </details>
-
-              <details>
-                <summary>Fairness and monetization <span class="meta"><i class="fa-solid fa-shield-heart" aria-hidden="true"></i>No P2W</span></summary>
-                <div class="details-content"><p>Placeholder monetization.</p></div>
-              </details>
-
-              <details>
-                <summary>Technical and performance <span class="meta"><i class="fa-solid fa-microchip" aria-hidden="true"></i>Stability</span></summary>
-                <div class="details-content"><p>Placeholder technical notes.</p></div>
-              </details>
-
-              <details>
-                <summary>Community and onboarding <span class="meta"><i class="fa-solid fa-people-group" aria-hidden="true"></i>Start here</span></summary>
-                <div class="details-content"><p>Placeholder onboarding notes.</p></div>
-              </details>
-
-              <p class="fineprint">
-                Score recap (example): Purity 26/35, Fairness 18/20, Stability 12/15, Rules 11/15, Longevity 7/10, Transparency 4/5.
-              </p>
+              <details><summary>Vanilla purity <span class="meta"><i class="fa-solid fa-leaf"></i>What stays vanilla</span></summary><div class="details-content"><p>Describe how vanilla the gameplay feels and list any minimal QoL.</p></div></details>
+              <details><summary>Rules and moderation <span class="meta"><i class="fa-solid fa-scroll"></i>Grief, PvP, resets</span></summary><div class="details-content"><p>Summarize rules and enforcement.</p></div></details>
+              <details><summary>Fair play and monetization <span class="meta"><i class="fa-solid fa-shield-heart"></i>No P2W notes</span></summary><div class="details-content"><p>Document store policy and fairness statement.</p></div></details>
+              <details><summary>Stability and last checked <span class="meta"><i class="fa-solid fa-microchip"></i>Uptime and checks</span></summary><div class="details-content"><p>Include last checked date and stability notes.</p></div></details>
+              <details><summary>Community and onboarding <span class="meta"><i class="fa-solid fa-people-group"></i>Start here</span></summary><div class="details-content"><p>Outline onboarding and intended community style.</p></div></details>
+              <details><summary>Transparency <span class="meta"><i class="fa-solid fa-eye"></i>Disclosures</span></summary><div class="details-content"><p>Link policies and list declared changes.</p></div></details>
             </div>
           </article>
         </div>
@@ -1367,77 +1244,36 @@
 
     <section id="methodology" aria-labelledby="methodology-title">
       <div class="container">
-        <h2 id="methodology-title">How we rank vanilla Hytale servers</h2>
-        <p class="section-lead">
-          This list is curated manually. There are no votes and no automated ranking. Each server is reviewed against the same rubric
-          to keep the “vanilla” label meaningful and comparable.
+        <h2 id="methodology-title" data-reveal>How scoring works</h2>
+        <p class="section-lead" data-reveal>
+          The editor score is a simple sum. Each category is scored from 0 up to its maximum points, then we add them together to get a final score out of 100.
+          The sections inside each server card mirror these same categories, so the rubric and the review topics match one to one.
         </p>
 
         <div class="grid-2">
-          <div class="panel">
+          <div class="panel tilt idle" data-reveal>
             <h3>Exclusion rules (must pass)</h3>
-            <ul>
+            <ul style="margin:0; padding-left:18px; color: var(--muted);">
               <li><strong>No pay-to-win:</strong> no progression advantages sold for money.</li>
-              <li><strong>Vanilla must be defined:</strong> the server must clearly state what is changed and what is not.</li>
-              <li><strong>Rules must be public:</strong> griefing, PvP, resets, and moderation expectations.</li>
-              <li><strong>Contact must exist:</strong> at least an active Discord or website.</li>
-              <li><strong>Verifiable access:</strong> IP and availability must be checkable (we note “last checked”).</li>
+              <li><strong>Clear vanilla-first statement:</strong> changes and additions must be disclosed.</li>
+              <li><strong>Public rules:</strong> griefing, PvP, resets, and moderation expectations.</li>
+              <li><strong>Contact exists:</strong> at least an active Discord or website.</li>
+              <li><strong>Verifiable access:</strong> IP and availability can be checked (we show “last checked”).</li>
             </ul>
-            <div class="callout">
-              <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
-              <p>
-                “Vanilla” here means: base gameplay first, minimal additions, and full disclosure. QoL may exist, but it should not rewrite progression.
-              </p>
-            </div>
           </div>
 
-          <div class="panel">
+          <div class="panel tilt idle" data-reveal>
             <h3>Editor score (0 to 100)</h3>
-            <p class="footer-text" style="margin-top:0;">
-              We score each server using weighted criteria, then rank by the final score.
-            </p>
-            <ul>
-              <li><strong>35</strong> Vanilla Purity</li>
-              <li><strong>20</strong> Fairness and No P2W</li>
-              <li><strong>15</strong> Stability and Last Checked</li>
-              <li><strong>15</strong> Rules and Moderation</li>
-              <li><strong>10</strong> Community and Longevity</li>
+            <ul style="margin:0; padding-left:18px; color: var(--muted);">
+              <li><strong>35</strong> Vanilla purity</li>
+              <li><strong>20</strong> Fairness and no P2W</li>
+              <li><strong>15</strong> Stability and last checked</li>
+              <li><strong>15</strong> Rules and moderation</li>
+              <li><strong>10</strong> Community and longevity</li>
               <li><strong>5</strong> Transparency</li>
             </ul>
-            <div class="callout">
-              <i class="fa-solid fa-check-double" aria-hidden="true"></i>
-              <p>
-                We keep a “Last checked” date on every listing. If a server changes policy or additions, its score can change on the next review.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <p class="fineprint">
-          Tip: if you run a vanilla Hytale server and want to be listed, make your vanilla definition, rules, and monetization policy easy to find.
-        </p>
-      </div>
-    </section>
-
-    <section id="join" aria-labelledby="join-title">
-      <div class="container">
-        <h2 id="join-title">How to join a vanilla Hytale server</h2>
-        <p class="section-lead">
-          The exact menu labels may change over time, but the basic flow stays the same.
-        </p>
-
-        <div class="panel">
-          <ol style="margin:0; padding-left:18px; color: var(--muted);">
-            <li>Open Hytale.</li>
-            <li>Go to Multiplayer (or Servers).</li>
-            <li>Choose “Direct Connect” (or “Add Server”).</li>
-            <li>Paste the IP from the card above and join.</li>
-          </ol>
-
-          <div class="callout">
-            <i class="fa-solid fa-lock" aria-hidden="true"></i>
-            <p>
-              Some vanilla servers use whitelist onboarding. If a server is whitelisted, join their Discord and follow the “start here” steps.
+            <p class="fineprint">
+              Example: if a server scores 30/35 for purity and 18/20 for fairness, those points are added directly into the final score.
             </p>
           </div>
         </div>
@@ -1446,82 +1282,43 @@
 
     <section id="faq" aria-labelledby="faq-title">
       <div class="container">
-        <h2 id="faq-title">Vanilla Hytale server FAQ</h2>
-        <p class="section-lead">
-          Clear definitions help keep the list useful. These FAQs also cover common questions people search for.
+        <h2 id="faq-title" data-reveal>Vanilla Hytale server FAQ</h2>
+        <p class="section-lead" data-reveal>
+          Definitions stay simple on purpose, so “vanilla” remains useful as a label and not just a marketing word.
         </p>
 
-        <div class="panel">
+        <div class="panel tilt idle" data-reveal>
           <details open>
-            <summary>
-              What is a vanilla Hytale server?
-              <span class="meta"><i class="fa-solid fa-circle-question" aria-hidden="true"></i>Definition</span>
-            </summary>
+            <summary>What is a vanilla Hytale server? <span class="meta"><i class="fa-solid fa-circle-question" aria-hidden="true"></i>Definition</span></summary>
             <div class="details-content">
               <p>
-                A vanilla Hytale server focuses on base gameplay. It avoids additions that significantly change progression, combat balance, loot, or economy.
-                Some servers may still run minimal QoL and moderation tools, but those should be disclosed.
+                A vanilla Hytale server focuses on base gameplay and avoids changes that significantly alter progression, balance, loot, or economy.
+                Some servers may still run minimal quality-of-life and moderation tooling, as long as it is disclosed and does not rewrite the core experience.
               </p>
             </div>
           </details>
 
           <details>
-            <summary>
-              Vanilla vs semi-vanilla: what is the difference?
-              <span class="meta"><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i>Comparison</span>
-            </summary>
+            <summary>Vanilla vs semi-vanilla <span class="meta"><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i>Difference</span></summary>
             <div class="details-content">
               <p>
-                Semi-vanilla usually allows a few convenience features (for example, limited teleports, basic claims, or UI helpers).
-                In this list, we prefer minimal additions and we document them per server.
+                Semi-vanilla usually adds convenience systems. In this list, we prefer vanilla-first servers and we document any gameplay footprint clearly per server.
               </p>
             </div>
           </details>
 
           <details>
-            <summary>
-              Do these servers allow mods or custom content?
-              <span class="meta"><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>Content</span>
-            </summary>
+            <summary>Do you accept pay-to-win servers? <span class="meta"><i class="fa-solid fa-shield-heart" aria-hidden="true"></i>Fair play</span></summary>
             <div class="details-content">
-              <p>
-                Some servers may run server-side additions. We require clear disclosure and we score how strongly they impact “vanilla purity”.
-              </p>
+              <p>No. Pay-to-win fails the exclusion rules and is not listed.</p>
             </div>
           </details>
 
           <details>
-            <summary>
-              Are these servers pay-to-win?
-              <span class="meta"><i class="fa-solid fa-shield-heart" aria-hidden="true"></i>Fair play</span>
-            </summary>
+            <summary>Can I suggest a server? <span class="meta"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i>Submissions</span></summary>
             <div class="details-content">
               <p>
-                Our list excludes pay-to-win servers. We review monetization policies and document what is sold. If a server changes its store policy, it can be removed.
-              </p>
-            </div>
-          </details>
-
-          <details>
-            <summary>
-              How often is this list updated?
-              <span class="meta"><i class="fa-regular fa-calendar" aria-hidden="true"></i>Updates</span>
-            </summary>
-            <div class="details-content">
-              <p>
-                This is a small curated page. We update when we re-check listings or when a server policy changes. The “Last updated” date appears at the top.
-              </p>
-            </div>
-          </details>
-
-          <details>
-            <summary>
-              Can I suggest a server?
-              <span class="meta"><i class="fa-solid fa-envelope" aria-hidden="true"></i>Submissions</span>
-            </summary>
-            <div class="details-content">
-              <p>
-                Yes. Send the server name, IP, region, language, and links to rules and monetization policy. If it passes the exclusion rules, we may review it.
+                Yes. Send the server name, IP, region, language, and links to rules and monetization policy. If it passes the exclusion rules, we review it.
               </p>
             </div>
           </details>
@@ -1531,12 +1328,12 @@
 
     <section id="suggest" aria-labelledby="suggest-title">
       <div class="container">
-        <h2 id="suggest-title">Suggest a server (manual review)</h2>
-        <p class="section-lead">
-          This list is intentionally small. If you believe a server deserves a spot, send the essentials and make the vanilla definition easy to verify.
+        <h2 id="suggest-title" data-reveal>Suggest a server (manual review)</h2>
+        <p class="section-lead" data-reveal>
+          If you want to be listed, make it easy for us to verify the server’s vanilla purity, rules, stability, and monetization policy.
         </p>
 
-        <div class="panel">
+        <div class="panel tilt idle" data-reveal>
           <p class="footer-text" style="margin-top:0;">
             Email: <a href="mailto:submit@hytalevanillaservers.com">submit@hytalevanillaservers.com</a>
           </p>
@@ -1546,33 +1343,33 @@
             <li>Website and Discord link</li>
             <li>Rules link (grief, PvP, resets)</li>
             <li>Monetization policy link (store, perks)</li>
-            <li>Short “vanilla definition” summary</li>
+            <li>Short vanilla-first statement (what is changed, if anything)</li>
           </ul>
-        </div>
 
-        <p class="fineprint">
-          Disclaimer: this site is not affiliated with Hytale or Hypixel Studios. All trademarks belong to their respective owners.
-        </p>
+          <p class="fineprint">
+            Disclaimer: this site is not affiliated with Hytale or Hypixel Studios. All trademarks belong to their respective owners.
+          </p>
+        </div>
       </div>
     </section>
   </main>
 
   <footer role="contentinfo">
     <div class="container">
-      <div class="footer-grid">
+      <div class="footer-grid" data-reveal>
         <div>
-          <p class="footer-title">About this page</p>
+          <p class="footer-title">About</p>
           <p class="footer-text">
-            HytaleVanillaServers.com is a curated, editor-ranked list of vanilla Hytale servers. The goal is clarity and comparability, not popularity.
+            HytaleVanillaServers.com is a curated, editor-ranked list of vanilla-first Hytale servers. The goal is clarity and comparability, not popularity.
           </p>
           <p class="footer-text" style="margin-top:10px;">
             Contact: <a href="mailto:hello@hytalevanillaservers.com">hello@hytalevanillaservers.com</a>
           </p>
         </div>
         <div class="footer-links" aria-label="Footer links">
-          <a class="link-pill" href="#servers"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i>Back to top servers</a>
-          <a class="link-pill" href="#methodology"><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i>Methodology</a>
-          <a class="link-pill" href="#faq"><i class="fa-solid fa-circle-question" aria-hidden="true"></i>FAQ</a>
+          <a class="link-pill tilt" href="#servers"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i>Servers</a>
+          <a class="link-pill tilt" href="#methodology"><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i>Scoring</a>
+          <a class="link-pill tilt" href="#suggest"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i>Submit</a>
         </div>
       </div>
     </div>
@@ -1581,7 +1378,7 @@
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script>
-    // Minimal JS for "Copy IP" buttons. No frameworks for speed.
+    // Minimal JS for "Copy IP" buttons.
     (function () {
       const toast = document.getElementById("toast");
 
@@ -1589,7 +1386,7 @@
         toast.textContent = message;
         toast.classList.add("show");
         window.clearTimeout(showToast._t);
-        showToast._t = window.setTimeout(() => toast.classList.remove("show"), 1800);
+        showToast._t = window.setTimeout(() => toast.classList.remove("show"), 1600);
       }
 
       async function copyText(text) {
@@ -1599,7 +1396,7 @@
             return true;
           }
         } catch (e) {}
-        // Fallback for older browsers
+        // Fallback
         try {
           const ta = document.createElement("textarea");
           ta.value = text;
@@ -1619,12 +1416,109 @@
       document.addEventListener("click", async (ev) => {
         const btn = ev.target.closest("[data-copy]");
         if (!btn) return;
-
         const value = btn.getAttribute("data-copy");
         const ok = await copyText(value);
         showToast(ok ? ("Copied: " + value) : "Copy failed. Please copy manually.");
       });
     })();
+
+    // Motion: scroll reveal + hover tilt + animated bars
+    window.addEventListener("DOMContentLoaded", () => {
+      if (!window.gsap) return;
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Scroll reveal: pronounced bottom-to-top with modern easing and soft blur.
+      const revealEls = Array.from(document.querySelectorAll("[data-reveal]"));
+      revealEls.forEach((el) => {
+        gsap.fromTo(
+          el,
+          { opacity: 0, y: 44, filter: "blur(10px)" },
+          {
+            opacity: 1,
+            y: 0,
+            filter: "blur(0px)",
+            duration: 0.95,
+            ease: "back.out(1.55)",
+            scrollTrigger: {
+              trigger: el,
+              start: "top 88%",
+              once: true
+            }
+          }
+        );
+      });
+
+      // Tilt on mouse move (desktop only). Uses GSAP for smooth easing.
+      const canTilt = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+      if (canTilt) {
+        const tiltEls = Array.from(document.querySelectorAll(".tilt"));
+
+        tiltEls.forEach((el) => {
+          // Use quickTo for buttery smooth updates.
+          const qx = gsap.quickTo(el, "x", { duration: 0.35, ease: "power3.out" });
+          const qy = gsap.quickTo(el, "y", { duration: 0.35, ease: "power3.out" });
+          const qrx = gsap.quickTo(el, "rotationX", { duration: 0.45, ease: "power3.out" });
+          const qry = gsap.quickTo(el, "rotationY", { duration: 0.45, ease: "power3.out" });
+
+          el.style.transformPerspective = "1000px";
+
+          el.addEventListener("mousemove", (e) => {
+            const r = el.getBoundingClientRect();
+            const px = (e.clientX - r.left) / r.width;
+            const py = (e.clientY - r.top) / r.height;
+
+            // Slightly stronger than typical, but still tasteful.
+            const maxTilt = 7;   // degrees
+            const maxMove = 8;   // px
+
+            const rotY = (px - 0.5) * (maxTilt * 2);
+            const rotX = -(py - 0.5) * (maxTilt * 2);
+
+            qx((px - 0.5) * (maxMove * 2));
+            qy((py - 0.5) * (maxMove * 2));
+            qrx(rotX);
+            qry(rotY);
+          });
+
+          el.addEventListener("mouseleave", () => {
+            gsap.to(el, {
+              x: 0, y: 0, rotationX: 0, rotationY: 0,
+              duration: 0.8,
+              ease: "elastic.out(1, 0.55)"
+            });
+          });
+        });
+      }
+
+      // Animated score bars: animate on <details> open.
+      function animateBars(detailsEl) {
+        const bars = Array.from(detailsEl.querySelectorAll(".bar"));
+        bars.forEach((bar) => {
+          const fill = bar.querySelector(".bar-fill");
+          const v = Number(bar.getAttribute("data-value") || "0");
+          const m = Number(bar.getAttribute("data-max") || "1");
+          const pct = Math.max(0, Math.min(100, (v / m) * 100));
+
+          // Reset then animate to target.
+          gsap.set(fill, { width: "0%" });
+          gsap.to(fill, {
+            width: pct + "%",
+            duration: 0.95,
+            ease: "expo.out"
+          });
+        });
+      }
+
+      document.querySelectorAll("details[data-bars]").forEach((detailsEl) => {
+        detailsEl.addEventListener("toggle", () => {
+          if (detailsEl.open) animateBars(detailsEl);
+        });
+      });
+
+      // If any bars are inside an open details by default, animate once.
+      document.querySelectorAll("details[data-bars][open]").forEach(animateBars);
+    });
   </script>
 </body>
 </html>
