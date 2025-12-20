@@ -272,6 +272,7 @@
       display: grid;
       place-items: center;
       flex: 0 0 auto;
+      overflow: hidden;
     }
     :root[data-theme="light"] .brand-badge {
       background:
@@ -389,27 +390,54 @@
 
     /* Hero */
     section { padding: 26px 0; }
-    .hero { padding: 36px 0 18px; }
+    .hero { padding: 36px 0 26px; }
 
     .hero-panel {
       border-radius: calc(var(--radius) + 4px);
       border: 1px solid rgba(255,255,255,0.10);
-      background:
-        radial-gradient(620px 260px at 20% 30%, rgba(94,230,255,0.14), transparent 65%),
-        radial-gradient(520px 240px at 80% 20%, rgba(124,255,200,0.10), transparent 65%),
-        rgba(255,255,255,0.05);
+      background: rgba(255,255,255,0.05);
       box-shadow: var(--shadow);
       overflow: hidden;
+      position: relative;
     }
     :root[data-theme="light"] .hero-panel {
       border-color: rgba(0,0,0,0.10);
+      background: rgba(255,255,255,0.70);
+    }
+
+    .hero-panel .hero-bg-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.06);
+      filter: saturate(1.06) contrast(1.04);
+      opacity: 0.62;
+      will-change: transform;
+    }
+    :root[data-theme="light"] .hero-panel .hero-bg-img { opacity: 0.55; }
+
+    .hero-panel::after {
+      content: "";
+      position: absolute;
+      inset: 0;
       background:
-        radial-gradient(620px 260px at 20% 30%, rgba(36,183,255,0.18), transparent 68%),
-        radial-gradient(520px 240px at 80% 20%, rgba(41,227,162,0.12), transparent 68%),
-        rgba(255,255,255,0.70);
+        radial-gradient(900px 440px at 25% 15%, rgba(94,230,255,0.16), transparent 60%),
+        radial-gradient(840px 480px at 80% 20%, rgba(124,255,200,0.10), transparent 62%),
+        linear-gradient(180deg, rgba(7,10,19,0.70) 0%, rgba(7,10,19,0.84) 65%, rgba(7,10,19,0.90) 100%);
+      pointer-events: none;
+    }
+    :root[data-theme="light"] .hero-panel::after {
+      background:
+        radial-gradient(900px 440px at 25% 15%, rgba(36,183,255,0.12), transparent 65%),
+        radial-gradient(840px 480px at 80% 20%, rgba(41,227,162,0.08), transparent 68%),
+        linear-gradient(180deg, rgba(255,255,255,0.42) 0%, rgba(255,255,255,0.70) 62%, rgba(255,255,255,0.84) 100%);
     }
 
     .hero-inner {
+      position: relative;
+      z-index: 1;
       display: grid;
       grid-template-columns: 1.35fr 0.65fr;
       gap: 18px;
@@ -428,19 +456,21 @@
 
     .hero p {
       margin: 0;
-      color: var(--muted);
+      color: rgba(255,255,255,0.84);
       font-size: 15px;
-      max-width: 78ch;
+      max-width: 92ch;
     }
+    :root[data-theme="light"] .hero p { color: rgba(10,15,31,0.86); }
 
     .hero-meta {
       margin-top: 12px;
       display: flex;
       flex-wrap: wrap;
       gap: 10px 14px;
-      color: var(--muted-2);
+      color: rgba(255,255,255,0.74);
       font-size: 13px;
     }
+    :root[data-theme="light"] .hero-meta { color: rgba(10,15,31,0.66); }
 
     .hero-meta a {
       color: var(--text);
@@ -523,7 +553,7 @@
     .image-panel-content {
       position: relative;
       z-index: 1;
-      max-width: 84ch;
+      max-width: 92ch;
     }
     .image-panel-content p {
       margin: 0;
@@ -535,6 +565,14 @@
     }
     .image-panel-content strong { color: rgba(255,255,255,0.94); }
     :root[data-theme="light"] .image-panel-content strong { color: rgba(10,15,31,0.94); }
+
+    .image-panel-actions {
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
 
     .image-panel.spacious {
       margin: 18px 0 34px;
@@ -947,14 +985,6 @@
 
     .card-body { padding: 12px 16px 16px; }
 
-    .why {
-      margin: 0 0 12px;
-      color: var(--muted);
-      font-size: 13.5px;
-    }
-    .why strong { color: rgba(255,255,255,0.92); }
-    :root[data-theme="light"] .why strong { color: rgba(10,15,31,0.92); }
-
     /* Details */
     details {
       border-radius: 14px;
@@ -1336,15 +1366,26 @@
     <section class="hero">
       <div class="container">
         <div class="hero-panel idle tilt" data-tilt-strength="1.05" data-reveal>
+          <img
+            class="hero-bg-img"
+            src="/img/hytale/hytale_vanilla_servers_list_1.jpeg"
+            alt="Hytale screenshot background for vanilla Hytale servers list, survival atmosphere"
+            loading="lazy"
+            decoding="async"
+            width="1600"
+            height="900"
+          />
+
           <div class="hero-inner">
             <div>
               <h1>Vanilla Hytale Servers</h1>
 
               <p>
-                A curated <strong>vanilla Hytale server list</strong> with five editor-ranked picks. Discover the <strong>best vanilla Hytale servers</strong>
-                for SMP and survival, compare rules and gameplay footprint, check monetization and <strong>no pay-to-win</strong> notes, and copy the
-                <strong>Hytale server IP</strong> to join. Every listing includes an editor score, a last-checked date, and a clear review of what stays vanilla
-                and what is changed.
+                A curated <strong>vanilla Hytale server list</strong> with five editor-ranked picks. Discover the <strong>best vanilla Hytale servers</strong> for SMP and survival,
+                compare rules and gameplay footprint, check monetization and <strong>no pay-to-win</strong> notes, and copy the <strong>Hytale server IP</strong> to join.
+                Every listing includes an editor score, a last-checked date, and a clear review of what stays vanilla and what is changed.
+                When players search for <strong>vanilla Hytale servers</strong>, they usually want the real experience: explore, gather, craft, and build, without mods replacing survival.
+                This list focuses on <strong>vanilla-first</strong> servers and clearly documents each server’s gameplay footprint so you can pick the right <strong>vanilla Hytale server</strong> fast.
               </p>
 
               <div class="hero-meta">
@@ -1369,40 +1410,19 @@
             </div>
           </div>
         </div>
-
-        <!-- Spacer image panel (more breathing room before server cards) -->
-        <div class="image-panel spacious tilt idle" data-tilt-strength="1.00" data-reveal>
-          <img
-            src="/img/hytale/hytale_vanilla_servers_list_1.jpeg"
-            alt="Hytale screenshot for vanilla Hytale servers list, survival exploration and building atmosphere"
-            loading="lazy"
-            decoding="async"
-            width="1600"
-            height="900"
-          />
-          <div class="image-panel-content">
-            <p>
-              When players search for <strong>vanilla Hytale servers</strong>, they usually want the real loop: explore, gather, craft, and build, without menus replacing survival.
-              This list focuses on <strong>vanilla-first</strong> servers and clearly documents each server’s gameplay footprint so you can pick the right <strong>vanilla Hytale server</strong> fast.
-            </p>
-          </div>
-        </div>
       </div>
     </section>
 
     <section id="servers" aria-labelledby="servers-title">
       <div class="container">
         <h2 id="servers-title" data-reveal><i class="fa-solid fa-trophy" aria-hidden="true"></i>Top vanilla Hytale servers (editor picks)</h2>
-        <p class="section-lead" data-reveal>
-          Ranked by editor score. Expand any card to see how we evaluate vanilla purity, fairness, rules, stability, community, and transparency.
-        </p>
 
         <div class="cards">
           <!--
             SERVER CARD QUICK EDIT GUIDE
             1) Update rank badge text: <span class="rank-badge">…</span>
             2) Update name: <h3>Server Name (Hytale)</h3>
-            3) Update subtitle and "Why it’s vanilla-first" paragraph
+            3) Update subtitle
             4) Update facts: Region, Language, Playstyle, Whitelist, Last checked
             5) Update IP in <code>…</code> and data-copy="…"
             6) Update links:
@@ -1455,10 +1475,6 @@
             </div>
 
             <div class="card-body">
-              <p class="why">
-                <strong>Why it’s vanilla-first:</strong> A calm survival world with strong guardrails: no griefing, no unsolicited PvP, no pay-to-win, and a long-term mindset for towns and community builds.
-              </p>
-
               <details class="glance" data-bars data-reveal>
                 <summary>
                   In a glance
@@ -1606,7 +1622,7 @@
             </div>
           </article>
 
-          <!-- SLOT #2 -->
+          <!-- SLOT TEMPLATE (identical across #2 to #5) -->
           <article class="card slot tilt idle" data-tilt-strength="1.00" id="slot2" data-reveal>
             <span class="rank-badge" aria-hidden="true"><i class="fa-solid fa-medal"></i>#2</span>
 
@@ -1641,10 +1657,6 @@
             </div>
 
             <div class="card-body">
-              <p class="why">
-                <strong>How to get listed:</strong> Send the server name, IP, region, rules, and monetization policy so we can verify vanilla gameplay footprint and no pay-to-win.
-              </p>
-
               <details data-reveal>
                 <summary>
                   Submission checklist
@@ -1662,7 +1674,6 @@
             </div>
           </article>
 
-          <!-- SLOT #3 -->
           <article class="card slot tilt idle" data-tilt-strength="1.00" id="slot3" data-reveal>
             <span class="rank-badge" aria-hidden="true"><i class="fa-solid fa-medal"></i>#3</span>
 
@@ -1697,27 +1708,23 @@
             </div>
 
             <div class="card-body">
-              <p class="why">
-                <strong>Vanilla-first matters:</strong> players searching for vanilla Hytale servers want core survival, not menu-driven progression. If your server keeps changes minimal and disclosed, submit it.
-              </p>
-
               <details data-reveal>
                 <summary>
-                  What counts as vanilla-first here?
-                  <span class="meta"><i class="fa-solid fa-leaf" aria-hidden="true"></i>Gameplay footprint</span>
+                  Submission checklist
+                  <span class="meta"><i class="fa-solid fa-list-check" aria-hidden="true"></i>What we need</span>
                 </summary>
                 <div class="details-content">
                   <ul>
-                    <li>No paid shortcuts that change progression or power.</li>
-                    <li>Minimal systems that replace survival with menus.</li>
-                    <li>Clear disclosure of any semi-vanilla QoL changes.</li>
+                    <li>Server name and IP (plus region and primary language).</li>
+                    <li>Rules link: grief, PvP, resets, moderation expectations.</li>
+                    <li>Monetization policy link: confirm no pay-to-win advantages.</li>
+                    <li>Short vanilla-first statement: what is changed, if anything.</li>
                   </ul>
                 </div>
               </details>
             </div>
           </article>
 
-          <!-- SLOT #4 -->
           <article class="card slot tilt idle" data-tilt-strength="1.00" id="slot4" data-reveal>
             <span class="rank-badge" aria-hidden="true"><i class="fa-solid fa-medal"></i>#4</span>
 
@@ -1752,13 +1759,23 @@
             </div>
 
             <div class="card-body">
-              <p class="why">
-                <strong>Open slot:</strong> If your server belongs on a best vanilla Hytale servers list, submit it with links we can verify.
-              </p>
+              <details data-reveal>
+                <summary>
+                  Submission checklist
+                  <span class="meta"><i class="fa-solid fa-list-check" aria-hidden="true"></i>What we need</span>
+                </summary>
+                <div class="details-content">
+                  <ul>
+                    <li>Server name and IP (plus region and primary language).</li>
+                    <li>Rules link: grief, PvP, resets, moderation expectations.</li>
+                    <li>Monetization policy link: confirm no pay-to-win advantages.</li>
+                    <li>Short vanilla-first statement: what is changed, if anything.</li>
+                  </ul>
+                </div>
+              </details>
             </div>
           </article>
 
-          <!-- SLOT #5 -->
           <article class="card slot tilt idle" data-tilt-strength="1.00" id="slot5" data-reveal>
             <span class="rank-badge" aria-hidden="true"><i class="fa-solid fa-medal"></i>#5</span>
 
@@ -1793,9 +1810,20 @@
             </div>
 
             <div class="card-body">
-              <p class="why">
-                <strong>Open slot:</strong> Your vanilla-first Hytale server could sit here once we confirm rules, join info, and monetization policy.
-              </p>
+              <details data-reveal>
+                <summary>
+                  Submission checklist
+                  <span class="meta"><i class="fa-solid fa-list-check" aria-hidden="true"></i>What we need</span>
+                </summary>
+                <div class="details-content">
+                  <ul>
+                    <li>Server name and IP (plus region and primary language).</li>
+                    <li>Rules link: grief, PvP, resets, moderation expectations.</li>
+                    <li>Monetization policy link: confirm no pay-to-win advantages.</li>
+                    <li>Short vanilla-first statement: what is changed, if anything.</li>
+                  </ul>
+                </div>
+              </details>
             </div>
           </article>
         </div>
@@ -1805,13 +1833,8 @@
     <section id="methodology" aria-labelledby="methodology-title">
       <div class="container">
         <h2 id="methodology-title" data-reveal><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i>How scoring works</h2>
-        <p class="section-lead" data-reveal>
-          The editor score is a simple sum. Each category is scored from 0 up to its maximum points, then we add them together to get a final score out of 100.
-          The sections inside each server card mirror these same categories, so the rubric and the review topics match one to one.
-        </p>
 
-        <!-- Image panel with overlay (extra spacing before the two panels) -->
-        <div class="image-panel spacious tilt idle" data-tilt-strength="1.00" data-reveal style="margin-top: 18px; margin-bottom: 28px;">
+        <div class="image-panel spacious tilt idle" data-tilt-strength="1.00" data-reveal style="margin-top: 16px; margin-bottom: 22px;">
           <img
             src="/img/hytale/hytale_vanilla_servers_list_2.jpeg"
             alt="Hytale screenshot used to explain scoring for vanilla Hytale servers, gameplay and survival clarity"
@@ -1822,8 +1845,9 @@
           />
           <div class="image-panel-content">
             <p>
-              For <strong>vanilla Hytale servers</strong>, our scoring rewards small gameplay footprint, transparent rules, and fair monetization.
-              The goal is simple: you should know what stays vanilla before you join.
+              The editor score is a simple sum. Each category is scored from 0 up to its maximum points, then we add them together to get a final score out of 100.
+              The sections inside each server card mirror these same categories, so the rubric and the review topics match one to one.
+              For <strong>vanilla Hytale servers</strong>, scoring rewards small gameplay footprint, transparent rules, and fair monetization, so “vanilla-first” stays meaningful.
             </p>
           </div>
         </div>
@@ -1874,9 +1898,6 @@
     <section id="faq" aria-labelledby="faq-title">
       <div class="container">
         <h2 id="faq-title" data-reveal><i class="fa-solid fa-circle-question" aria-hidden="true"></i>Vanilla Hytale server FAQ</h2>
-        <p class="section-lead" data-reveal>
-          Definitions stay simple on purpose, so “vanilla” remains useful as a label and not just a marketing word.
-        </p>
 
         <div class="image-panel spacious tilt idle" data-tilt-strength="1.00" data-reveal style="margin-top: 16px; margin-bottom: 22px;">
           <img
@@ -1889,8 +1910,8 @@
           />
           <div class="image-panel-content">
             <p>
-              If you are comparing <strong>vanilla Hytale servers</strong>, focus on two things: <strong>gameplay footprint</strong> and <strong>fairness</strong>.
-              A good listing makes both easy to verify.
+              Definitions stay simple on purpose, so “vanilla” remains useful as a label and not just a marketing word.
+              If you are comparing <strong>vanilla Hytale servers</strong>, focus on gameplay footprint and fairness, then verify rules and monetization before you join.
             </p>
           </div>
         </div>
@@ -1966,9 +1987,6 @@
     <section id="suggest" aria-labelledby="suggest-title">
       <div class="container">
         <h2 id="suggest-title" data-reveal><i class="fa-solid fa-paper-plane" aria-hidden="true"></i>Suggest a server (manual review)</h2>
-        <p class="section-lead" data-reveal>
-          If you want to be listed, make it easy for us to verify the server’s vanilla gameplay footprint, rules, stability, and monetization policy.
-        </p>
 
         <div class="image-panel spacious tilt idle" data-tilt-strength="1.00" data-reveal style="margin-top: 16px; margin-bottom: 22px;">
           <img
@@ -1981,18 +1999,23 @@
           />
           <div class="image-panel-content">
             <p>
-              Want your server featured in a <strong>vanilla Hytale servers</strong> list that players can trust? Submit join info plus rules and monetization policy so we can review it quickly.
+              If you want to be listed, make it easy for us to verify the server’s vanilla gameplay footprint, rules, stability, and monetization policy.
+              Submit your <strong>vanilla Hytale server</strong> and we will review it for a chance to be featured in this vanilla Hytale servers list.
             </p>
+
+            <div class="image-panel-actions">
+              <button class="btn btn-primary pressable" id="contactBtn" type="button" data-label="Contact us" aria-label="Contact us">
+                <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+                Contact us
+              </button>
+            </div>
           </div>
         </div>
 
         <div class="panel tilt idle" data-tilt-strength="1.00" data-reveal>
-          <button class="btn btn-primary pressable" id="contactBtn" type="button" data-label="Contact us" aria-label="Contact us">
-            <i class="fa-solid fa-envelope" aria-hidden="true"></i>
-            Contact us
-          </button>
+          <h3><i class="fa-solid fa-list-check" aria-hidden="true"></i>Requirements</h3>
 
-          <ul style="margin:14px 0 0; padding-left:18px; color: var(--muted);">
+          <ul style="margin:0; padding-left:18px; color: var(--muted);">
             <li>Server name and IP</li>
             <li>Region and primary language</li>
             <li>Website and Discord link</li>
@@ -2002,7 +2025,7 @@
           </ul>
 
           <p class="fineprint" style="margin-bottom:0;">
-            Tip: include a direct link to your rules and monetization policy so we can verify no pay-to-win and vanilla-first positioning for the vanilla Hytale servers list.
+            Tip: include direct links to rules and monetization policy so we can verify no pay-to-win and vanilla-first positioning for vanilla Hytale servers.
           </p>
         </div>
       </div>
