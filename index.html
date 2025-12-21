@@ -110,7 +110,6 @@
       --muted: rgba(10,15,31,0.72);
       --muted-2: rgba(10,15,31,0.58);
 
-      /* Hytale-ish: bright sky + mint */
       --accent: #24b7ff;
       --accent-2: #29e3a2;
 
@@ -124,10 +123,15 @@
     }
 
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg);
+      overflow-x: hidden;
+    }
     body {
       margin: 0;
       position: relative;
+      min-height: 100vh;
       font-family: var(--b-font);
       color: var(--text);
       background:
@@ -135,8 +139,10 @@
         radial-gradient(980px 580px at 88% 18%, rgba(124,255,200,0.10), transparent 60%),
         radial-gradient(820px 560px at 56% 86%, rgba(94,230,255,0.06), transparent 64%),
         linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+      background-color: var(--bg);
       line-height: 1.55;
       overflow-x: hidden;
+      overscroll-behavior-y: none;
     }
 
     :root[data-theme="light"] body {
@@ -145,6 +151,7 @@
         radial-gradient(980px 580px at 88% 18%, rgba(41,227,162,0.10), transparent 68%),
         radial-gradient(820px 560px at 56% 86%, rgba(36,183,255,0.06), transparent 70%),
         linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+      background-color: var(--bg);
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -157,6 +164,18 @@
     .toast {
       position: relative;
       z-index: 1;
+    }
+
+    .sr-only {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0, 0, 0, 0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
     }
 
     /* Background float layer */
@@ -178,9 +197,7 @@
       will-change: transform;
       mix-blend-mode: screen;
     }
-    :root[data-theme="light"] .bg-float {
-      mix-blend-mode: multiply;
-    }
+    :root[data-theme="light"] .bg-float { mix-blend-mode: multiply; }
 
     a { color: inherit; text-decoration: none; }
     a:hover { text-decoration: underline; }
@@ -281,7 +298,6 @@
         rgba(0,0,0,0.02);
       border: 1px solid rgba(0,0,0,0.10);
     }
-    .brand-badge i { color: var(--accent); font-size: 15px; }
 
     .brand-title {
       display: flex;
@@ -369,9 +385,7 @@
       color: var(--text);
       background: rgba(255,255,255,0.05);
     }
-    :root[data-theme="light"] .nav-text:hover {
-      background: rgba(0,0,0,0.03);
-    }
+    :root[data-theme="light"] .nav-text:hover { background: rgba(0,0,0,0.03); }
 
     /* Theme toggle */
     .theme-toggle {
@@ -379,9 +393,7 @@
       gap: 9px;
       white-space: nowrap;
     }
-    .theme-toggle i {
-      color: var(--accent);
-    }
+    .theme-toggle i { color: var(--accent); }
     .theme-toggle span {
       font-weight: 900;
       font-size: 12.5px;
@@ -479,12 +491,8 @@
       text-underline-offset: 3px;
     }
     .hero-meta a:hover { text-decoration-color: rgba(94,230,255,0.45); }
-    :root[data-theme="light"] .hero-meta a {
-      text-decoration-color: rgba(0,0,0,0.20);
-    }
-    :root[data-theme="light"] .hero-meta a:hover {
-      text-decoration-color: rgba(36,183,255,0.55);
-    }
+    :root[data-theme="light"] .hero-meta a { text-decoration-color: rgba(0,0,0,0.20); }
+    :root[data-theme="light"] .hero-meta a:hover { text-decoration-color: rgba(36,183,255,0.55); }
 
     .hero-cta {
       display: flex;
@@ -560,11 +568,24 @@
       color: rgba(255,255,255,0.88);
       font-size: 14.5px;
     }
-    :root[data-theme="light"] .image-panel-content p {
-      color: rgba(10,15,31,0.88);
-    }
+    :root[data-theme="light"] .image-panel-content p { color: rgba(10,15,31,0.88); }
     .image-panel-content strong { color: rgba(255,255,255,0.94); }
     :root[data-theme="light"] .image-panel-content strong { color: rgba(10,15,31,0.94); }
+
+    .overlay-title {
+      margin: 0 0 10px;
+      font-family: var(--h-font);
+      letter-spacing: 0.02em;
+      font-weight: 900;
+      font-size: 22px;
+      line-height: 1.1;
+      color: rgba(255,255,255,0.96);
+      text-shadow: 0 12px 26px rgba(0,0,0,0.45);
+    }
+    :root[data-theme="light"] .overlay-title {
+      color: rgba(10,15,31,0.96);
+      text-shadow: 0 12px 26px rgba(0,0,0,0.10);
+    }
 
     .image-panel-actions {
       margin-top: 12px;
@@ -574,14 +595,10 @@
       align-items: center;
     }
 
-    .image-panel.spacious {
-      margin: 18px 0 34px;
-    }
+    .image-panel.spacious { margin: 18px 0 34px; }
 
     /* Full-bleed filmstrip */
-    .filmstrip-section {
-      padding: 10px 0 24px;
-    }
+    .filmstrip-section { padding: 10px 0 24px; }
     .filmstrip {
       width: 100vw;
       margin-left: 50%;
@@ -598,6 +615,7 @@
       -webkit-overflow-scrolling: touch;
       overscroll-behavior-x: contain;
       cursor: grab;
+      touch-action: pan-y;
     }
     .filmstrip-track.dragging { cursor: grabbing; }
     .filmstrip-track::-webkit-scrollbar { height: 10px; }
@@ -605,9 +623,8 @@
       background: rgba(255,255,255,0.16);
       border-radius: 999px;
     }
-    :root[data-theme="light"] .filmstrip-track::-webkit-scrollbar-thumb {
-      background: rgba(0,0,0,0.12);
-    }
+    :root[data-theme="light"] .filmstrip-track::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); }
+
     .filmstrip-img {
       flex: 0 0 auto;
       height: 240px;
@@ -618,10 +635,9 @@
       scroll-snap-align: center;
       user-select: none;
       -webkit-user-drag: none;
+      pointer-events: none;
     }
-    :root[data-theme="light"] .filmstrip-img {
-      border-color: rgba(0,0,0,0.12);
-    }
+    :root[data-theme="light"] .filmstrip-img { border-color: rgba(0,0,0,0.12); }
     @media (min-width: 920px) {
       .filmstrip-img { height: 310px; border-radius: 20px; }
     }
@@ -638,17 +654,6 @@
       margin: 0 0 14px;
       color: var(--muted);
       max-width: 86ch;
-    }
-
-    /* Title icons */
-    h2 i, .panel h3 i {
-      margin-right: 10px;
-      color: var(--accent);
-      opacity: 0.92;
-    }
-    :root[data-theme="light"] h2 i, :root[data-theme="light"] .panel h3 i {
-      color: var(--accent);
-      opacity: 0.95;
     }
 
     /* Cards */
@@ -717,9 +722,7 @@
       background: rgba(0,0,0,0.015);
       box-shadow: var(--shadow-soft), 0 0 0 1px rgba(0,0,0,0.04) inset;
     }
-    :root[data-theme="light"] .card.slot:hover {
-      border-color: rgba(0,0,0,0.16);
-    }
+    :root[data-theme="light"] .card.slot:hover { border-color: rgba(0,0,0,0.16); }
 
     /* Rank badge (top-left) */
     .rank-badge {
@@ -852,8 +855,6 @@
       border-color: rgba(0,0,0,0.12);
       background: rgba(0,0,0,0.02);
     }
-    .fact i { color: rgba(255,255,255,0.82); }
-    :root[data-theme="light"] .fact i { color: rgba(10,15,31,0.72); }
 
     .cta-row {
       display: flex;
@@ -887,9 +888,7 @@
       text-overflow: ellipsis;
       white-space: nowrap;
     }
-    :root[data-theme="light"] .ip-box code {
-      color: rgba(10,15,31,0.92);
-    }
+    :root[data-theme="light"] .ip-box code { color: rgba(10,15,31,0.92); }
 
     .btn-copy {
       margin-left: auto;
@@ -1104,10 +1103,9 @@
       padding: 30px 0 40px;
       border-top: 1px solid rgba(255,255,255,0.08);
       margin-top: 24px;
+      background: transparent;
     }
-    :root[data-theme="light"] footer {
-      border-top: 1px solid rgba(0,0,0,0.08);
-    }
+    :root[data-theme="light"] footer { border-top: 1px solid rgba(0,0,0,0.08); }
 
     .footer-grid {
       display: grid;
@@ -1174,7 +1172,6 @@
     }
 
     @media (max-width: 820px) {
-      /* Header layout fix */
       .topbar{
         flex-direction: column;
         align-items: stretch;
@@ -1186,12 +1183,8 @@
         justify-content: center;
       }
 
-      .brand-title strong{
-        font-size: 12px;
-      }
-      .brand-title span{
-        font-size: 11.5px;
-      }
+      .brand-title strong{ font-size: 12px; }
+      .brand-title span{ font-size: 11.5px; }
 
       nav.main-nav{
         width: 100%;
@@ -1214,19 +1207,12 @@
         padding: 10px 10px;
       }
 
-      nav.main-nav .nav-text{
-        display: none;
-      }
+      nav.main-nav .nav-text{ display: none; }
     }
 
     @media (max-width: 420px) {
-      nav.main-nav{
-        grid-template-columns: 1fr;
-      }
-
-      nav.main-nav .btn.btn-primary{
-        grid-column: auto;
-      }
+      nav.main-nav{ grid-template-columns: 1fr; }
+      nav.main-nav .btn.btn-primary{ grid-column: auto; }
     }
   </style>
 
@@ -1415,21 +1401,9 @@
 
     <section id="servers" aria-labelledby="servers-title">
       <div class="container">
-        <h2 id="servers-title" data-reveal><i class="fa-solid fa-trophy" aria-hidden="true"></i>Top vanilla Hytale servers (editor picks)</h2>
+        <h2 id="servers-title" class="sr-only">Vanilla Hytale servers list</h2>
 
         <div class="cards">
-          <!--
-            SERVER CARD QUICK EDIT GUIDE
-            1) Update rank badge text: <span class="rank-badge">…</span>
-            2) Update name: <h3>Server Name (Hytale)</h3>
-            3) Update subtitle
-            4) Update facts: Region, Language, Playstyle, Whitelist, Last checked
-            5) Update IP in <code>…</code> and data-copy="…"
-            6) Update links:
-               - Featured server links: rel="noopener noreferrer"
-               - Non-featured server links: rel="nofollow noopener noreferrer"
-          -->
-
           <!-- #1 FEATURED -->
           <article class="card featured tilt idle" data-tilt-strength="1.05" id="pvc" data-reveal>
             <span class="rank-badge" aria-hidden="true"><i class="fa-solid fa-crown"></i>#1</span>
@@ -1676,7 +1650,6 @@
 
           <article class="card slot tilt idle" data-tilt-strength="1.00" id="slot3" data-reveal>
             <span class="rank-badge" aria-hidden="true"><i class="fa-solid fa-medal"></i>#3</span>
-
             <div class="card-head">
               <div class="card-title-row">
                 <div>
@@ -1727,7 +1700,6 @@
 
           <article class="card slot tilt idle" data-tilt-strength="1.00" id="slot4" data-reveal>
             <span class="rank-badge" aria-hidden="true"><i class="fa-solid fa-medal"></i>#4</span>
-
             <div class="card-head">
               <div class="card-title-row">
                 <div>
@@ -1778,7 +1750,6 @@
 
           <article class="card slot tilt idle" data-tilt-strength="1.00" id="slot5" data-reveal>
             <span class="rank-badge" aria-hidden="true"><i class="fa-solid fa-medal"></i>#5</span>
-
             <div class="card-head">
               <div class="card-title-row">
                 <div>
@@ -1832,8 +1803,6 @@
 
     <section id="methodology" aria-labelledby="methodology-title">
       <div class="container">
-        <h2 id="methodology-title" data-reveal><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i>How scoring works</h2>
-
         <div class="image-panel spacious tilt idle" data-tilt-strength="1.00" data-reveal style="margin-top: 16px; margin-bottom: 22px;">
           <img
             src="/img/hytale/hytale_vanilla_servers_list_2.jpeg"
@@ -1844,6 +1813,7 @@
             height="900"
           />
           <div class="image-panel-content">
+            <h2 id="methodology-title" class="overlay-title">How scoring works</h2>
             <p>
               The editor score is a simple sum. Each category is scored from 0 up to its maximum points, then we add them together to get a final score out of 100.
               The sections inside each server card mirror these same categories, so the rubric and the review topics match one to one.
@@ -1897,8 +1867,6 @@
 
     <section id="faq" aria-labelledby="faq-title">
       <div class="container">
-        <h2 id="faq-title" data-reveal><i class="fa-solid fa-circle-question" aria-hidden="true"></i>Vanilla Hytale server FAQ</h2>
-
         <div class="image-panel spacious tilt idle" data-tilt-strength="1.00" data-reveal style="margin-top: 16px; margin-bottom: 22px;">
           <img
             src="/img/hytale/hytale_vanilla_servers_list_3.jpeg"
@@ -1909,6 +1877,7 @@
             height="900"
           />
           <div class="image-panel-content">
+            <h2 id="faq-title" class="overlay-title">Vanilla Hytale server FAQ</h2>
             <p>
               Definitions stay simple on purpose, so “vanilla” remains useful as a label and not just a marketing word.
               If you are comparing <strong>vanilla Hytale servers</strong>, focus on gameplay footprint and fairness, then verify rules and monetization before you join.
@@ -1986,8 +1955,6 @@
 
     <section id="suggest" aria-labelledby="suggest-title">
       <div class="container">
-        <h2 id="suggest-title" data-reveal><i class="fa-solid fa-paper-plane" aria-hidden="true"></i>Suggest a server (manual review)</h2>
-
         <div class="image-panel spacious tilt idle" data-tilt-strength="1.00" data-reveal style="margin-top: 16px; margin-bottom: 22px;">
           <img
             src="/img/hytale/hytale_vanilla_servers_list_4.jpeg"
@@ -1998,6 +1965,7 @@
             height="900"
           />
           <div class="image-panel-content">
+            <h2 id="suggest-title" class="overlay-title">Suggest a server (manual review)</h2>
             <p>
               If you want to be listed, make it easy for us to verify the server’s vanilla gameplay footprint, rules, stability, and monetization policy.
               Submit your <strong>vanilla Hytale server</strong> and we will review it for a chance to be featured in this vanilla Hytale servers list.
@@ -2086,7 +2054,7 @@
       applyUI();
     })();
 
-    // Minimal JS for "Copy IP" buttons.
+    // Copy buttons + toast
     (function () {
       const toast = document.getElementById("toast");
 
@@ -2137,19 +2105,9 @@
         const baseLabel = contactBtn.getAttribute("data-label") || "Contact us";
         const iconHtml = '<i class="fa-solid fa-envelope" aria-hidden="true"></i>';
 
-        function setLabel(text) {
-          contactBtn.innerHTML = iconHtml + " " + text;
-        }
-
-        function reveal() {
-          contactBtn.classList.add("revealed");
-          setLabel(email);
-        }
-
-        function hide() {
-          contactBtn.classList.remove("revealed");
-          setLabel(baseLabel);
-        }
+        function setLabel(text) { contactBtn.innerHTML = iconHtml + " " + text; }
+        function reveal() { contactBtn.classList.add("revealed"); setLabel(email); }
+        function hide() { contactBtn.classList.remove("revealed"); setLabel(baseLabel); }
 
         let clickTimer = null;
 
@@ -2177,7 +2135,7 @@
       })();
     })();
 
-    // Filmstrip drag-to-scroll (mouse + touch friendly)
+    // Filmstrip: pointer-driven drag to scroll (touch + mouse), without breaking page vertical scroll.
     (function () {
       const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       const track = document.querySelector("[data-filmstrip-track]");
@@ -2186,38 +2144,40 @@
       let isDown = false;
       let startX = 0;
       let startScrollLeft = 0;
+      let activePointerId = null;
 
-      const onDown = (e) => {
-        if (e.button !== undefined && e.button !== 0) return;
+      const onPointerDown = (e) => {
+        if (e.pointerType === "mouse" && e.button !== 0) return;
         isDown = true;
+        activePointerId = e.pointerId;
         track.classList.add("dragging");
-        startX = (e.pageX || (e.touches && e.touches[0] && e.touches[0].pageX) || 0);
+        startX = e.clientX;
         startScrollLeft = track.scrollLeft;
+        try { track.setPointerCapture(activePointerId); } catch (err) {}
       };
 
-      const onMove = (e) => {
-        if (!isDown) return;
-        const x = (e.pageX || (e.touches && e.touches[0] && e.touches[0].pageX) || 0);
-        const dx = x - startX;
+      const onPointerMove = (e) => {
+        if (!isDown || e.pointerId !== activePointerId) return;
+        const dx = e.clientX - startX;
         track.scrollLeft = startScrollLeft - dx;
         if (!reduce) e.preventDefault();
       };
 
-      const onUp = () => {
+      const onPointerUp = (e) => {
+        if (e.pointerId !== activePointerId) return;
         isDown = false;
+        activePointerId = null;
         track.classList.remove("dragging");
       };
 
-      track.addEventListener("mousedown", onDown);
-      window.addEventListener("mousemove", onMove, { passive: false });
-      window.addEventListener("mouseup", onUp);
-
-      track.addEventListener("touchstart", onDown, { passive: true });
-      track.addEventListener("touchmove", onMove, { passive: false });
-      track.addEventListener("touchend", onUp, { passive: true });
+      track.addEventListener("pointerdown", onPointerDown);
+      track.addEventListener("pointermove", onPointerMove, { passive: false });
+      track.addEventListener("pointerup", onPointerUp);
+      track.addEventListener("pointercancel", onPointerUp);
+      track.addEventListener("pointerleave", onPointerUp);
     })();
 
-    // Background floats: subtle opposite scroll + gentle opposite mouse drift
+    // Background floats: parallax drift (slower than content) + gentle opposite mouse drift
     (function () {
       const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       if (reduce) return;
@@ -2232,7 +2192,7 @@
           el: img,
           rot: Number.isFinite(parseFloat(r)) ? parseFloat(r) : 0,
           scale: Number.isFinite(parseFloat(s)) ? parseFloat(s) : 1.03,
-          speed: 0.016 + (Math.random() * 0.014),
+          speed: 0.06 + (Math.random() * 0.04),
           depth: 0.55 + (Math.random() * 0.45)
         };
       });
@@ -2254,11 +2214,13 @@
         const sy = window.scrollY || 0;
 
         for (const it of base) {
-          const parY = -sy * it.speed;
+          // Positive translate cancels part of normal scroll so images drift slower, like a background layer.
+          const parY = sy * it.speed;
           const parX = tx * it.depth;
           const parM = ty * it.depth;
 
-          it.el.style.transform = "translate3d(" + parX.toFixed(2) + "px," + (parY + parM).toFixed(2) + "px,0) rotate(" + it.rot + "deg) scale(" + it.scale + ")";
+          it.el.style.transform =
+            "translate3d(" + parX.toFixed(2) + "px," + (parY + parM).toFixed(2) + "px,0) rotate(" + it.rot + "deg) scale(" + it.scale + ")";
         }
 
         requestAnimationFrame(tick);
@@ -2321,11 +2283,7 @@
 
         const tl = gsap.timeline();
         fills.forEach((fill, i) => {
-          tl.to(fill, {
-            width: targets[i] + "%",
-            duration: 0.85,
-            ease: "expo.out"
-          }, i * 0.12);
+          tl.to(fill, { width: targets[i] + "%", duration: 0.85, ease: "expo.out" }, i * 0.12);
         });
       }
 
@@ -2361,7 +2319,6 @@
                 onComplete: () => {
                   content.style.height = "auto";
                   d.removeAttribute("data-animating");
-
                   if (d.hasAttribute("data-bars")) {
                     gsap.delayedCall(0.10, () => animateBars(d));
                   }
@@ -2404,7 +2361,7 @@
         });
       })();
 
-      // Smooth global proximity tilt (delicate spring), excludes header items by not selecting them.
+      // Smooth global proximity tilt
       (function smoothProximityTilt() {
         const canTilt = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
         if (!canTilt) return;
@@ -2425,7 +2382,6 @@
             setTy: gsap.quickSetter(el, "--ty", "px"),
             setRx: gsap.quickSetter(el, "--rx", "deg"),
             setRy: gsap.quickSetter(el, "--ry", "deg"),
-
             cur: { tx: 0, ty: 0, rx: 0, ry: 0 },
             vel: { tx: 0, ty: 0, rx: 0, ry: 0 },
             tgt: { tx: 0, ty: 0, rx: 0, ry: 0 }
@@ -2520,9 +2476,7 @@
           pointerInside = false;
         });
 
-        window.addEventListener("mouseenter", () => {
-          pointerInside = true;
-        });
+        window.addEventListener("mouseenter", () => { pointerInside = true; });
 
         tick();
       })();
