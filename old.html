@@ -46,8 +46,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-  <!-- Preload site image -->
-  <link rel="preload" as="image" href="/img/vanillahytaleservers.jpg" />
+  <!-- Preload hero image (LCP) -->
+  <link rel="preload" as="image" href="/img/hytale/hytale_vanilla_servers_list_1.jpeg" />
 
   <!-- Fonts: medieval for headings, clean body -->
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
@@ -128,7 +128,9 @@
     html {
       scroll-behavior: smooth;
       background: var(--bg);
+      background-color: var(--bg);
       overflow-x: hidden;
+      min-height: 100%;
     }
     body {
       margin: 0;
@@ -604,6 +606,66 @@
     }
 
     .image-panel.spacious { margin: 18px 0 34px; }
+
+    /* Image panel variant: content aligned toward top, with a light glass strip behind text */
+    .image-panel--top {
+      align-items: flex-start;
+      padding: 22px;
+    }
+    .image-panel--top .image-panel-content {
+      max-width: 92ch;
+      padding: 14px 14px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.20);
+      box-shadow: 0 12px 26px rgba(0,0,0,0.25);
+      backdrop-filter: blur(7px);
+      -webkit-backdrop-filter: blur(7px);
+    }
+    :root[data-theme="light"] .image-panel--top .image-panel-content {
+      border-color: rgba(0,0,0,0.10);
+      background: rgba(255,255,255,0.58);
+      box-shadow: 0 12px 26px rgba(0,0,0,0.10);
+    }
+    .image-panel--top .overlay-title { margin-bottom: 10px; }
+
+    /* Contact button smooth label swap */
+    #contactBtn {
+      justify-content: center;
+      min-width: 270px;
+    }
+    #contactBtn .btn-swap {
+      position: relative;
+      display: inline-block;
+      min-height: 1em;
+      white-space: nowrap;
+    }
+    #contactBtn .btn-label {
+      display: inline-block;
+      transition:
+        opacity 360ms cubic-bezier(.2,.9,.2,1),
+        transform 360ms cubic-bezier(.2,.9,.2,1),
+        filter 360ms cubic-bezier(.2,.9,.2,1);
+      will-change: opacity, transform, filter;
+    }
+    #contactBtn .btn-label--email {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transform: translateY(6px);
+      filter: blur(10px);
+      pointer-events: none;
+    }
+    #contactBtn.is-email .btn-label--base {
+      opacity: 0;
+      transform: translateY(-6px);
+      filter: blur(10px);
+    }
+    #contactBtn.is-email .btn-label--email {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
 
     h2 {
       margin: 0 0 12px;
@@ -1293,6 +1355,59 @@
     ]
   }
   </script>
+
+  <!-- Structured data: WebSite + Organization + BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://www.vanillahytaleservers.com/#organization",
+        "name": "VanillaHytaleServers.com",
+        "url": "https://www.vanillahytaleservers.com/",
+        "email": "hello@vanillahytaleservers.com",
+        "sameAs": [
+          "https://vanillaminecraftservers.net"
+        ],
+        "contactPoint": [
+          {
+            "@type": "ContactPoint",
+            "contactType": "customer support",
+            "email": "hello@vanillahytaleservers.com",
+            "availableLanguage": ["en"]
+          }
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.vanillahytaleservers.com/#website",
+        "url": "https://www.vanillahytaleservers.com/",
+        "name": "VanillaHytaleServers.com",
+        "inLanguage": "en",
+        "publisher": { "@id": "https://www.vanillahytaleservers.com/#organization" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://www.vanillahytaleservers.com/#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.vanillahytaleservers.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Servers",
+            "item": "https://www.vanillahytaleservers.com/#servers"
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 
 <body>
@@ -1350,8 +1465,9 @@
             class="hero-bg-img"
             src="/img/hytale/hytale_vanilla_servers_list_1.jpeg"
             alt="Hytale screenshot background for vanilla Hytale servers list, survival atmosphere"
-            loading="lazy"
+            loading="eager"
             decoding="async"
+            fetchpriority="high"
             width="1600"
             height="900"
           />
@@ -1797,7 +1913,7 @@
 
     <section id="methodology" aria-labelledby="methodology-title">
       <div class="container">
-        <div class="image-panel spacious tilt idle" data-tilt-strength="1.00" data-reveal style="margin-top: 16px; margin-bottom: 22px;">
+        <div class="image-panel image-panel--top spacious tilt idle" data-tilt-strength="1.00" data-reveal style="margin-top: 16px; margin-bottom: 22px;">
           <img
             src="/img/hytale/hytale_vanilla_servers_list_2.jpeg"
             alt="Hytale screenshot used to explain scoring for vanilla Hytale servers, gameplay and survival clarity"
@@ -1817,6 +1933,8 @@
               The editor score is a simple sum. Each category is scored from 0 up to its maximum points, then we add them together to get a final score out of 100.
               The sections inside each server card mirror these same categories, so the rubric and the review topics match one to one.
               For <strong>vanilla Hytale servers</strong>, scoring rewards small gameplay footprint, transparent rules, and fair monetization, so “vanilla-first” stays meaningful.
+              Scores are refreshed when a listing is re-checked, so the score and the “last checked” date are designed to stay aligned.
+              A high score is about clarity and restraint, not popularity.
             </p>
           </div>
         </div>
@@ -1888,7 +2006,7 @@
 
     <section id="faq" aria-labelledby="faq-title">
       <div class="container">
-        <div class="image-panel spacious tilt idle" data-tilt-strength="1.00" data-reveal style="margin-top: 16px; margin-bottom: 22px;">
+        <div class="image-panel image-panel--top spacious tilt idle" data-tilt-strength="1.00" data-reveal style="margin-top: 16px; margin-bottom: 22px;">
           <img
             src="/img/hytale/hytale_vanilla_servers_list_3.jpeg"
             alt="Hytale screenshot used next to vanilla Hytale servers FAQ, explaining vanilla-first survival servers"
@@ -1907,6 +2025,8 @@
             <p>
               Definitions stay simple on purpose, so “vanilla” remains useful as a label and not just a marketing word.
               If you are comparing <strong>vanilla Hytale servers</strong>, focus on gameplay footprint and fairness, then verify rules and monetization before you join.
+              The goal is that you can read a server card fast and understand what is preserved, what is moderated, and what is changed.
+              If a listing is vague about rules or monetization, treat it as unverified until it is clarified.
             </p>
           </div>
         </div>
@@ -1981,7 +2101,7 @@
 
     <section id="suggest" aria-labelledby="suggest-title">
       <div class="container">
-        <div class="image-panel spacious tilt idle" data-tilt-strength="1.00" data-reveal style="margin-top: 16px; margin-bottom: 22px;">
+        <div class="image-panel image-panel--top spacious tilt idle" data-tilt-strength="1.00" data-reveal style="margin-top: 16px; margin-bottom: 22px;">
           <img
             src="/img/hytale/hytale_vanilla_servers_list_4.jpeg"
             alt="Hytale screenshot used near submissions section for vanilla Hytale servers list"
@@ -2000,12 +2120,24 @@
             <p>
               If you want to be listed, make it easy for us to verify the server’s vanilla gameplay footprint, rules, stability, and monetization policy.
               Submit your <strong>vanilla Hytale server</strong> and we will review it for a chance to be featured in this vanilla Hytale servers list.
+              Clear submissions are faster to review: link directly to rules and monetization, and state if you run any convenience systems that affect progression or fairness.
+              If everything checks out, your server can replace an open review slot.
             </p>
 
             <div class="image-panel-actions">
-              <button class="btn btn-primary pressable" id="contactBtn" type="button" data-label="Contact us" aria-label="Contact us">
+              <button
+                class="btn btn-primary pressable"
+                id="contactBtn"
+                type="button"
+                data-label="Contact us"
+                data-email="hello@vanillahytaleservers.com"
+                aria-label="Copy hello@vanillahytaleservers.com"
+              >
                 <i class="fa-solid fa-envelope" aria-hidden="true"></i>
-                Contact us
+                <span class="btn-swap" aria-hidden="true">
+                  <span class="btn-label btn-label--base">Contact us</span>
+                  <span class="btn-label btn-label--email">hello@vanillahytaleservers.com</span>
+                </span>
               </button>
             </div>
           </div>
@@ -2136,15 +2268,11 @@
         const contactBtn = document.getElementById("contactBtn");
         if (!contactBtn) return;
 
-        const email = "hello@vanillahytaleservers.com";
-        const baseLabel = contactBtn.getAttribute("data-label") || "Contact us";
-        const iconHtml = '<i class="fa-solid fa-envelope" aria-hidden="true"></i>';
-
-        function setLabel(text) { contactBtn.innerHTML = iconHtml + " " + text; }
-        function reveal() { contactBtn.classList.add("revealed"); setLabel(email); }
-        function hide() { contactBtn.classList.remove("revealed"); setLabel(baseLabel); }
-
+        const email = contactBtn.getAttribute("data-email") || "hello@vanillahytaleservers.com";
         let clickTimer = null;
+
+        function reveal() { contactBtn.classList.add("is-email"); }
+        function hide() { contactBtn.classList.remove("is-email"); }
 
         contactBtn.addEventListener("mouseenter", () => {
           if (contactBtn.classList.contains("clicked")) return;
