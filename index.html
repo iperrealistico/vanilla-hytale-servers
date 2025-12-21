@@ -21,7 +21,12 @@
   <meta name="description" content="Editor-ranked vanilla Hytale servers. Curated vanilla Hytale server list with IPs, rules, gameplay footprint, no pay-to-win notes, and last-checked dates." />
   <meta name="robots" content="index,follow,max-image-preview:large" />
   <link rel="canonical" href="https://www.vanillahytaleservers.com/" />
-  <link rel="icon" type="image/png" href="/img/favicon.png">
+
+  <!-- Favicon (Google is often more reliable with /favicon.ico in root) -->
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" href="/img/favicon.png" />
+  <link rel="apple-touch-icon" href="/img/favicon.png" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
@@ -350,6 +355,7 @@
       font-size: 13px;
       cursor: pointer;
       user-select: none;
+      max-width: 100%;
     }
     .btn:hover {
       text-decoration: none;
@@ -629,18 +635,24 @@
     }
     .image-panel--top .overlay-title { margin-bottom: 10px; }
 
-    /* Contact button smooth label swap */
-    #contactBtn {
+    /* Contact button smooth label swap (supports multiple buttons) */
+    .contact-btn {
       justify-content: center;
-      min-width: 270px;
+      width: fit-content;
+      max-width: 100%;
     }
-    #contactBtn .btn-swap {
+    .contact-btn .btn-swap {
       position: relative;
-      display: inline-block;
+      display: inline-grid;
       min-height: 1em;
+      max-width: 100%;
       white-space: nowrap;
     }
-    #contactBtn .btn-label {
+    .contact-btn .btn-label {
+      grid-area: 1 / 1;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
       display: inline-block;
       transition:
         opacity 360ms cubic-bezier(.2,.9,.2,1),
@@ -648,20 +660,18 @@
         filter 360ms cubic-bezier(.2,.9,.2,1);
       will-change: opacity, transform, filter;
     }
-    #contactBtn .btn-label--email {
-      position: absolute;
-      inset: 0;
+    .contact-btn .btn-label--email {
       opacity: 0;
       transform: translateY(6px);
       filter: blur(10px);
       pointer-events: none;
     }
-    #contactBtn.is-email .btn-label--base {
+    .contact-btn.is-email .btn-label--base {
       opacity: 0;
       transform: translateY(-6px);
       filter: blur(10px);
     }
-    #contactBtn.is-email .btn-label--email {
+    .contact-btn.is-email .btn-label--email {
       opacity: 1;
       transform: translateY(0);
       filter: blur(0);
@@ -1201,6 +1211,16 @@
       max-width: min(560px, calc(100% - 24px));
       text-align: center;
     }
+    .toast.anchored {
+      bottom: auto;
+      top: var(--toast-top, 20px);
+      left: var(--toast-left, 50%);
+      transform: translate(-50%, -100%);
+    }
+    .toast.anchored.below {
+      transform: translate(-50%, 0);
+    }
+
     :root[data-theme="light"] .toast {
       background: rgba(255,255,255,0.88);
       border-color: rgba(0,0,0,0.12);
@@ -1936,6 +1956,21 @@
               Scores are refreshed when a listing is re-checked, so the score and the “last checked” date are designed to stay aligned.
               A high score is about clarity and restraint, not popularity.
             </p>
+
+            <div class="image-panel-actions">
+              <button
+                class="btn btn-primary pressable contact-btn"
+                type="button"
+                data-email="hello@vanillahytaleservers.com"
+                aria-label="Copy hello@vanillahytaleservers.com"
+              >
+                <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+                <span class="btn-swap" aria-hidden="true">
+                  <span class="btn-label btn-label--base">Doubts?</span>
+                  <span class="btn-label btn-label--email">hello@vanillahytaleservers.com</span>
+                </span>
+              </button>
+            </div>
           </div>
         </div>
 
@@ -2028,6 +2063,21 @@
               The goal is that you can read a server card fast and understand what is preserved, what is moderated, and what is changed.
               If a listing is vague about rules or monetization, treat it as unverified until it is clarified.
             </p>
+
+            <div class="image-panel-actions">
+              <button
+                class="btn btn-primary pressable contact-btn"
+                type="button"
+                data-email="hello@vanillahytaleservers.com"
+                aria-label="Copy hello@vanillahytaleservers.com"
+              >
+                <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+                <span class="btn-swap" aria-hidden="true">
+                  <span class="btn-label btn-label--base">Any question?</span>
+                  <span class="btn-label btn-label--email">hello@vanillahytaleservers.com</span>
+                </span>
+              </button>
+            </div>
           </div>
         </div>
 
@@ -2126,7 +2176,7 @@
 
             <div class="image-panel-actions">
               <button
-                class="btn btn-primary pressable"
+                class="btn btn-primary pressable contact-btn"
                 id="contactBtn"
                 type="button"
                 data-label="Contact us"
@@ -2226,8 +2276,34 @@
     (function () {
       const toast = document.getElementById("toast");
 
-      function showToast(message) {
+      function showToast(message, anchorEl) {
+        if (!toast) return;
+
         toast.textContent = message;
+
+        toast.classList.remove("anchored", "below");
+        toast.style.removeProperty("--toast-left");
+        toast.style.removeProperty("--toast-top");
+
+        if (anchorEl && typeof anchorEl.getBoundingClientRect === "function") {
+          const r = anchorEl.getBoundingClientRect();
+          const x = r.left + (r.width / 2);
+          const margin = 10;
+
+          const aboveY = r.top - margin;
+          const belowY = r.bottom + margin;
+
+          toast.classList.add("anchored");
+          toast.style.setProperty("--toast-left", x.toFixed(2) + "px");
+
+          if (aboveY < 70) {
+            toast.classList.add("below");
+            toast.style.setProperty("--toast-top", belowY.toFixed(2) + "px");
+          } else {
+            toast.style.setProperty("--toast-top", aboveY.toFixed(2) + "px");
+          }
+        }
+
         toast.classList.add("show");
         window.clearTimeout(showToast._t);
         showToast._t = window.setTimeout(() => toast.classList.remove("show"), 1600);
@@ -2265,35 +2341,38 @@
       });
 
       (function () {
-        const contactBtn = document.getElementById("contactBtn");
-        if (!contactBtn) return;
+        const contactBtns = Array.from(document.querySelectorAll(".contact-btn"));
+        if (!contactBtns.length) return;
 
-        const email = contactBtn.getAttribute("data-email") || "hello@vanillahytaleservers.com";
-        let clickTimer = null;
+        contactBtns.forEach((contactBtn) => {
+          const email = contactBtn.getAttribute("data-email") || "hello@vanillahytaleservers.com";
+          let clickTimer = null;
 
-        function reveal() { contactBtn.classList.add("is-email"); }
-        function hide() { contactBtn.classList.remove("is-email"); }
+          function reveal() { contactBtn.classList.add("is-email"); }
+          function hide() { contactBtn.classList.remove("is-email"); }
 
-        contactBtn.addEventListener("mouseenter", () => {
-          if (contactBtn.classList.contains("clicked")) return;
-          reveal();
-        }, { passive: true });
+          contactBtn.addEventListener("mouseenter", () => {
+            if (contactBtn.classList.contains("clicked")) return;
+            reveal();
+          }, { passive: true });
 
-        contactBtn.addEventListener("mouseleave", () => {
-          if (contactBtn.classList.contains("clicked")) return;
-          hide();
-        }, { passive: true });
-
-        contactBtn.addEventListener("click", async () => {
-          const ok = await copyText(email);
-          contactBtn.classList.add("clicked");
-          reveal();
-          showToast(ok ? "Email copied" : "Copy failed. Please copy manually.");
-          window.clearTimeout(clickTimer);
-          clickTimer = window.setTimeout(() => {
-            contactBtn.classList.remove("clicked");
+          contactBtn.addEventListener("mouseleave", () => {
+            if (contactBtn.classList.contains("clicked")) return;
             hide();
-          }, 2400);
+          }, { passive: true });
+
+          contactBtn.addEventListener("click", async () => {
+            const ok = await copyText(email);
+            contactBtn.classList.add("clicked");
+            reveal();
+            showToast(ok ? "Email copied" : "Copy failed. Please copy manually.", contactBtn);
+
+            window.clearTimeout(clickTimer);
+            clickTimer = window.setTimeout(() => {
+              contactBtn.classList.remove("clicked");
+              hide();
+            }, 2400);
+          });
         });
       })();
     })();
