@@ -1,9 +1,13 @@
 import { Octokit } from 'octokit';
 
-const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
-const OWNER = 'iperrealistico';
-const REPO = 'vanilla-hytale-servers';
-const BRANCH = 'main';
+const OWNER = process.env.VERCEL_GIT_REPO_OWNER || 'iperrealistico';
+const REPO = process.env.VERCEL_GIT_REPO_SLUG || 'vanilla-hytale-servers';
+const BRANCH = process.env.VERCEL_GIT_COMMIT_REF || 'main';
+
+// Instantiate Octokit inside commitFiles or using a getter to ensure it picks up GITHUB_TOKEN if it changes (less likely but safer)
+function getOctokit() {
+    return new Octokit({ auth: process.env.GITHUB_TOKEN });
+}
 
 export async function commitFiles(files: { path: string, content: string | Buffer }[]) {
     if (process.env.NODE_ENV !== 'production' && !process.env.GITHUB_TOKEN) {
@@ -18,7 +22,7 @@ export async function commitFiles(files: { path: string, content: string | Buffe
 
     try {
         // Get ref for base sha
-        const { data: refData } = await octokit.rest.git.getRef({
+        const { data: refData } = await getOctokit().rest.git.getRef({
             owner: OWNER,
             repo: REPO,
             ref: `heads/${BRANCH}`,
@@ -27,7 +31,7 @@ export async function commitFiles(files: { path: string, content: string | Buffe
 
         // Create blobs
         const blobs = await Promise.all(files.map(async (file) => {
-            const { data } = await octokit.rest.git.createBlob({
+            const { data } = await getOctokit().rest.git.createBlob({
                 owner: OWNER,
                 repo: REPO,
                 content: typeof file.content === 'string' ? file.content : file.content.toString('base64'),
@@ -37,14 +41,14 @@ export async function commitFiles(files: { path: string, content: string | Buffe
         }));
 
         // Get the current tree
-        const { data: currentTree } = await octokit.rest.git.getTree({
+        const { data: currentTree } = await getOctokit().rest.git.getTree({
             owner: OWNER,
             repo: REPO,
             tree_sha: baseSha,
         });
 
         // Create new tree
-        const { data: newTree } = await octokit.rest.git.createTree({
+        const { data: newTree } = await getOctokit().rest.git.createTree({
             owner: OWNER,
             repo: REPO,
             base_tree: currentTree.sha,
@@ -57,7 +61,7 @@ export async function commitFiles(files: { path: string, content: string | Buffe
         });
 
         // Create commit
-        const { data: newCommit } = await octokit.rest.git.createCommit({
+        const { data: newCommit } = await getOctokit().rest.git.createCommit({
             owner: OWNER,
             repo: REPO,
             message: 'CMS update [skip ci]',
@@ -66,7 +70,7 @@ export async function commitFiles(files: { path: string, content: string | Buffe
         });
 
         // Update ref
-        await octokit.rest.git.updateRef({
+        await getOctokit().rest.git.updateRef({
             owner: OWNER,
             repo: REPO,
             ref: `heads/${BRANCH}`,
