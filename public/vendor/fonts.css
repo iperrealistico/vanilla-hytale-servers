@@ -1,0 +1,41 @@
+/* Cinzel Decorative */
+@font-face {
+    font-family: 'Cinzel Decorative';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url(/fonts/cinzel-decorative-v16-latin-700.woff2) format('woff2');
+}
+
+@font-face {
+    font-family: 'Cinzel Decorative';
+    font-style: normal;
+    font-weight: 900;
+    font-display: swap;
+    src: url(/fonts/cinzel-decorative-v16-latin-900.woff2) format('woff2');
+}
+
+/* Nunito Sans */
+@font-face {
+    font-family: 'Nunito Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(/fonts/nunito-sans-v15-latin-400.woff2) format('woff2');
+}
+
+@font-face {
+    font-family: 'Nunito Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url(/fonts/nunito-sans-v15-latin-600.woff2) format('woff2');
+}
+
+@font-face {
+    font-family: 'Nunito Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url(/fonts/nunito-sans-v15-latin-700.woff2) format('woff2');
+}

@@ -38,15 +38,13 @@ export default function RootLayout({
         <link rel="shortcut icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" href="/img/favicon.png" />
         <link rel="apple-touch-icon" href="/img/favicon.png" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+        <link rel="stylesheet" href="/vendor/fonts.css" />
+        <link rel="stylesheet" href="/vendor/font-awesome.min.css" />
       </head>
       <body>
-        <Script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" strategy="afterInteractive" />
-        <Script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" strategy="afterInteractive" />
-        <Script src="https://unpkg.com/embla-carousel@8.1.8/embla-carousel.umd.js" strategy="afterInteractive" />
+        <Script src="/vendor/gsap.min.js" strategy="beforeInteractive" />
+        <Script src="/vendor/ScrollTrigger.min.js" strategy="beforeInteractive" />
+        <Script src="/vendor/embla-carousel.umd.js" strategy="beforeInteractive" />
         <div className="bg-floats" aria-hidden="true">
           {/* These should be added back by the page or a background component */}
         </div>

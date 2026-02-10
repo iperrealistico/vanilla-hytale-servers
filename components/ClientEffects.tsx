@@ -14,6 +14,7 @@ export default function ClientEffects() {
     useEffect(() => {
         const init = () => {
             if (typeof window === 'undefined') return;
+
             const gsap = window.gsap;
             const ScrollTrigger = window.ScrollTrigger;
             const EmblaCarousel = window.EmblaCarousel;
@@ -40,11 +41,10 @@ export default function ClientEffects() {
                     );
                 });
 
-                // Tilt effect (minimal manual implementation if VanillaTilt is not used, 
-                // but here we just follow the data-tilt-strength attribute)
+                // Tilt effect
                 const tiltElements = document.querySelectorAll('.tilt');
                 tiltElements.forEach((el: any) => {
-                    el.addEventListener('mousemove', (e: MouseEvent) => {
+                    const handleMouseMove = (e: MouseEvent) => {
                         const rect = el.getBoundingClientRect();
                         const x = e.clientX - rect.left;
                         const y = e.clientY - rect.top;
@@ -54,13 +54,17 @@ export default function ClientEffects() {
                         const rotateX = ((y - centerY) / centerY) * -10 * strength;
                         const rotateY = ((x - centerX) / centerX) * 10 * strength;
 
-                        el.style.setProperty('--rx', `${rotateX}deg`);
-                        el.style.setProperty('--ry', `${rotateY}deg`);
-                    });
-                    el.addEventListener('mouseleave', () => {
-                        el.style.setProperty('--rx', '0deg');
-                        el.style.setProperty('--ry', '0deg');
-                    });
+                        el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                        el.style.transition = 'transform 0.1s ease-out';
+                    };
+
+                    const handleMouseLeave = () => {
+                        el.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+                        el.style.transition = 'transform 0.3s ease-out';
+                    };
+
+                    el.addEventListener('mousemove', handleMouseMove);
+                    el.addEventListener('mouseleave', handleMouseLeave);
                 });
             }
 
@@ -104,9 +108,22 @@ export default function ClientEffects() {
             });
         };
 
-        // Wait for external scripts to load if they are still loading
-        const timer = setTimeout(init, 500);
-        return () => clearTimeout(timer);
+        // Wait for external scripts to load - check multiple times
+        let attempts = 0;
+        const maxAttempts = 20;
+        const checkInterval = setInterval(() => {
+            attempts++;
+            if (window.gsap && window.ScrollTrigger && window.EmblaCarousel) {
+                clearInterval(checkInterval);
+                init();
+            } else if (attempts >= maxAttempts) {
+                clearInterval(checkInterval);
+                console.warn('External scripts did not load in time');
+                init(); // Try anyway
+            }
+        }, 100);
+
+        return () => clearInterval(checkInterval);
     }, []);
 
     return null;
