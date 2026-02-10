@@ -1,0 +1,480 @@
+{
+  "it": {
+    "meta": {
+      "title": "Best Vanilla Hytale Servers (2026) | Curated List + IPs",
+      "description": "Editor-ranked vanilla Hytale servers. Curated vanilla Hytale server list with IPs, rules, gameplay footprint, no pay-to-win notes, and last-checked dates.",
+      "ogTitle": "Vanilla Hytale Servers | Curated Editor Picks",
+      "ogDescription": "Editor-ranked vanilla Hytale servers with IPs, rules, gameplay footprint, monetization notes, and last-checked dates.",
+      "ogImage": "https://www.vanillahytaleservers.com/img/vanillahytaleservers.jpg",
+      "twitterTitle": "Vanilla Hytale Servers | Curated Editor Picks",
+      "twitterDescription": "Editor-ranked vanilla Hytale servers with IPs, rules, gameplay footprint, monetization notes, and last-checked dates.",
+      "twitterImage": "https://www.vanillahytaleservers.com/img/vanillahytaleservers.jpg"
+    },
+    "header": {
+      "brandSmall": "VanillaHytaleServers.com",
+      "brandSubtitle": "Curated editor picks"
+    },
+    "hero": {
+      "title": "Vanilla Hytale Servers",
+      "description": "\n                A curated <strong>vanilla Hytale server list</strong> with five editor-ranked picks. Discover the <strong>best vanilla Hytale servers</strong> for SMP and survival,\n                compare rules and gameplay footprint, check monetization and <strong>no pay-to-win</strong> notes, and copy the <strong>Hytale server IP</strong> to join.\n                Every listing includes an editor score, a last-checked date, and a clear review of what stays vanilla and what is changed.\n                When players search for <strong>vanilla Hytale servers</strong>, they usually want the real experience: explore, gather, craft, and build, without mods replacing survival.\n                This list focuses on <strong>vanilla-first</strong> servers and clearly documents each server’s gameplay footprint so you can pick the right <strong>vanilla Hytale server</strong> fast.\n              ",
+      "lastUpdated": "2025-12-19"
+    },
+    "servers": {
+      "title": "Vanilla Hytale servers list",
+      "items": [
+        {
+          "type": "server",
+          "id": "pvc",
+          "rank": "1",
+          "title": "Peaceful Vanilla Club (Hytale)",
+          "subtitle": "Peaceful vanilla survival SMP with a semi-vanilla approach: no grief, no random PvP, no pay to win.",
+          "score": "92",
+          "isFeatured": true,
+          "facts": [
+            "<i class=\"fa-solid fa-globe\" aria-hidden=\"true\"></i><strong>Region:</strong>&nbsp;EU",
+            "<i class=\"fa-solid fa-language\" aria-hidden=\"true\"></i><strong>Language:</strong>&nbsp;EN",
+            "<i class=\"fa-solid fa-tree\" aria-hidden=\"true\"></i><strong>Playstyle:</strong>&nbsp;Vanilla SMP",
+            "<i class=\"fa-solid fa-user-shield\" aria-hidden=\"true\"></i><strong>Whitelist:</strong>&nbsp;No",
+            "<i class=\"fa-regular fa-clock\" aria-hidden=\"true\"></i><strong>Last checked:</strong>&nbsp;2025-12-19"
+          ],
+          "ip": "hy.peacefulvanilla.club",
+          "discordUrl": "https://discord.gg/2d9wPbrpEU",
+          "websiteUrl": "https://hytale.peacefulvanilla.club/",
+          "scoreBreakdown": [
+            {
+              "label": "Vanilla purity",
+              "value": "32",
+              "max": "35"
+            },
+            {
+              "label": "Fairness and no P2W",
+              "value": "20",
+              "max": "20"
+            },
+            {
+              "label": "Stability and last checked",
+              "value": "14",
+              "max": "15"
+            },
+            {
+              "label": "Rules and moderation",
+              "value": "13",
+              "max": "15"
+            },
+            {
+              "label": "Community and longevity",
+              "value": "9",
+              "max": "10"
+            },
+            {
+              "label": "Transparency",
+              "value": "4",
+              "max": "5"
+            }
+          ],
+          "details": [
+            {
+              "title": "Vanilla purity",
+              "meta": "What stays vanilla",
+              "content": "\n                  <p>\n                    The server aims to keep the survival loop intact: explore, gather, craft, build, and collaborate, without systems that replace the world with menus.\n                    It describes itself as semi-vanilla: minimal quality-of-life choices plus strict moderation to protect builders and long-term projects, while keeping progression meaningful.\n                  </p>\n                  <ul>\n                    <li>No fast-travel spam designed to replace exploration and distance.</li>\n                    <li>One shared survival world optimized for long-term towns and community infrastructure.</li>\n                    <li>Changes are introduced slowly, with stability prioritized over hype.</li>\n                  </ul>\n                "
+            },
+            {
+              "title": "Rules and moderation",
+              "meta": "Grief, PvP, resets",
+              "content": "\n                  <p>\n                    The rule set is built around a peaceful world: no griefing, no stealing, and no unsolicited PvP. The goal is that your builds and towns survive when you log off.\n                    Moderation is strict against harassment, slurs, and exploit abuse.\n                  </p>\n                  <ul>\n                    <li>No griefing or sabotage (protects towns and long-term builds).</li>\n                    <li>No random PvP in the open world (events, if any, should be opt-in and clearly separated).</li>\n                    <li>Clear community standards to keep chat and gameplay calm.</li>\n                  </ul>\n                "
+            },
+            {
+              "title": "Fair play and monetization",
+              "meta": "No P2W notes",
+              "content": "\n                  <p>\n                    The server’s public messaging is explicit: no pay-to-win. No selling power, progression, donor kits, boosts, or shortcuts that break survival balance.\n                    If donations exist, they should support operations without affecting gameplay.\n                  </p>\n                  <ul>\n                    <li>No progression advantages sold for money.</li>\n                    <li>No paid shortcuts that invalidate exploration or early survival progression.</li>\n                    <li>Fair survival balance to protect any organic community economy.</li>\n                  </ul>\n                "
+            },
+            {
+              "title": "Stability and last checked",
+              "meta": "Uptime and checks",
+              "content": "\n                  <p>\n                    The community positions itself as long-running (since 2019) and operations-focused, with monitoring and backups as part of the long-term plan.\n                    “Last checked” reflects our most recent verification of join info and listing details.\n                  </p>\n                  <ul>\n                    <li>Long-term world mindset: persistent progress over fast seasons.</li>\n                    <li>Operational focus: monitoring and backups to support stability.</li>\n                    <li>For the latest join steps, the Discord pinned instructions remain the source of truth.</li>\n                  </ul>\n                "
+            },
+            {
+              "title": "Community and onboarding",
+              "meta": "Start here",
+              "content": "\n                  <p>\n                    Onboarding is intentionally simple: Discord is the hub for announcements, rules, support, and connection steps. The culture is builder-friendly and relaxed,\n                    with a focus on cooperative projects, towns, and exploration.\n                  </p>\n                  <ul>\n                    <li>Join Discord first, read rules, then connect using the pinned steps.</li>\n                    <li>Inclusive, LGBTQ+ friendly community positioning.</li>\n                    <li>Designed to be stress-free: log in, make progress, log out without drama.</li>\n                  </ul>\n                "
+            },
+            {
+              "title": "Transparency",
+              "meta": "Disclosures",
+              "content": "\n                  <p>\n                    The server’s messaging is clear about what it is optimizing for (peaceful survival) and what it avoids (pay-to-win, unsolicited PvP, fast travel spam).\n                    Any semi-vanilla choices should be disclosed in a way that stays readable for real players.\n                  </p>\n                  <ul>\n                    <li>Explicit positioning: no grief, no unsolicited PvP, no pay-to-win.</li>\n                    <li>Semi-vanilla intent stated: protect the experience without rewriting it.</li>\n                    <li>Discord-first approach for current connection info and announcements.</li>\n                  </ul>\n                "
+            }
+          ]
+        },
+        {
+          "type": "slot",
+          "rank": "2",
+          "title": "Open Review Slot",
+          "subtitle": "Submit your <strong>vanilla Hytale server</strong> for review for a chance to be featured here.",
+          "status": "Open",
+          "facts": [
+            "<i class=\"fa-solid fa-globe\" aria-hidden=\"true\"></i><strong>Region:</strong>&nbsp;Global",
+            "<i class=\"fa-solid fa-language\" aria-hidden=\"true\"></i><strong>Language:</strong>&nbsp;Any",
+            "<i class=\"fa-solid fa-tree\" aria-hidden=\"true\"></i><strong>Playstyle:</strong>&nbsp;Vanilla-first",
+            "<i class=\"fa-solid fa-user-shield\" aria-hidden=\"true\"></i><strong>Fairness:</strong>&nbsp;No P2W",
+            "<i class=\"fa-regular fa-clock\" aria-hidden=\"true\"></i><strong>Last checked:</strong>&nbsp;Pending"
+          ],
+          "ipText": "Claim this slot: submit for review"
+        },
+        {
+          "type": "slot",
+          "rank": "3",
+          "title": "Open Review Slot",
+          "subtitle": "Submit your <strong>vanilla Hytale server</strong> for review for a chance to be featured here.",
+          "status": "Open",
+          "facts": [
+            "<i class=\"fa-solid fa-globe\" aria-hidden=\"true\"></i><strong>Region:</strong>&nbsp;Global",
+            "<i class=\"fa-solid fa-language\" aria-hidden=\"true\"></i><strong>Language:</strong>&nbsp;Any",
+            "<i class=\"fa-solid fa-tree\" aria-hidden=\"true\"></i><strong>Playstyle:</strong>&nbsp;Vanilla-first",
+            "<i class=\"fa-solid fa-user-shield\" aria-hidden=\"true\"></i><strong>Fairness:</strong>&nbsp;No P2W",
+            "<i class=\"fa-regular fa-clock\" aria-hidden=\"true\"></i><strong>Last checked:</strong>&nbsp;Pending"
+          ],
+          "ipText": "Claim this slot: submit for review"
+        },
+        {
+          "type": "slot",
+          "rank": "4",
+          "title": "Open Review Slot",
+          "subtitle": "Submit your <strong>vanilla Hytale server</strong> for review for a chance to be featured here.",
+          "status": "Open",
+          "facts": [
+            "<i class=\"fa-solid fa-globe\" aria-hidden=\"true\"></i><strong>Region:</strong>&nbsp;Global",
+            "<i class=\"fa-solid fa-language\" aria-hidden=\"true\"></i><strong>Language:</strong>&nbsp;Any",
+            "<i class=\"fa-solid fa-tree\" aria-hidden=\"true\"></i><strong>Playstyle:</strong>&nbsp;Vanilla-first",
+            "<i class=\"fa-solid fa-user-shield\" aria-hidden=\"true\"></i><strong>Fairness:</strong>&nbsp;No P2W",
+            "<i class=\"fa-regular fa-clock\" aria-hidden=\"true\"></i><strong>Last checked:</strong>&nbsp;Pending"
+          ],
+          "ipText": "Claim this slot: submit for review"
+        },
+        {
+          "type": "slot",
+          "rank": "5",
+          "title": "Open Review Slot",
+          "subtitle": "Submit your <strong>vanilla Hytale server</strong> for review for a chance to be featured here.",
+          "status": "Open",
+          "facts": [
+            "<i class=\"fa-solid fa-globe\" aria-hidden=\"true\"></i><strong>Region:</strong>&nbsp;Global",
+            "<i class=\"fa-solid fa-language\" aria-hidden=\"true\"></i><strong>Language:</strong>&nbsp;Any",
+            "<i class=\"fa-solid fa-tree\" aria-hidden=\"true\"></i><strong>Playstyle:</strong>&nbsp;Vanilla-first",
+            "<i class=\"fa-solid fa-user-shield\" aria-hidden=\"true\"></i><strong>Fairness:</strong>&nbsp;No P2W",
+            "<i class=\"fa-regular fa-clock\" aria-hidden=\"true\"></i><strong>Last checked:</strong>&nbsp;Pending"
+          ],
+          "ipText": "Claim this slot: submit for review"
+        }
+      ]
+    },
+    "methodology": {
+      "title": "How scoring works",
+      "description": "\n              The editor score is a simple sum. Each category is scored from 0 up to its maximum points, then we add them together to get a final score out of 100.\n              The sections inside each server card mirror these same categories, so the rubric and the review topics match one to one.\n              For <strong>vanilla Hytale servers</strong>, scoring rewards small gameplay footprint, transparent rules, and fair monetization, so “vanilla-first” stays meaningful.\n              Scores are refreshed when a listing is re-checked, so the score and the “last checked” date are designed to stay aligned.\n              A high score is about clarity and restraint, not popularity.\n            ",
+      "exclusionRules": [
+        "<strong>No pay-to-win:</strong> no progression advantages sold for money.",
+        "<strong>Clear vanilla-first statement:</strong> changes and additions must be disclosed.",
+        "<strong>Public rules:</strong> griefing, PvP, resets, and moderation expectations.",
+        "<strong>Contact exists:</strong> at least an active Discord or website.",
+        "<strong>Verifiable access:</strong> IP and availability can be checked (we show “last checked”)."
+      ],
+      "scoreCategories": [
+        "<strong>35</strong> Vanilla purity",
+        "<strong>20</strong> Fairness and no P2W",
+        "<strong>15</strong> Stability and last checked",
+        "<strong>15</strong> Rules and moderation",
+        "<strong>10</strong> Community and longevity",
+        "<strong>5</strong> Transparency"
+      ]
+    },
+    "faq": {
+      "title": "Vanilla Hytale server FAQ",
+      "description": "\n              Definitions stay simple on purpose, so “vanilla” remains useful as a label and not just a marketing word.\n              If you are comparing <strong>vanilla Hytale servers</strong>, focus on gameplay footprint and fairness, then verify rules and monetization before you join.\n              The goal is that you can read a server card fast and understand what is preserved, what is moderated, and what is changed.\n              If a listing is vague about rules or monetization, treat it as unverified until it is clarified.\n            ",
+      "items": [
+        {
+          "question": "What is a vanilla Hytale server?",
+          "answer": "\n              <p>\n                A vanilla Hytale server focuses on base gameplay and avoids changes that significantly alter progression, balance, loot, or economy.\n                Some servers may still run minimal quality-of-life and moderation tooling, as long as it is disclosed and does not rewrite the core experience.\n              </p>\n            "
+        },
+        {
+          "question": "Vanilla vs semi-vanilla",
+          "answer": "\n              <p>\n                Semi-vanilla usually adds convenience systems. In this vanilla Hytale servers list, we prefer vanilla-first servers and we document any gameplay footprint clearly per server.\n              </p>\n            "
+        },
+        {
+          "question": "Do you accept pay-to-win servers?",
+          "answer": "<p>No. Pay-to-win fails the exclusion rules and is not listed.</p>"
+        },
+        {
+          "question": "How do you verify a server is vanilla-first?",
+          "answer": "\n              <p>\n                We look for a clear vanilla-first statement, public rules, a monetization policy, and a gameplay footprint that does not replace core survival with menus and paid shortcuts.\n                We also track a last-checked date for join info and listing details.\n              </p>\n            "
+        },
+        {
+          "question": "What is Hytale in simple terms?",
+          "answer": "\n              <p>\n                Hytale is a sandbox adventure game built to support both vanilla gameplay and deep modding.\n                That is why the vanilla-first label matters: it signals servers that try to keep the base survival loop intact.\n              </p>\n            "
+        },
+        {
+          "question": "Who runs this site?",
+          "answer": "\n              <p>\n                VanillaHytaleServers.com is curated by editors who also run a vanilla server directory for Minecraft:\n                <a href=\"https://vanillaminecraftservers.net\" target=\"_blank\" rel=\"noopener noreferrer\">vanillaminecraftservers.net</a>.\n                The goal is clarity and comparability for players searching for <strong>vanilla Hytale servers</strong>.\n              </p>\n            "
+        },
+        {
+          "question": "Can I suggest a server?",
+          "answer": "\n              <p>\n                Yes. Send the server name, IP, region, language, and links to rules and monetization policy. If it passes the exclusion rules, we review it for a chance to be featured here.\n              </p>\n            "
+        }
+      ]
+    },
+    "suggest": {
+      "title": "Suggest a server (manual review)",
+      "description": "\n              If you want to be listed, make it easy for us to verify the server’s vanilla gameplay footprint, rules, stability, and monetization policy.\n              Submit your <strong>vanilla Hytale server</strong> and we will review it for a chance to be featured in this vanilla Hytale servers list.\n              Clear submissions are faster to review: link directly to rules and monetization, and state if you run any convenience systems that affect progression or fairness.\n              If everything checks out, your server can replace an open review slot.\n            ",
+      "requirements": [
+        "Server name and IP",
+        "Region and primary language",
+        "Website and Discord link",
+        "Rules link (grief, PvP, resets)",
+        "Monetization policy link (store, perks)",
+        "Short vanilla-first statement (what is changed, if anything)"
+      ]
+    },
+    "footer": {
+      "aboutTitle": "About",
+      "aboutText": "\n            VanillaHytaleServers.com is a curated, editor-ranked list of vanilla-first Hytale servers. The goal is clarity and comparability, not popularity.\n          ",
+      "disclaimer": "\n            Disclaimer: this site is not affiliated with Hytale or Hypixel Studios. All trademarks belong to their respective owners.\n          "
+    }
+  },
+  "en": {
+    "meta": {
+      "title": "Best Vanilla Hytale Servers (2026) | Curated List + IPs",
+      "description": "Editor-ranked vanilla Hytale servers. Curated vanilla Hytale server list with IPs, rules, gameplay footprint, no pay-to-win notes, and last-checked dates.",
+      "ogTitle": "Vanilla Hytale Servers | Curated Editor Picks",
+      "ogDescription": "Editor-ranked vanilla Hytale servers with IPs, rules, gameplay footprint, monetization notes, and last-checked dates.",
+      "ogImage": "https://www.vanillahytaleservers.com/img/vanillahytaleservers.jpg",
+      "twitterTitle": "Vanilla Hytale Servers | Curated Editor Picks",
+      "twitterDescription": "Editor-ranked vanilla Hytale servers with IPs, rules, gameplay footprint, monetization notes, and last-checked dates.",
+      "twitterImage": "https://www.vanillahytaleservers.com/img/vanillahytaleservers.jpg"
+    },
+    "header": {
+      "brandSmall": "VanillaHytaleServers.com",
+      "brandSubtitle": "Curated editor picks"
+    },
+    "hero": {
+      "title": "Vanilla Hytale Servers",
+      "description": "\n                A curated <strong>vanilla Hytale server list</strong> with five editor-ranked picks. Discover the <strong>best vanilla Hytale servers</strong> for SMP and survival,\n                compare rules and gameplay footprint, check monetization and <strong>no pay-to-win</strong> notes, and copy the <strong>Hytale server IP</strong> to join.\n                Every listing includes an editor score, a last-checked date, and a clear review of what stays vanilla and what is changed.\n                When players search for <strong>vanilla Hytale servers</strong>, they usually want the real experience: explore, gather, craft, and build, without mods replacing survival.\n                This list focuses on <strong>vanilla-first</strong> servers and clearly documents each server’s gameplay footprint so you can pick the right <strong>vanilla Hytale server</strong> fast.\n              ",
+      "lastUpdated": "2025-12-19"
+    },
+    "servers": {
+      "title": "Vanilla Hytale servers list",
+      "items": [
+        {
+          "type": "server",
+          "id": "pvc",
+          "rank": "1",
+          "title": "Peaceful Vanilla Club (Hytale)",
+          "subtitle": "Peaceful vanilla survival SMP with a semi-vanilla approach: no grief, no random PvP, no pay to win.",
+          "score": "92",
+          "isFeatured": true,
+          "facts": [
+            "<i class=\"fa-solid fa-globe\" aria-hidden=\"true\"></i><strong>Region:</strong>&nbsp;EU",
+            "<i class=\"fa-solid fa-language\" aria-hidden=\"true\"></i><strong>Language:</strong>&nbsp;EN",
+            "<i class=\"fa-solid fa-tree\" aria-hidden=\"true\"></i><strong>Playstyle:</strong>&nbsp;Vanilla SMP",
+            "<i class=\"fa-solid fa-user-shield\" aria-hidden=\"true\"></i><strong>Whitelist:</strong>&nbsp;No",
+            "<i class=\"fa-regular fa-clock\" aria-hidden=\"true\"></i><strong>Last checked:</strong>&nbsp;2025-12-19"
+          ],
+          "ip": "hy.peacefulvanilla.club",
+          "discordUrl": "https://discord.gg/2d9wPbrpEU",
+          "websiteUrl": "https://hytale.peacefulvanilla.club/",
+          "scoreBreakdown": [
+            {
+              "label": "Vanilla purity",
+              "value": "32",
+              "max": "35"
+            },
+            {
+              "label": "Fairness and no P2W",
+              "value": "20",
+              "max": "20"
+            },
+            {
+              "label": "Stability and last checked",
+              "value": "14",
+              "max": "15"
+            },
+            {
+              "label": "Rules and moderation",
+              "value": "13",
+              "max": "15"
+            },
+            {
+              "label": "Community and longevity",
+              "value": "9",
+              "max": "10"
+            },
+            {
+              "label": "Transparency",
+              "value": "4",
+              "max": "5"
+            }
+          ],
+          "details": [
+            {
+              "title": "Vanilla purity",
+              "meta": "What stays vanilla",
+              "content": "\n                  <p>\n                    The server aims to keep the survival loop intact: explore, gather, craft, build, and collaborate, without systems that replace the world with menus.\n                    It describes itself as semi-vanilla: minimal quality-of-life choices plus strict moderation to protect builders and long-term projects, while keeping progression meaningful.\n                  </p>\n                  <ul>\n                    <li>No fast-travel spam designed to replace exploration and distance.</li>\n                    <li>One shared survival world optimized for long-term towns and community infrastructure.</li>\n                    <li>Changes are introduced slowly, with stability prioritized over hype.</li>\n                  </ul>\n                "
+            },
+            {
+              "title": "Rules and moderation",
+              "meta": "Grief, PvP, resets",
+              "content": "\n                  <p>\n                    The rule set is built around a peaceful world: no griefing, no stealing, and no unsolicited PvP. The goal is that your builds and towns survive when you log off.\n                    Moderation is strict against harassment, slurs, and exploit abuse.\n                  </p>\n                  <ul>\n                    <li>No griefing or sabotage (protects towns and long-term builds).</li>\n                    <li>No random PvP in the open world (events, if any, should be opt-in and clearly separated).</li>\n                    <li>Clear community standards to keep chat and gameplay calm.</li>\n                  </ul>\n                "
+            },
+            {
+              "title": "Fair play and monetization",
+              "meta": "No P2W notes",
+              "content": "\n                  <p>\n                    The server’s public messaging is explicit: no pay-to-win. No selling power, progression, donor kits, boosts, or shortcuts that break survival balance.\n                    If donations exist, they should support operations without affecting gameplay.\n                  </p>\n                  <ul>\n                    <li>No progression advantages sold for money.</li>\n                    <li>No paid shortcuts that invalidate exploration or early survival progression.</li>\n                    <li>Fair survival balance to protect any organic community economy.</li>\n                  </ul>\n                "
+            },
+            {
+              "title": "Stability and last checked",
+              "meta": "Uptime and checks",
+              "content": "\n                  <p>\n                    The community positions itself as long-running (since 2019) and operations-focused, with monitoring and backups as part of the long-term plan.\n                    “Last checked” reflects our most recent verification of join info and listing details.\n                  </p>\n                  <ul>\n                    <li>Long-term world mindset: persistent progress over fast seasons.</li>\n                    <li>Operational focus: monitoring and backups to support stability.</li>\n                    <li>For the latest join steps, the Discord pinned instructions remain the source of truth.</li>\n                  </ul>\n                "
+            },
+            {
+              "title": "Community and onboarding",
+              "meta": "Start here",
+              "content": "\n                  <p>\n                    Onboarding is intentionally simple: Discord is the hub for announcements, rules, support, and connection steps. The culture is builder-friendly and relaxed,\n                    with a focus on cooperative projects, towns, and exploration.\n                  </p>\n                  <ul>\n                    <li>Join Discord first, read rules, then connect using the pinned steps.</li>\n                    <li>Inclusive, LGBTQ+ friendly community positioning.</li>\n                    <li>Designed to be stress-free: log in, make progress, log out without drama.</li>\n                  </ul>\n                "
+            },
+            {
+              "title": "Transparency",
+              "meta": "Disclosures",
+              "content": "\n                  <p>\n                    The server’s messaging is clear about what it is optimizing for (peaceful survival) and what it avoids (pay-to-win, unsolicited PvP, fast travel spam).\n                    Any semi-vanilla choices should be disclosed in a way that stays readable for real players.\n                  </p>\n                  <ul>\n                    <li>Explicit positioning: no grief, no unsolicited PvP, no pay-to-win.</li>\n                    <li>Semi-vanilla intent stated: protect the experience without rewriting it.</li>\n                    <li>Discord-first approach for current connection info and announcements.</li>\n                  </ul>\n                "
+            }
+          ]
+        },
+        {
+          "type": "slot",
+          "rank": "2",
+          "title": "Open Review Slot",
+          "subtitle": "Submit your <strong>vanilla Hytale server</strong> for review for a chance to be featured here.",
+          "status": "Open",
+          "facts": [
+            "<i class=\"fa-solid fa-globe\" aria-hidden=\"true\"></i><strong>Region:</strong>&nbsp;Global",
+            "<i class=\"fa-solid fa-language\" aria-hidden=\"true\"></i><strong>Language:</strong>&nbsp;Any",
+            "<i class=\"fa-solid fa-tree\" aria-hidden=\"true\"></i><strong>Playstyle:</strong>&nbsp;Vanilla-first",
+            "<i class=\"fa-solid fa-user-shield\" aria-hidden=\"true\"></i><strong>Fairness:</strong>&nbsp;No P2W",
+            "<i class=\"fa-regular fa-clock\" aria-hidden=\"true\"></i><strong>Last checked:</strong>&nbsp;Pending"
+          ],
+          "ipText": "Claim this slot: submit for review"
+        },
+        {
+          "type": "slot",
+          "rank": "3",
+          "title": "Open Review Slot",
+          "subtitle": "Submit your <strong>vanilla Hytale server</strong> for review for a chance to be featured here.",
+          "status": "Open",
+          "facts": [
+            "<i class=\"fa-solid fa-globe\" aria-hidden=\"true\"></i><strong>Region:</strong>&nbsp;Global",
+            "<i class=\"fa-solid fa-language\" aria-hidden=\"true\"></i><strong>Language:</strong>&nbsp;Any",
+            "<i class=\"fa-solid fa-tree\" aria-hidden=\"true\"></i><strong>Playstyle:</strong>&nbsp;Vanilla-first",
+            "<i class=\"fa-solid fa-user-shield\" aria-hidden=\"true\"></i><strong>Fairness:</strong>&nbsp;No P2W",
+            "<i class=\"fa-regular fa-clock\" aria-hidden=\"true\"></i><strong>Last checked:</strong>&nbsp;Pending"
+          ],
+          "ipText": "Claim this slot: submit for review"
+        },
+        {
+          "type": "slot",
+          "rank": "4",
+          "title": "Open Review Slot",
+          "subtitle": "Submit your <strong>vanilla Hytale server</strong> for review for a chance to be featured here.",
+          "status": "Open",
+          "facts": [
+            "<i class=\"fa-solid fa-globe\" aria-hidden=\"true\"></i><strong>Region:</strong>&nbsp;Global",
+            "<i class=\"fa-solid fa-language\" aria-hidden=\"true\"></i><strong>Language:</strong>&nbsp;Any",
+            "<i class=\"fa-solid fa-tree\" aria-hidden=\"true\"></i><strong>Playstyle:</strong>&nbsp;Vanilla-first",
+            "<i class=\"fa-solid fa-user-shield\" aria-hidden=\"true\"></i><strong>Fairness:</strong>&nbsp;No P2W",
+            "<i class=\"fa-regular fa-clock\" aria-hidden=\"true\"></i><strong>Last checked:</strong>&nbsp;Pending"
+          ],
+          "ipText": "Claim this slot: submit for review"
+        },
+        {
+          "type": "slot",
+          "rank": "5",
+          "title": "Open Review Slot",
+          "subtitle": "Submit your <strong>vanilla Hytale server</strong> for review for a chance to be featured here.",
+          "status": "Open",
+          "facts": [
+            "<i class=\"fa-solid fa-globe\" aria-hidden=\"true\"></i><strong>Region:</strong>&nbsp;Global",
+            "<i class=\"fa-solid fa-language\" aria-hidden=\"true\"></i><strong>Language:</strong>&nbsp;Any",
+            "<i class=\"fa-solid fa-tree\" aria-hidden=\"true\"></i><strong>Playstyle:</strong>&nbsp;Vanilla-first",
+            "<i class=\"fa-solid fa-user-shield\" aria-hidden=\"true\"></i><strong>Fairness:</strong>&nbsp;No P2W",
+            "<i class=\"fa-regular fa-clock\" aria-hidden=\"true\"></i><strong>Last checked:</strong>&nbsp;Pending"
+          ],
+          "ipText": "Claim this slot: submit for review"
+        }
+      ]
+    },
+    "methodology": {
+      "title": "How scoring works",
+      "description": "\n              The editor score is a simple sum. Each category is scored from 0 up to its maximum points, then we add them together to get a final score out of 100.\n              The sections inside each server card mirror these same categories, so the rubric and the review topics match one to one.\n              For <strong>vanilla Hytale servers</strong>, scoring rewards small gameplay footprint, transparent rules, and fair monetization, so “vanilla-first” stays meaningful.\n              Scores are refreshed when a listing is re-checked, so the score and the “last checked” date are designed to stay aligned.\n              A high score is about clarity and restraint, not popularity.\n            ",
+      "exclusionRules": [
+        "<strong>No pay-to-win:</strong> no progression advantages sold for money.",
+        "<strong>Clear vanilla-first statement:</strong> changes and additions must be disclosed.",
+        "<strong>Public rules:</strong> griefing, PvP, resets, and moderation expectations.",
+        "<strong>Contact exists:</strong> at least an active Discord or website.",
+        "<strong>Verifiable access:</strong> IP and availability can be checked (we show “last checked”)."
+      ],
+      "scoreCategories": [
+        "<strong>35</strong> Vanilla purity",
+        "<strong>20</strong> Fairness and no P2W",
+        "<strong>15</strong> Stability and last checked",
+        "<strong>15</strong> Rules and moderation",
+        "<strong>10</strong> Community and longevity",
+        "<strong>5</strong> Transparency"
+      ]
+    },
+    "faq": {
+      "title": "Vanilla Hytale server FAQ",
+      "description": "\n              Definitions stay simple on purpose, so “vanilla” remains useful as a label and not just a marketing word.\n              If you are comparing <strong>vanilla Hytale servers</strong>, focus on gameplay footprint and fairness, then verify rules and monetization before you join.\n              The goal is that you can read a server card fast and understand what is preserved, what is moderated, and what is changed.\n              If a listing is vague about rules or monetization, treat it as unverified until it is clarified.\n            ",
+      "items": [
+        {
+          "question": "What is a vanilla Hytale server?",
+          "answer": "\n              <p>\n                A vanilla Hytale server focuses on base gameplay and avoids changes that significantly alter progression, balance, loot, or economy.\n                Some servers may still run minimal quality-of-life and moderation tooling, as long as it is disclosed and does not rewrite the core experience.\n              </p>\n            "
+        },
+        {
+          "question": "Vanilla vs semi-vanilla",
+          "answer": "\n              <p>\n                Semi-vanilla usually adds convenience systems. In this vanilla Hytale servers list, we prefer vanilla-first servers and we document any gameplay footprint clearly per server.\n              </p>\n            "
+        },
+        {
+          "question": "Do you accept pay-to-win servers?",
+          "answer": "<p>No. Pay-to-win fails the exclusion rules and is not listed.</p>"
+        },
+        {
+          "question": "How do you verify a server is vanilla-first?",
+          "answer": "\n              <p>\n                We look for a clear vanilla-first statement, public rules, a monetization policy, and a gameplay footprint that does not replace core survival with menus and paid shortcuts.\n                We also track a last-checked date for join info and listing details.\n              </p>\n            "
+        },
+        {
+          "question": "What is Hytale in simple terms?",
+          "answer": "\n              <p>\n                Hytale is a sandbox adventure game built to support both vanilla gameplay and deep modding.\n                That is why the vanilla-first label matters: it signals servers that try to keep the base survival loop intact.\n              </p>\n            "
+        },
+        {
+          "question": "Who runs this site?",
+          "answer": "\n              <p>\n                VanillaHytaleServers.com is curated by editors who also run a vanilla server directory for Minecraft:\n                <a href=\"https://vanillaminecraftservers.net\" target=\"_blank\" rel=\"noopener noreferrer\">vanillaminecraftservers.net</a>.\n                The goal is clarity and comparability for players searching for <strong>vanilla Hytale servers</strong>.\n              </p>\n            "
+        },
+        {
+          "question": "Can I suggest a server?",
+          "answer": "\n              <p>\n                Yes. Send the server name, IP, region, language, and links to rules and monetization policy. If it passes the exclusion rules, we review it for a chance to be featured here.\n              </p>\n            "
+        }
+      ]
+    },
+    "suggest": {
+      "title": "Suggest a server (manual review)",
+      "description": "\n              If you want to be listed, make it easy for us to verify the server’s vanilla gameplay footprint, rules, stability, and monetization policy.\n              Submit your <strong>vanilla Hytale server</strong> and we will review it for a chance to be featured in this vanilla Hytale servers list.\n              Clear submissions are faster to review: link directly to rules and monetization, and state if you run any convenience systems that affect progression or fairness.\n              If everything checks out, your server can replace an open review slot.\n            ",
+      "requirements": [
+        "Server name and IP",
+        "Region and primary language",
+        "Website and Discord link",
+        "Rules link (grief, PvP, resets)",
+        "Monetization policy link (store, perks)",
+        "Short vanilla-first statement (what is changed, if anything)"
+      ]
+    },
+    "footer": {
+      "aboutTitle": "About",
+      "aboutText": "\n            VanillaHytaleServers.com is a curated, editor-ranked list of vanilla-first Hytale servers. The goal is clarity and comparability, not popularity.\n          ",
+      "disclaimer": "\n            Disclaimer: this site is not affiliated with Hytale or Hypixel Studios. All trademarks belong to their respective owners.\n          "
+    }
+  }
+}
