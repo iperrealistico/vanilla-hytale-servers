@@ -9,9 +9,8 @@ export default async function AdminPage() {
         redirect('/secret-admin-gate/login');
     }
 
-    const content = await getSiteContent('it'); // Load as base for editing both
-    const fullContent = JSON.parse(require('fs').readFileSync(require('path').join(process.cwd(), 'content', 'site.json'), 'utf8'));
+    const content = await getSiteContent();
     const manifest = await getUploadsManifest();
 
-    return <AdminDashboard initialContent={fullContent} initialManifest={manifest} />;
+    return <AdminDashboard initialContent={content} initialManifest={manifest} />;
 }

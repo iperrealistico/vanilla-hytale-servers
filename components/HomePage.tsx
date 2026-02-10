@@ -1,11 +1,10 @@
 import React from 'react';
 import ServerCard from '@/components/ServerCard';
 import ClientEffects from '@/components/ClientEffects';
-import LanguageSwitcher from '@/components/LanguageSwitcher';
 import ThemeToggle from '@/components/ThemeToggle';
 import { SiteContent } from '../lib/content';
 
-export default function HomePage({ content, lang }: { content: SiteContent, lang: string }) {
+export default function HomePage({ content }: { content: SiteContent }) {
     return (
         <>
             <div className="bg-floats" aria-hidden="true">
@@ -289,7 +288,6 @@ export default function HomePage({ content, lang }: { content: SiteContent, lang
 
             <div className="toast" id="toast" role="status" aria-live="polite"></div>
 
-            <LanguageSwitcher currentLang={lang} />
             <ClientEffects />
         </>
     );

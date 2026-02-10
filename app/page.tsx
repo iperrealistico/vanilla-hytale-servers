@@ -3,18 +3,11 @@ import HomePage from '../components/HomePage';
 import { getSiteContent } from '../lib/content';
 
 export async function generateMetadata(): Promise<Metadata> {
-  const content = await getSiteContent('it');
+  const content = await getSiteContent();
   return {
     title: content.meta.title,
     description: content.meta.description,
-    alternates: {
-      canonical: 'https://www.vanillahytaleservers.com/',
-      languages: {
-        'it': 'https://www.vanillahytaleservers.com/',
-        'en': 'https://www.vanillahytaleservers.com/en',
-        'x-default': 'https://www.vanillahytaleservers.com/',
-      }
-    },
+
     openGraph: {
       title: content.meta.ogTitle,
       description: content.meta.ogDescription,
@@ -32,6 +25,6 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
-  const content = await getSiteContent('it');
-  return <HomePage content={content} lang="it" />;
+  const content = await getSiteContent();
+  return <HomePage content={content} />;
 }

@@ -12,11 +12,10 @@ export interface SiteContent {
     footer: any;
 }
 
-export function getSiteContent(lang: string = 'it'): SiteContent {
+export function getSiteContent(): SiteContent {
     const filePath = path.join(process.cwd(), 'content', 'site.json');
     const fileContent = fs.readFileSync(filePath, 'utf8');
-    const allContent = JSON.parse(fileContent);
-    return allContent[lang] || allContent['en'];
+    return JSON.parse(fileContent);
 }
 
 export function getUploadsManifest() {

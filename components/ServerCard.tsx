@@ -56,8 +56,10 @@ export default function ServerCard({ item }: { item: any }) {
         );
     }
 
+    const cardClasses = `card ${item.isFeatured ? 'featured' : ''} ${item.highlight ? 'highlighted' : ''} tilt idle`.trim();
+
     return (
-        <article className="card featured tilt idle" data-tilt-strength="1.05" id={item.id} data-reveal>
+        <article className={cardClasses} data-tilt-strength="1.05" id={item.id} data-reveal>
             <span className="rank-badge" aria-hidden="true"><i className="fa-solid fa-crown"></i>#{item.rank}</span>
 
             <div className="card-head">
