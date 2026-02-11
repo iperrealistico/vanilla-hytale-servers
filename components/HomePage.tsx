@@ -38,7 +38,8 @@ export default function HomePage({ content }: { content: SiteContent }) {
                             <div className="nav-divider" aria-hidden="true" style={{ width: '1px', height: '20px', background: 'var(--stroke)', margin: '0 5px' }}></div>
                             <a className="nav-text pressable" href="#servers">Servers</a>
                             <a className="nav-text pressable" href="#faq">FAQ</a>
-                            <a className="btn btn-primary tilt pressable" data-tilt-strength="0.70" href="#suggest">
+                            <a className="nav-text pressable" href="/blog">Blog</a>
+                            <a className="btn btn-primary tilt pressable" data-tilt-strength="0.40" href="#suggest">
                                 <i className="fa-solid fa-paper-plane" aria-hidden="true"></i>
                                 Submit
                             </a>
@@ -50,7 +51,7 @@ export default function HomePage({ content }: { content: SiteContent }) {
             <main id="main-content">
                 <section className="hero">
                     <div className="container">
-                        <div className="hero-panel tilt idle" data-tilt-strength="0.60" data-reveal>
+                        <div className="hero-panel tilt idle" data-tilt-strength="0.30" data-reveal>
                             <img
                                 className="hero-bg-img"
                                 src="/img/hytale/hytale_vanilla_servers_list_1.jpeg"
@@ -70,15 +71,15 @@ export default function HomePage({ content }: { content: SiteContent }) {
                                 </div>
 
                                 <div className="hero-cta" aria-label="Primary actions">
-                                    <a className="btn btn-primary tilt pressable" data-tilt-strength="0.70" href="#servers">
+                                    <a className="btn btn-primary tilt pressable" data-tilt-strength="0.50" href="#servers">
                                         <i className="fa-solid fa-arrow-down" aria-hidden="true"></i>
                                         Jump to servers
                                     </a>
-                                    <a className="btn btn-secondary tilt pressable" data-tilt-strength="0.70" href="#faq">
+                                    <a className="btn btn-secondary tilt pressable" data-tilt-strength="0.50" href="#faq">
                                         <i className="fa-solid fa-circle-question" aria-hidden="true"></i>
                                         Vanilla FAQ
                                     </a>
-                                    <a className="btn btn-secondary tilt pressable" data-tilt-strength="0.70" href="#suggest">
+                                    <a className="btn btn-secondary tilt pressable" data-tilt-strength="0.50" href="#suggest">
                                         <i className="fa-solid fa-paper-plane" aria-hidden="true"></i>
                                         Submit
                                     </a>
@@ -101,7 +102,7 @@ export default function HomePage({ content }: { content: SiteContent }) {
 
                 <section id="methodology" aria-labelledby="methodology-title">
                     <div className="container">
-                        <div className="image-panel image-panel--top spacious tilt idle" data-tilt-strength="1.00" data-reveal style={{ marginTop: '16px', marginBottom: '22px' }}>
+                        <div className="image-panel image-panel--top spacious tilt idle" data-tilt-strength="0.40" data-reveal style={{ marginTop: '16px', marginBottom: '22px' }}>
                             <img
                                 src="/img/hytale/hytale_vanilla_servers_list_2.jpeg"
                                 alt="Hytale screenshot used to explain scoring"
@@ -137,7 +138,7 @@ export default function HomePage({ content }: { content: SiteContent }) {
                         </div>
 
                         <div className="grid-2">
-                            <div className="panel tilt idle" data-tilt-strength="1.00" data-reveal>
+                            <div className="panel tilt idle" data-tilt-strength="0.40" data-reveal>
                                 <h3>
                                     <span className="title-with-icon">
                                         <i className="fa-solid fa-ban" aria-hidden="true"></i>
@@ -151,7 +152,7 @@ export default function HomePage({ content }: { content: SiteContent }) {
                                 </ul>
                             </div>
 
-                            <div className="panel tilt idle" data-tilt-strength="1.00" data-reveal>
+                            <div className="panel tilt idle" data-tilt-strength="0.40" data-reveal>
                                 <h3>
                                     <span className="title-with-icon">
                                         <i className="fa-solid fa-chart-column" aria-hidden="true"></i>
@@ -184,7 +185,7 @@ export default function HomePage({ content }: { content: SiteContent }) {
 
                 <section id="faq" aria-labelledby="faq-title">
                     <div className="container">
-                        <div className="image-panel image-panel--top spacious tilt idle" data-tilt-strength="1.00" data-reveal style={{ marginTop: '16px', marginBottom: '22px' }}>
+                        <div className="image-panel image-panel--top spacious tilt idle" data-tilt-strength="0.40" data-reveal style={{ marginTop: '16px', marginBottom: '22px' }}>
                             <img
                                 src="/img/hytale/hytale_vanilla_servers_list_3.jpeg"
                                 alt="Hytale screenshot"
@@ -204,7 +205,7 @@ export default function HomePage({ content }: { content: SiteContent }) {
                             </div>
                         </div>
 
-                        <div className="panel tilt idle" data-tilt-strength="1.00" data-reveal>
+                        <div className="panel tilt idle" data-tilt-strength="0.40" data-reveal>
                             {content.faq.items.map((item: any, i: number) => (
                                 <details key={i} open={i === 0}>
                                     <summary>{item.question}</summary>
@@ -217,7 +218,7 @@ export default function HomePage({ content }: { content: SiteContent }) {
 
                 <section id="suggest" aria-labelledby="suggest-title">
                     <div className="container">
-                        <div className="image-panel image-panel--top spacious tilt idle" data-tilt-strength="1.00" data-reveal style={{ marginTop: '16px', marginBottom: '22px' }}>
+                        <div className="image-panel image-panel--top spacious tilt idle" data-tilt-strength="0.40" data-reveal style={{ marginTop: '16px', marginBottom: '22px' }}>
                             <img
                                 src="/img/hytale/hytale_vanilla_servers_list_4.jpeg"
                                 alt="Hytale screenshot"
@@ -252,7 +253,7 @@ export default function HomePage({ content }: { content: SiteContent }) {
                             </div>
                         </div>
 
-                        <div className="panel tilt idle" data-tilt-strength="1.00" data-reveal>
+                        <div className="panel tilt idle" data-tilt-strength="0.40" data-reveal>
                             <h3>
                                 <span className="title-with-icon">
                                     <i className="fa-solid fa-list-check" aria-hidden="true"></i>

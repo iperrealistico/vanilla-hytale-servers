@@ -1,0 +1,9 @@
+{
+  "slug": "hytale-server-scoring-explained",
+  "title": "Hytale Server Scoring: How We Rank the Best Vanilla Worlds",
+  "excerpt": "Curious about how we decide which servers make it to the top of our list? We break down our 100-point scoring system and the strict exclusion rules we apply to every listing.",
+  "content": "<p>Ranking Hytale servers is both an art and a science. As we prepare for the beta, our editorial team has developed a robust framework to ensure that only the most stable, fair, and high-quality vanilla communities are featured.</p><h2>The 100-Point System</h2><p>Our scoring is divided into four main categories, each contributing to the final editor score you see on our cards.</p><ul><li><strong>Performance (30 pts):</strong> Based on tick rate stability and latency tests.</li><li><strong>Community Health (30 pts):</strong> Based on moderation activity and player retention.</li><li><strong>Vanilla Integrity (20 pts):</strong> How far the server deviates from the core Hytale experience.</li><li><strong>Monetization (20 pts):</strong> Strict penalties for pay-to-win mechanics.</li></ul><p>By applying these standards, we hope to foster a community of high-quality servers that players can trust.</p>",
+  "category": "GUIDES",
+  "createdAt": "2026-02-11T19:05:00.000Z",
+  "coverImage": "/img/hytale/hytale_vanilla_servers_list_2.jpeg"
+}

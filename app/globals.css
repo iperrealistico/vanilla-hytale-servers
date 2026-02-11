@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --bg: #070a13;
   --bg-2: #0a0f1f;
@@ -632,42 +636,60 @@ h1 {
 }
 
 .image-panel-actions {
-  margin-top: 12px;
+  margin-top: 30px;
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 12px;
   align-items: center;
+  justify-content: center;
 }
 
 .image-panel.spacious {
   margin: 18px 0 34px;
 }
 
-/* Image panel variant: content aligned toward top, with a light glass strip behind text */
+/* Image panel variant: content aligned toward top, simplified without the glass box */
 .image-panel--top {
-  align-items: flex-start;
-  padding: 22px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px var(--pad);
 }
 
 .image-panel--top .image-panel-content {
-  max-width: 92ch;
-  padding: 14px 14px 14px;
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(0, 0, 0, 0.20);
-  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(7px);
-  -webkit-backdrop-filter: blur(7px);
+  max-width: 80ch;
+  padding: 0;
+  border: none;
+  background: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
-:root[data-theme="light"] .image-panel--top .image-panel-content {
-  border-color: rgba(0, 0, 0, 0.10);
-  background: rgba(255, 255, 255, 0.58);
-  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.10);
+.image-panel-content p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 18px;
+  line-height: 1.6;
 }
 
-.image-panel--top .overlay-title {
-  margin-bottom: 10px;
+:root[data-theme="light"] .image-panel-content p {
+  color: rgba(10, 15, 31, 0.92);
+}
+
+.overlay-title {
+  margin: 0 0 16px;
+  font-family: var(--h-font);
+  letter-spacing: 0.02em;
+  font-weight: 900;
+  font-size: 32px;
+  line-height: 1.1;
+  color: rgba(255, 255, 255, 0.98);
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.6);
+}
+
+.title-with-icon {
+  justify-content: center;
 }
 
 /* Contact button smooth label swap (supports multiple buttons) */
@@ -1006,6 +1028,8 @@ h2 {
   border-color: rgba(0, 0, 0, 0.12);
   background: rgba(0, 0, 0, 0.02);
 }
+
+
 
 .facts {
   display: flex;

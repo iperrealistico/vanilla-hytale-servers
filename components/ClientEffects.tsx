@@ -55,9 +55,9 @@ export default function ClientEffects() {
 
                         const strength = parseFloat(el.getAttribute('data-tilt-strength') || '1');
 
-                        // Calculate raw rotation values (max range +/- 6 before strength)
-                        let rotateX = ((y - centerY) / centerY) * -6 * strength;
-                        let rotateY = ((x - centerX) / centerX) * 6 * strength;
+                        // Calculate raw rotation values (max range +/- 2 before strength for subtler effect)
+                        let rotateX = ((y - centerY) / centerY) * -2 * strength;
+                        let rotateY = ((x - centerX) / centerX) * 2 * strength;
 
                         // Clamp values to ensure they don't exceed +/- 8 degrees
                         const maxTilt = 8;
