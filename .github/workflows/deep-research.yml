@@ -12,6 +12,9 @@ on:
         required: true
         default: 'news'
 
+permissions:
+  contents: write
+
 jobs:
   research:
     runs-on: ubuntu-latest
