@@ -50,9 +50,17 @@ export default function ClientEffects() {
                         const y = e.clientY - rect.top;
                         const centerX = rect.width / 2;
                         const centerY = rect.height / 2;
+
                         const strength = parseFloat(el.getAttribute('data-tilt-strength') || '1');
-                        const rotateX = ((y - centerY) / centerY) * -10 * strength;
-                        const rotateY = ((x - centerX) / centerX) * 10 * strength;
+
+                        // Calculate raw rotation values (max range +/- 6 before strength)
+                        let rotateX = ((y - centerY) / centerY) * -6 * strength;
+                        let rotateY = ((x - centerX) / centerX) * 6 * strength;
+
+                        // Clamp values to ensure they don't exceed +/- 8 degrees
+                        const maxTilt = 8;
+                        rotateX = Math.max(-maxTilt, Math.min(maxTilt, rotateX));
+                        rotateY = Math.max(-maxTilt, Math.min(maxTilt, rotateY));
 
                         el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
                         el.style.transition = 'transform 0.1s ease-out';
@@ -60,7 +68,7 @@ export default function ClientEffects() {
 
                     const handleMouseLeave = () => {
                         el.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
-                        el.style.transition = 'transform 0.3s ease-out';
+                        el.style.transition = 'transform 0.4s ease-out';
                     };
 
                     el.addEventListener('mousemove', handleMouseMove);
