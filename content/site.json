@@ -197,7 +197,7 @@
       },
       {
         "type": "slot",
-        "disabled": false,
+        "disabled": true,
         "rank": "2",
         "title": "Open Review Slot",
         "subtitle": "Submit your <strong>vanilla Hytale server</strong> for review for a chance to be featured here.",
@@ -213,7 +213,7 @@
       },
       {
         "type": "slot",
-        "disabled": false,
+        "disabled": true,
         "rank": "3",
         "title": "Open Review Slot",
         "subtitle": "Submit your <strong>vanilla Hytale server</strong> for review for a chance to be featured here.",
@@ -229,7 +229,7 @@
       },
       {
         "type": "slot",
-        "disabled": false,
+        "disabled": true,
         "rank": "4",
         "title": "Open Review Slot",
         "subtitle": "Submit your <strong>vanilla Hytale server</strong> for review for a chance to be featured here.",
@@ -245,7 +245,7 @@
       },
       {
         "type": "slot",
-        "disabled": false,
+        "disabled": true,
         "rank": "5",
         "title": "Open Review Slot",
         "subtitle": "Submit your <strong>vanilla Hytale server</strong> for review for a chance to be featured here.",
