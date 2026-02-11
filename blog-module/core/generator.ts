@@ -34,61 +34,67 @@ export class Generator {
       if (options?.onProgress) options.onProgress(msg);
     };
 
-    report(`Starting generation for typology: ${typology}`);
+    const now = new Date();
+    const dateStr = now.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+    report(`🚀 Intelligence Engine started (Mode: ${options?.researchMode || 'internal'})`);
+    report(`📅 Temporal context set to: ${dateStr}`);
+    report(`📁 Initialization: Environment checked (CWD: ${process.cwd()})`);
 
     // 1. Topic Selection
-    report("Selecting a fresh topic...");
+    report("🧠 Brain: Analyzing recent content gaps...");
     let topic = await this.selectTopic(typology);
+    report(`🎯 Strategy: Selected topic: "${topic.title}"`);
 
-    // 2. Semantic Overlap Check (if Supabase is enabled)
+    // 2. Semantic Overlap Check
     if (this.config.storage.adapter === 'supabase') {
-      report("Checking for semantic uniqueness...");
+      report("🔍 Validator: Checking for semantic uniqueness in database...");
       const isUnique = await this.checkSemanticUniqueness(topic.title);
       if (!isUnique) {
-        report(`Semantic overlap detected for: ${topic.title}. Retrying...`);
-        return this.generate(typology, options); // Recursive retry
+        report(`⚠️ Conflict: Semantic overlap detected. Recalibrating...`);
+        return this.generate(typology, options);
       }
     }
-    // Check overlap with friends/enemies
-    let attempts = 0;
-    while (attempts < 3 && await this.competitors.checkOverlap(topic.title, typology)) {
-      report(`Topic overlap detected for: ${topic.title}. Retrying...`);
-      topic = await this.selectTopic(typology);
-      attempts++;
-    }
 
-    report(`Final topic: ${topic.title}`);
-
-    // 2. Research
+    // 3. Research
     const researchMode = options?.researchMode || 'internal';
-    report(`Performing research (Mode: ${researchMode})...`);
+    report(`🌐 Researcher: Initiating ${researchMode} protocols for: "${topic.title}"`);
     const research = await this.doResearch(topic.title, researchMode);
+    report("✅ Researcher: Field data collected and synthesized.");
 
-    // 3. Draft Generation
-    report("Generating article draft...");
+    // 4. Draft Generation
+    report("✍️ Author: Drafting article using synthesized data...");
     const draft = await this.generateDraft(topic.title, research, typology, options?.seoLevel);
+    report(`✅ Author: Draft completed (${draft.content?.split(' ').length} words).`);
 
-    // 4. Friends/Enemies Logic (Backlinks)
-    report("Applying community backlinks...");
+    // 5. Community Logic
+    report("🔗 Network: Integrating community backlinks and relations...");
     const finalizedDraft = await this.applyCompetitorLogic(draft);
 
-    // 5. Save & Embed
-    report("Saving post to storage...");
-    const savedPost = await this.storage.savePost({
-      ...(finalizedDraft as Post),
-      category: typology,
-      status: 'published',
-    });
+    // 6. Save
+    report(`💾 Storage: Attempting to persist post to ${this.config.storage.adapter} adapter...`);
+    try {
+      const savedPost = await this.storage.savePost({
+        ...(finalizedDraft as Post),
+        category: typology,
+        status: 'published',
+      });
+      report(`✅ Storage: Persistence successful (Slug: ${savedPost.slug}).`);
 
-    // Save Embedding if supported
-    if (this.config.storage.adapter === 'supabase' && this.storage.saveEmbedding && this.ai.generateEmbedding) {
-      report("Generating and saving search embedding...");
-      const embedding = await this.ai.generateEmbedding(savedPost.title + ' ' + savedPost.excerpt);
-      await this.storage.saveEmbedding(savedPost.slug, embedding);
+      // Save Embedding
+      if (this.config.storage.adapter === 'supabase' && this.storage.saveEmbedding && this.ai.generateEmbedding) {
+        report("🧬 Vector: Generating and saved search embedding...");
+        const embedding = await this.ai.generateEmbedding(savedPost.title + ' ' + savedPost.excerpt);
+        await this.storage.saveEmbedding(savedPost.slug, embedding);
+      }
+
+      report("🏁 Process completed successfully.");
+      return savedPost;
+    } catch (e: any) {
+      report(`❌ Storage Failure: ${e.message}`);
+      report(`💡 Diagnostic: Check if directory exists or if filesystem is read-only.`);
+      throw e;
     }
-
-    report("Generation complete!");
-    return savedPost;
   }
 
   // ... (rest of class)
