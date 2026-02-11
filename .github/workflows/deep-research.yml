@@ -27,6 +27,17 @@ jobs:
       - name: Install Dependencies
         run: npm install
         
+      - name: Check Secrets
+        run: |
+          if [ -z "${{ secrets.OPENAI_API_KEY }}" ]; then
+            echo "::error::OPENAI_API_KEY is missing. Please add it to your GitHub Repo Secrets."
+            exit 1
+          fi
+          if [ -z "${{ secrets.FIRECRAWL_API_KEY }}" ]; then
+            echo "::error::FIRECRAWL_API_KEY is missing. Please add it to your GitHub Repo Secrets."
+            exit 1
+          fi
+
       - name: Run Deep Research
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}

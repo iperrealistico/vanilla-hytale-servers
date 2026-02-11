@@ -133,6 +133,7 @@ ${result.learnings.map(l => `- ${l}`).join('\n')}
 }
 
 // Run if called directly
-if (require.main === module) {
-    run().catch(console.error);
-}
+run().catch((err) => {
+    console.error("Fatal Error in Research Worker:", err);
+    process.exit(1);
+});

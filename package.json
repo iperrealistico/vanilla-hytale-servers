@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "blog:research": "npx ts-node blog-module/scripts/deep-research-worker.ts"
+    "blog:research": "npx tsx blog-module/scripts/deep-research-worker.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.74.0",
@@ -41,6 +41,7 @@
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.18",
     "ts-node": "^10.9.2",
+    "tsx": "^4.21.0",
     "typescript": "^5"
   }
 }
