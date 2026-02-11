@@ -75,9 +75,12 @@ class DeepResearcher {
         const prompt = `
       I need to write a comprehensive, deep-dive article about: "${topic}".
       Generate 3 specific, search-engine-optimized questions that would help me gather detailed technical information.
-      Return a JSON array of strings.
     `;
-        return this.ai.generateObject<string[]>(prompt, { type: 'json' } as any);
+        const res = await this.ai.generateObject<any>(prompt, {
+            type: 'array',
+            items: { type: 'string' }
+        } as any);
+        return Array.isArray(res) ? res : (res.data || res.questions || []);
     }
 
     private async extractLearnings(question: string, context: string): Promise<string[]> {
@@ -87,9 +90,12 @@ class DeepResearcher {
       ${context}
 
       Extract 3-5 key facts, statistics, or unique insights from the context.
-      Return a JSON array of strings.
     `;
-        return this.ai.generateObject<string[]>(prompt, { type: 'json' } as any);
+        const res = await this.ai.generateObject<any>(prompt, {
+            type: 'array',
+            items: { type: 'string' }
+        } as any);
+        return Array.isArray(res) ? res : (res.data || res.learnings || []);
     }
 }
 
