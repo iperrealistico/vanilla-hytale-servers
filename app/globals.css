@@ -91,7 +91,7 @@ body {
   background-color: var(--bg);
   line-height: 1.55;
   overflow-x: hidden;
-  overscroll-behavior-y: none;
+  /* Removed overscroll-behavior-y: none to fix scroll issues */
 }
 
 :root[data-theme="light"] body {
@@ -101,12 +101,9 @@ body {
     radial-gradient(820px 560px at 56% 86%, rgba(36, 183, 255, 0.06), transparent 70%),
     linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
   background-color: var(--bg);
-  touch-action: auto;
+  /* Ensure touch scrolling works */
+  touch-action: pan-y;
   -webkit-overflow-scrolling: touch;
-}
-
-body {
-  touch-action: auto;
 }
 
 @media (prefers-reduced-motion: reduce) {
