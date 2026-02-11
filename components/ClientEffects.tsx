@@ -12,6 +12,8 @@ declare global {
 
 export default function ClientEffects() {
     useEffect(() => {
+        let emblaApi: any = null;
+
         const init = () => {
             if (typeof window === 'undefined') return;
 
@@ -79,7 +81,21 @@ export default function ClientEffects() {
             // Embla Carousel
             const emblaNode = document.querySelector('[data-embla]');
             if (emblaNode && EmblaCarousel) {
-                EmblaCarousel(emblaNode, { loop: true });
+                // Determine if we should treat drag as click based on drag amount
+                emblaApi = EmblaCarousel(emblaNode, {
+                    loop: true,
+                    skipSnaps: false
+                });
+
+                // Add dragging class to cursor style
+                emblaApi.on('pointerDown', () => {
+                    const node = emblaApi.rootNode();
+                    node.style.cursor = 'grabbing';
+                });
+                emblaApi.on('pointerUp', () => {
+                    const node = emblaApi.rootNode();
+                    node.style.cursor = 'grab';
+                });
             }
 
             // Copy buttons
@@ -131,7 +147,10 @@ export default function ClientEffects() {
             }
         }, 100);
 
-        return () => clearInterval(checkInterval);
+        return () => {
+            clearInterval(checkInterval);
+            if (emblaApi) emblaApi.destroy();
+        };
     }, []);
 
     return null;
