@@ -2,6 +2,8 @@ import { AiBlogConfig } from '../config/schema';
 import { AIProvider, StorageAdapter, Post } from './types';
 import { CompetitorsManager } from '../features/competitors';
 import { FirecrawlAdapter } from '../adapters/sources/firecrawl';
+import * as fs from 'fs';
+import * as path from 'path';
 
 export class Generator {
   private config: AiBlogConfig;
@@ -120,7 +122,24 @@ export class Generator {
     }
 
     if (researchMode === 'deep') {
-      return `[Deep Research Note] This article was generated using the dedicated Deep Research worker. Context for: ${topic}`;
+      try {
+        const researchDir = path.join(process.cwd(), 'data', 'research');
+        if (fs.existsSync(researchDir)) {
+          const files = fs.readdirSync(researchDir)
+            .filter(f => f.endsWith('.md'))
+            .map(f => ({ name: f, time: fs.statSync(path.join(researchDir, f)).mtime.getTime() }))
+            .sort((a, b) => b.time - a.time);
+
+          if (files.length > 0) {
+            const latestFile = path.join(researchDir, files[0].name);
+            console.log(`[Generator] Using Deep Research report: ${files[0].name}`);
+            return fs.readFileSync(latestFile, 'utf-8');
+          }
+        }
+      } catch (e) {
+        console.error(`[Generator] Failed to read Deep Research: ${e}`);
+      }
+      return `[Deep Research Note] No research file found. Falling back to internal context for: ${topic}`;
     }
 
     return `Internal Knowledge Check for: ${topic}. Focus on technical details and unique insights.`;
