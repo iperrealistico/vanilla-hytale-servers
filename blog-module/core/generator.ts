@@ -95,12 +95,16 @@ export class Generator {
 
   private async selectTopic(typology: string) {
     const memory = await this.storage.getMemory();
+    const now = new Date();
+    const dateStr = now.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
     const prompt = `
       You are a content strategist for a blog called "${this.config.blog.siteName}".
+      TODAY'S DATE: ${dateStr}
       The typology is "${typology}".
       Existing topics: ${memory.join(', ')}
       
-      Suggest a new, unique, and highly engaging article topic.
+      Suggest a new, unique, and highly engaging article topic for today.
       Return a JSON object with:
       - title: The proposed headline
       - focus: A brief summary of what the article should cover
@@ -164,8 +168,12 @@ export class Generator {
     // Find typology definition for intent
     const intent = this.config.blog.typologyDefinitions?.find(t => t.id === typology)?.intent || "General blog post";
 
+    const now = new Date();
+    const dateStr = now.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
     const prompt = `
       You are a professional blog author.
+      TODAY'S DATE: ${dateStr}
       Goal: Write a post with title "${title}".
       Typology Intent: ${intent}
       Research Context: ${research}

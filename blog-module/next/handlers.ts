@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import path from 'path';
 import { AiBlogConfig } from '../config/schema';
 import { AIProvider, StorageAdapter } from '../core/types';
 import { Generator } from '../core/generator';
@@ -15,7 +16,7 @@ export const createHandlers = (config: AiBlogConfig) => {
     if (config.storage.adapter === 'supabase') {
       return new SupabaseStorageAdapter(config);
     }
-    return new FileStorageAdapter(config.storage.connectionStringEnvVar || './data/blog');
+    return new FileStorageAdapter(config.storage.connectionStringEnvVar || path.join(process.cwd(), 'data/blog'));
   };
 
   const getAI = (): AIProvider => {
