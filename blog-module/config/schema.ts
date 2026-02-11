@@ -48,11 +48,14 @@ export const ImagePolicySchema = z.object({
 });
 
 export const ScheduleSchema = z.object({
+  id: z.string().optional(),
   name: z.string(),
   typology: TypologySchema,
   cron: z.string(), // e.g., "0 9 * * *"
   timezone: z.string().default('UTC'),
   publishImmediately: z.boolean().default(true),
+  enabled: z.boolean().default(true),
+  oneShot: z.boolean().default(false),
 
   // Per-schedule overrides
   seoLevel: SeoLevelSchema.default(5),

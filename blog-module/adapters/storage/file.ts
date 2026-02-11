@@ -1,7 +1,7 @@
 import fs from 'fs/promises';
 import path from 'path';
 import { Post, StorageAdapter } from '../../core/types';
-import { commitFiles } from '@/lib/github';
+import { commitFiles, deleteFile } from '@/lib/github';
 
 export class FileStorageAdapter implements StorageAdapter {
   private dataDir: string;
@@ -132,6 +132,31 @@ export class FileStorageAdapter implements StorageAdapter {
     }
 
     return data;
+  }
+
+  async deletePost(slug: string): Promise<void> {
+    const filename = `${slug}.json`;
+
+    // 1. Local/Tmp Deletion
+    const dirs = [this.dataDir];
+    if (this.tmpDir) dirs.push(this.tmpDir);
+
+    for (const dir of dirs) {
+      const filePath = path.join(dir, filename);
+      try {
+        await fs.unlink(filePath);
+        console.log(`[FileStorage] Locally deleted: ${filePath}`);
+      } catch (e) {
+        // Might not exist in one of the locations
+      }
+    }
+
+    // 2. Cloud Deletion (GitHub)
+    if (process.env.GITHUB_TOKEN || process.env.VERCEL) {
+      console.log(`[FileStorage] Deleting from GitHub: ${slug}`);
+      const relativePath = `data/blog/${filename}`;
+      await deleteFile(relativePath);
+    }
   }
 
   async getMemory(): Promise<string[]> {

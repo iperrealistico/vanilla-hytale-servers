@@ -78,6 +78,16 @@ export class SupabaseStorageAdapter implements StorageAdapter {
 
         return this.mapToPost(data);
     }
+    async deletePost(slug: string): Promise<void> {
+        const { error } = await this.client
+            .from('posts')
+            .delete()
+            .eq('slug', slug);
+
+        if (error) {
+            throw new Error(`Failed to delete post from Supabase: ${error.message}`);
+        }
+    }
 
     async getMemory(): Promise<string[]> {
         // Return titles for basic dedup

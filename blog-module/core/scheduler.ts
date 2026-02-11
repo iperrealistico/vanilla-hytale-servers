@@ -13,47 +13,49 @@ export class Scheduler {
     this.director = director;
   }
 
-  async runCron() {
+  async runCron(): Promise<string[]> {
     console.log('Running AI Blog Cron...');
     const now = new Date();
-    const currentHour = now.getUTCHours();
-    const currentDay = now.getUTCDay();
+    const completedOneShots: string[] = [];
 
     for (const schedule of this.config.scheduling.schedules) {
-      // Very simple cron parsing for demonstration
-      // In a real app, we'd use a library like 'cron-parser'
-      // For now, we'll just check if the schedule matches some basic criteria
-      // OR we just trigger them all and let the generator handle dedup via memory/storage
+      if (schedule.enabled === false) {
+        console.log(`Skipping disabled schedule: ${schedule.name}`);
+        continue;
+      }
 
-      // Basic check: parse hour from cron "m h ..."
+      // ... existing cron parsing logic ...
       const parts = schedule.cron.split(' ');
       const hourStr = parts[1];
 
       if (hourStr !== '*' && parseInt(hourStr) !== now.getUTCHours()) {
-        console.log(`Skipping schedule ${schedule.name} - not the right hour (${hourStr} vs ${now.getUTCHours()})`);
         continue;
       }
 
-      console.log(`Checking schedule: ${schedule.name}`);
+      console.log(`Executing schedule: ${schedule.name}`);
 
-      // AUTO mode logic
-      let typologyToRun = schedule.typology as string;
-      if (typologyToRun === 'AUTO') {
-        const availableTypologies = this.config.blog.typologyDefinitions?.map(d => d.id) || ['news', 'guide', 'tutorial'];
-        const memory = await this.generator.getStorage().getMemory(); // Assuming access
-        typologyToRun = await this.director.decideNextTypology(availableTypologies, memory);
-      }
-
+      // ... existing generation logic ...
       try {
+        let typologyToRun = schedule.typology as string;
+        if (typologyToRun === 'AUTO') {
+          const availableTypologies = this.config.blog.typologyDefinitions?.map(d => d.id) || ['news', 'guide'];
+          const memory = await this.generator.getStorage().getMemory();
+          typologyToRun = await this.director.decideNextTypology(availableTypologies, memory);
+        }
+
         await this.generator.generate(typologyToRun, {
           seoLevel: schedule.seoLevel,
           researchMode: schedule.researchMode,
         });
-        console.log(`Successfully generated article for: ${schedule.name} (${typologyToRun})`);
+
+        if ((schedule as any).oneShot) {
+          completedOneShots.push((schedule as any).id);
+        }
       } catch (error) {
-        console.error(`Failed to generate article for: ${schedule.name}`, error);
+        console.error(`Failed: ${schedule.name}`, error);
       }
     }
+    return completedOneShots;
   }
 
   private selectAutoTypology(): any {

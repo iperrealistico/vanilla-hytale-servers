@@ -1,4 +1,5 @@
 import { AiBlogConfig } from '@/blog-module';
+import schedules from './data/schedules.json';
 
 export const blogConfig: AiBlogConfig = {
     blog: {
@@ -105,45 +106,7 @@ export const blogConfig: AiBlogConfig = {
         },
     },
     scheduling: {
-        schedules: [
-            // Weekly Schedule: 4 Posts/Week
-            {
-                name: 'Monday News',
-                typology: 'AUTO',
-                cron: '0 10 * * 1', // Every Monday at 10:00
-                researchMode: 'deep',
-                timezone: 'UTC',
-                publishImmediately: true,
-                seoLevel: 5,
-            },
-            {
-                name: 'Wednesday Spotlight',
-                typology: 'AUTO',
-                cron: '0 10 * * 3', // Every Wednesday at 10:00
-                researchMode: 'deep', // Uses the deep research worker
-                timezone: 'UTC',
-                publishImmediately: true,
-                seoLevel: 8,
-            },
-            {
-                name: 'Friday Guide',
-                typology: 'AUTO',
-                cron: '0 10 * * 5', // Every Friday at 10:00
-                researchMode: 'deep',
-                timezone: 'UTC',
-                publishImmediately: true,
-                seoLevel: 5,
-            },
-            {
-                name: 'Sunday Updates',
-                typology: 'AUTO',
-                cron: '0 10 * * 0', // Every Sunday at 10:00
-                researchMode: 'deep',
-                timezone: 'UTC',
-                publishImmediately: true,
-                seoLevel: 3,
-            }
-        ],
+        schedules: (schedules as any[]),
     },
     friendsEnemies: {
         friends: [

@@ -83,3 +83,41 @@ export async function commitFiles(files: { path: string, content: string | Buffe
         return { success: false, message: e.message };
     }
 }
+export async function deleteFile(filePath: string) {
+    if (process.env.NODE_ENV !== 'production' && !process.env.GITHUB_TOKEN) {
+        console.log('Local dev: deleting file from disk');
+        const fs = require('fs');
+        const path = require('path');
+        const fullPath = path.join(process.cwd(), filePath);
+        if (fs.existsSync(fullPath)) {
+            fs.unlinkSync(fullPath);
+        }
+        return { success: true };
+    }
+
+    try {
+        // We need the current file SHA to delete it
+        const { data: fileData } = await getOctokit().rest.repos.getContent({
+            owner: OWNER,
+            repo: REPO,
+            path: filePath,
+            ref: BRANCH,
+        });
+
+        if (Array.isArray(fileData)) throw new Error('Path is a directory, not a file');
+
+        const result = await getOctokit().rest.repos.deleteFile({
+            owner: OWNER,
+            repo: REPO,
+            path: filePath,
+            message: `Delete ${filePath} [skip ci]`,
+            sha: fileData.sha,
+            branch: BRANCH,
+        });
+
+        return { success: true, sha: result.data.commit.sha };
+    } catch (e: any) {
+        console.error('GitHub Delete Error:', e);
+        return { success: false, message: e.message };
+    }
+}

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import path from 'path';
+import fs from 'fs/promises';
 import { AiBlogConfig } from '../config/schema';
 import { AIProvider, StorageAdapter } from '../core/types';
 import { Generator } from '../core/generator';
@@ -38,10 +39,79 @@ export const createHandlers = (config: AiBlogConfig) => {
   const getScheduler = () => new Scheduler(config, getGenerator(), getDirector());
 
   return {
+    posts: async (req: NextRequest) => {
+      const method = req.method;
+
+      if (method === 'GET') {
+        const posts = await storage.listPosts();
+        return NextResponse.json(posts);
+      }
+
+      if (method === 'POST') {
+        const post = await req.json();
+        const saved = await storage.savePost(post);
+        return NextResponse.json(saved);
+      }
+
+      if (method === 'DELETE') {
+        const { searchParams } = new URL(req.url);
+        const slug = searchParams.get('slug');
+        if (!slug) return NextResponse.json({ success: false, message: 'Slug required' }, { status: 400 });
+        await storage.deletePost(slug);
+        return NextResponse.json({ success: true });
+      }
+
+      return new Response('Method Not Allowed', { status: 405 });
+    },
+    schedules: async (req: NextRequest) => {
+      const method = req.method;
+      const schedulesPath = path.join(process.cwd(), 'data/schedules.json');
+
+      if (method === 'GET') {
+        try {
+          const data = await fs.readFile(schedulesPath, 'utf-8');
+          return NextResponse.json(JSON.parse(data));
+        } catch (e) {
+          return NextResponse.json([]);
+        }
+      }
+
+      if (method === 'POST') {
+        const schedules = await req.json();
+        await fs.mkdir(path.dirname(schedulesPath), { recursive: true });
+        await fs.writeFile(schedulesPath, JSON.stringify(schedules, null, 2));
+
+        // Also sync to GitHub for persistence
+        const { commitFiles } = require('@/lib/github');
+        await commitFiles([{ path: 'data/schedules.json', content: JSON.stringify(schedules, null, 2) }]);
+
+        return NextResponse.json({ success: true });
+      }
+
+      return new Response('Method Not Allowed', { status: 405 });
+    },
     cron: async (req: any) => {
       const scheduler = getScheduler();
-      await scheduler.runCron();
-      return NextResponse.json({ success: true, message: 'Cron run completed' });
+      const completedOneShots = await scheduler.runCron();
+
+      if (completedOneShots.length > 0) {
+        console.log(`[Cron] Cleaning up ${completedOneShots.length} one-shot schedules.`);
+        const schedulesPath = path.join(process.cwd(), 'data/schedules.json');
+        try {
+          const data = await fs.readFile(schedulesPath, 'utf-8');
+          const schedules = JSON.parse(data);
+          const updated = schedules.filter((s: any) => !completedOneShots.includes(s.id));
+          await fs.writeFile(schedulesPath, JSON.stringify(updated, null, 2));
+
+          // Sync cleanup to GitHub
+          const { commitFiles } = require('@/lib/github');
+          await commitFiles([{ path: 'data/schedules.json', content: JSON.stringify(updated, null, 2) }]);
+        } catch (e) {
+          console.error('[Cron] Cleanup failed:', e);
+        }
+      }
+
+      return NextResponse.json({ success: true, message: 'Cron run completed', cleanedUp: completedOneShots.length });
     },
     run: async (req: any) => {
       const { searchParams } = new URL(req.url);
@@ -80,7 +150,6 @@ export const createHandlers = (config: AiBlogConfig) => {
       });
     },
     sitemap: async (req: any) => {
-      // Inline simple sitemap generation
       const posts = await storage.listPosts();
       const baseUrl = config.blog.baseUrl;
       const basePath = config.blog.basePath || '/blog';

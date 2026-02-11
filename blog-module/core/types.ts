@@ -34,6 +34,7 @@ export interface StorageAdapter {
   getPostBySlug(slug: string): Promise<Post | null>;
   listPosts(options?: { category?: string; limit?: number; offset?: number }): Promise<Post[]>;
   savePost(post: Post): Promise<Post>;
+  deletePost(slug: string): Promise<void>;
   getMemory(): Promise<string[]>; // list of recent topics/titles for dedup
 
   // Semantic Search (Optional)
