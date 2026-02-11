@@ -1,0 +1,39 @@
+name: Hytale Deep Research
+
+on:
+  workflow_dispatch:
+    inputs:
+      topic:
+        description: 'Topic to research'
+        required: true
+        default: 'Latest Hytale development news'
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          
+      - name: Install Dependencies
+        run: npm install
+        
+      - name: Run Deep Research
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
+          TOPIC: ${{ github.event.inputs.topic }}
+        run: npm run blog:research
+        
+      - name: Commit Research Report
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add data/research/
+          git commit -m "Add deep research report for: ${{ github.event.inputs.topic }}"
+          git push
