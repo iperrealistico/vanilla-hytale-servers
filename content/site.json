@@ -112,6 +112,7 @@
     "items": [
       {
         "type": "server",
+        "disabled": false,
         "id": "pvc",
         "rank": "1",
         "title": "Peaceful Vanilla Club (Hytale)",

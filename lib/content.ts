@@ -18,6 +18,7 @@ export interface ServerItem {
     scoreBreakdown?: Array<{ label: string; value: string; max: string }>;
     details?: Array<{ title: string; meta: string; content: string }>;
     status?: string;
+    disabled?: boolean;
 }
 
 export interface FaqItem {

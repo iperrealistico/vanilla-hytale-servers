@@ -85,7 +85,7 @@ export default function ServerCard({ item }: { item: any }) {
                         <i className="fa-solid fa-network-wired" aria-hidden="true"></i>
                         <code>{item.ip}</code>
                         <button className="btn-copy pressable" type="button" data-copy={item.ip} data-tilt-strength="0.40">
-                            <i className="fa-regular fa-copy" aria-hidden="true"></i>Copy IP
+                            <i className="fa-regular fa-copy" aria-hidden="true"></i>Copy
                         </button>
                     </div>
 

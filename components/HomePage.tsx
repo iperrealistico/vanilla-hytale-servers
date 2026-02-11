@@ -84,7 +84,7 @@ export default function HomePage({ content }: { content: SiteContent }) {
                     <div className="container">
                         <h2 id="servers-title" className="sr-only">{content.servers.title}</h2>
                         <div className="cards">
-                            {content.servers.items.map((item, i) => (
+                            {content.servers.items.filter(item => !item.disabled).map((item, i) => (
                                 <ServerCard key={i} item={item} />
                             ))}
                         </div>
