@@ -25,7 +25,7 @@ export const StorageConfigSchema = z.object({
   }).optional(),
 });
 
-export const TypologySchema = z.enum(['news', 'guide', 'tutorial', 'deep_dive', 'comparison', 'opinion', 'AUTO']);
+export const TypologySchema = z.enum(['news', 'guide', 'tutorial', 'deep_dive', 'comparison', 'opinion', 'patch_notes', 'spotlight', 'AUTO']);
 
 // New: Typology Definition with Intent
 export const TypologyDefinitionSchema = z.object({
