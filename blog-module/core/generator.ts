@@ -72,14 +72,14 @@ export class Generator {
     const finalizedDraft = await this.applyCompetitorLogic(draft);
 
     // 6. Save
-    report(`💾 Storage: Attempting to persist post to ${this.config.storage.adapter} adapter...`);
+    report(`💾 Storage: Persistence starting (Local + Cloud Sync)...`);
     try {
       const savedPost = await this.storage.savePost({
         ...(finalizedDraft as Post),
         category: typology,
         status: 'published',
       });
-      report(`✅ Storage: Persistence successful (Slug: ${savedPost.slug}).`);
+      report(`✅ Storage: Successfully synced to GitHub repository.`);
 
       // Save Embedding
       if (this.config.storage.adapter === 'supabase' && this.storage.saveEmbedding && this.ai.generateEmbedding) {

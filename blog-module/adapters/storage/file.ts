@@ -1,10 +1,12 @@
 import fs from 'fs/promises';
 import path from 'path';
 import { Post, StorageAdapter } from '../../core/types';
+import { commitFiles } from '@/lib/github';
 
 export class FileStorageAdapter implements StorageAdapter {
   private dataDir: string;
   private tmpDir: string | null = null;
+  private isRepoRelative: boolean = false;
 
   constructor(dataDir: string) {
     this.dataDir = dataDir;
@@ -12,6 +14,11 @@ export class FileStorageAdapter implements StorageAdapter {
     if (process.env.VERCEL) {
       this.tmpDir = path.join('/tmp', 'blog-data');
       console.log(`[FileStorage] Hybrid mode enabled. Repo: ${this.dataDir}, Scratch: ${this.tmpDir}`);
+    }
+
+    // Check if the dataDir is within the current repo to determine if we should commit
+    if (this.dataDir.includes(process.cwd())) {
+      this.isRepoRelative = true;
     }
   }
 
@@ -82,29 +89,49 @@ export class FileStorageAdapter implements StorageAdapter {
       updatedAt: new Date(),
     };
 
-    // Decide where to write: Try Repo first, then Tmp
+    // 1. Local/Tmp Persistence
     const writeDirs = [this.dataDir];
     if (this.tmpDir) writeDirs.push(this.tmpDir);
 
-    let lastError = null;
+    let localSaved = false;
     for (const dir of writeDirs) {
       const filePath = path.join(dir, `${post.slug}.json`);
       try {
         await this.ensureDir(dir);
         await fs.writeFile(filePath, JSON.stringify(data, null, 2));
-        console.log(`[FileStorage] Successfully saved to: ${filePath}`);
-        return data;
+        console.log(`[FileStorage] Successfully saved to local: ${filePath}`);
+        localSaved = true;
       } catch (e: any) {
-        lastError = e;
         console.warn(`[FileStorage] Failed write to ${dir}: ${e.message}`);
       }
     }
 
-    const errorMsg = `Persistence failed in all locations. Last error: ${lastError?.message}`;
-    if (process.env.VERCEL) {
-      throw new Error(`${errorMsg}. TIP: Vercel lambda filesystem is extremely restricted.`);
+    // 2. Cloud Persistence (GitHub GitOps)
+    if (process.env.GITHUB_TOKEN || process.env.VERCEL) {
+      console.log(`[FileStorage] Committing to GitHub for slug: ${post.slug}`);
+      const relativePath = `data/blog/${post.slug}.json`;
+
+      // We do this asynchronously but wait for it to ensure we can report success
+      const gitResult = await commitFiles([
+        { path: relativePath, content: JSON.stringify(data, null, 2) }
+      ]);
+
+      if (gitResult.success) {
+        console.log(`[FileStorage] GitHub commit successful: ${gitResult.sha}`);
+      } else {
+        console.error(`[FileStorage] GitHub commit failed: ${gitResult.message}`);
+        // If local save also failed, we must throw
+        if (!localSaved) {
+          throw new Error(`Persistence failed. Local Error AND GitHub Error: ${gitResult.message}`);
+        }
+      }
     }
-    throw new Error(errorMsg);
+
+    if (!localSaved && !process.env.GITHUB_TOKEN) {
+      throw new Error("Persistence failed: No writeable locations found and no GitHub token available.");
+    }
+
+    return data;
   }
 
   async getMemory(): Promise<string[]> {
