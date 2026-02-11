@@ -172,9 +172,18 @@ export default function AdminDashboard({ initialContent, initialManifest }: { in
                         const data = JSON.parse(line.slice(6));
                         if (data.type === 'progress') {
                             setBlogProgress(prev => [...prev, data.status]);
+                        } else if (data.type === 'research_triggered') {
+                            setBlogProgress(prev => [
+                                ...prev,
+                                `📋 Selected Topic: ${data.topic}`,
+                                '🚀 GitHub Action triggered!',
+                                '⌛ Research is now running on GitHub. Vercel will automatically write the article when it finishes (approx. 5 mins).'
+                            ]);
+                            setMessage('Deep Research initiated on GitHub.');
                         } else if (data.type === 'complete') {
                             setBlogProgress(prev => [...prev, '✅ Success: Post created!']);
                             setMessage('Blog post generated successfully!');
+                            fetchBlogData();
                         } else if (data.type === 'error') {
                             setBlogProgress(prev => [...prev, `❌ Error: ${data.message}`]);
                             setMessage('Error: ' + data.message);

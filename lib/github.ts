@@ -121,3 +121,27 @@ export async function deleteFile(filePath: string) {
         return { success: false, message: e.message };
     }
 }
+
+export async function triggerWorkflow(topic: string, typology: string) {
+    if (process.env.NODE_ENV !== 'production' && !process.env.GITHUB_TOKEN) {
+        console.log('Local dev: skipping workflow trigger');
+        return { success: true, message: 'Simulated trigger' };
+    }
+
+    try {
+        await getOctokit().rest.actions.createWorkflowDispatch({
+            owner: OWNER,
+            repo: REPO,
+            workflow_id: 'deep-research.yml',
+            ref: BRANCH,
+            inputs: {
+                topic,
+                typology
+            },
+        });
+        return { success: true };
+    } catch (e: any) {
+        console.error('GitHub Workflow Trigger Error:', e);
+        return { success: false, message: e.message };
+    }
+}

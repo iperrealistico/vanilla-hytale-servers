@@ -116,7 +116,8 @@ export const createHandlers = (config: AiBlogConfig) => {
     run: async (req: any) => {
       const { searchParams } = new URL(req.url);
       const typology = searchParams.get('typology') || 'news';
-      const researchMode = searchParams.get('researchMode') || undefined;
+      const researchMode = searchParams.get('researchMode') || 'internal';
+      const researchFile = searchParams.get('researchFile') || undefined;
 
       // SSE Setup
       const encoder = new TextEncoder();
@@ -128,11 +129,24 @@ export const createHandlers = (config: AiBlogConfig) => {
 
           try {
             const generator = getGenerator();
-            const post = await generator.generate(typology, {
-              researchMode,
-              onProgress: (status) => send({ type: 'progress', status })
-            });
-            send({ type: 'complete', post });
+
+            // SPECIAL CASE: Trigger GitHub Research
+            if (researchMode === 'deep' && !researchFile) {
+              const result = await generator.initiateDeepResearch(typology, (status) => send({ type: 'progress', status }));
+              if (result.success) {
+                send({ type: 'research_triggered', topic: result.topic });
+              } else {
+                send({ type: 'error', message: 'Failed to trigger GitHub Action' });
+              }
+            } else {
+              // NORMAL CASE: Generate Article
+              const post = await generator.generate(typology, {
+                researchMode,
+                researchFile,
+                onProgress: (status) => send({ type: 'progress', status })
+              });
+              send({ type: 'complete', post });
+            }
           } catch (error: any) {
             send({ type: 'error', message: error.message });
           } finally {

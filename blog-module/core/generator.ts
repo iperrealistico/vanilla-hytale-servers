@@ -28,7 +28,7 @@ export class Generator {
     return this.storage;
   }
 
-  async generate(typology: string, options?: { seoLevel?: number | 'RANDOM', researchMode?: string, onProgress?: (status: string) => void }): Promise<Post> {
+  async generate(typology: string, options?: { seoLevel?: number | 'RANDOM', researchMode?: string, researchFile?: string, onProgress?: (status: string) => void }): Promise<Post> {
     const report = (msg: string) => {
       console.log(`[Generator] ${msg}`);
       if (options?.onProgress) options.onProgress(msg);
@@ -59,7 +59,7 @@ export class Generator {
     // 3. Research
     const researchMode = options?.researchMode || 'internal';
     report(`🌐 Researcher: Initiating ${researchMode} protocols for: "${topic.title}"`);
-    const research = await this.doResearch(topic.title, researchMode);
+    const research = await this.doResearch(topic.title, researchMode, options?.researchFile);
     report("✅ Researcher: Field data collected and synthesized.");
 
     // 4. Draft Generation
@@ -134,7 +134,30 @@ export class Generator {
     return similar.length === 0;
   }
 
-  private async doResearch(topic: string, researchMode: string = 'internal') {
+  async initiateDeepResearch(typology: string, onProgress?: (status: string) => void): Promise<{ success: boolean, topic: string }> {
+    const report = (msg: string) => {
+      console.log(`[Generator] ${msg}`);
+      if (onProgress) onProgress(msg);
+    };
+
+    report("🧠 Brain: Selecting strategic topic for Deep Research...");
+    const topic = await this.selectTopic(typology);
+    report(`🎯 Strategy: Selected topic: "${topic.title}"`);
+
+    report("🚀 Bridge: Triggering long-running research on GitHub...");
+    const { triggerWorkflow } = require('@/lib/github');
+    const result = await triggerWorkflow(topic.title, typology);
+
+    if (result.success) {
+      report("✅ Bridge: GitHub Action successfully triggered.");
+      return { success: true, topic: topic.title };
+    } else {
+      report(`❌ Bridge: Failed to trigger GitHub: ${result.message}`);
+      return { success: false, topic: topic.title };
+    }
+  }
+
+  private async doResearch(topic: string, researchMode: string = 'internal', specificFile?: string) {
     if (researchMode === 'web-lite' && this.researchAdapter) {
       try {
         console.log(`[Generator] Performing Web-Lite research for: ${topic}`);
@@ -148,15 +171,23 @@ export class Generator {
       try {
         const researchDir = path.join(process.cwd(), 'data', 'research');
         if (fs.existsSync(researchDir)) {
-          const files = fs.readdirSync(researchDir)
-            .filter(f => f.endsWith('.md'))
-            .map(f => ({ name: f, time: fs.statSync(path.join(researchDir, f)).mtime.getTime() }))
-            .sort((a, b) => b.time - a.time);
+          let filename = specificFile;
 
-          if (files.length > 0) {
-            const latestFile = path.join(researchDir, files[0].name);
-            console.log(`[Generator] Using Deep Research report: ${files[0].name}`);
-            return fs.readFileSync(latestFile, 'utf-8');
+          if (!filename) {
+            const files = fs.readdirSync(researchDir)
+              .filter(f => f.endsWith('.md'))
+              .map(f => ({ name: f, time: fs.statSync(path.join(researchDir, f)).mtime.getTime() }))
+              .sort((a, b) => b.time - a.time);
+
+            if (files.length > 0) {
+              filename = files[0].name;
+            }
+          }
+
+          if (filename) {
+            const filePath = path.join(researchDir, filename);
+            console.log(`[Generator] Using Deep Research report: ${filename}`);
+            return fs.readFileSync(filePath, 'utf-8');
           }
         }
       } catch (e) {

@@ -7,6 +7,10 @@ on:
         description: 'Topic to research'
         required: true
         default: 'Latest Hytale development news'
+      typology:
+        description: 'Typology to use for the final article'
+        required: true
+        default: 'news'
 
 jobs:
   research:
@@ -31,9 +35,24 @@ jobs:
         run: npm run blog:research
         
       - name: Commit Research Report
+        id: commit
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add data/research/
-          git commit -m "Add deep research report for: ${{ github.event.inputs.topic }}"
+          # Escape topic for commit message
+          MSG="Add deep research report for: ${{ github.event.inputs.topic }}"
+          git commit -m "$MSG"
           git push
+          
+      - name: Post-Research Article Generation
+        env:
+          BASE_URL: ${{ secrets.NEXT_PUBLIC_BASE_URL }}
+          TOPIC: ${{ github.event.inputs.topic }}
+          TYPOLOGY: ${{ github.event.inputs.typology }}
+        run: |
+          # Trigger Vercel to write the article now that the report is in the repo
+          # We use the 'run' endpoint which is now updated to handle existing reports
+          REPORT_FILE=$(ls -t data/research/*.md | head -n 1)
+          FILENAME=$(basename $REPORT_FILE)
+          curl -X GET "$BASE_URL/api/blog/run?typology=$TYPOLOGY&researchMode=deep&researchFile=$FILENAME"
