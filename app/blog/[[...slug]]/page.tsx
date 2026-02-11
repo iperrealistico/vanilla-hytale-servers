@@ -4,8 +4,10 @@ import { BlogLayout, PostList, PostDetail } from '@/blog-module/ui/components';
 import { FileStorageAdapter } from '@/blog-module/adapters/storage/file';
 import { blogConfig } from '@/aiBlog.config';
 
-// Change to SupabaseStorageAdapter(blogConfig) if using Supabase
-const storage = new FileStorageAdapter('./data/blog');
+import path from 'path';
+
+// Use process.cwd() to resolve path correctly on Vercel
+const storage = new FileStorageAdapter(path.join(process.cwd(), 'data/blog'));
 
 export default async function BlogPage({ params }: { params: Promise<{ slug?: string[] }> }) {
     const { slug } = await params;
@@ -25,7 +27,11 @@ export default async function BlogPage({ params }: { params: Promise<{ slug?: st
         const posts = await storage.listPosts({ category: slug[1] });
         return (
             <BlogLayout config={blogConfig}>
-                <h2 className="text-2xl font-bold mb-8">Category: {slug[1]}</h2>
+                <div className="mb-10 text-center">
+                    <h2 className="text-3xl font-black tracking-tight" style={{ fontFamily: 'var(--h-font)' }}>
+                        Category: <span className="text-[var(--accent)]">{slug[1]}</span>
+                    </h2>
+                </div>
                 <PostList posts={posts} basePath="/blog" />
             </BlogLayout>
         );
@@ -36,7 +42,7 @@ export default async function BlogPage({ params }: { params: Promise<{ slug?: st
     if (!post) return notFound();
 
     return (
-        <BlogLayout config={blogConfig}>
+        <BlogLayout config={blogConfig} isPost={true}>
             <PostDetail post={post} />
         </BlogLayout>
     );

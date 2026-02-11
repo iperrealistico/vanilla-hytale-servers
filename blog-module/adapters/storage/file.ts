@@ -10,7 +10,12 @@ export class FileStorageAdapter implements StorageAdapter {
   }
 
   private async ensureDir() {
-    await fs.mkdir(this.dataDir, { recursive: true });
+    try {
+      await fs.mkdir(this.dataDir, { recursive: true });
+    } catch (e) {
+      // On Vercel this might fail because it's read-only, 
+      // but if the dir already exists it's fine.
+    }
   }
 
   async getPostBySlug(slug: string): Promise<Post | null> {
