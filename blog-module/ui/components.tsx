@@ -162,6 +162,9 @@ export const PostList = ({ posts, basePath }: { posts: any[], basePath: string }
   );
 };
 
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+
 export const PostDetail = ({ post }: { post: any }) => {
   return (
     <div className="max-w-3xl mx-auto">
@@ -184,11 +187,11 @@ export const PostDetail = ({ post }: { post: any }) => {
       )}
 
       <div className="panel p-8 md:p-12 mb-12">
-        <div
-          className="blog-content prose prose-invert max-w-none text-gray-300 leading-relaxed space-y-6"
-          dangerouslySetInnerHTML={{ __html: post.content }}
-          style={{ fontSize: '18px' }}
-        />
+        <div className="blog-content prose prose-invert max-w-none text-gray-300 leading-relaxed" style={{ fontSize: '18px' }}>
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>
+            {post.content}
+          </ReactMarkdown>
+        </div>
       </div>
 
       {post.backlinks && post.backlinks.length > 0 && (

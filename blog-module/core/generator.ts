@@ -189,14 +189,19 @@ export class Generator {
         seoIntensity > 7 ? "- Aggressively optimize. Use the main keyword in H1, first paragraph, and H2s. Keep density high." :
           "- Balance readability with keyword usage. Include keyword in title and opening."}
 
-      The post should be in Markdown format.
-      Include a title, an excerpt, and the main content.
+      FORMATTING RULES (CRITICAL):
+      1. Use standard Markdown for everything.
+      2. Use ## and ### for sections. NEVER use <h1> as it's provided by the layout.
+      3. Use **bold text** for emphasis.
+      4. Use bullet points or numbered lists for features or steps.
+      5. Use meaningful paragraphs.
+
       Target word count: ${this.config.content.lengthTargets?.[typology] || 800} words.
       
       Return a JSON object with:
       - title: The final headline
       - excerpt: A catchy 1-2 sentence summary
-      - content: The full markdown content
+      - content: The full markdown content (start with a strong hook, then ## Headings)
       - slug: A URL-friendly slug (style: ${this.config.content.slugStyle})
     `;
 

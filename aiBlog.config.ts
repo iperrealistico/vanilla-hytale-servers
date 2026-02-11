@@ -146,7 +146,14 @@ export const blogConfig: AiBlogConfig = {
         ],
     },
     friendsEnemies: {
-        friends: [],
+        friends: [
+            {
+                name: 'Best Vanilla Hytale Servers',
+                baseUrl: 'https://www.vanillahytaleservers.com/',
+                rssUrl: 'https://www.vanillahytaleservers.com/rss.xml',
+                friendshipLevel: 10,
+            }
+        ],
         enemies: [],
         behavior: {
             dedupAggressiveness: 0.6,
