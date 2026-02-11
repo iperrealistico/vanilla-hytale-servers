@@ -109,7 +109,7 @@ export const blogConfig: AiBlogConfig = {
             // Weekly Schedule: 4 Posts/Week
             {
                 name: 'Monday News',
-                typology: 'news',
+                typology: 'AUTO',
                 cron: '0 10 * * 1', // Every Monday at 10:00
                 researchMode: 'deep',
                 timezone: 'UTC',
@@ -118,7 +118,7 @@ export const blogConfig: AiBlogConfig = {
             },
             {
                 name: 'Wednesday Spotlight',
-                typology: 'spotlight',
+                typology: 'AUTO',
                 cron: '0 10 * * 3', // Every Wednesday at 10:00
                 researchMode: 'deep', // Uses the deep research worker
                 timezone: 'UTC',
@@ -127,7 +127,7 @@ export const blogConfig: AiBlogConfig = {
             },
             {
                 name: 'Friday Guide',
-                typology: 'guide',
+                typology: 'AUTO',
                 cron: '0 10 * * 5', // Every Friday at 10:00
                 researchMode: 'deep',
                 timezone: 'UTC',
@@ -136,7 +136,7 @@ export const blogConfig: AiBlogConfig = {
             },
             {
                 name: 'Sunday Updates',
-                typology: 'patch_notes',
+                typology: 'AUTO',
                 cron: '0 10 * * 0', // Every Sunday at 10:00
                 researchMode: 'deep',
                 timezone: 'UTC',
