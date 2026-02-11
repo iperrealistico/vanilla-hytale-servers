@@ -1592,3 +1592,33 @@ footer {
     grid-column: auto;
   }
 }
+
+/* AI Blog Engine Polish */
+.dot-pulse {
+  position: relative;
+  left: -9999px;
+  width: 4px;
+  height: 4px;
+  border-radius: 5px;
+  background-color: var(--accent);
+  color: var(--accent);
+  box-shadow: 9999px 0 0 0 var(--accent);
+  animation: dot-pulse 1.5s infinite linear;
+  margin-left: 25px;
+  display: inline-block;
+}
+
+@keyframes dot-pulse {
+  0% {
+    box-shadow: 9999px 0 0 -5px var(--accent);
+  }
+
+  30% {
+    box-shadow: 9999px 0 0 2px var(--accent);
+  }
+
+  60%,
+  100% {
+    box-shadow: 9999px 0 0 -5px var(--accent);
+  }
+}
