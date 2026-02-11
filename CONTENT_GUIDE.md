@@ -18,11 +18,13 @@ The website content is now fully parameterized and driven by a single JSON sourc
 ## 2. Admin Panel
 - **URL**: `/admin`
 - **Login**: Accessed via password set in `ADMIN_PASSWORD`.
-- **Editing**:
-  - **Content Tab**: Automatically generates editors for all fields in `site.json`.
-  - **Arrays**: You can Add (+) or Remove (x) items for Navigation, Servers, FAQs, etc.
+- **v2.0 Simplified Interface**:
+  - **Servers Tab**: Dedicated screen for managing the server list. Use **Up/Down arrows** to reorder servers easily.
+  - **Page Content**: Curated editors for Hero, Methodology, FAQ, etc. Image fields now have a **"Browse" button** to select from uploaded images visually.
+  - **Media Library**: View uploaded images. Upload new ones using the "Upload Image" button.
+  - **Settings & SEO**: Edit metadata, header links, and footer content.
+  - **Raw JSON**: Advanced mode for direct JSON editing (use with caution).
   - **Publish**: "Publish to GitHub" commits changes to the repo, triggering a Vercel rebuild.
-- **Uploads**: Manage images in `public/` via the "Uploads" tab.
 
 ## 3. Environment Variables
 Required for the admin panel and publishing flow:
