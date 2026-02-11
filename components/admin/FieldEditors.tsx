@@ -142,16 +142,34 @@ export function FieldEditor({ label, value, onChange, path = '', manifest }: Fie
     }
 
     if (type === 'object' && !Array.isArray(value)) {
+        const [isCollapsed, setIsCollapsed] = React.useState(true);
+        const childCount = Object.keys(value).length;
+
         return (
             <div style={{
                 background: 'rgba(255,255,255,0.03)',
-                padding: '15px',
+                padding: '12px 15px',
                 borderRadius: '8px',
                 border: '1px solid var(--stroke)',
-                marginBottom: '20px'
+                marginBottom: '15px'
             }}>
-                <h4 style={{ margin: '0 0 15px', color: 'var(--accent)', fontSize: '14px', textTransform: 'uppercase' }}>{label}</h4>
-                {Object.keys(value).map((key) => (
+                <div
+                    onClick={() => setIsCollapsed(!isCollapsed)}
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        cursor: 'pointer',
+                        marginBottom: isCollapsed ? '0' : '15px'
+                    }}
+                >
+                    <h4 style={{ margin: 0, color: 'var(--accent)', fontSize: '14px', textTransform: 'uppercase' }}>
+                        {label} <span style={{ fontSize: '10px', color: 'var(--muted)', marginLeft: '5px' }}>({childCount} fields)</span>
+                    </h4>
+                    <span style={{ color: 'var(--muted)', fontSize: '12px' }}>{isCollapsed ? '▶ Show' : '▼ Hide'}</span>
+                </div>
+
+                {!isCollapsed && Object.keys(value).map((key) => (
                     <FieldEditor
                         key={key}
                         label={key}
