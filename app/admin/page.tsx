@@ -1,12 +1,12 @@
 import { redirect } from 'next/navigation';
 import { verifyAuth } from '@/lib/auth';
 import { getSiteContent, getUploadsManifest } from '@/lib/content';
-import AdminDashboard from '@/app/secret-admin-gate/AdminDashboard';
+import AdminDashboard from '@/app/admin/AdminDashboard';
 
 export default async function AdminPage() {
     const isAuth = await verifyAuth();
     if (!isAuth) {
-        redirect('/secret-admin-gate/login');
+        redirect('/admin/login');
     }
 
     const content = await getSiteContent();

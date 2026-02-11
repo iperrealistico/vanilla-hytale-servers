@@ -101,21 +101,21 @@ export default function AdminDashboard({ initialContent, initialManifest }: { in
             {activeTab === 'content' && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
                     <section style={{ background: 'var(--bg-2)', padding: '20px', borderRadius: '12px', border: '1px solid var(--stroke)' }}>
-                        <h2 style={{ marginTop: 0 }}>Meta & Hero (Italian)</h2>
+                        <h2 style={{ marginTop: 0 }}>Meta & Hero</h2>
                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                                 <label>Title</label>
                                 <input
-                                    value={content.it.meta.title}
-                                    onChange={(e) => setContent({ ...content, it: { ...content.it, meta: { ...content.it.meta, title: e.target.value } } })}
+                                    value={content.meta.title}
+                                    onChange={(e) => setContent({ ...content, meta: { ...content.meta, title: e.target.value } })}
                                     style={{ padding: '10px', borderRadius: '8px', border: '1px solid var(--stroke)', background: 'var(--bg)', color: 'white' }}
                                 />
                             </div>
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                                 <label>Hero Title</label>
                                 <input
-                                    value={content.it.hero.title}
-                                    onChange={(e) => setContent({ ...content, it: { ...content.it, hero: { ...content.it.hero, title: e.target.value } } })}
+                                    value={content.hero.title}
+                                    onChange={(e) => setContent({ ...content, hero: { ...content.hero, title: e.target.value } })}
                                     style={{ padding: '10px', borderRadius: '8px', border: '1px solid var(--stroke)', background: 'var(--bg)', color: 'white' }}
                                 />
                             </div>
@@ -123,18 +123,18 @@ export default function AdminDashboard({ initialContent, initialManifest }: { in
                     </section>
 
                     <section style={{ background: 'var(--bg-2)', padding: '20px', borderRadius: '12px', border: '1px solid var(--stroke)' }}>
-                        <h2 style={{ marginTop: 0 }}>Servers (Italian)</h2>
+                        <h2 style={{ marginTop: 0 }}>Servers</h2>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                            {content.it.servers.items.map((server: any, idx: number) => (
+                            {content.servers.items.map((server: any, idx: number) => (
                                 <div key={idx} style={{ padding: '15px', border: '1px solid var(--stroke)', borderRadius: '8px' }}>
-                                    <h4 style={{ margin: '0 0 10px' }}>Server #{idx + 1}: {server.name}</h4>
+                                    <h4 style={{ margin: '0 0 10px' }}>Server #{idx + 1}: {server.title}</h4>
                                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '10px' }}>
                                         <input
-                                            value={server.name}
+                                            value={server.title}
                                             onChange={(e) => {
-                                                const newItems = [...content.it.servers.items];
-                                                newItems[idx] = { ...server, name: e.target.value };
-                                                setContent({ ...content, it: { ...content.it, servers: { ...content.it.servers, items: newItems } } });
+                                                const newItems = [...content.servers.items];
+                                                newItems[idx] = { ...server, title: e.target.value };
+                                                setContent({ ...content, servers: { ...content.servers, items: newItems } });
                                             }}
                                             placeholder="Server Name"
                                             style={{ padding: '8px', borderRadius: '6px', border: '1px solid var(--stroke)', background: 'var(--bg)', color: 'white' }}
@@ -142,9 +142,9 @@ export default function AdminDashboard({ initialContent, initialManifest }: { in
                                         <input
                                             value={server.ip}
                                             onChange={(e) => {
-                                                const newItems = [...content.it.servers.items];
+                                                const newItems = [...content.servers.items];
                                                 newItems[idx] = { ...server, ip: e.target.value };
-                                                setContent({ ...content, it: { ...content.it, servers: { ...content.it.servers, items: newItems } } });
+                                                setContent({ ...content, servers: { ...content.servers, items: newItems } });
                                             }}
                                             placeholder="Server IP"
                                             style={{ padding: '8px', borderRadius: '6px', border: '1px solid var(--stroke)', background: 'var(--bg)', color: 'white' }}
@@ -152,9 +152,9 @@ export default function AdminDashboard({ initialContent, initialManifest }: { in
                                         <input
                                             value={server.subtitle}
                                             onChange={(e) => {
-                                                const newItems = [...content.it.servers.items];
+                                                const newItems = [...content.servers.items];
                                                 newItems[idx] = { ...server, subtitle: e.target.value };
-                                                setContent({ ...content, it: { ...content.it, servers: { ...content.it.servers, items: newItems } } });
+                                                setContent({ ...content, servers: { ...content.servers, items: newItems } });
                                             }}
                                             placeholder="Subtitle"
                                             style={{ padding: '8px', borderRadius: '6px', border: '1px solid var(--stroke)', background: 'var(--bg)', color: 'white' }}
@@ -164,7 +164,6 @@ export default function AdminDashboard({ initialContent, initialManifest }: { in
                             ))}
                         </div>
                     </section>
-
                     <p style={{ color: 'var(--muted)' }}>Note: This is a simplified interface. Use the <strong>Raw JSON</strong> tab for full multi-language editing and complex fields.</p>
                 </div>
             )}

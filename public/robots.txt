@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /secret-admin-gate
+Disallow: /admin
 
 Sitemap: https://www.vanillahytaleservers.com/sitemap.xml

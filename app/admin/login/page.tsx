@@ -19,7 +19,7 @@ export default function LoginPage() {
         });
 
         if (res.ok) {
-            window.location.href = '/secret-admin-gate';
+            window.location.href = '/admin';
         } else {
             setError('Invalid password');
         }

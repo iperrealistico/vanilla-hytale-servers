@@ -5,7 +5,7 @@
 The admin panel is located at a non-obvious URL for security:
 
 ```
-https://yourdomain.com/secret-admin-gate
+https://yourdomain.com/admin
 ```
 
 Replace `yourdomain.com` with your actual domain (e.g., `vanillahytaleservers.com`).
