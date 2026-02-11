@@ -45,10 +45,38 @@ export const createHandlers = (config: AiBlogConfig) => {
     run: async (req: any) => {
       const { searchParams } = new URL(req.url);
       const typology = searchParams.get('typology') || 'news';
+      const researchMode = searchParams.get('researchMode') || undefined;
 
-      const generator = getGenerator();
-      const post = await generator.generate(typology);
-      return NextResponse.json({ success: true, post });
+      // SSE Setup
+      const encoder = new TextEncoder();
+      const stream = new ReadableStream({
+        async start(controller) {
+          const send = (data: any) => {
+            controller.enqueue(encoder.encode(`data: ${JSON.stringify(data)}\n\n`));
+          };
+
+          try {
+            const generator = getGenerator();
+            const post = await generator.generate(typology, {
+              researchMode,
+              onProgress: (status) => send({ type: 'progress', status })
+            });
+            send({ type: 'complete', post });
+          } catch (error: any) {
+            send({ type: 'error', message: error.message });
+          } finally {
+            controller.close();
+          }
+        },
+      });
+
+      return new Response(stream, {
+        headers: {
+          'Content-Type': 'text/event-stream',
+          'Cache-Control': 'no-cache',
+          'Connection': 'keep-alive',
+        },
+      });
     },
     sitemap: async (req: any) => {
       // Inline simple sitemap generation

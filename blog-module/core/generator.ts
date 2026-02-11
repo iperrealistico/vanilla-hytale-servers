@@ -28,41 +28,52 @@ export class Generator {
     return this.storage;
   }
 
-  async generate(typology: string, options?: { seoLevel?: number | 'RANDOM', researchMode?: string }): Promise<Post> {
-    console.log(`Starting generation for typology: ${typology}`);
+  async generate(typology: string, options?: { seoLevel?: number | 'RANDOM', researchMode?: string, onProgress?: (status: string) => void }): Promise<Post> {
+    const report = (msg: string) => {
+      console.log(`[Generator] ${msg}`);
+      if (options?.onProgress) options.onProgress(msg);
+    };
+
+    report(`Starting generation for typology: ${typology}`);
 
     // 1. Topic Selection
+    report("Selecting a fresh topic...");
     let topic = await this.selectTopic(typology);
 
     // 2. Semantic Overlap Check (if Supabase is enabled)
     if (this.config.storage.adapter === 'supabase') {
+      report("Checking for semantic uniqueness...");
       const isUnique = await this.checkSemanticUniqueness(topic.title);
       if (!isUnique) {
-        console.log(`Semantic overlap detected for: ${topic.title}. Retrying...`);
+        report(`Semantic overlap detected for: ${topic.title}. Retrying...`);
         return this.generate(typology, options); // Recursive retry
       }
     }
     // Check overlap with friends/enemies
     let attempts = 0;
     while (attempts < 3 && await this.competitors.checkOverlap(topic.title, typology)) {
-      console.log(`Topic overlap detected for: ${topic.title}. Retrying...`);
+      report(`Topic overlap detected for: ${topic.title}. Retrying...`);
       topic = await this.selectTopic(typology);
       attempts++;
     }
 
-    console.log(`Final topic: ${topic.title}`);
+    report(`Final topic: ${topic.title}`);
 
     // 2. Research
     const researchMode = options?.researchMode || 'internal';
+    report(`Performing research (Mode: ${researchMode})...`);
     const research = await this.doResearch(topic.title, researchMode);
 
     // 3. Draft Generation
+    report("Generating article draft...");
     const draft = await this.generateDraft(topic.title, research, typology, options?.seoLevel);
 
     // 4. Friends/Enemies Logic (Backlinks)
+    report("Applying community backlinks...");
     const finalizedDraft = await this.applyCompetitorLogic(draft);
 
     // 5. Save & Embed
+    report("Saving post to storage...");
     const savedPost = await this.storage.savePost({
       ...(finalizedDraft as Post),
       category: typology,
@@ -71,10 +82,12 @@ export class Generator {
 
     // Save Embedding if supported
     if (this.config.storage.adapter === 'supabase' && this.storage.saveEmbedding && this.ai.generateEmbedding) {
+      report("Generating and saving search embedding...");
       const embedding = await this.ai.generateEmbedding(savedPost.title + ' ' + savedPost.excerpt);
       await this.storage.saveEmbedding(savedPost.slug, embedding);
     }
 
+    report("Generation complete!");
     return savedPost;
   }
 
