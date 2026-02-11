@@ -3,10 +3,15 @@ import "./globals.css";
 
 import Script from "next/script";
 
-export const metadata: Metadata = {
-  title: "Best Vanilla Hytale Servers (2026) | Curated List + IPs",
-  description: "Editor-ranked vanilla Hytale servers. Curated vanilla Hytale server list with IPs, rules, gameplay footprint, no pay-to-win notes, and last-checked dates.",
-};
+import { getSiteContent } from "@/lib/content";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const content = await getSiteContent();
+  return {
+    title: content.meta.title,
+    description: content.meta.description,
+  };
+}
 
 export default function RootLayout({
   children,

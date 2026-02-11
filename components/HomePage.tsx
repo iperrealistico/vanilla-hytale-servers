@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React from 'react';
 import ServerCard from '@/components/ServerCard';
 import ClientEffects from '@/components/ClientEffects';
@@ -8,16 +9,9 @@ export default function HomePage({ content }: { content: SiteContent }) {
     return (
         <>
             <div className="bg-floats" aria-hidden="true">
-                <img className="bg-float" src="/img/hytale/hytale_vanilla_servers_list_11.jpeg" alt="" loading="lazy" decoding="async"
-                    style={{ top: '38vh', left: '-6vw', transform: 'translate3d(0,0,0) rotate(-6deg) scale(1.05)' }} />
-                <img className="bg-float" src="/img/hytale/hytale_vanilla_servers_list_12.jpeg" alt="" loading="lazy" decoding="async"
-                    style={{ top: '132vh', right: '-10vw', width: 'min(820px, 66vw)', transform: 'translate3d(0,0,0) rotate(7deg) scale(1.04)' }} />
-                <img className="bg-float" src="/img/hytale/hytale_vanilla_servers_list_13.jpeg" alt="" loading="lazy" decoding="async"
-                    style={{ top: '242vh', left: '-8vw', width: 'min(720px, 60vw)', transform: 'translate3d(0,0,0) rotate(-4deg) scale(1.03)' }} />
-                <img className="bg-float" src="/img/hytale/hytale_vanilla_servers_list_14.jpeg" alt="" loading="lazy" decoding="async"
-                    style={{ top: '372vh', right: '-10vw', width: 'min(860px, 68vw)', transform: 'translate3d(0,0,0) rotate(6deg) scale(1.04)' }} />
-                <img className="bg-float" src="/img/hytale/hytale_vanilla_servers_list_10.jpeg" alt="" loading="lazy" decoding="async"
-                    style={{ top: '512vh', left: '-6vw', width: 'min(760px, 62vw)', transform: 'translate3d(0,0,0) rotate(-7deg) scale(1.05)' }} />
+                {content.hero.backgroundFloats.map((float, i) => (
+                    <img key={i} className="bg-float" src={float.src} alt="" loading="lazy" decoding="async" style={float.style} />
+                ))}
             </div>
 
             <header className="site-header" role="banner">
@@ -36,13 +30,16 @@ export default function HomePage({ content }: { content: SiteContent }) {
                         <nav className="main-nav" aria-label="Main navigation">
                             <ThemeToggle />
                             <div className="nav-divider" aria-hidden="true" style={{ width: '1px', height: '20px', background: 'var(--stroke)', margin: '0 5px' }}></div>
-                            <a className="nav-text pressable" href="#servers">Servers</a>
-                            <a className="nav-text pressable" href="#faq">FAQ</a>
-                            <a className="nav-text pressable" href="/blog">Blog</a>
-                            <a className="btn btn-primary tilt pressable" data-tilt-strength="0.40" href="#suggest">
-                                <i className="fa-solid fa-paper-plane" aria-hidden="true"></i>
-                                Submit
-                            </a>
+                            {content.header.nav.map((link, i) => (
+                                link.isButton ? (
+                                    <a key={i} className="btn btn-primary tilt pressable" data-tilt-strength="0.40" href={link.url}>
+                                        {link.icon && <i className={link.icon} aria-hidden="true"></i>}
+                                        {link.label}
+                                    </a>
+                                ) : (
+                                    <a key={i} className="nav-text pressable" href={link.url}>{link.label}</a>
+                                )
+                            ))}
                         </nav>
                     </div>
                 </div>
@@ -71,18 +68,12 @@ export default function HomePage({ content }: { content: SiteContent }) {
                                 </div>
 
                                 <div className="hero-cta" aria-label="Primary actions">
-                                    <a className="btn btn-primary tilt pressable" data-tilt-strength="0.50" href="#servers">
-                                        <i className="fa-solid fa-arrow-down" aria-hidden="true"></i>
-                                        Jump to servers
-                                    </a>
-                                    <a className="btn btn-secondary tilt pressable" data-tilt-strength="0.50" href="#faq">
-                                        <i className="fa-solid fa-circle-question" aria-hidden="true"></i>
-                                        Vanilla FAQ
-                                    </a>
-                                    <a className="btn btn-secondary tilt pressable" data-tilt-strength="0.50" href="#suggest">
-                                        <i className="fa-solid fa-paper-plane" aria-hidden="true"></i>
-                                        Submit
-                                    </a>
+                                    {content.hero.cta.map((btn, i) => (
+                                        <a key={i} className={`btn ${btn.class} tilt pressable`} data-tilt-strength={btn.tilt || "0.50"} href={btn.url}>
+                                            {btn.icon && <i className={btn.icon} aria-hidden="true"></i>}
+                                            {btn.label}
+                                        </a>
+                                    ))}
                                 </div>
                             </div>
                         </div>
@@ -93,7 +84,7 @@ export default function HomePage({ content }: { content: SiteContent }) {
                     <div className="container">
                         <h2 id="servers-title" className="sr-only">{content.servers.title}</h2>
                         <div className="cards">
-                            {content.servers.items.map((item: any, i: number) => (
+                            {content.servers.items.map((item, i) => (
                                 <ServerCard key={i} item={item} />
                             ))}
                         </div>
@@ -124,13 +115,13 @@ export default function HomePage({ content }: { content: SiteContent }) {
                                     <button
                                         className="btn btn-primary pressable contact-btn"
                                         type="button"
-                                        data-email="hello@vanillahytaleservers.com"
-                                        aria-label="Copy hello@vanillahytaleservers.com"
+                                        data-email={content.methodology.contact.email}
+                                        aria-label={`Copy ${content.methodology.contact.email}`}
                                     >
                                         <i className="fa-solid fa-envelope" aria-hidden="true"></i>
                                         <span className="btn-swap" aria-hidden="true">
-                                            <span className="btn-label btn-label--base">Doubts?</span>
-                                            <span className="btn-label btn-label--email">hello@vanillahytaleservers.com</span>
+                                            <span className="btn-label btn-label--base">{content.methodology.contact.label}</span>
+                                            <span className="btn-label btn-label--email">{content.methodology.contact.email}</span>
                                         </span>
                                     </button>
                                 </div>
@@ -142,7 +133,7 @@ export default function HomePage({ content }: { content: SiteContent }) {
                                 <h3>
                                     <span className="title-with-icon">
                                         <i className="fa-solid fa-ban" aria-hidden="true"></i>
-                                        <span>Exclusion rules (must pass)</span>
+                                        <span>{content.methodology.sectionHeaders.exclusionRules}</span>
                                     </span>
                                 </h3>
                                 <ul style={{ margin: 0, paddingLeft: '18px', color: 'var(--muted)' }}>
@@ -156,7 +147,7 @@ export default function HomePage({ content }: { content: SiteContent }) {
                                 <h3>
                                     <span className="title-with-icon">
                                         <i className="fa-solid fa-chart-column" aria-hidden="true"></i>
-                                        <span>Editor score (0 to 100)</span>
+                                        <span>{content.methodology.sectionHeaders.scoreCategories}</span>
                                     </span>
                                 </h3>
                                 <ul style={{ margin: 0, paddingLeft: '18px', color: 'var(--muted)' }}>
@@ -173,9 +164,9 @@ export default function HomePage({ content }: { content: SiteContent }) {
                     <div className="filmstrip embla" data-embla>
                         <div className="embla__viewport" data-embla-viewport>
                             <div className="embla__container">
-                                {['6', '7', '8', '9', '5'].map((num) => (
-                                    <div key={num} className="embla__slide">
-                                        <img className="embla__slide__img" src={`/img/hytale/hytale_vanilla_servers_list_${num}.jpeg`} alt="Hytale screenshot" loading="lazy" decoding="async" width="1600" height="900" />
+                                {content.filmstrip.images.map((img, i) => (
+                                    <div key={i} className="embla__slide">
+                                        <img className="embla__slide__img" src={img.src} alt={img.alt} loading="lazy" decoding="async" width="1600" height="900" />
                                     </div>
                                 ))}
                             </div>
@@ -206,7 +197,7 @@ export default function HomePage({ content }: { content: SiteContent }) {
                         </div>
 
                         <div className="panel tilt idle" data-tilt-strength="0.40" data-reveal>
-                            {content.faq.items.map((item: any, i: number) => (
+                            {content.faq.items.map((item, i) => (
                                 <details key={i} open={i === 0}>
                                     <summary>{item.question}</summary>
                                     <div className="details-content" dangerouslySetInnerHTML={{ __html: item.answer }}></div>
@@ -241,12 +232,12 @@ export default function HomePage({ content }: { content: SiteContent }) {
                                         className="btn btn-primary pressable contact-btn"
                                         id="contactBtn"
                                         type="button"
-                                        data-email="hello@vanillahytaleservers.com"
+                                        data-email={content.suggest.cta.email}
                                     >
                                         <i className="fa-solid fa-envelope" aria-hidden="true"></i>
                                         <span className="btn-swap" aria-hidden="true">
-                                            <span className="btn-label btn-label--base">Contact us</span>
-                                            <span className="btn-label btn-label--email">hello@vanillahytaleservers.com</span>
+                                            <span className="btn-label btn-label--base">{content.suggest.cta.label}</span>
+                                            <span className="btn-label btn-label--email">{content.suggest.cta.email}</span>
                                         </span>
                                     </button>
                                 </div>
@@ -257,7 +248,7 @@ export default function HomePage({ content }: { content: SiteContent }) {
                             <h3>
                                 <span className="title-with-icon">
                                     <i className="fa-solid fa-list-check" aria-hidden="true"></i>
-                                    <span>Requirements</span>
+                                    <span>{content.suggest.requirementsTitle}</span>
                                 </span>
                             </h3>
                             <ul style={{ margin: 0, paddingLeft: '18px', color: 'var(--muted)' }}>
@@ -279,9 +270,11 @@ export default function HomePage({ content }: { content: SiteContent }) {
                             <p className="footer-text" style={{ marginTop: '10px' }} dangerouslySetInnerHTML={{ __html: content.footer.disclaimer }}></p>
                         </div>
                         <div className="footer-links" aria-label="Footer links">
-                            <a className="link-pill tilt pressable" data-tilt-strength="0.55" href="#servers"><i className="fa-solid fa-arrow-up" aria-hidden="true"></i>Servers</a>
-                            <a className="link-pill tilt pressable" data-tilt-strength="0.55" href="#methodology"><i className="fa-solid fa-scale-balanced" aria-hidden="true"></i>Scoring</a>
-                            <a className="link-pill tilt pressable" data-tilt-strength="0.55" href="#suggest"><i className="fa-solid fa-paper-plane" aria-hidden="true"></i>Submit</a>
+                            {content.footer.links.map((link, i) => (
+                                <a key={i} className="link-pill tilt pressable" data-tilt-strength="0.55" href={link.url}>
+                                    <i className={link.icon} aria-hidden="true"></i>{link.label}
+                                </a>
+                            ))}
                         </div>
                     </div>
                 </div>

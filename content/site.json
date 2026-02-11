@@ -11,12 +11,101 @@
   },
   "header": {
     "brandSmall": "VanillaHytaleServers.com",
-    "brandSubtitle": "Curated editor picks"
+    "brandSubtitle": "Curated editor picks",
+    "nav": [
+      {
+        "label": "Servers",
+        "url": "#servers"
+      },
+      {
+        "label": "FAQ",
+        "url": "#faq"
+      },
+      {
+        "label": "Blog",
+        "url": "/blog"
+      },
+      {
+        "label": "Submit",
+        "url": "#suggest",
+        "isButton": true,
+        "icon": "fa-solid fa-paper-plane"
+      }
+    ]
   },
   "hero": {
     "title": "Vanilla Hytale Servers",
     "description": "\n                A curated <strong>vanilla Hytale server list</strong> with five editor-ranked picks. Discover the <strong>best vanilla Hytale servers</strong> for SMP and survival,\n                compare rules and gameplay footprint, check monetization and <strong>no pay-to-win</strong> notes, and copy the <strong>Hytale server IP</strong> to join.\n                Every listing includes an editor score, a last-checked date, and a clear review of what stays vanilla and what is changed.\n                When players search for <strong>vanilla Hytale servers</strong>, they usually want the real experience: explore, gather, craft, and build, without mods replacing survival.\n                This list focuses on <strong>vanilla-first</strong> servers and clearly documents each server’s gameplay footprint so you can pick the right <strong>vanilla Hytale server</strong> fast.\n              ",
-    "lastUpdated": "2025-12-19"
+    "lastUpdated": "2025-12-19",
+    "backgroundFloats": [
+      {
+        "src": "/img/hytale/hytale_vanilla_servers_list_11.jpeg",
+        "style": {
+          "top": "38vh",
+          "left": "-6vw",
+          "transform": "translate3d(0,0,0) rotate(-6deg) scale(1.05)"
+        }
+      },
+      {
+        "src": "/img/hytale/hytale_vanilla_servers_list_12.jpeg",
+        "style": {
+          "top": "132vh",
+          "right": "-10vw",
+          "width": "min(820px, 66vw)",
+          "transform": "translate3d(0,0,0) rotate(7deg) scale(1.04)"
+        }
+      },
+      {
+        "src": "/img/hytale/hytale_vanilla_servers_list_13.jpeg",
+        "style": {
+          "top": "242vh",
+          "left": "-8vw",
+          "width": "min(720px, 60vw)",
+          "transform": "translate3d(0,0,0) rotate(-4deg) scale(1.03)"
+        }
+      },
+      {
+        "src": "/img/hytale/hytale_vanilla_servers_list_14.jpeg",
+        "style": {
+          "top": "372vh",
+          "right": "-10vw",
+          "width": "min(860px, 68vw)",
+          "transform": "translate3d(0,0,0) rotate(6deg) scale(1.04)"
+        }
+      },
+      {
+        "src": "/img/hytale/hytale_vanilla_servers_list_10.jpeg",
+        "style": {
+          "top": "512vh",
+          "left": "-6vw",
+          "width": "min(760px, 62vw)",
+          "transform": "translate3d(0,0,0) rotate(-7deg) scale(1.05)"
+        }
+      }
+    ],
+    "cta": [
+      {
+        "label": "Jump to servers",
+        "url": "#servers",
+        "icon": "fa-solid fa-arrow-down",
+        "class": "btn-primary",
+        "tilt": "0.50"
+      },
+      {
+        "label": "Vanilla FAQ",
+        "url": "#faq",
+        "icon": "fa-solid fa-circle-question",
+        "class": "btn-secondary",
+        "tilt": "0.50"
+      },
+      {
+        "label": "Submit",
+        "url": "#suggest",
+        "icon": "fa-solid fa-paper-plane",
+        "class": "btn-secondary",
+        "tilt": "0.50"
+      }
+    ]
   },
   "servers": {
     "title": "Vanilla Hytale servers list",
@@ -177,6 +266,10 @@
       "<strong>Contact exists:</strong> at least an active Discord or website.",
       "<strong>Verifiable access:</strong> IP and availability can be checked (we show “last checked”)."
     ],
+    "contact": {
+      "label": "Doubts?",
+      "email": "hello@vanillahytaleservers.com"
+    },
     "scoreCategories": [
       "<strong>35</strong> Vanilla purity",
       "<strong>20</strong> Fairness and no P2W",
@@ -184,6 +277,34 @@
       "<strong>15</strong> Rules and moderation",
       "<strong>10</strong> Community and longevity",
       "<strong>5</strong> Transparency"
+    ],
+    "sectionHeaders": {
+      "exclusionRules": "Exclusion rules (must pass)",
+      "scoreCategories": "Editor score (0 to 100)"
+    }
+  },
+  "filmstrip": {
+    "images": [
+      {
+        "src": "/img/hytale/hytale_vanilla_servers_list_6.jpeg",
+        "alt": "Hytale screenshot"
+      },
+      {
+        "src": "/img/hytale/hytale_vanilla_servers_list_7.jpeg",
+        "alt": "Hytale screenshot"
+      },
+      {
+        "src": "/img/hytale/hytale_vanilla_servers_list_8.jpeg",
+        "alt": "Hytale screenshot"
+      },
+      {
+        "src": "/img/hytale/hytale_vanilla_servers_list_9.jpeg",
+        "alt": "Hytale screenshot"
+      },
+      {
+        "src": "/img/hytale/hytale_vanilla_servers_list_5.jpeg",
+        "alt": "Hytale screenshot"
+      }
     ]
   },
   "faq": {
@@ -223,6 +344,7 @@
   "suggest": {
     "title": "Suggest a server (manual review)",
     "description": "\n              If you want to be listed, make it easy for us to verify the server’s vanilla gameplay footprint, rules, stability, and monetization policy.\n              Submit your <strong>vanilla Hytale server</strong> and we will review it for a chance to be featured in this vanilla Hytale servers list.\n              Clear submissions are faster to review: link directly to rules and monetization, and state if you run any convenience systems that affect progression or fairness.\n              If everything checks out, your server can replace an open review slot.\n            ",
+    "requirementsTitle": "Requirements",
     "requirements": [
       "Server name and IP",
       "Region and primary language",
@@ -230,11 +352,32 @@
       "Rules link (grief, PvP, resets)",
       "Monetization policy link (store, perks)",
       "Short vanilla-first statement (what is changed, if anything)"
-    ]
+    ],
+    "cta": {
+      "label": "Contact us",
+      "email": "hello@vanillahytaleservers.com"
+    }
   },
   "footer": {
     "aboutTitle": "About",
     "aboutText": "\n            VanillaHytaleServers.com is a curated, editor-ranked list of vanilla-first Hytale servers. The goal is clarity and comparability, not popularity.\n          ",
-    "disclaimer": "\n            Disclaimer: this site is not affiliated with Hytale or Hypixel Studios. All trademarks belong to their respective owners.\n          "
+    "disclaimer": "\n            Disclaimer: this site is not affiliated with Hytale or Hypixel Studios. All trademarks belong to their respective owners.\n          ",
+    "links": [
+      {
+        "label": "Servers",
+        "url": "#servers",
+        "icon": "fa-solid fa-arrow-up"
+      },
+      {
+        "label": "Scoring",
+        "url": "#methodology",
+        "icon": "fa-solid fa-scale-balanced"
+      },
+      {
+        "label": "Submit",
+        "url": "#suggest",
+        "icon": "fa-solid fa-paper-plane"
+      }
+    ]
   }
 }
