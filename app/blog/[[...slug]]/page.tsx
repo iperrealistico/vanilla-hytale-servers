@@ -42,7 +42,7 @@ export default async function BlogPage({ params }: { params: Promise<{ slug?: st
     if (!post) return notFound();
 
     return (
-        <BlogLayout config={blogConfig} isPost={true}>
+        <BlogLayout config={blogConfig}>
             <PostDetail post={post} />
         </BlogLayout>
     );
