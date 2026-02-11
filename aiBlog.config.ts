@@ -111,7 +111,7 @@ export const blogConfig: AiBlogConfig = {
                 name: 'Monday News',
                 typology: 'news',
                 cron: '0 10 * * 1', // Every Monday at 10:00
-                researchMode: 'web-lite',
+                researchMode: 'deep',
                 timezone: 'UTC',
                 publishImmediately: true,
                 seoLevel: 5,
@@ -129,7 +129,7 @@ export const blogConfig: AiBlogConfig = {
                 name: 'Friday Guide',
                 typology: 'guide',
                 cron: '0 10 * * 5', // Every Friday at 10:00
-                researchMode: 'web-lite',
+                researchMode: 'deep',
                 timezone: 'UTC',
                 publishImmediately: true,
                 seoLevel: 5,
@@ -138,7 +138,7 @@ export const blogConfig: AiBlogConfig = {
                 name: 'Sunday Updates',
                 typology: 'patch_notes',
                 cron: '0 10 * * 0', // Every Sunday at 10:00
-                researchMode: 'internal', // Usually summarizes known info or quick check
+                researchMode: 'deep',
                 timezone: 'UTC',
                 publishImmediately: true,
                 seoLevel: 3,
