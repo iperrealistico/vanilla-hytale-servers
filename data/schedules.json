@@ -5,7 +5,7 @@
     "typology": "AUTO",
     "cron": "0 10 * * 1",
     "researchMode": "deep",
-    "enabled": false,
+    "enabled": true,
     "oneShot": false
   },
   {
@@ -32,7 +32,7 @@
     "typology": "AUTO",
     "cron": "0 10 * * 0",
     "researchMode": "deep",
-    "enabled": true,
+    "enabled": false,
     "oneShot": false
   }
 ]
