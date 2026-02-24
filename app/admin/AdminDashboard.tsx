@@ -95,7 +95,8 @@ export default function AdminDashboard({ initialContent, initialManifest }: { in
             setMessage('Schedules updated successfully!');
             fetchBlogData();
         } else {
-            setMessage('Error updating schedules.');
+            const errData = await res.json().catch(() => ({}));
+            setMessage(`Error updating schedules: ${errData.message || res.statusText}`);
         }
         setSaving(false);
     };

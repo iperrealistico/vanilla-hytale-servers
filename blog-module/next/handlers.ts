@@ -78,12 +78,26 @@ export const createHandlers = (config: AiBlogConfig) => {
 
       if (method === 'POST') {
         const schedules = await req.json();
-        await fs.mkdir(path.dirname(schedulesPath), { recursive: true });
-        await fs.writeFile(schedulesPath, JSON.stringify(schedules, null, 2));
+
+        // Try local write (might fail on Vercel)
+        try {
+          await fs.mkdir(path.dirname(schedulesPath), { recursive: true });
+          await fs.writeFile(schedulesPath, JSON.stringify(schedules, null, 2));
+        } catch (e: any) {
+          console.warn('[Schedules] Local write failed, continuing to GitHub sync:', e.message);
+        }
 
         // Also sync to GitHub for persistence
-        const { commitFiles } = require('@/lib/github');
-        await commitFiles([{ path: 'data/schedules.json', content: JSON.stringify(schedules, null, 2) }]);
+        try {
+          const { commitFiles } = require('@/lib/github');
+          const result = await commitFiles([{ path: 'data/schedules.json', content: JSON.stringify(schedules, null, 2) }]);
+          if (!result.success) {
+            return NextResponse.json({ success: false, message: result.message }, { status: 500 });
+          }
+        } catch (e: any) {
+          console.error('[Schedules] GitHub sync error:', e);
+          return NextResponse.json({ success: false, message: e.message }, { status: 500 });
+        }
 
         return NextResponse.json({ success: true });
       }
