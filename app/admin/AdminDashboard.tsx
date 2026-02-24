@@ -84,27 +84,10 @@ export default function AdminDashboard({ initialContent, initialManifest }: { in
         setSaving(false);
     };
 
-    const handleSaveSchedules = async (newSchedules: any[]) => {
-        setSaving(true);
-        const res = await fetch('/api/blog/schedules', {
-            method: 'POST',
-            body: JSON.stringify(newSchedules),
-            headers: { 'Content-Type': 'application/json' }
-        });
-        if (res.ok) {
-            setMessage('Schedules updated successfully!');
-            fetchBlogData();
-        } else {
-            const errData = await res.json().catch(() => ({}));
-            setMessage(`Error updating schedules: ${errData.message || res.statusText}`);
-        }
-        setSaving(false);
-    };
-
     const handleToggleSchedule = (id: string) => {
         const newSchedules = schedules.map(s => s.id === id ? { ...s, enabled: !s.enabled } : s);
         setSchedules(newSchedules);
-        handleSaveSchedules(newSchedules);
+        // Saved only on publish
     };
 
     const handlePublish = async () => {
@@ -112,7 +95,7 @@ export default function AdminDashboard({ initialContent, initialManifest }: { in
         setMessage('');
         const res = await fetch('/api/admin/publish', {
             method: 'POST',
-            body: JSON.stringify({ content, manifest }),
+            body: JSON.stringify({ content, manifest, schedules }),
             headers: { 'Content-Type': 'application/json' }
         });
 
@@ -359,7 +342,7 @@ export default function AdminDashboard({ initialContent, initialManifest }: { in
                                 <button className="btn btn-secondary btn-sm" onClick={() => {
                                     const id = `sched-${Date.now()}`;
                                     const newSched = { id, name: 'New Schedule', typology: 'AUTO', cron: '0 10 * * 1', researchMode: 'deep', enabled: true };
-                                    handleSaveSchedules([...schedules, newSched]);
+                                    setSchedules([...schedules, newSched]);
                                 }}>
                                     <i className="fa-solid fa-plus"></i> Add Trigger
                                 </button>
@@ -383,7 +366,7 @@ export default function AdminDashboard({ initialContent, initialManifest }: { in
                                                 <button onClick={() => handleToggleSchedule(sched.id)} style={{ border: 'none', background: 'none', color: sched.enabled ? 'var(--accent)' : 'var(--muted)', cursor: 'pointer' }}>
                                                     <i className={`fa-solid ${sched.enabled ? 'fa-toggle-on' : 'fa-toggle-off'} fa-xl`}></i>
                                                 </button>
-                                                <button onClick={() => handleSaveSchedules(schedules.filter(s => s.id !== sched.id))} style={{ border: 'none', background: 'none', color: '#ff4d4d', cursor: 'pointer' }}>
+                                                <button onClick={() => setSchedules(schedules.filter(s => s.id !== sched.id))} style={{ border: 'none', background: 'none', color: '#ff4d4d', cursor: 'pointer' }}>
                                                     <i className="fa-solid fa-trash-can"></i>
                                                 </button>
                                             </div>
