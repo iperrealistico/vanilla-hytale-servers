@@ -14,7 +14,7 @@
     "typology": "AUTO",
     "cron": "0 10 * * 3",
     "researchMode": "deep",
-    "enabled": true,
+    "enabled": false,
     "oneShot": false
   },
   {
