@@ -1,38 +1,38 @@
 [
-    {
-        "id": "mon-news",
-        "name": "Monday News",
-        "typology": "AUTO",
-        "cron": "0 10 * * 1",
-        "researchMode": "deep",
-        "enabled": true,
-        "oneShot": false
-    },
-    {
-        "id": "wed-spotlight",
-        "name": "Wednesday Spotlight",
-        "typology": "AUTO",
-        "cron": "0 10 * * 3",
-        "researchMode": "deep",
-        "enabled": true,
-        "oneShot": false
-    },
-    {
-        "id": "fri-guide",
-        "name": "Friday Guide",
-        "typology": "AUTO",
-        "cron": "0 10 * * 5",
-        "researchMode": "deep",
-        "enabled": true,
-        "oneShot": false
-    },
-    {
-        "id": "sun-updates",
-        "name": "Sunday Updates",
-        "typology": "AUTO",
-        "cron": "0 10 * * 0",
-        "researchMode": "deep",
-        "enabled": true,
-        "oneShot": false
-    }
+  {
+    "id": "mon-news",
+    "name": "Monday News",
+    "typology": "AUTO",
+    "cron": "0 10 * * 1",
+    "researchMode": "deep",
+    "enabled": false,
+    "oneShot": false
+  },
+  {
+    "id": "wed-spotlight",
+    "name": "Wednesday Spotlight",
+    "typology": "AUTO",
+    "cron": "0 10 * * 3",
+    "researchMode": "deep",
+    "enabled": true,
+    "oneShot": false
+  },
+  {
+    "id": "fri-guide",
+    "name": "Friday Guide",
+    "typology": "AUTO",
+    "cron": "0 10 * * 5",
+    "researchMode": "deep",
+    "enabled": true,
+    "oneShot": false
+  },
+  {
+    "id": "sun-updates",
+    "name": "Sunday Updates",
+    "typology": "AUTO",
+    "cron": "0 10 * * 0",
+    "researchMode": "deep",
+    "enabled": true,
+    "oneShot": false
+  }
 ]
