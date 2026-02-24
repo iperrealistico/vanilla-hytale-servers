@@ -23,7 +23,7 @@
     "typology": "AUTO",
     "cron": "0 10 * * 5",
     "researchMode": "deep",
-    "enabled": true,
+    "enabled": false,
     "oneShot": false
   },
   {
@@ -32,7 +32,7 @@
     "typology": "AUTO",
     "cron": "0 10 * * 0",
     "researchMode": "deep",
-    "enabled": true,
+    "enabled": false,
     "oneShot": false
   }
 ]
