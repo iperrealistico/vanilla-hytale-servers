@@ -277,7 +277,7 @@ export function regenerateTitleReport(state: DiscoveryState) {
 }
 
 export function syncPublishedArticlesIntoState(state: DiscoveryState, nowIso: string) {
-  const articles = getAllArticles().filter((article) => article.frontmatter.workflowStatus === 'published');
+  const articles = getAllArticles(state.paths.workspaceRoot).filter((article) => article.frontmatter.workflowStatus === 'published');
   const queueById = new Map(state.queueRecords.map((record) => [record.queueId, record]));
   const candidateById = new Map(state.candidates.map((candidate) => [candidate.candidateId, candidate]));
 

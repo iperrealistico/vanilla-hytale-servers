@@ -8,7 +8,9 @@ import { ArticleFrontmatterSchema, type ArticleFrontmatter } from '@/lib/article
 import { slugify } from '@/lib/articles/utils';
 import { resolveArticleImageManifest, type ArticleImageManifest } from '@/lib/images/imageManifest';
 
-const articleRoot = path.join(process.cwd(), 'content', 'blog');
+function resolveArticleRoot(workspaceRoot = process.cwd()) {
+  return path.join(workspaceRoot, 'content', 'blog');
+}
 
 export interface ArticleEntry {
   filePath: string;
@@ -21,12 +23,12 @@ export interface ArticleEntry {
   images: ArticleImageManifest;
 }
 
-export function getArticleRoot() {
-  return articleRoot;
+export function getArticleRoot(workspaceRoot = process.cwd()) {
+  return resolveArticleRoot(workspaceRoot);
 }
 
-export function getAllArticles(): ArticleEntry[] {
-  return walkMdxFiles(articleRoot)
+export function getAllArticles(workspaceRoot = process.cwd()): ArticleEntry[] {
+  return walkMdxFiles(resolveArticleRoot(workspaceRoot))
     .map(loadArticleFile)
     .sort((left, right) => {
       return new Date(right.frontmatter.publishedAt).getTime() - new Date(left.frontmatter.publishedAt).getTime();

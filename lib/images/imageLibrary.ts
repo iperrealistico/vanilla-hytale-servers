@@ -84,6 +84,30 @@ export const imageLibrary = {
     640,
     'cyan',
   ),
+  'blog-update5-cover': createAsset(
+    'blog-update5-cover',
+    '/images/blog/blueprints/update5-cover.svg',
+    'A blueprint-style Hytale planning scene with builders, tools, and server-readiness diagrams.',
+    1600,
+    900,
+    'blueprint',
+  ),
+  'blog-update5-wash': createAsset(
+    'blog-update5-wash',
+    '/images/blog/blueprints/update5-wash.svg',
+    'A quiet Hytale blueprint wash with construction marks and multiplayer planning lines.',
+    1600,
+    900,
+    'blueprint',
+  ),
+  'blog-update5-orbit': createAsset(
+    'blog-update5-orbit',
+    '/images/blog/blueprints/update5-orbit.svg',
+    'A compact Hytale blueprint orbit emblem with a board, tool, and server signal rings.',
+    640,
+    640,
+    'blueprint',
+  ),
 } as const;
 
 export type ImageAssetId = keyof typeof imageLibrary;

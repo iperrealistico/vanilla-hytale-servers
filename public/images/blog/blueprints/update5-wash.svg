@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Blueprint wash for Hytale Update 5 article</title>
+  <desc id="desc">A subdued blue drafting field with construction marks, tool silhouettes, and soft orbit lines.</desc>
+  <defs>
+    <pattern id="grid" width="64" height="64" patternUnits="userSpaceOnUse">
+      <path d="M64 0H0V64" fill="none" stroke="#70afdb" stroke-opacity=".1"/>
+    </pattern>
+    <radialGradient id="glow" cx=".7" cy=".4" r=".7">
+      <stop offset="0" stop-color="#70afdb" stop-opacity=".24"/>
+      <stop offset="1" stop-color="#4560a9" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="900" fill="#4560a9"/>
+  <rect width="1600" height="900" fill="url(#grid)"/>
+  <rect width="1600" height="900" fill="url(#glow)"/>
+  <g fill="none" stroke="#70afdb" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M120 680C292 562 424 634 580 530c164-109 262-224 466-174 166 41 235 198 434 108" stroke-opacity=".28" stroke-width="5"/>
+    <path d="M86 746c220-92 378-48 560-106 184-59 255-193 452-164 140 20 240 100 416 58" stroke-opacity=".18" stroke-width="4"/>
+    <path d="M242 258h222v272H242zM284 306h128M284 352h92M284 398h142M284 444h104" stroke-opacity=".32" stroke-width="4"/>
+    <path d="M1016 160h232v164h-232zM1056 204h152M1056 244h92M1056 284h132" stroke-opacity=".28" stroke-width="4"/>
+    <circle cx="900" cy="486" r="202" stroke-opacity=".22" stroke-width="4" stroke-dasharray="10 22"/>
+    <circle cx="900" cy="486" r="112" stroke-opacity=".18" stroke-width="3" stroke-dasharray="6 18"/>
+    <path d="M788 486h224M900 374v224" stroke-opacity=".18" stroke-width="3"/>
+    <path d="M1140 592l178-160 52 58-178 160zM1180 638l238-214" stroke-opacity=".24" stroke-width="5"/>
+    <path d="M600 282l76 78 112-134M672 360l86 66 152-176" stroke-opacity=".26" stroke-width="5"/>
+    <path d="M140 138h190M140 174h116M140 210h152M1322 702h154M1322 738h96M1322 774h124" stroke-opacity=".22" stroke-width="3"/>
+  </g>
+</svg>

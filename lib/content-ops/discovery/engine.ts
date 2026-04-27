@@ -27,7 +27,7 @@ export async function discoverTitles(options: DiscoverTitlesOptions = {}) {
 
   syncPublishedArticlesIntoState(state, nowIso);
 
-  const recentPublished = getRecentPublishedArticles(10);
+  const recentPublished = getRecentPublishedArticles(10, paths.workspaceRoot);
   const fetcher = options.fetcher ?? createSourceFetcher(paths);
   const families = getDiscoveryFamilies(options.familyId);
 

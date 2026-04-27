@@ -28,8 +28,8 @@ export interface RecentPublishedArticle {
   tags: string[];
 }
 
-export function getRecentPublishedArticles(limit = 10): RecentPublishedArticle[] {
-  return getAllArticles()
+export function getRecentPublishedArticles(limit = 10, workspaceRoot = process.cwd()): RecentPublishedArticle[] {
+  return getAllArticles(workspaceRoot)
     .filter((article) => article.frontmatter.workflowStatus === 'published' && !article.frontmatter.noindex)
     .slice(0, limit)
     .map((article) => mapArticle(article));
