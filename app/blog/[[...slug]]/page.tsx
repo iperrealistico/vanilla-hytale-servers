@@ -1,6 +1,5 @@
 import { notFound } from 'next/navigation';
 import { MDXRemote } from 'next-mdx-remote/rsc';
-import Link from 'next/link';
 
 import { ArticleCard } from '@/components/articles/ArticleCard';
 import { getArticleMdxComponents } from '@/components/articles/ArticleBlocks';
@@ -12,7 +11,6 @@ import {
   getArticleBySlug,
   getArticleCategories,
   getArticlesByCategory,
-  getFeaturedArticles,
   getLiveArticles,
   getRelatedArticles,
   humanizeCategory,
@@ -82,7 +80,6 @@ export default async function BlogPage({ params }: { params: Promise<{ slug?: st
   const { slug = [] } = await params;
 
   if (slug.length === 0) {
-    const featured = getFeaturedArticles(1)[0];
     const articles = getLiveArticles();
 
     return (
@@ -99,41 +96,6 @@ export default async function BlogPage({ params }: { params: Promise<{ slug?: st
               { href: '/guides', label: 'Explore guide hub', variant: 'secondary' },
             ]}
           />
-
-          <section>
-            <div className="container blog-index-layout">
-              {featured ? (
-                <div className="panel blog-featured-panel">
-                  <span className="editorial-eyebrow">Featured guide</span>
-                  <h2>{featured.frontmatter.title}</h2>
-                  <p>{featured.frontmatter.excerpt}</p>
-                  <div className="hero-meta">
-                    <span>{humanizeCategory(featured.frontmatter.category)}</span>
-                    <span>{featured.analysis.readMinutes} min read</span>
-                  </div>
-                  <div className="blog-index-actions">
-                    <Link className="btn btn-primary pressable" href={featured.urlPath}>Read featured guide</Link>
-                    <Link className="btn btn-secondary pressable" href="/methodology">See the scoring lens</Link>
-                  </div>
-                </div>
-              ) : null}
-
-              <div className="panel blog-category-panel">
-                <span className="editorial-eyebrow">Guide map</span>
-                <h2>Where the coverage goes next</h2>
-                <div className="article-tag-row">
-                  {getArticleCategories().map((category) => (
-                    <Link className="link-pill" key={category} href={`/blog/category/${category}`}>
-                      {humanizeCategory(category)}
-                    </Link>
-                  ))}
-                </div>
-                <p>
-                  The goal is not to chase every Hytale rumor. The goal is to help players compare real vanilla-first server tradeoffs, spot vague marketing, and use the directory, the <Link href="/guides">guides hub</Link>, and the <Link href="/servers">server shortlist</Link> together.
-                </p>
-              </div>
-            </div>
-          </section>
 
           <section className="article-related-section">
             <div className="container">
