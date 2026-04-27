@@ -7,8 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "discover:titles": "node --import tsx scripts/content-ops/discover-titles.ts",
+    "queue:report": "node --import tsx scripts/content-ops/queue-report.ts",
+    "sync:image-sidecars": "node --import tsx scripts/content-ops/sync-image-sidecars.ts",
     "validate:articles": "node --import tsx scripts/validate-article-system.ts",
-    "test:articles": "node --import tsx --test tests/articles/*.test.ts",
+    "test:articles": "node --import tsx --test tests/articles/*.test.ts tests/content-ops/*.test.ts",
     "test": "npm run test:articles"
   },
   "dependencies": {
@@ -26,6 +29,7 @@
     "@playwright/test": "^1.58.2",
     "@tailwindcss/postcss": "^4.1.18",
     "@types/cookie": "^0.6.0",
+    "@types/jsdom": "^28.0.1",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^20.19.33",
     "@types/react": "^19",

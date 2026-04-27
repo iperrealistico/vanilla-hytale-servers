@@ -14,6 +14,8 @@ A Next.js site for comparing vanilla-first Hytale servers, explaining the scorin
 
 The repo now uses one canonical article system:
 - live articles in `content/blog/**`
+- discovery-ledger automation in `lib/content-ops/discovery/**`
+- blueprint-driven staged image workflow in `lib/content-ops/image-work.ts`
 - deterministic image slots in `content/site/image-slots.json`
 - runtime loaders, analyzers, and validators in `lib/articles/**`
 - article presentation components in `components/articles/**`
@@ -26,6 +28,8 @@ Those files are intentionally Git-ignored so queue state, staging artifacts, pro
 
 ```bash
 npm install
+npm run discover:titles
+npm run queue:report
 npm run validate:articles
 npm run test:articles
 npm run build

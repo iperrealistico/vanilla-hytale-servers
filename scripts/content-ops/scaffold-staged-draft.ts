@@ -1,6 +1,10 @@
 import fs from 'fs';
 import path from 'path';
 
+import { syncImageWorkSidecarsForRecord } from '@/lib/content-ops/image-work';
+import { readQueueRecords, writeQueueRecords } from '@/lib/content-ops/queue';
+import { getContentOpsPaths } from '@/lib/content-ops/paths';
+
 function slugify(value: string): string {
   return value
     .toLowerCase()
@@ -10,36 +14,10 @@ function slugify(value: string): string {
     .replace(/-{2,}/g, '-');
 }
 
-const root = path.join(process.cwd(), 'documents-local', 'workspace-local', 'content-ops');
-const queuePath = path.join(root, 'article-title-queue.jsonl');
+const paths = getContentOpsPaths();
+const root = paths.contentOpsRoot;
 const draftDir = path.join(root, 'staging', 'mdx-drafts');
 const slotDir = path.join(root, 'staging', 'slot-assignments');
-const imageWorkDir = path.join(root, 'staging', 'image-work');
-
-interface QueueRecord {
-  queueId: string;
-  queueIndex: number;
-  rawTitleLineNumber: number;
-  title: string;
-  titleLocked: boolean;
-  workflowStatus: string;
-  articleSlug: string | null;
-  draftPath: string | null;
-  lastRunOutcome: string | null;
-  updatedAt: string | null;
-}
-
-function readQueue(): QueueRecord[] {
-  return fs
-    .readFileSync(queuePath, 'utf8')
-    .split('\n')
-    .filter(Boolean)
-    .map((line) => JSON.parse(line) as QueueRecord);
-}
-
-function writeQueue(records: QueueRecord[]) {
-  fs.writeFileSync(queuePath, `${records.map((record) => JSON.stringify(record)).join('\n')}\n`);
-}
 
 function ensureDir(dir: string) {
   fs.mkdirSync(dir, { recursive: true });
@@ -47,7 +25,7 @@ function ensureDir(dir: string) {
 
 function main() {
   const requestedQueueId = process.argv[2];
-  const queue = readQueue();
+  const queue = readQueueRecords(paths);
   const target = requestedQueueId ? queue.find((record) => record.queueId === requestedQueueId) : queue.find((record) => record.workflowStatus === 'queued');
 
   if (!target) {
@@ -57,11 +35,9 @@ function main() {
   const slug = target.articleSlug ?? slugify(target.title);
   const draftPath = path.join(draftDir, `${slug}.mdx`);
   const slotPath = path.join(slotDir, `${slug}.json`);
-  const queueIndex = String(target.queueIndex).padStart(4, '0');
 
   ensureDir(draftDir);
   ensureDir(slotDir);
-  ensureDir(imageWorkDir);
 
   if (!fs.existsSync(draftPath)) {
     fs.writeFileSync(
@@ -85,25 +61,11 @@ function main() {
     );
   }
 
-  for (const [suffix, slotLabel] of [
-    ['cover', 'cover'],
-    ['wash', 'ornament-wash'],
-    ['orbit', 'ornament-orbit'],
-  ] as const) {
-    const sidecarPath = path.join(imageWorkDir, `${slug}-${suffix}.md`);
-    if (!fs.existsSync(sidecarPath)) {
-      fs.writeFileSync(
-        sidecarPath,
-        `# Image Work Sidecar\n\n- Article title: ${target.title}\n- Slot ID: ${slotLabel}\n- Slot key: \`blog.${slug}.${suffix === 'cover' ? 'cover' : `ornament.${suffix}`}\`\n- Why generation was needed: staged draft ${queueIndex} needs its article-specific image package before live promotion\n- Style reference used: N/A\n- Generation method used: pending\n- Output file path: pending\n- Output pixel dimensions: pending\n- Aspect-ratio confirmation: pending\n- Optimization status: pending\n- Selected future asset-library key: \`staged-${slug}-${suffix === 'cover' ? 'cover' : `ornament-${suffix}`}\`\n`,
-      );
-    }
-  }
-
-  const nextQueue = queue.map((record) => {
+  const nextQueue: typeof queue = queue.map((record) => {
     if (record.queueId !== target.queueId) return record;
     return {
       ...record,
-      workflowStatus: 'drafted',
+      workflowStatus: 'drafted' as const,
       articleSlug: slug,
       draftPath,
       lastRunOutcome: 'Scaffolded staged draft package.',
@@ -111,7 +73,12 @@ function main() {
     };
   });
 
-  writeQueue(nextQueue);
+  writeQueueRecords(paths, nextQueue);
+  syncImageWorkSidecarsForRecord({
+    paths,
+    record: nextQueue.find((record) => record.queueId === target.queueId) ?? target,
+    slug,
+  });
   console.log(`Scaffolded staged draft for ${target.queueId} -> ${draftPath}`);
 }
 

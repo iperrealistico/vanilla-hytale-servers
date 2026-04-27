@@ -84,6 +84,10 @@ export function humanizeCategory(category: string): string {
 }
 
 function walkMdxFiles(root: string): string[] {
+  if (!fs.existsSync(root)) {
+    return [];
+  }
+
   const results: string[] = [];
   const entries = fs.readdirSync(root, { withFileTypes: true });
 
