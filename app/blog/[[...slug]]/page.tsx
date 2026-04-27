@@ -1,49 +1,216 @@
-import React from 'react';
 import { notFound } from 'next/navigation';
-import { BlogLayout, PostList, PostDetail } from '@/blog-module/ui/components';
-import { FileStorageAdapter } from '@/blog-module/adapters/storage/file';
-import { blogConfig } from '@/aiBlog.config';
+import { MDXRemote } from 'next-mdx-remote/rsc';
+import Link from 'next/link';
 
-import path from 'path';
+import { ArticleCard } from '@/components/articles/ArticleCard';
+import { getArticleMdxComponents } from '@/components/articles/ArticleBlocks';
+import { EditorialFooter, EditorialHeader, EditorialHero } from '@/components/articles/EditorialChrome';
+import { ArticleShell } from '@/components/articles/ArticleShell';
+import { LegacyArchiveArticle } from '@/components/articles/LegacyArchiveArticle';
+import { buildArticleMetadata, buildSurfaceMetadata } from '@/lib/articles/metadata';
+import {
+  getArticleBySlug,
+  getArticleCategories,
+  getArticlesByCategory,
+  getFeaturedArticles,
+  getLiveArticles,
+  getRelatedArticles,
+  humanizeCategory,
+} from '@/lib/articles/content';
+import { getLegacyArchive, getLegacyArchiveBySlug } from '@/lib/articles/legacyArchive';
 
-// Use process.cwd() to resolve path correctly on Vercel
-const storage = new FileStorageAdapter(path.join(process.cwd(), 'data/blog'));
+export async function generateStaticParams() {
+  const articles = getLiveArticles();
+  const categories = getArticleCategories();
+  const legacyArchive = getLegacyArchive();
+
+  return [
+    ...articles.map((article) => ({ slug: [article.slug] })),
+    ...legacyArchive.map((entry) => ({ slug: [entry.slug] })),
+    ...categories.map((category) => ({ slug: ['category', category] })),
+  ];
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug?: string[] }> }) {
+  const { slug = [] } = await params;
+
+  if (slug.length === 0) {
+    return buildSurfaceMetadata({
+      pathname: '/blog',
+      title: 'Vanilla Hytale Blog | Server Selection, Fairness, and SMP Guides',
+      description: 'Practical Hytale articles about vanilla-first servers, fairness checks, semi-vanilla tradeoffs, onboarding, and calm survival SMP decisions.',
+    });
+  }
+
+  if (slug[0] === 'category' && slug[1]) {
+    const categoryTitle = humanizeCategory(slug[1]);
+    return buildSurfaceMetadata({
+      pathname: `/blog/category/${slug[1]}`,
+      title: `${categoryTitle} | Vanilla Hytale Blog`,
+      description: `Browse ${categoryTitle.toLowerCase()} articles from VanillaHytaleServers.com.`,
+    });
+  }
+
+  const article = getArticleBySlug(slug[0]);
+  if (article) {
+    return buildArticleMetadata(article);
+  }
+
+  const legacy = getLegacyArchiveBySlug(slug[0]);
+  if (legacy) {
+    return {
+      ...buildSurfaceMetadata({
+        pathname: `/blog/${legacy.slug}`,
+        title: `${legacy.title} | Legacy Archive`,
+        description: legacy.excerpt,
+      }),
+      robots: {
+        index: false,
+        follow: true,
+      },
+    };
+  }
+
+  return buildSurfaceMetadata({
+    pathname: '/blog',
+    title: 'Vanilla Hytale Blog | Server Selection, Fairness, and SMP Guides',
+    description: 'Practical Hytale articles about vanilla-first servers, fairness checks, semi-vanilla tradeoffs, onboarding, and calm survival SMP decisions.',
+  });
+}
 
 export default async function BlogPage({ params }: { params: Promise<{ slug?: string[] }> }) {
-    const { slug } = await params;
+  const { slug = [] } = await params;
 
-    // List View
-    if (!slug || slug.length === 0) {
-        const posts = await storage.listPosts();
-        return (
-            <BlogLayout config={blogConfig}>
-                <PostList posts={posts} basePath="/blog" />
-            </BlogLayout>
-        );
-    }
-
-    // Category Filter
-    if (slug[0] === 'category' && slug[1]) {
-        const posts = await storage.listPosts({ category: slug[1] });
-        return (
-            <BlogLayout config={blogConfig}>
-                <div className="mb-10 text-center">
-                    <h2 className="text-3xl font-black tracking-tight" style={{ fontFamily: 'var(--h-font)' }}>
-                        Category: <span className="text-[var(--accent)]">{slug[1]}</span>
-                    </h2>
-                </div>
-                <PostList posts={posts} basePath="/blog" />
-            </BlogLayout>
-        );
-    }
-
-    // Post Detail
-    const post = await storage.getPostBySlug(slug[0]);
-    if (!post) return notFound();
+  if (slug.length === 0) {
+    const featured = getFeaturedArticles(1)[0];
+    const articles = getLiveArticles();
 
     return (
-        <BlogLayout config={blogConfig}>
-            <PostDetail post={post} />
-        </BlogLayout>
+      <>
+        <EditorialHeader />
+        <main id="main-content">
+          <EditorialHero
+            eyebrow="Editorial surface"
+            title="Vanilla-first Hytale guides that help you choose better servers"
+            description="This blog exists to make the server directory more useful. Each article turns a fuzzy label like vanilla, fair, semi-vanilla, or no pay-to-win into practical questions you can actually use before you join."
+            badges={['Server selection', 'Fairness checks', 'SMP onboarding']}
+            actions={[
+              { href: '/servers', label: 'Browse servers' },
+              { href: '/guides', label: 'Explore guide hub', variant: 'secondary' },
+            ]}
+          />
+
+          <section>
+            <div className="container blog-index-layout">
+              {featured ? (
+                <div className="panel blog-featured-panel">
+                  <span className="editorial-eyebrow">Featured guide</span>
+                  <h2>{featured.frontmatter.title}</h2>
+                  <p>{featured.frontmatter.excerpt}</p>
+                  <div className="hero-meta">
+                    <span>{humanizeCategory(featured.frontmatter.category)}</span>
+                    <span>{featured.analysis.readMinutes} min read</span>
+                  </div>
+                  <div className="blog-index-actions">
+                    <Link className="btn btn-primary pressable" href={featured.urlPath}>Read featured guide</Link>
+                    <Link className="btn btn-secondary pressable" href="/methodology">See the scoring lens</Link>
+                  </div>
+                </div>
+              ) : null}
+
+              <div className="panel blog-category-panel">
+                <span className="editorial-eyebrow">Guide map</span>
+                <h2>Where the coverage goes next</h2>
+                <div className="article-tag-row">
+                  {getArticleCategories().map((category) => (
+                    <Link className="link-pill" key={category} href={`/blog/category/${category}`}>
+                      {humanizeCategory(category)}
+                    </Link>
+                  ))}
+                </div>
+                <p>
+                  The goal is not to chase every Hytale rumor. The goal is to help players compare real vanilla-first server tradeoffs, spot vague marketing, and use the directory, the <Link href="/guides">guides hub</Link>, and the <Link href="/servers">server shortlist</Link> together.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section className="article-related-section">
+            <div className="container">
+              <div className="article-section-heading">
+                <span className="editorial-eyebrow">Latest articles</span>
+                <h2>Fresh Hytale server decision guides</h2>
+                <p>These articles are built to answer real selection questions, not to flood the site with generic trend posts.</p>
+              </div>
+              <div className="article-card-grid">
+                {articles.map((article) => (
+                  <ArticleCard key={article.slug} article={article} />
+                ))}
+              </div>
+            </div>
+          </section>
+        </main>
+        <EditorialFooter />
+      </>
     );
+  }
+
+  if (slug[0] === 'category' && slug[1]) {
+    const category = slug[1];
+    const articles = getArticlesByCategory(category);
+
+    if (articles.length === 0) {
+      notFound();
+    }
+
+    return (
+      <>
+        <EditorialHeader />
+        <main id="main-content">
+          <EditorialHero
+            eyebrow="Category view"
+            title={`${humanizeCategory(category)} articles`}
+            description="A focused slice of the Vanilla Hytale editorial system for readers who already know which decision angle they want to explore first."
+            badges={[`${articles.length} articles`, 'Topic-aware', 'Linked to live routes']}
+            actions={[
+              { href: '/blog', label: 'Back to blog' },
+              { href: '/guides', label: 'Guide hub', variant: 'secondary' },
+            ]}
+            backgroundSrc="/img/hytale/hytale_vanilla_servers_list_6.jpeg"
+          />
+
+          <section className="article-related-section">
+            <div className="container">
+              <div className="article-card-grid">
+                {articles.map((article) => (
+                  <ArticleCard key={article.slug} article={article} />
+                ))}
+              </div>
+            </div>
+          </section>
+        </main>
+        <EditorialFooter />
+      </>
+    );
+  }
+
+  const article = getArticleBySlug(slug[0]);
+  if (article) {
+    const related = getRelatedArticles(article, 3);
+
+    return (
+      <ArticleShell
+        article={article}
+        related={related}
+        body={<MDXRemote source={article.body} components={getArticleMdxComponents(article.frontmatter.articleCtas.segue)} />}
+      />
+    );
+  }
+
+  const legacy = getLegacyArchiveBySlug(slug[0]);
+  if (legacy) {
+    return <LegacyArchiveArticle legacy={legacy} body={<MDXRemote source={legacy.content} />} />;
+  }
+
+  notFound();
 }

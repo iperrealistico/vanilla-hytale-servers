@@ -1,8 +1,0 @@
-{
-    "crons": [
-        {
-            "path": "/api/blog/run?typology=AUTO&researchMode=deep",
-            "schedule": "0 10 * * *"
-        }
-    ]
-}

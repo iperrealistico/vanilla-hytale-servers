@@ -7,22 +7,19 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "blog:research": "npx tsx blog-module/scripts/deep-research-worker.ts"
+    "validate:articles": "node --import tsx scripts/validate-article-system.ts",
+    "test:articles": "node --import tsx --test tests/articles/*.test.ts",
+    "test": "npm run test:articles"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.74.0",
-    "@google/generative-ai": "^0.24.1",
-    "@supabase/supabase-js": "^2.95.3",
     "cookie": "^1.1.1",
+    "gray-matter": "^4.0.3",
     "jsonwebtoken": "^9.0.3",
     "next": "16.1.6",
+    "next-mdx-remote": "^6.0.0",
     "octokit": "^5.0.5",
     "react": "19.2.3",
     "react-dom": "19.2.3",
-    "react-markdown": "^10.1.0",
-    "react-quill-new": "^3.8.3",
-    "remark-gfm": "^4.0.1",
-    "rss-parser": "^3.13.0",
     "zod": "^4.3.6"
   },
   "devDependencies": {
@@ -40,7 +37,6 @@
     "playwright": "^1.58.2",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.18",
-    "ts-node": "^10.9.2",
     "tsx": "^4.21.0",
     "typescript": "^5"
   }

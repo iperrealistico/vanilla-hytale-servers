@@ -1,46 +1,61 @@
 # Content Inventory & Parameterization Map
 
 ## 1. Global / Shared
-| Component | Existing JSON? | Hardcoded Content | Target JSON Path |
-|-----------|----------------|-------------------|------------------|
-| **Meta** | Partial | Title, Description, OG, Twitter | `meta.*` (Extend with missing if any) |
-| **Header** | Partial | "Servers", "FAQ", "Blog", "Submit" | `header.nav.*` (Array of label/url) |
-| **Footer** | Partial | "Servers", "Scoring", "Submit" | `footer.links.*` (Array of label/url) |
-| **Toast** | No | (Empty in code, but maybe needs text?) | `toast.messages.*` |
+| Component | Current source | Notes |
+|-----------|----------------|-------|
+| **Meta** | `content/site.json -> meta` | Editable through `/admin` |
+| **Header** | `content/site.json -> header` | Editable through `/admin` |
+| **Footer** | `content/site.json -> footer` | Editable through `/admin` |
+| **Uploads manifest** | `content/uploads.manifest.json` | Managed through `/admin` upload flow |
 
 ## 2. Home Page (`/`)
-| Section | Existing JSON? | Hardcoded Content | Target JSON Path |
-|---------|----------------|-------------------|------------------|
-| **Background** | No | `bg-floats` images (5 images) | `hero.backgroundFloats.*` (Array of src/style) |
-| **Hero** | Yes | Title, Decsription, Last Updated | `hero.*` |
-| **Hero CTA** | No | "Jump to servers", "Vanilla FAQ", "Submit" | `hero.cta.*` (Array of label/url/icon) |
-| **Server List** | Yes | List of servers | `servers.items` |
-| **Methodology** | Partial | Title, Description, Rules, Categories | `methodology.*` |
-| **Methodology** | No | "Doubts?", "hello@..." | `methodology.contact.*` |
-| **Methodology** | No | "Exclusion rules", "Editor score" headers | `methodology.sectionHeaders.*` |
-| **Filmstrip** | No | `['6', '7', '8', '9', '5']` images | `filmstrip.images.*` (Array of src/alt) |
-| **FAQ** | Yes | Title, Description, Items | `faq.*` |
-| **Suggest** | Yes | Title, Description, Requirements | `suggest.*` |
-| **Suggest** | No | "Contact us", "Requirements" header | `suggest.cta.*`, `suggest.requirementsTitle` |
+| Section | Current source | Notes |
+|---------|----------------|-------|
+| **Hero** | `content/site.json -> hero` | Editable through `/admin` |
+| **Server list** | `content/site.json -> servers` | Primary directory content |
+| **Methodology** | `content/site.json -> methodology` | Also summarized at `/methodology` |
+| **Filmstrip** | `content/site.json -> filmstrip` | Editable through `/admin` |
+| **FAQ** | `content/site.json -> faq` | Editable through `/admin` |
+| **Suggest** | `content/site.json -> suggest` | Editable through `/admin` |
 
-## 3. Blog Pages
-(Need to check `blog-module` or `app/blog` structure, but assuming standard post content)
+## 3. Article Runtime (`/blog`)
+| Surface | Current source | Notes |
+|---------|----------------|-------|
+| **Live articles** | `content/blog/**/*.mdx` | Canonical v3 article content |
+| **Image slots** | `content/site/image-slots.json` | Maps deterministic slot IDs to asset keys |
+| **Asset library** | `lib/images/imageLibrary.ts` | Tracked image metadata registry |
+| **Image manifest** | `lib/images/imageManifest.ts` | Resolves render-ready cover/wash/orbit assets |
+| **Loader + schema** | `lib/articles/**` | Parses frontmatter, analyzes structure, validates rules |
+| **Presentation layer** | `components/articles/**` | Cards, shell, blocks, and archive compatibility UI |
+| **Legacy archive** | `content/archive/legacy-ai-blog/posts/*.json` | Historical compatibility only, no longer part of the live queue |
 
-## 4. Admin Panel (`/admin`)
-- **Current State**: Only edits `meta.title`, `hero.title`, and `servers` list (partial fields).
-- **Target State**: Must edit ALL of the above target JSON paths.
-- **Components Needed**:
-    - Array editor (for nav, footer, floats, filmstrip, CTA buttons).
-    - Object editor (for nested sections).
-    - Image picker (integrating with `uploads.manifest.json`).
+## 4. Local Content-Ops Control Plane
+- **Canonical local AI workspace guide**: `AI-START-HERE.local.md`
+- **Operations board**: `documents-local/agent-operations/01-OPERATIONS-BOARD.md`
+- **Immutable raw titles**: `documents-local/workspace-local/content-ops/article-titles-raw.md`
+- **Mutable queue**: `documents-local/workspace-local/content-ops/article-title-queue.jsonl`
+- **Staging**:
+  - `documents-local/workspace-local/content-ops/staging/mdx-drafts/`
+  - `documents-local/workspace-local/content-ops/staging/slot-assignments/`
+  - `documents-local/workspace-local/content-ops/staging/image-work/`
+  - `documents-local/workspace-local/content-ops/staging/generated-assets/`
 
-## 5. Parameterization Strategy
-1.  **Phase 1: JSON Expansion**
-    -   Update `site.json` with all missing fields populated with current hardcoded values.
-2.  **Phase 2: Component Refactor**
-    -   Refactor `HomePage.tsx` to read from new JSON paths.
-    -   Refactor `layout.tsx` / `Header` / `Footer` to read from new JSON paths.
-3.  **Phase 3: Admin Expansion**
-    -   Create `ArrayField` component.
-    -   Create `ObjectField` component.
-    -   Update `AdminDashboard` to render editors for the full JSON tree.
+These paths are intentionally local-only and Git-ignored so AI operating context, staged artifacts, and queue state do not become tracked repo noise.
+
+## 5. Admin Panel (`/admin`)
+- **Supported responsibilities**:
+  - homepage/server directory content edits
+  - media uploads
+  - site JSON editing
+  - publish-to-GitHub for tracked site JSON and media manifests
+- **Not supported anymore**:
+  - in-browser AI article generation
+  - direct JSON-post editing
+  - schedule toggling for a legacy blog cron system
+
+## 6. Validation & Publication
+- **Validation command**: `npm run validate:articles`
+- **Test command**: `npm run test:articles`
+- **Build gate**: `npm run build`
+
+The canonical publication flow is now staged draft -> slot assignment + image sidecars -> tracked MDX promotion -> validation -> build verification.
