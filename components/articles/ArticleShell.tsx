@@ -6,6 +6,7 @@ import type { ArticleEntry } from '@/lib/articles/content';
 import { humanizeCategory } from '@/lib/articles/content';
 import { EditorialFooter, EditorialHeader } from '@/components/articles/EditorialChrome';
 import { ArticleCard } from '@/components/articles/ArticleCard';
+import { FloatingRailCta } from '@/components/articles/FloatingRailCta';
 
 interface ArticleShellProps {
   article: ArticleEntry;
@@ -66,14 +67,12 @@ export function ArticleShell({ article, body, related }: ArticleShellProps) {
         <section>
           <div className="container article-layout">
             <aside className="article-rail">
-              <div className="panel article-sticky-cta">
-                <span className="editorial-eyebrow">{article.frontmatter.articleCtas.sticky.eyebrow}</span>
-                <h2>{article.frontmatter.articleCtas.sticky.title}</h2>
-                <p>{article.frontmatter.articleCtas.sticky.body}</p>
-                <Link className={`btn ${article.frontmatter.articleCtas.sticky.primaryCta.variant === 'secondary' ? 'btn-secondary' : 'btn-primary'} pressable`} href={article.frontmatter.articleCtas.sticky.primaryCta.href}>
-                  {article.frontmatter.articleCtas.sticky.primaryCta.label}
-                </Link>
-              </div>
+              <FloatingRailCta
+                eyebrow={article.frontmatter.articleCtas.sticky.eyebrow}
+                title={article.frontmatter.articleCtas.sticky.title}
+                body={article.frontmatter.articleCtas.sticky.body}
+                primaryCta={article.frontmatter.articleCtas.sticky.primaryCta}
+              />
             </aside>
 
             <article className="panel article-body-panel">
