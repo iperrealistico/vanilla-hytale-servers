@@ -108,6 +108,30 @@ export const imageLibrary = {
     640,
     'blueprint',
   ),
+  'staged-best-furniture-and-decoration-hytale-mods-this-month-after-pre-release-patch-notes-update-5-cover': createAsset(
+    'staged-best-furniture-and-decoration-hytale-mods-this-month-after-pre-release-patch-notes-update-5-cover',
+    '/images/blog/blueprints/furniture-decoration-hytale-mods-cover.png',
+    'A blueprint-style Hytale furniture and decoration mod planning scene with lanterns, workbenches, and modular decor blocks.',
+    1600,
+    900,
+    'blueprint',
+  ),
+  'staged-best-furniture-and-decoration-hytale-mods-this-month-after-pre-release-patch-notes-update-5-ornament-wash': createAsset(
+    'staged-best-furniture-and-decoration-hytale-mods-this-month-after-pre-release-patch-notes-update-5-ornament-wash',
+    '/images/blog/blueprints/furniture-decoration-hytale-mods-wash.png',
+    'A broad blueprint wash with faint Hytale furniture, decorative light, block, and workbench linework.',
+    1600,
+    900,
+    'blueprint',
+  ),
+  'staged-best-furniture-and-decoration-hytale-mods-this-month-after-pre-release-patch-notes-update-5-ornament-orbit': createAsset(
+    'staged-best-furniture-and-decoration-hytale-mods-this-month-after-pre-release-patch-notes-update-5-ornament-orbit',
+    '/images/blog/blueprints/furniture-decoration-hytale-mods-orbit.png',
+    'A compact blueprint orbit ornament with a decorative lantern above a furniture workbench and block cluster.',
+    640,
+    640,
+    'blueprint',
+  ),
 } as const;
 
 export type ImageAssetId = keyof typeof imageLibrary;
