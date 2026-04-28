@@ -9,6 +9,7 @@
     "lint": "eslint",
     "discover:titles": "node --import tsx scripts/content-ops/discover-titles.ts",
     "queue:report": "node --import tsx scripts/content-ops/queue-report.ts",
+    "prime:curseforge": "node --import tsx scripts/content-ops/prime-curseforge-browser.ts",
     "sync:image-sidecars": "node --import tsx scripts/content-ops/sync-image-sidecars.ts",
     "validate:articles": "node --import tsx scripts/validate-article-system.ts",
     "test:articles": "node --import tsx --test tests/articles/*.test.ts tests/content-ops/*.test.ts",

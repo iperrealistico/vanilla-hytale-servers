@@ -1,9 +1,10 @@
 import fs from 'fs';
 import path from 'path';
 
-import type { ContentOpsPaths } from '@/lib/content-ops/paths';
-import { ensureParentDir } from '@/lib/content-ops/jsonl';
+import { createDiscoveryBrowserTransport, isCurseforgeUrl } from '@/lib/content-ops/discovery/browser';
 import { shortHash, slugify } from '@/lib/content-ops/discovery/text';
+import { ensureParentDir } from '@/lib/content-ops/jsonl';
+import type { ContentOpsPaths } from '@/lib/content-ops/paths';
 
 export interface FetchedSource {
   canonicalUrl: string;
@@ -18,15 +19,29 @@ export interface FetchedSource {
 export interface SourceFetcher {
   fetchHtml(options: { familyId: string; sourceKey: string; url: string }): Promise<FetchedSource>;
   downloadGuidelineImage(options: { familyId: string; sourceKey: string; imageUrl: string }): Promise<string | null>;
+  dispose?(): Promise<void>;
+}
+
+interface FetchTransportResult {
+  statusCode: number | null;
+  body: string | null;
+  finalUrl: string;
+  blockedReason?: string | null;
+  challengeHeader?: string | null;
+}
+
+export interface SourceFetcherRuntime {
+  fetchText?: (url: string) => Promise<FetchTransportResult>;
+  fetchBrowserHtml?: (url: string) => Promise<FetchTransportResult>;
 }
 
 function nowIso() {
   return new Date().toISOString();
 }
 
-function isBlockedResponse(text: string, statusCode: number | null) {
+function isBlockedResponse(text: string, statusCode: number | null, challengeHeader: string | null = null) {
   const blockedPatterns = [/just a moment/i, /enable javascript and cookies to continue/i, /__cf_chl/i];
-  return statusCode === 403 || blockedPatterns.some((pattern) => pattern.test(text));
+  return challengeHeader === 'challenge' || statusCode === 403 || blockedPatterns.some((pattern) => pattern.test(text));
 }
 
 function buildSnapshotPath(paths: ContentOpsPaths, familyId: string, sourceKey: string, extension: string) {
@@ -70,7 +85,7 @@ function latestBinarySnapshot(paths: ContentOpsPaths, familyId: string, sourceKe
   return path.join(dir, candidates[candidates.length - 1]);
 }
 
-async function fetchText(url: string) {
+async function fetchText(url: string): Promise<FetchTransportResult> {
   const response = await fetch(url, {
     headers: {
       'accept-language': 'en-US,en;q=0.9',
@@ -82,28 +97,37 @@ async function fetchText(url: string) {
     statusCode: response.status,
     body: await response.text(),
     finalUrl: response.url,
+    challengeHeader: response.headers.get('cf-mitigated'),
   };
 }
 
-export function createSourceFetcher(paths: ContentOpsPaths): SourceFetcher {
+export function createSourceFetcher(paths: ContentOpsPaths, runtime: SourceFetcherRuntime = {}): SourceFetcher {
+  const browserTransport = createDiscoveryBrowserTransport(paths);
+  const fetchTextImpl = runtime.fetchText ?? fetchText;
+  const fetchBrowserHtmlImpl = runtime.fetchBrowserHtml ?? ((url: string) => browserTransport.fetchHtml(url));
+
   return {
     async fetchHtml({ familyId, sourceKey, url }) {
       const fetchedAt = nowIso();
+      const primaryFetch = isCurseforgeUrl(url) ? fetchBrowserHtmlImpl : fetchTextImpl;
 
       try {
-        const result = await fetchText(url);
-        if (!isBlockedResponse(result.body, result.statusCode)) {
+        const liveResult = await primaryFetch(url);
+        const liveBody = liveResult.body ?? '';
+        const liveResultBlocked = !liveResult.body || isBlockedResponse(liveBody, liveResult.statusCode, liveResult.challengeHeader ?? null);
+
+        if (!liveResultBlocked && liveResult.body) {
           const snapshotPath = buildSnapshotPath(paths, familyId, sourceKey, 'html');
           ensureParentDir(snapshotPath);
-          fs.writeFileSync(snapshotPath, result.body);
+          fs.writeFileSync(snapshotPath, liveResult.body);
           return {
-            canonicalUrl: result.finalUrl,
-            body: result.body,
+            canonicalUrl: liveResult.finalUrl,
+            body: liveResult.body,
             fetchedAt,
             sourceMode: 'live',
             snapshotPath,
             blockedReason: null,
-            statusCode: result.statusCode,
+            statusCode: liveResult.statusCode,
           };
         }
 
@@ -115,8 +139,10 @@ export function createSourceFetcher(paths: ContentOpsPaths): SourceFetcher {
             fetchedAt,
             sourceMode: 'snapshot',
             snapshotPath: fallbackPath,
-            blockedReason: `Live fetch was blocked with status ${result.statusCode}.`,
-            statusCode: result.statusCode,
+            blockedReason:
+              liveResult.blockedReason ??
+              `Live fetch was blocked with status ${liveResult.statusCode ?? 'unknown'}.`,
+            statusCode: liveResult.statusCode,
           };
         }
 
@@ -126,8 +152,10 @@ export function createSourceFetcher(paths: ContentOpsPaths): SourceFetcher {
           fetchedAt,
           sourceMode: 'blocked',
           snapshotPath: null,
-          blockedReason: `Live fetch was blocked with status ${result.statusCode}.`,
-          statusCode: result.statusCode,
+          blockedReason:
+            liveResult.blockedReason ??
+            `Live fetch was blocked with status ${liveResult.statusCode ?? 'unknown'}.`,
+          statusCode: liveResult.statusCode,
         };
       } catch (error) {
         const fallbackPath = latestSnapshot(paths, familyId, sourceKey, 'html');
@@ -186,6 +214,10 @@ export function createSourceFetcher(paths: ContentOpsPaths): SourceFetcher {
       } catch {
         return fallbackPath;
       }
+    },
+
+    async dispose() {
+      await browserTransport.close();
     },
   };
 }

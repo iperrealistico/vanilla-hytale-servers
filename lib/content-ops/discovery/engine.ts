@@ -31,30 +31,34 @@ export async function discoverTitles(options: DiscoverTitlesOptions = {}) {
   const fetcher = options.fetcher ?? createSourceFetcher(paths);
   const families = getDiscoveryFamilies(options.familyId);
 
-  for (const family of families) {
-    const result = await family.discover({
-      familyId: family.id,
-      nowIso,
-      paths,
-      fetcher,
-      recentPublished,
-      queueRecords: state.queueRecords,
-      existingCandidates: state.candidates,
-      sourceLedger: state.sourceLedger,
-      sourceConsumption: state.sourceConsumption,
-    });
+  try {
+    for (const family of families) {
+      const result = await family.discover({
+        familyId: family.id,
+        nowIso,
+        paths,
+        fetcher,
+        recentPublished,
+        queueRecords: state.queueRecords,
+        existingCandidates: state.candidates,
+        sourceLedger: state.sourceLedger,
+        sourceConsumption: state.sourceConsumption,
+      });
 
-    for (const candidate of result.candidates) {
-      upsertCandidate(state, candidate);
-    }
+      for (const candidate of result.candidates) {
+        upsertCandidate(state, candidate);
+      }
 
-    for (const record of result.sourceLedger) {
-      upsertSourceLedgerRecord(state, record);
-    }
+      for (const record of result.sourceLedger) {
+        upsertSourceLedgerRecord(state, record);
+      }
 
-    for (const record of result.suppressionLog) {
-      appendSuppressionLog(state, record);
+      for (const record of result.suppressionLog) {
+        appendSuppressionLog(state, record);
+      }
     }
+  } finally {
+    await fetcher.dispose?.();
   }
 
   materializeQueueFromCandidates(state);

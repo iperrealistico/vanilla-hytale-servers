@@ -155,6 +155,7 @@ The image system is deterministic.
 
 Raw third-party source images are reference-only inputs.
 The staged workflow now expects AI-generated blueprint derivatives built from those references, using the Hytale-blue range `#4560a9 -> #70afdb`.
+Those derivatives should be created through the built-in `imagegen` skill and the same built-in `image_gen` tool available in chat, not through hand-assembled SVG/vector placeholder work.
 
 Layer 1:
 - article metadata references slot keys such as `blog.some-slug.cover`
@@ -178,6 +179,7 @@ Operational image rules now also require:
 - scraping Hytale hero images when available for official-update articles,
 - scraping CurseForge mod-page images when available for mod-scene articles,
 - never publishing the raw scraped source image directly,
+- using the built-in `imagegen` tool for the final image generation step,
 - and recording the blueprint prompt plus reference paths in each staged image sidecar.
 
 ## Validation And Testing
@@ -219,7 +221,9 @@ The canonical flow is now:
 8. Register or promote assets into the tracked slot map and image library.
 9. Promote the draft into `content/blog/**`.
 10. Run validation, tests, and build.
-11. Only then treat the article as live.
+11. Commit the tracked article package on `main` and push it to `origin/main`.
+12. Verify the public `/blog`, category, and article routes on the live site.
+13. Only then treat the article as live.
 
 If a gate fails, the queue record should not move to `published`.
 If discovery finds nothing fresh or sufficiently novel, it is valid for the daily run to add zero titles.
@@ -228,10 +232,10 @@ If discovery finds nothing fresh or sufficiently novel, it is valid for the dail
 
 The current discovery families are intentionally asymmetric:
 - Hytale official news can be fetched and snapshotted directly, with revision detection based on page content hashing and visible in-body update dates.
-- CurseForge discovery uses fetch-first parsing but also supports snapshot fallback because some CurseForge routes may present anti-bot challenges to plain HTTP clients.
+- CurseForge discovery now uses a Playwright-backed real-browser transport with a persistent local Chrome profile, then falls back to snapshots only if the browser session is still challenged or unavailable.
 - Guideline image downloads for both families follow the same local snapshot pattern so a previously captured reference image can still support later blueprint-generation runs.
 
-This blocked-source fallback is deliberate. It is better for a daily run to produce no candidate than to spam repetitive or partially trusted titles.
+This blocked-source fallback is deliberate. It is better for a daily run to produce no candidate than to spam repetitive or partially trusted titles. A manual recovery command is available for the local profile if needed: `npm run prime:curseforge`.
 
 ## Legacy Archive Policy
 

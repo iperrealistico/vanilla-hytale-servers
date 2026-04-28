@@ -61,6 +61,8 @@ test('buildBlueprintImagePrompt enforces the Hytale blueprint palette and redraw
   assert.match(prompt, /#70afdb/);
   assert.match(prompt, /blueprint/i);
   assert.match(prompt, /Redraw every visible element from scratch/i);
+  assert.match(prompt, /raster bitmap illustration/i);
+  assert.match(prompt, /not an SVG/i);
   assert.match(prompt, /Do not keep original logos, UI text, watermarks, screenshots/i);
 });
 
@@ -123,5 +125,8 @@ test('renderImageWorkSidecar includes scraped reference paths and the blueprint 
 
   assert.match(sidecar, /\/tmp\/mod-cover\.png/);
   assert.match(sidecar, /never publish scraped source images directly/i);
+  assert.match(sidecar, /built-in `imagegen` skill/i);
+  assert.match(sidecar, /do not satisfy this asset with hand-assembled SVG/i);
+  assert.match(sidecar, /final deliverable must be a raster file/i);
   assert.match(sidecar, /## Blueprint Prompt/);
 });

@@ -174,6 +174,40 @@ test('recent published overlap suppresses near-duplicate angles', () => {
   assert.deepEqual(summary.matchedPublishedSlugs, ['how-to-choose-a-vanilla-hytale-server-if-you-care-about-fair-monetization']);
 });
 
+test('same queued title promise suppresses clone candidates even when the source fingerprint changes', () => {
+  const summary = evaluateCandidateDuplication({
+    candidate: {
+      candidateId: 'candidate-d',
+      title: 'Best Furniture & Decoration Hytale Mods This Month After Pre-release Patch Notes (update 5)',
+      angleSummary: 'Translate the featured mod cluster for vanilla-first players.',
+      seoPrimaryKeyword: 'best furniture decoration hytale mods',
+      sourceFingerprint: 'curseforge-theme:2026-04:furniture-decoration:new-cluster',
+      noveltyFingerprint:
+        'mod-scene-radar:best-furniture-and-decoration-hytale-mods-this-month-after-pre-release-patch-notes-update-5:furniture-and-decoration',
+      familyId: 'mod-scene-radar',
+      relatedRouteTargets: ['/servers', '/guides'],
+      sourceRefs: [{ title: 'Furniture & Decoration', canonicalUrl: 'https://www.curseforge.com/hytale' }],
+    },
+    recentPublished: [],
+    existingCandidates: [],
+    queueRecords: [
+      {
+        candidateId: 'candidate-old',
+        queueId: 'title-0003',
+        title: 'Best Furniture & Decoration Hytale Mods This Month After Pre-release Patch Notes (update 5)',
+        angleSummary: 'Translate the featured mod cluster for vanilla-first players.',
+        seoPrimaryKeyword: 'best furniture decoration hytale mods',
+        sourceFingerprint: 'curseforge-theme:2026-04:furniture-decoration:old-cluster',
+        workflowStatus: 'queued',
+      },
+    ],
+    sourceConsumption: [],
+  });
+
+  assert.equal(summary.decision, 'suppressed');
+  assert.deepEqual(summary.matchedCandidateIds, ['candidate-old']);
+});
+
 test('mod-scene-radar suppresses stale fallback clusters with no fresh signal', async () => {
   const html = `<!doctype html><html><body><section><h2>Latest Mods</h2><article><a href="/hytale/mods/ancient-furniture-pack">Ancient Furniture Pack</a><p>By OldAuthor</p><p>Furniture pack for roleplay worlds.</p><p>January 10, 2025</p><p>Furniture</p></article></section></body></html>`;
   const detail = `<!doctype html><html><body><h1>Ancient Furniture Pack</h1><div class="author"><a>OldAuthor</a></div><section><h3>Details</h3><p>Created January 10, 2025</p><p>Updated January 10, 2025</p><p>Project ID 1001</p></section><section><h2>Description</h2><p>Furniture pack for roleplay worlds.</p></section></body></html>`;

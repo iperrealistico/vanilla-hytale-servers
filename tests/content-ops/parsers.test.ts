@@ -53,6 +53,21 @@ test('parseCurseforgeHomePage falls back cleanly when no monthly theme is presen
   assert.equal(parsed.featuredCards[0]?.title, 'QueryHy - HTTP Server Query');
 });
 
+test('parseCurseforgeHomePage ignores install links and only keeps project pages', () => {
+  const html = `<!doctype html><html><body>
+    <section>
+      <h2>Monthly Theme - Furniture & Decoration</h2>
+      <article><a href="/hytale/mods/decoration-lights">Decoration Lights +</a></article>
+      <article><a href="/hytale/mods/decoration-lights/install/7841844">Install Decoration Lights +</a></article>
+    </section>
+  </body></html>`;
+
+  const parsed = parseCurseforgeHomePage(html);
+
+  assert.equal(parsed.monthlyThemeCards.length, 1);
+  assert.equal(parsed.monthlyThemeCards[0]?.canonicalUrl, 'https://www.curseforge.com/hytale/mods/decoration-lights');
+});
+
 test('parseCurseforgeModDetailPage extracts project metadata and description', () => {
   const html = fs.readFileSync(fixture('curseforge-mod-detail.html'), 'utf8');
   const detail = parseCurseforgeModDetailPage(html, 'https://www.curseforge.com/hytale/mods/more-vanilla-furnitures');
@@ -64,6 +79,46 @@ test('parseCurseforgeModDetailPage extracts project metadata and description', (
   assert.equal(detail.heroImageUrl, 'https://static.curseforge.com/hytale/mods/more-vanilla-furnitures/cover.png');
   assert.match(detail.mainFile ?? '', /MoreVanillaFurnitures1\.1\.1\.zip/);
   assert.match(detail.description, /All blocks and items are vanilla/);
+});
+
+test('parseCurseforgeModDetailPage prefers structured metadata on the live app shell', () => {
+  const html = `<!doctype html><html><head>
+    <meta property="og:title" content="Decoration Lights +">
+    <meta property="og:description" content="Crystal-powered decorative lights for Hytale builders.">
+    <meta property="og:image" content="https://media.forgecdn.net/example.png">
+  </head><body>
+    <script type="application/ld+json">
+      {"@context":"https://schema.org","@graph":[
+        {"@type":"WebPage","url":"https://www.curseforge.com/hytale/mods/decoration-lights","name":"Decoration Lights +","identifier":"1464425","description":"Crystal-powered decorative lights for Hytale builders.","mainEntity":{"@type":"CreativeWork","name":"Decoration Lights +","identifier":"1464425","description":"Crystal-powered decorative lights for Hytale builders.","dateModified":"2026-03-29T17:08:13.000Z","url":"https://www.curseforge.com/hytale/mods/decoration-lights","author":{"@type":"Person","name":"VengenceOG"},"image":"https://media.forgecdn.net/example.png"}}
+      ]}
+    </script>
+    <section>
+      <h3>Details</h3>
+      <dl>
+        <dt>Created</dt><dd>March 18, 2026</dd>
+        <dt>Updated</dt><dd>March 29, 2026</dd>
+        <dt>Project ID</dt><dd>1464425</dd>
+      </dl>
+    </section>
+    <section id="project-categories">
+      <a href="/hytale/search?categories=furniture">Furniture</a>
+      <a href="/hytale/search?categories=blocks">Blocks</a>
+    </section>
+    <section>
+      <h3>Description</h3>
+      <p>Place decorative lights crafted at the Furniture Bench.</p>
+    </section>
+  </body></html>`;
+
+  const detail = parseCurseforgeModDetailPage(html, 'https://www.curseforge.com/hytale/mods/decoration-lights');
+
+  assert.equal(detail.title, 'Decoration Lights +');
+  assert.equal(detail.author, 'VengenceOG');
+  assert.equal(detail.projectId, '1464425');
+  assert.equal(detail.updatedAt, '2026-03-29T17:08:13.000Z');
+  assert.deepEqual(detail.categories, ['Furniture', 'Blocks']);
+  assert.equal(detail.heroImageUrl, 'https://media.forgecdn.net/example.png');
+  assert.match(detail.description, /decorative lights crafted at the Furniture Bench/i);
 });
 
 test('buildCurseforgeThemeMonthKey keeps month partitioning stable', () => {

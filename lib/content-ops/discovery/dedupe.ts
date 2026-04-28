@@ -75,6 +75,7 @@ export function evaluateCandidateDuplication(options: {
   sourceConsumption: SourceConsumptionRecord[];
 }): DuplicateCheckSummary {
   const { candidate, recentPublished, existingCandidates, queueRecords, sourceConsumption } = options;
+  const normalizedCandidateTitle = normalizeWhitespace(candidate.title).toLowerCase();
 
   const exactSourceReuse =
     sourceConsumption.some((record) => record.sourceFingerprint === candidate.sourceFingerprint) ||
@@ -101,6 +102,49 @@ export function evaluateCandidateDuplication(options: {
         .filter((record) => record.sourceFingerprint === candidate.sourceFingerprint)
         .map((record) => record.candidateId),
       reasoning: 'Exact source fingerprint already exists in consumption history, queue state, or discovery ledger.',
+    };
+  }
+
+  const exactPromiseReuse =
+    existingCandidates.some(
+      (record) =>
+        record.candidateId !== candidate.candidateId &&
+        !['suppressed', 'stale', 'blocked', 'published'].includes(record.workflowStatus) &&
+        (record.noveltyFingerprint === candidate.noveltyFingerprint ||
+          normalizeWhitespace(record.title).toLowerCase() === normalizedCandidateTitle),
+    ) ||
+    queueRecords.some(
+      (record) =>
+        record.candidateId !== candidate.candidateId &&
+        !['blocked', 'published', 'published-needs-enrichment'].includes(record.workflowStatus) &&
+        (record.sourceFingerprint === candidate.sourceFingerprint ||
+          normalizeWhitespace(record.title).toLowerCase() === normalizedCandidateTitle),
+    );
+
+  if (exactPromiseReuse) {
+    return {
+      decision: 'suppressed',
+      overlapScore: 1,
+      sourceReuse: false,
+      matchedPublishedSlugs: [],
+      matchedCandidateIds: unique([
+        ...existingCandidates
+          .filter(
+            (record) =>
+              record.candidateId !== candidate.candidateId &&
+              (record.noveltyFingerprint === candidate.noveltyFingerprint ||
+                normalizeWhitespace(record.title).toLowerCase() === normalizedCandidateTitle),
+          )
+          .map((record) => record.candidateId),
+        ...queueRecords
+          .filter(
+            (record) =>
+              record.candidateId !== candidate.candidateId &&
+              normalizeWhitespace(record.title).toLowerCase() === normalizedCandidateTitle,
+          )
+          .map((record) => record.candidateId ?? record.queueId),
+      ]),
+      reasoning: 'A queued or discovered candidate already uses the same reader-facing promise, so this run should refresh it instead of cloning it.',
     };
   }
 

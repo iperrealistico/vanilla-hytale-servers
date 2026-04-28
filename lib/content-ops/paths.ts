@@ -11,6 +11,7 @@ export interface ContentOpsPaths {
   sourceConsumptionPath: string;
   suppressionLogPath: string;
   snapshotsRoot: string;
+  browserProfilesRoot: string;
 }
 
 export function getContentOpsPaths(workspaceRoot = process.cwd()): ContentOpsPaths {
@@ -28,5 +29,6 @@ export function getContentOpsPaths(workspaceRoot = process.cwd()): ContentOpsPat
     sourceConsumptionPath: path.join(discoveryRoot, 'source-consumption.jsonl'),
     suppressionLogPath: path.join(discoveryRoot, 'suppression-log.jsonl'),
     snapshotsRoot: path.join(discoveryRoot, 'snapshots'),
+    browserProfilesRoot: path.join(discoveryRoot, 'playwright-profiles'),
   };
 }

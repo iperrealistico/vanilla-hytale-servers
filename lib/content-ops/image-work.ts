@@ -103,6 +103,7 @@ export function buildBlueprintImagePrompt(record: QueueRecord, slot: ArticleImag
 
   const lines = [
     `Create an original Hytale blueprint illustration for the article "${record.title}".`,
+    `Output medium requirement: generate a raster bitmap illustration, not an SVG, not a flat vector diagram, and not a hand-assembled wireframe placeholder.`,
     referenceDirective,
     `Source topic focus: ${sourceTheme}.`,
     record.angleSummary ? `Editorial angle: ${record.angleSummary}` : null,
@@ -155,11 +156,13 @@ export function renderImageWorkSidecar(options: {
 - Style reference used: scraped source image guidance transformed into the Hytale blueprint style
 - Blueprint palette: \`${HYTALE_BLUEPRINT_PALETTE.base} -> ${HYTALE_BLUEPRINT_PALETTE.highlight}\`
 - Raw source publishing rule: never publish scraped source images directly; only publish AI-generated blueprint derivatives
-- Generation method used: AI image generation, image-to-image blueprint stylization when reference images exist, otherwise text-to-image blueprint concept fallback
+- Generation method required: use the built-in \`imagegen\` skill and the same \`image_gen\` tool available in chat; use image-to-image blueprint stylization when reference images exist, otherwise text-to-image blueprint concept fallback
+- Disallowed fallback: do not satisfy this asset with hand-assembled SVG, HTML/CSS illustration, repo-native vector placeholder work, or manual blueprint line art
 - Output file path: ${outputFilePath}
 - Output pixel dimensions: ${slotConfig.outputDimensions}
 - Aspect-ratio confirmation: ${slotConfig.aspectRatio}
-- Optimization status: pending blueprint generation, crop review, resize, compression, and metadata cleanup
+- Output format rule: final deliverable must be a raster file such as PNG or WebP generated through \`imagegen\`, then moved into the tracked/public asset path chosen for publication
+- Optimization status: pending \`imagegen\` raster generation, crop review, resize, compression, and metadata cleanup
 - Selected future asset-library key: \`staged-${slug}-${slotConfig.assetKeySuffix}\`
 
 ## Scraped Source References

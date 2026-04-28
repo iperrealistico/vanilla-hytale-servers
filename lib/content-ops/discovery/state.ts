@@ -3,6 +3,7 @@ import fs from 'fs';
 import { ensureTextFile, readJsonlFile, writeJsonlFile } from '@/lib/content-ops/jsonl';
 import { getContentOpsPaths, type ContentOpsPaths } from '@/lib/content-ops/paths';
 import { readQueueRecords, writeQueueRecords, mergeQueueRecord } from '@/lib/content-ops/queue';
+import { normalizeWhitespace } from '@/lib/content-ops/discovery/text';
 import type { ArticleEntry } from '@/lib/articles/content';
 import { getAllArticles } from '@/lib/articles/content';
 import {
@@ -44,7 +45,7 @@ export function ensureDiscoveryWorkspace(paths = getContentOpsPaths()) {
 export function readDiscoveryState(paths = getContentOpsPaths()): DiscoveryState {
   ensureDiscoveryWorkspace(paths);
 
-  return {
+  const state = {
     paths,
     queueRecords: readQueueRecords(paths),
     candidates: readJsonlFile(paths.candidateLedgerPath, (value) => TitleCandidateRecordSchema.parse(value)),
@@ -52,6 +53,9 @@ export function readDiscoveryState(paths = getContentOpsPaths()): DiscoveryState
     sourceConsumption: readJsonlFile(paths.sourceConsumptionPath, (value) => SourceConsumptionRecordSchema.parse(value)),
     suppressionLog: readJsonlFile(paths.suppressionLogPath, (value) => SuppressionLogRecordSchema.parse(value)),
   };
+
+  state.candidates = dedupeCandidateLedger(state.candidates);
+  return state;
 }
 
 export function writeDiscoveryState(state: DiscoveryState) {
@@ -75,9 +79,40 @@ export function writeDiscoveryState(state: DiscoveryState) {
 }
 
 export function upsertCandidate(state: DiscoveryState, candidate: TitleCandidateRecord) {
-  const next = state.candidates.filter((record) => record.candidateId !== candidate.candidateId);
-  next.push(TitleCandidateRecordSchema.parse(candidate));
-  state.candidates = next;
+  const normalizedTitle = normalizeWhitespace(candidate.title).toLowerCase();
+  const existing =
+    state.candidates.find((record) => record.candidateId === candidate.candidateId) ??
+    state.candidates.find(
+      (record) =>
+        record.familyId === candidate.familyId &&
+        record.workflowStatus !== 'published' &&
+        (record.noveltyFingerprint === candidate.noveltyFingerprint ||
+          normalizeWhitespace(record.title).toLowerCase() === normalizedTitle),
+    );
+
+  const mergedCandidate = existing
+    ? TitleCandidateRecordSchema.parse({
+        ...candidate,
+        candidateId: existing.candidateId,
+        queueId: existing.queueId ?? candidate.queueId,
+        articleSlug: existing.articleSlug ?? candidate.articleSlug,
+        publishedSlug: existing.publishedSlug ?? candidate.publishedSlug,
+        createdAt: existing.createdAt ?? candidate.createdAt,
+      })
+    : TitleCandidateRecordSchema.parse(candidate);
+
+  const next = state.candidates.filter(
+    (record) =>
+      record.candidateId !== mergedCandidate.candidateId &&
+      !(
+        record.familyId === mergedCandidate.familyId &&
+        record.workflowStatus !== 'published' &&
+        (record.noveltyFingerprint === mergedCandidate.noveltyFingerprint ||
+          normalizeWhitespace(record.title).toLowerCase() === normalizedTitle)
+      ),
+  );
+  next.push(mergedCandidate);
+  state.candidates = dedupeCandidateLedger(next);
 }
 
 export function upsertSourceLedgerRecord(state: DiscoveryState, record: SourceLedgerRecord) {
@@ -149,7 +184,85 @@ function queueSortWeight(record: QueueRecord) {
   return record.familyId === 'legacy-manual' ? 0 : 1;
 }
 
+function rankCandidateStatus(status: TitleCandidateRecord['workflowStatus']) {
+  switch (status) {
+    case 'published':
+      return 6;
+    case 'published-needs-enrichment':
+      return 5;
+    case 'ready-to-publish':
+      return 4;
+    case 'ready-for-review':
+      return 3;
+    case 'drafted':
+      return 2;
+    case 'queued':
+    case 'accepted':
+      return 1;
+    case 'blocked':
+      return 0;
+    case 'suppressed':
+    case 'stale':
+      return -1;
+    default:
+      return -1;
+  }
+}
+
+function candidateLedgerKey(candidate: TitleCandidateRecord) {
+  return `${candidate.familyId}:${candidate.noveltyFingerprint || normalizeWhitespace(candidate.title).toLowerCase()}`;
+}
+
+function pickPreferredCandidate(left: TitleCandidateRecord, right: TitleCandidateRecord) {
+  const statusDelta = rankCandidateStatus(left.workflowStatus) - rankCandidateStatus(right.workflowStatus);
+  if (statusDelta !== 0) {
+    return statusDelta > 0 ? left : right;
+  }
+
+  const updatedDelta = (left.updatedAt || left.createdAt).localeCompare(right.updatedAt || right.createdAt);
+  if (updatedDelta !== 0) {
+    return updatedDelta > 0 ? left : right;
+  }
+
+  if (left.sourceRefs.length !== right.sourceRefs.length) {
+    return left.sourceRefs.length > right.sourceRefs.length ? left : right;
+  }
+
+  return left;
+}
+
+function mergeCandidatePair(primary: TitleCandidateRecord, secondary: TitleCandidateRecord): TitleCandidateRecord {
+  return TitleCandidateRecordSchema.parse({
+    ...primary,
+    queueId: primary.queueId ?? secondary.queueId,
+    articleSlug: primary.articleSlug ?? secondary.articleSlug,
+    publishedSlug: primary.publishedSlug ?? secondary.publishedSlug,
+    createdAt: primary.createdAt <= secondary.createdAt ? primary.createdAt : secondary.createdAt,
+    updatedAt: primary.updatedAt >= secondary.updatedAt ? primary.updatedAt : secondary.updatedAt,
+  });
+}
+
+function dedupeCandidateLedger(candidates: TitleCandidateRecord[]) {
+  const byKey = new Map<string, TitleCandidateRecord>();
+
+  for (const candidate of candidates) {
+    const key = candidateLedgerKey(candidate);
+    const existing = byKey.get(key);
+    if (!existing) {
+      byKey.set(key, candidate);
+      continue;
+    }
+
+    const preferred = pickPreferredCandidate(existing, candidate);
+    const secondary = preferred === existing ? candidate : existing;
+    byKey.set(key, mergeCandidatePair(preferred, secondary));
+  }
+
+  return [...byKey.values()];
+}
+
 export function materializeQueueFromCandidates(state: DiscoveryState) {
+  state.candidates = dedupeCandidateLedger(state.candidates);
   const queueByCandidateId = new Map(state.queueRecords.filter((record) => record.candidateId).map((record) => [record.candidateId as string, record]));
   const nextQueue: QueueRecord[] = [...state.queueRecords.filter((record) => record.candidateId === null)];
 
