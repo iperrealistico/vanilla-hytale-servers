@@ -90,7 +90,6 @@ export default async function BlogPage({ params }: { params: Promise<{ slug?: st
             eyebrow="Editorial surface"
             title="Vanilla-first Hytale articles that help you choose better servers"
             description="This blog exists to make the homepage shortlist more useful. Each article turns a fuzzy label like vanilla, fair, semi-vanilla, or no pay-to-win into practical questions you can actually use before you join."
-            badges={['Server selection', 'Fairness checks', 'SMP onboarding']}
             actions={[
               { href: '/#servers', label: 'View homepage shortlist' },
               { href: '/#methodology', label: 'See scoring', variant: 'secondary' },

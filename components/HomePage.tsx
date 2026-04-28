@@ -7,7 +7,7 @@ import { SiteContent } from '../lib/content';
 
 export default function HomePage({ content }: { content: SiteContent }) {
     return (
-        <>
+        <div className="homepage-shell">
             <div className="bg-floats" aria-hidden="true">
                 {content.hero.backgroundFloats.map((float, i) => (
                     <img key={i} className="bg-float" src={float.src} alt="" loading="lazy" decoding="async" style={float.style} />
@@ -283,6 +283,6 @@ export default function HomePage({ content }: { content: SiteContent }) {
             <div className="toast" id="toast" role="status" aria-live="polite"></div>
 
             <ClientEffects />
-        </>
+        </div>
     );
 }

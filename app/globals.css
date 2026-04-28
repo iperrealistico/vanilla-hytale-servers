@@ -345,6 +345,19 @@ nav.main-nav {
   background: linear-gradient(180deg, rgba(94, 230, 255, 0.26), rgba(94, 230, 255, 0.10));
 }
 
+.homepage-shell .btn {
+  min-height: 52px;
+  padding: 13px 18px;
+  border-radius: 15px;
+  border-width: 1.5px;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.homepage-shell .btn i {
+  font-size: 0.98em;
+}
+
 :root[data-theme="light"] .btn {
   border-color: rgba(0, 0, 0, 0.12);
   background: rgba(0, 0, 0, 0.03);
@@ -1107,6 +1120,16 @@ h2 {
   display: inline-flex;
   align-items: center;
   gap: 8px;
+}
+
+.homepage-shell .btn-copy,
+.homepage-shell .btn-slot,
+.homepage-shell .link-pill {
+  min-height: 46px;
+  padding: 11px 15px;
+  border-radius: 14px;
+  border-width: 1.5px;
+  font-size: 13px;
 }
 
 .btn-copy:hover {
