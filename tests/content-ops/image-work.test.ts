@@ -40,7 +40,7 @@ test('buildBlueprintImagePrompt enforces the Hytale blueprint palette and redraw
     angleSummary: 'Broaden the patch notes into server stability and mod ecosystem implications.',
     seoPrimaryKeyword: 'update 5 vanilla hytale servers',
     seoIntent: 'informational',
-    relatedRouteTargets: ['/servers', '/guides'],
+    relatedRouteTargets: ['/#servers', '/blog', '/#methodology'],
     duplicateCheckSummary: {
       decision: 'accepted',
       overlapScore: 0.2,
@@ -101,7 +101,7 @@ test('renderImageWorkSidecar includes scraped reference paths and the blueprint 
     angleSummary: 'Connect the current mod theme to vanilla-first worldbuilding and the latest Hytale update.',
     seoPrimaryKeyword: 'best furniture decoration hytale mods',
     seoIntent: 'informational',
-    relatedRouteTargets: ['/servers', '/guides'],
+    relatedRouteTargets: ['/#servers', '/blog'],
     duplicateCheckSummary: {
       decision: 'accepted',
       overlapScore: 0.18,

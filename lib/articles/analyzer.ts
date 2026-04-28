@@ -11,7 +11,7 @@ export const approvedEditorialBlocks = [
   'ArticlePrimarySegue',
 ] as const;
 
-export const strategicInternalRoutes = ['/servers', '/guides', '/methodology'] as const;
+export const strategicInternalRoutes = ['/#servers', '/blog', '/#methodology'] as const;
 
 export interface ArticleSubheading {
   id: string;
@@ -108,7 +108,7 @@ function findApprovedBlocks(source: string): string[] {
 }
 
 function findStrategicLinks(source: string): string[] {
-  const linkRegex = /\]\((\/[^)\s#?]+)(?:[#?][^)]+)?\)/g;
+  const linkRegex = /\]\((\/[^)\s?]+)(?:\?[^)]*)?\)/g;
   const links = Array.from(source.matchAll(linkRegex), (match) => match[1]);
   return unique(links.filter((href) => strategicInternalRoutes.includes(href as (typeof strategicInternalRoutes)[number])));
 }

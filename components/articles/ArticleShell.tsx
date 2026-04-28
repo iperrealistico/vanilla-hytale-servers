@@ -94,8 +94,8 @@ export function ArticleShell({ article, body, related }: ArticleShellProps) {
           <div className="container">
             <div className="article-section-heading">
               <span className="editorial-eyebrow">Keep exploring</span>
-              <h2>Related Hytale server guides</h2>
-              <p>Use the guide hub to compare another angle before you join a server or shortlist one for your group.</p>
+              <h2>Related Hytale server articles</h2>
+              <p>Use the blog to compare another angle before you join a server or shortlist one for your group.</p>
             </div>
             <div className="article-card-grid">
               {related.map((relatedArticle) => (

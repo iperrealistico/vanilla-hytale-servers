@@ -11,9 +11,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     '',
     '/blog',
-    '/guides',
-    '/servers',
-    '/methodology',
     ...categories.map((category) => `/blog/category/${category}`),
     ...articles.map((article) => article.urlPath),
   ].map((pathname) => ({

@@ -88,12 +88,12 @@ export default async function BlogPage({ params }: { params: Promise<{ slug?: st
         <main id="main-content">
           <EditorialHero
             eyebrow="Editorial surface"
-            title="Vanilla-first Hytale guides that help you choose better servers"
-            description="This blog exists to make the server directory more useful. Each article turns a fuzzy label like vanilla, fair, semi-vanilla, or no pay-to-win into practical questions you can actually use before you join."
+            title="Vanilla-first Hytale articles that help you choose better servers"
+            description="This blog exists to make the homepage shortlist more useful. Each article turns a fuzzy label like vanilla, fair, semi-vanilla, or no pay-to-win into practical questions you can actually use before you join."
             badges={['Server selection', 'Fairness checks', 'SMP onboarding']}
             actions={[
-              { href: '/servers', label: 'Browse servers' },
-              { href: '/guides', label: 'Explore guide hub', variant: 'secondary' },
+              { href: '/#servers', label: 'View homepage shortlist' },
+              { href: '/#methodology', label: 'See scoring', variant: 'secondary' },
             ]}
           />
 
@@ -101,7 +101,7 @@ export default async function BlogPage({ params }: { params: Promise<{ slug?: st
             <div className="container">
               <div className="article-section-heading">
                 <span className="editorial-eyebrow">Latest articles</span>
-                <h2>Fresh Hytale server decision guides</h2>
+                <h2>Fresh Hytale server decision articles</h2>
                 <p>These articles are built to answer real selection questions, not to flood the site with generic trend posts.</p>
               </div>
               <div className="article-card-grid">
@@ -136,7 +136,7 @@ export default async function BlogPage({ params }: { params: Promise<{ slug?: st
             badges={[`${articles.length} articles`, 'Topic-aware', 'Linked to live routes']}
             actions={[
               { href: '/blog', label: 'Back to blog' },
-              { href: '/guides', label: 'Guide hub', variant: 'secondary' },
+              { href: '/#servers', label: 'Homepage shortlist', variant: 'secondary' },
             ]}
             backgroundSrc="/img/hytale/hytale_vanilla_servers_list_6.jpeg"
           />

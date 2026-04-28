@@ -2045,3 +2045,24 @@ footer {
     grid-template-columns: 1fr;
   }
 }
+
+/* Title font override kept late in the cascade so editorial titles use true lowercase forms. */
+:root {
+  --h-font: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", "URW Palladio L", Georgia, serif;
+  --brand-font: "Cinzel Decorative", serif;
+}
+
+.brand-title strong {
+  font-family: var(--brand-font);
+}
+
+h1,
+h2,
+h3,
+.overlay-title,
+.article-card-title,
+.article-section-heading h2,
+.panel h2 {
+  font-family: var(--h-font);
+  letter-spacing: 0.01em;
+}

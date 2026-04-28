@@ -24,7 +24,7 @@ const editorialChecklist = [
   'Write or promote live articles in content/blog with articleTemplate: v3.',
   'Run npm run validate:articles before any article goes live.',
   'Run npm run test:articles and npm run build before a publish or deploy step.',
-  'Use /servers, /guides, and /methodology as the strategic internal-link backbone.',
+  'Use /blog plus the homepage anchors /#servers and /#methodology as the strategic internal-link backbone.',
 ];
 
 export default function AdminDashboard({ initialContent, initialManifest }: { initialContent: SiteContent, initialManifest: Record<string, ManifestEntry> }) {
@@ -202,10 +202,8 @@ export default function AdminDashboard({ initialContent, initialManifest }: { in
                 <h3 style={{ marginTop: 0 }}>Public routes</h3>
                 <div style={{ display: 'grid', gap: '10px' }}>
                   {[
+                    { href: '/', label: 'Homepage' },
                     { href: '/blog', label: 'Blog index' },
-                    { href: '/guides', label: 'Guide hub' },
-                    { href: '/servers', label: 'Server directory' },
-                    { href: '/methodology', label: 'Methodology' },
                   ].map((route) => (
                     <a key={route.href} href={route.href} target="_blank" rel="noreferrer" className="btn btn-secondary" style={{ justifyContent: 'space-between' }}>
                       <span>{route.label}</span>

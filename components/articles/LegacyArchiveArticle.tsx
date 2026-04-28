@@ -44,7 +44,7 @@ export function LegacyArchiveArticle({ legacy, body }: LegacyArchiveArticleProps
                   </p>
                   <div className="blog-index-actions" style={{ marginTop: '1rem' }}>
                     <Link className="btn btn-primary pressable" href="/blog">Open live blog</Link>
-                    <Link className="btn btn-secondary pressable" href="/guides">Explore guide hub</Link>
+                    <Link className="btn btn-secondary pressable" href="/#servers">Homepage shortlist</Link>
                   </div>
                 </div>
               </div>
@@ -58,10 +58,10 @@ export function LegacyArchiveArticle({ legacy, body }: LegacyArchiveArticleProps
               <div className="panel article-sticky-cta">
                 <span className="editorial-eyebrow">Current routes</span>
                 <h2>Use the live selection system instead</h2>
-                <p>The best next step is usually the server directory, the guide hub, or the methodology page that explains how servers are evaluated now.</p>
+                <p>The best next step is usually the homepage shortlist, the live blog, or the homepage scoring section that explains how servers are evaluated now.</p>
                 <div style={{ display: 'grid', gap: '0.75rem' }}>
-                  <Link className="btn btn-primary pressable" href="/servers">Browse servers</Link>
-                  <Link className="btn btn-secondary pressable" href="/methodology">See methodology</Link>
+                  <Link className="btn btn-primary pressable" href="/#servers">Homepage shortlist</Link>
+                  <Link className="btn btn-secondary pressable" href="/#methodology">See scoring</Link>
                 </div>
               </div>
             </aside>

@@ -33,8 +33,7 @@ export function EditorialHeader() {
           </Link>
 
           <nav className="main-nav" aria-label="Main navigation">
-            <Link className="nav-text pressable" href="/servers">Servers</Link>
-            <Link className="nav-text pressable" href="/guides">Guides</Link>
+            <Link className="nav-text pressable" href="/">Home</Link>
             <Link className="nav-text pressable" href="/blog">Blog</Link>
             <Link className="btn btn-primary tilt pressable" href="/#suggest">
               <i className="fa-solid fa-paper-plane" aria-hidden="true"></i>
@@ -112,8 +111,8 @@ export function EditorialFooter() {
             </p>
           </div>
           <div className="footer-links">
-            <Link className="link-pill" href="/servers"><i className="fa-solid fa-server"></i> Servers</Link>
-            <Link className="link-pill" href="/guides"><i className="fa-solid fa-map"></i> Guides</Link>
+            <Link className="link-pill" href="/#servers"><i className="fa-solid fa-server"></i> Shortlist</Link>
+            <Link className="link-pill" href="/#methodology"><i className="fa-solid fa-scale-balanced"></i> Scoring</Link>
             <Link className="link-pill" href="/blog"><i className="fa-solid fa-book"></i> Blog</Link>
           </div>
         </div>
