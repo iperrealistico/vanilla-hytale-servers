@@ -66,29 +66,33 @@ export function EditorialHero({
               <span className="editorial-eyebrow">{eyebrow}</span>
               <h1>{title}</h1>
               <p>{description}</p>
-              {badges.length > 0 ? (
-                <div className="hero-meta editorial-hero-badges">
-                  {badges.map((badge) => (
-                    <span key={badge}>{badge}</span>
-                  ))}
+              {badges.length > 0 || actions.length > 0 ? (
+                <div className="editorial-hero-footer">
+                  {badges.length > 0 ? (
+                    <div className="hero-meta editorial-hero-badges">
+                      {badges.map((badge) => (
+                        <span key={badge}>{badge}</span>
+                      ))}
+                    </div>
+                  ) : null}
+
+                  {actions.length > 0 ? (
+                    <div className="hero-cta editorial-hero-actions" aria-label="Primary actions">
+                      {actions.map((action) => (
+                        <Link
+                          key={action.href}
+                          className={`btn ${action.variant === 'secondary' ? 'btn-secondary' : 'btn-primary'} tilt pressable`}
+                          data-tilt-strength="0.40"
+                          href={action.href}
+                        >
+                          {action.label}
+                        </Link>
+                      ))}
+                    </div>
+                  ) : null}
                 </div>
               ) : null}
             </div>
-
-            {actions.length > 0 ? (
-              <div className="hero-cta" aria-label="Primary actions">
-                {actions.map((action) => (
-                  <Link
-                    key={action.href}
-                    className={`btn ${action.variant === 'secondary' ? 'btn-secondary' : 'btn-primary'} tilt pressable`}
-                    data-tilt-strength="0.40"
-                    href={action.href}
-                  >
-                    {action.label}
-                  </Link>
-                ))}
-              </div>
-            ) : null}
           </div>
         </div>
       </div>
