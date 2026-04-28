@@ -84,6 +84,30 @@ export const imageLibrary = {
     640,
     'cyan',
   ),
+  'staged-what-pre-release-patch-notes-update-5-means-for-vanilla-first-hytale-servers-and-mods-cover': createAsset(
+    'staged-what-pre-release-patch-notes-update-5-means-for-vanilla-first-hytale-servers-and-mods-cover',
+    '/images/blog/blueprints/pre-release-update-5-vanilla-servers-cover.png',
+    'A blueprint-style Hytale server planning scene with builders, a workbench, and a drafting board.',
+    1600,
+    900,
+    'blueprint',
+  ),
+  'staged-what-pre-release-patch-notes-update-5-means-for-vanilla-first-hytale-servers-and-mods-ornament-wash': createAsset(
+    'staged-what-pre-release-patch-notes-update-5-means-for-vanilla-first-hytale-servers-and-mods-ornament-wash',
+    '/images/blog/blueprints/pre-release-update-5-vanilla-servers-wash.png',
+    'A broad blueprint wash with voxel settlement, workbench, server-rack, and planning-board linework.',
+    1600,
+    900,
+    'blueprint',
+  ),
+  'staged-what-pre-release-patch-notes-update-5-means-for-vanilla-first-hytale-servers-and-mods-ornament-orbit': createAsset(
+    'staged-what-pre-release-patch-notes-update-5-means-for-vanilla-first-hytale-servers-and-mods-ornament-orbit',
+    '/images/blog/blueprints/pre-release-update-5-vanilla-servers-orbit.png',
+    'A compact blueprint orbit ornament with a planning board, tool, and voxel block stack.',
+    640,
+    640,
+    'blueprint',
+  ),
 } as const;
 
 export type ImageAssetId = keyof typeof imageLibrary;

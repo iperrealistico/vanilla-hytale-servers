@@ -25,5 +25,14 @@
   },
   "blog.what-to-check-before-you-join-a-hytale-smp-that-claims-to-be-vanilla.ornament.orbit": {
     "asset": "blog-vanilla-smp-checklist-orbit"
+  },
+  "blog.what-pre-release-patch-notes-update-5-means-for-vanilla-first-hytale-servers-and-mods.cover": {
+    "asset": "staged-what-pre-release-patch-notes-update-5-means-for-vanilla-first-hytale-servers-and-mods-cover"
+  },
+  "blog.what-pre-release-patch-notes-update-5-means-for-vanilla-first-hytale-servers-and-mods.ornament.wash": {
+    "asset": "staged-what-pre-release-patch-notes-update-5-means-for-vanilla-first-hytale-servers-and-mods-ornament-wash"
+  },
+  "blog.what-pre-release-patch-notes-update-5-means-for-vanilla-first-hytale-servers-and-mods.ornament.orbit": {
+    "asset": "staged-what-pre-release-patch-notes-update-5-means-for-vanilla-first-hytale-servers-and-mods-ornament-orbit"
   }
 }
