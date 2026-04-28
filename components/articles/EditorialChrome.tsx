@@ -67,14 +67,6 @@ export function EditorialHero({
               <p>{description}</p>
               {badges.length > 0 || actions.length > 0 ? (
                 <div className="editorial-hero-footer">
-                  {badges.length > 0 ? (
-                    <div className="hero-meta editorial-hero-badges">
-                      {badges.map((badge) => (
-                        <span key={badge}>{badge}</span>
-                      ))}
-                    </div>
-                  ) : null}
-
                   {actions.length > 0 ? (
                     <div className="hero-cta editorial-hero-actions" aria-label="Primary actions">
                       {actions.map((action) => (
@@ -86,6 +78,14 @@ export function EditorialHero({
                         >
                           {action.label}
                         </Link>
+                      ))}
+                    </div>
+                  ) : null}
+
+                  {badges.length > 0 ? (
+                    <div className="hero-meta editorial-hero-badges">
+                      {badges.map((badge) => (
+                        <span key={badge}>{badge}</span>
                       ))}
                     </div>
                   ) : null}

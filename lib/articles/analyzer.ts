@@ -11,6 +11,7 @@ export const approvedEditorialBlocks = [
   'ArticlePrimarySegue',
 ] as const;
 
+export const homepageServerListRoute = '/#servers' as const;
 export const strategicInternalRoutes = ['/#servers', '/blog', '/#methodology'] as const;
 
 export interface ArticleSubheading {
@@ -34,6 +35,7 @@ export interface ArticleAnalysis {
   approvedBlockCountExcludingSegue: number;
   primarySegueCount: number;
   strategicLinks: string[];
+  hasHomepageServerListLink: boolean;
 }
 
 export function analyzeArticleSource(source: string): ArticleAnalysis {
@@ -78,6 +80,7 @@ export function analyzeArticleSource(source: string): ArticleAnalysis {
   const approvedBlockNames = findApprovedBlocks(source);
   const primarySegueCount = approvedBlockNames.filter((name) => name === 'ArticlePrimarySegue').length;
   const approvedBlockCountExcludingSegue = approvedBlockNames.filter((name) => name !== 'ArticlePrimarySegue').length;
+  const strategicLinks = findStrategicLinks(source);
 
   return {
     wordCount: countWords(source),
@@ -92,7 +95,8 @@ export function analyzeArticleSource(source: string): ArticleAnalysis {
     approvedBlockNames,
     approvedBlockCountExcludingSegue,
     primarySegueCount,
-    strategicLinks: findStrategicLinks(source),
+    strategicLinks,
+    hasHomepageServerListLink: strategicLinks.includes(homepageServerListRoute),
   };
 }
 

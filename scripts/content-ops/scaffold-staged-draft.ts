@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
+import { buildArticleEditorialBrief, homepageServerListRoute } from '@/lib/content-ops/editorialSeo';
 import { syncImageWorkSidecarsForRecord } from '@/lib/content-ops/image-work';
 import { readQueueRecords, writeQueueRecords } from '@/lib/content-ops/queue';
 import { getContentOpsPaths } from '@/lib/content-ops/paths';
@@ -23,6 +24,10 @@ function ensureDir(dir: string) {
   fs.mkdirSync(dir, { recursive: true });
 }
 
+function yamlQuote(value: string) {
+  return `"${value.replace(/\\/g, '\\\\').replace(/"/g, '\\"')}"`;
+}
+
 function main() {
   const requestedQueueId = process.argv[2];
   const queue = readQueueRecords(paths);
@@ -40,9 +45,19 @@ function main() {
   ensureDir(slotDir);
 
   if (!fs.existsSync(draftPath)) {
+    const editorialBrief = buildArticleEditorialBrief(target);
+    const primaryKeyword = editorialBrief.primaryKeyword ?? 'TODO';
+    const supportingKeywords = editorialBrief.supportingKeywords.length > 0 ? editorialBrief.supportingKeywords.join('; ') : 'TODO';
+    const naturalAnchorIdeas =
+      editorialBrief.naturalHomepageAnchorIdeas.length > 0 ? editorialBrief.naturalHomepageAnchorIdeas.join('; ') : 'TODO';
+    const secondaryRoutes = editorialBrief.requiredBodyRoutes.filter((route) => route !== homepageServerListRoute);
+    const secondaryRouteList = secondaryRoutes.length > 0 ? secondaryRoutes.join('; ') : 'none';
+    const contextValue = target.angleSummary ?? target.whyNow ?? 'TODO';
+    const seoTitle = target.title;
+
     fs.writeFileSync(
       draftPath,
-      `---\nslug: ${slug}\narticleTemplate: v3\nqueueId: ${target.queueId}\nworkflowStatus: drafted\ntitle: "${target.title.replace(/"/g, '\\"')}"\nexcerpt: TODO\ncategory: TODO\ncontext: TODO\nprimaryKeyword: TODO\nsearchIntent: informational\ncoverImage: blog.${slug}.cover\nornamentWashImage: blog.${slug}.ornament.wash\nornamentOrbitImage: blog.${slug}.ornament.orbit\npublishedAt: ${new Date().toISOString().slice(0, 10)}\nseoTitle: "${target.title.replace(/"/g, '\\"')}"\nseoDescription: TODO\nchapterShortTitles:\n  - TODO\n  - TODO\n  - TODO\n  - TODO\narticleCtas:\n  sticky:\n    eyebrow: TODO\n    title: TODO\n    body: TODO\n    primaryCta:\n      label: TODO\n      href: /servers\n      variant: primary\n  segue:\n    eyebrow: TODO\n    title: TODO\n    body: TODO\n    primaryCta:\n      label: TODO\n      href: /guides\n      variant: secondary\nrelatedSlugs: []\nfeatured: false\ntags:\n  - TODO\n---\n\n<ArticleQuickAnswer title=\"Short answer\">\n  <p>TODO</p>\n</ArticleQuickAnswer>\n\n## TODO\n\nTODO\n\n<ArticlePrimarySegue />\n\n## TODO\n\nTODO\n`,
+      `---\nslug: ${slug}\narticleTemplate: v3\nqueueId: ${target.queueId}\nworkflowStatus: drafted\ntitle: ${yamlQuote(target.title)}\nexcerpt: TODO\ncategory: TODO\ncontext: ${yamlQuote(contextValue)}\n# SEO brief:\n# - Primary keyword: ${primaryKeyword}\n# - Supporting keywords: ${supportingKeywords}\n# - Required homepage backlink: ${homepageServerListRoute}\n# - Natural anchor ideas: ${naturalAnchorIdeas}\n# - Secondary strategic routes: ${secondaryRouteList}\nprimaryKeyword: ${yamlQuote(primaryKeyword)}\nsearchIntent: ${target.seoIntent ?? 'informational'}\ncoverImage: blog.${slug}.cover\nornamentWashImage: blog.${slug}.ornament.wash\nornamentOrbitImage: blog.${slug}.ornament.orbit\npublishedAt: ${new Date().toISOString().slice(0, 10)}\nseoTitle: ${yamlQuote(seoTitle)}\nseoDescription: TODO\nchapterShortTitles:\n  - TODO\n  - TODO\n  - TODO\n  - TODO\narticleCtas:\n  sticky:\n    eyebrow: TODO\n    title: TODO\n    body: TODO\n    primaryCta:\n      label: TODO\n      href: /#servers\n      variant: primary\n  segue:\n    eyebrow: TODO\n    title: TODO\n    body: TODO\n    primaryCta:\n      label: TODO\n      href: /blog\n      variant: secondary\nrelatedSlugs: []\nfeatured: false\ntags:\n  - TODO\n---\n\n<!--\nDraft brief:\n- Work the primary keyword into the intro, a mid-article comparison section, and the final decision section without stuffing.\n- Use 3 to 5 supporting keyword variants where they fit naturally.\n- Add at least one in-body link to /#servers in the first half of the article and another when comparing or filtering options.\n-->\n\n<ArticleQuickAnswer title=\"Short answer\">\n  <p>TODO</p>\n</ArticleQuickAnswer>\n\n## TODO\n\nTODO\n\n<ArticlePrimarySegue />\n\n## TODO\n\nTODO\n`,
     );
   }
 

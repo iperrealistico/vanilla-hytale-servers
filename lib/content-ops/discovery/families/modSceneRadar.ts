@@ -1,5 +1,6 @@
 import type { DiscoveryFamily } from '@/lib/content-ops/discovery/families/types';
 import { evaluateCandidateDuplication } from '@/lib/content-ops/discovery/dedupe';
+import { buildModScenePrimaryKeyword } from '@/lib/content-ops/editorialSeo';
 import {
   buildCurseforgeThemeMonthKey,
   parseCurseforgeHomePage,
@@ -207,13 +208,14 @@ export const modSceneRadarFamily: DiscoveryFamily = {
     const sourceFingerprint = `curseforge-theme:${monthKey}:${modClusterKey}`;
     const title = buildThemeTitle(themeLabel, latestRelevantNewsTitle);
     const noveltyFingerprint = `mod-scene-radar:${slugify(title)}:${slugify(themeLabel)}`;
+    const seoPrimaryKeyword = buildModScenePrimaryKeyword(themeLabel);
 
     const duplicateCheckSummary = evaluateCandidateDuplication({
       candidate: {
         candidateId: `${context.familyId}:${shortHash(sourceFingerprint)}`,
         title,
         angleSummary: `Use ${themeLabel} as the main hook, then connect the freshest relevant Hytale update to vanilla-first building, SMPs, and server-side culture.`,
-        seoPrimaryKeyword: `best ${themeLabel.toLowerCase()} hytale mods`,
+        seoPrimaryKeyword,
         sourceFingerprint,
         noveltyFingerprint,
         familyId: context.familyId,
@@ -298,7 +300,7 @@ export const modSceneRadarFamily: DiscoveryFamily = {
       angleSummary: latestRelevantNewsTitle
         ? `Use ${themeLabel} as the mod hook, then explain how ${latestRelevantNewsTitle} may intersect with builders, vanilla-first server communities, and mod-curious players.`
         : `Use ${themeLabel} as the main hook, then translate the standout mods into practical guidance for vanilla-first readers, builders, and server communities.`,
-      seoPrimaryKeyword: `best ${themeLabel.toLowerCase()} hytale mods`,
+      seoPrimaryKeyword,
       seoIntent: 'informational',
       relatedRouteTargets: ['/#servers', '/blog'],
       duplicateCheckSummary,

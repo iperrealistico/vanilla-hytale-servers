@@ -1,5 +1,5 @@
 import { ArticleEntry, getAllArticles } from '@/lib/articles/content';
-import { strategicInternalRoutes } from '@/lib/articles/analyzer';
+import { homepageServerListRoute, strategicInternalRoutes } from '@/lib/articles/analyzer';
 import { validateImageLibraryIntegrity } from '@/lib/images/imageManifest';
 
 export interface ArticleValidationIssue {
@@ -46,6 +46,14 @@ export function validateArticleEntry(entry: ArticleEntry, allSlugs: Set<string>)
 
   if (analysis.strategicLinks.length < 2) {
     issues.push({ slug, severity: 'error', message: `Article links to ${analysis.strategicLinks.length} strategic routes. Expected at least 2 of ${strategicInternalRoutes.join(', ')}.` });
+  }
+
+  if (!analysis.hasHomepageServerListLink) {
+    issues.push({
+      slug,
+      severity: 'error',
+      message: `Article must include at least one natural homepage server-list backlink to ${homepageServerListRoute}.`,
+    });
   }
 
   for (const relatedSlug of frontmatter.relatedSlugs) {

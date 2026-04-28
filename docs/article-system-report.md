@@ -99,7 +99,9 @@ Every live v3 article must include:
 - exactly one `ArticlePrimarySegue`,
 - two to four approved editorial blocks excluding the segue,
 - four to six H2 sections,
-- and at least two strategic internal links.
+- at least two strategic internal links,
+- at least one natural in-body backlink to the homepage server list at `/#servers`,
+- and primary-keyword usage that stays aligned with the `vanilla hytale servers` cluster without stuffing exact-match phrases into every section.
 
 ## Discovery Model
 
@@ -131,7 +133,7 @@ Each queue record can now carry:
 - source references and source revisions
 - source and novelty fingerprints
 - angle summary and why-now rationale
-- SEO keyword/intent metadata
+- SEO keyword/intent metadata, including a `vanilla hytale servers`-aware primary keyword seed
 - duplicate-check summaries
 - suppression state
 - draft and publish linkage
@@ -196,6 +198,7 @@ Validation covers:
 - approved block counts,
 - exact segue count,
 - strategic internal links,
+- homepage server-list backlink presence at `/#servers`,
 - chapter alignment,
 - and public asset existence.
 

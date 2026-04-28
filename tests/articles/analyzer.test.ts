@@ -42,6 +42,7 @@ test('analyzeArticleSource extracts sections, blocks, and strategic links', () =
   assert.equal(analysis.primarySegueCount, 1);
   assert.equal(analysis.approvedBlockCountExcludingSegue, 2);
   assert.deepEqual(analysis.strategicLinks.sort(), ['/#methodology', '/#servers']);
+  assert.equal(analysis.hasHomepageServerListLink, true);
   assert.equal(analysis.sections[0]?.id, 'first-section');
   assert.equal(analysis.sections[0]?.subheadings[0]?.id, 'first-subheading');
 });

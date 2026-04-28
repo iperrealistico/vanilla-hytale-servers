@@ -79,22 +79,22 @@ export default function ClientEffects() {
             }
 
             // Embla Carousel
-            const emblaNode = document.querySelector('[data-embla]');
-            if (emblaNode && EmblaCarousel) {
-                // Determine if we should treat drag as click based on drag amount
-                emblaApi = EmblaCarousel(emblaNode, {
+            const emblaRoot = document.querySelector('[data-embla]');
+            const emblaViewport = document.querySelector('[data-embla-viewport]');
+            if (emblaRoot && emblaViewport && EmblaCarousel) {
+                emblaApi = EmblaCarousel(emblaViewport, {
                     loop: true,
                     skipSnaps: false
                 });
 
-                // Add dragging class to cursor style
                 emblaApi.on('pointerDown', () => {
-                    const node = emblaApi.rootNode();
-                    node.style.cursor = 'grabbing';
+                    emblaRoot.classList.add('dragging');
                 });
                 emblaApi.on('pointerUp', () => {
-                    const node = emblaApi.rootNode();
-                    node.style.cursor = 'grab';
+                    emblaRoot.classList.remove('dragging');
+                });
+                emblaApi.on('destroy', () => {
+                    emblaRoot.classList.remove('dragging');
                 });
             }
 

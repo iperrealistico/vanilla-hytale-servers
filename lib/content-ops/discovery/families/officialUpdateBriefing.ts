@@ -1,6 +1,7 @@
 import type { DiscoveryFamily } from '@/lib/content-ops/discovery/families/types';
 import { evaluateCandidateDuplication } from '@/lib/content-ops/discovery/dedupe';
 import { parseHytaleArticlePage, parseHytaleNewsIndex } from '@/lib/content-ops/discovery/parsers/hytale';
+import { buildOfficialUpdatePrimaryKeyword } from '@/lib/content-ops/editorialSeo';
 import type {
   SourceLedgerRecord,
   SuppressionLogRecord,
@@ -131,12 +132,13 @@ export const officialUpdateBriefingFamily: DiscoveryFamily = {
 
       const title = buildOfficialUpdateTitle(article.title);
       const noveltyFingerprint = buildNoveltyFingerprint(title, article.title);
+      const seoPrimaryKeyword = buildOfficialUpdatePrimaryKeyword(article.title);
       const duplicateCheckSummary = evaluateCandidateDuplication({
         candidate: {
           candidateId: `${context.familyId}:${shortHash(sourceFingerprint)}`,
           title,
           angleSummary: `Translate ${article.title} into a broader vanilla-first Hytale server, SMP, and mod ecosystem brief.`,
-          seoPrimaryKeyword: `${article.title.toLowerCase()} vanilla hytale servers`,
+          seoPrimaryKeyword,
           sourceFingerprint,
           noveltyFingerprint,
           familyId: context.familyId,
@@ -205,7 +207,7 @@ export const officialUpdateBriefingFamily: DiscoveryFamily = {
           ? `Latest official Hytale blog revision visible on ${freshness}; this is the newest unconsumed official update with server and mod ecosystem implications.`
           : 'Latest official Hytale blog update with clear relevance to vanilla-first players and server operators.',
         angleSummary: `Reframe ${article.title} for vanilla-first Hytale readers by widening the story from patch notes into server stability, community expectations, and mod ecosystem implications.`,
-        seoPrimaryKeyword: `${article.title.toLowerCase()} vanilla hytale servers`,
+        seoPrimaryKeyword,
         seoIntent: 'informational',
         relatedRouteTargets: ['/#servers', '/blog', '/#methodology'],
         duplicateCheckSummary,
