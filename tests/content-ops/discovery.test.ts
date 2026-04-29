@@ -7,8 +7,10 @@ import path from 'path';
 import { evaluateCandidateDuplication } from '@/lib/content-ops/discovery/dedupe';
 import { discoverTitles } from '@/lib/content-ops/discovery/engine';
 import { modSceneRadarFamily } from '@/lib/content-ops/discovery/families/modSceneRadar';
+import { officialUpdateBriefingFamily } from '@/lib/content-ops/discovery/families/officialUpdateBriefing';
 import type { SourceFetcher } from '@/lib/content-ops/discovery/fetcher';
 import { getContentOpsPaths } from '@/lib/content-ops/paths';
+import { SourceConsumptionRecordSchema } from '@/lib/content-ops/discovery/schema';
 import { readDiscoveryState } from '@/lib/content-ops/discovery/state';
 
 const fixture = (...segments: string[]) => path.join(process.cwd(), 'tests', 'fixtures', 'discovery', ...segments);
@@ -206,6 +208,109 @@ test('same queued title promise suppresses clone candidates even when the source
 
   assert.equal(summary.decision, 'suppressed');
   assert.deepEqual(summary.matchedCandidateIds, ['candidate-old']);
+});
+
+test('official-update-briefing suppresses older numbered updates when a newer covered update already exists', async () => {
+  const indexHtml = fs.readFileSync(fixture('hytale-news-index.html'), 'utf8');
+  const update5Html = fs.readFileSync(fixture('hytale-article-update5.html'), 'utf8');
+  const update4Html = `<!doctype html><html><body><main><div><h1 class="post-heading">Hytale Patch Notes - Update 4</h1><div><span>Posted by Hytale Team</span><span>March 25, 2026</span></div><img src="https://cdn.hytale.com/update4.png" alt="Hytale Patch Notes - Update 4"><div class="post-body"><p>Fourth update patch notes for early access servers.</p><p>These changes affect servers, mods, and player onboarding.</p></div></div></main></body></html>`;
+
+  const result = await officialUpdateBriefingFamily.discover({
+    familyId: 'official-update-briefing',
+    nowIso: '2026-04-29T10:00:00.000Z',
+    paths: createTempPaths(),
+    fetcher: fixtureFetcher({
+      'https://hytale.com/news': indexHtml,
+      'https://hytale.com/news/2026/4/hytale-pre-release-patch-notes-update-5': update5Html,
+      'https://hytale.com/news/2026/3/hytale-patch-notes-update-4': update4Html,
+    }),
+    recentPublished: [
+      {
+        slug: 'what-pre-release-patch-notes-update-5-means-for-vanilla-first-hytale-servers-and-mods',
+        title: 'What Pre-release Patch Notes (Update 5) Means for Vanilla-First Hytale Servers and Mods',
+        excerpt: 'Translate update 5 for vanilla-first readers.',
+        category: 'official-updates',
+        tags: ['official-updates', 'update 5'],
+      },
+    ],
+    queueRecords: [],
+    existingCandidates: [],
+    sourceLedger: [],
+    sourceConsumption: [],
+  });
+
+  assert.equal(result.candidates.length, 0);
+  assert.ok(
+    result.suppressionLog.some(
+      (record) => record.reasonCategory === 'stale-source' && record.title === 'Hytale Patch Notes - Update 4',
+    ),
+  );
+});
+
+test('official-update-briefing suppresses older dated official posts after a newer covered official post', async () => {
+  const indexHtml = `<!doctype html><html><body><main><article><a href="/news/2026/4/server-performance-notes"><img src="https://cdn.hytale.com/perf.png" alt=""><h4>Server Performance Notes</h4><span>Performance notes for operators and players.</span><span>April 12, 2026</span><span>Posted by Hytale Team</span></a></article><article><a href="/news/2026/4/community-server-faq"><img src="https://cdn.hytale.com/faq.png" alt=""><h4>Community Server FAQ</h4><span>Answers for server communities and moderators.</span><span>April 5, 2026</span><span>Posted by Hytale Team</span></a></article></main></body></html>`;
+  const performanceHtml = `<!doctype html><html><body><main><div><h1 class="post-heading">Server Performance Notes</h1><div><span>Posted by Hytale Team</span><span>April 12, 2026</span></div><img src="https://cdn.hytale.com/perf-full.png" alt="Server Performance Notes"><div class="post-body"><p>Performance guidance for servers and stability work.</p><p>This post matters for vanilla-first operators.</p></div></div></main></body></html>`;
+  const faqHtml = `<!doctype html><html><body><main><div><h1 class="post-heading">Community Server FAQ</h1><div><span>Posted by Hytale Team</span><span>April 5, 2026</span></div><img src="https://cdn.hytale.com/faq-full.png" alt="Community Server FAQ"><div class="post-body"><p>Server community notes for Hytale moderators and operators.</p><p>This post still touches social systems and server operations.</p></div></div></main></body></html>`;
+
+  const result = await officialUpdateBriefingFamily.discover({
+    familyId: 'official-update-briefing',
+    nowIso: '2026-04-29T10:00:00.000Z',
+    paths: createTempPaths(),
+    fetcher: fixtureFetcher({
+      'https://hytale.com/news': indexHtml,
+      'https://hytale.com/news/2026/4/server-performance-notes': performanceHtml,
+      'https://hytale.com/news/2026/4/community-server-faq': faqHtml,
+    }),
+    recentPublished: [
+      {
+        slug: 'how-server-performance-notes-affects-vanilla-first-hytale-servers-and-the-wider-ecosystem',
+        title: 'How Server Performance Notes Affects Vanilla-First Hytale Servers and the Wider Ecosystem',
+        excerpt: 'Translate the performance notes for vanilla-first readers.',
+        category: 'official-updates',
+        tags: ['official-updates'],
+      },
+    ],
+    queueRecords: [],
+    existingCandidates: [],
+    sourceLedger: [],
+    sourceConsumption: [
+      SourceConsumptionRecordSchema.parse({
+        consumptionId: 'official-covered-newer',
+        candidateId: 'official-update-briefing:covered-newer',
+        queueId: 'title-0001',
+        familyId: 'official-update-briefing',
+        articleSlug: 'how-server-performance-notes-affects-vanilla-first-hytale-servers-and-the-wider-ecosystem',
+        title: 'How Server Performance Notes Affects Vanilla-First Hytale Servers and the Wider Ecosystem',
+        sourceFingerprint: 'hytale-news:https://hytale.com/news/2026/4/server-performance-notes#perf',
+        noveltyFingerprint: 'official-update-briefing:performance',
+        sourceRefs: [
+          {
+            sourceKey: 'https://hytale.com/news/2026/4/server-performance-notes',
+            sourceKind: 'hytale-news-post',
+            canonicalUrl: 'https://hytale.com/news/2026/4/server-performance-notes',
+            title: 'Server Performance Notes',
+            author: 'Hytale Team',
+            excerpt: 'Performance guidance for servers and stability work.',
+            imageUrl: 'https://cdn.hytale.com/perf-full.png',
+            snapshotPath: null,
+            guidelineImagePath: null,
+            publishedAt: 'April 12, 2026',
+            updatedAt: 'April 12, 2026',
+          },
+        ],
+        sourceRevisionRefs: [],
+        consumedAt: '2026-04-28T08:00:00.000Z',
+        publishedAt: '2026-04-28',
+      }),
+    ],
+  });
+
+  assert.equal(result.candidates.length, 0);
+  assert.ok(
+    result.suppressionLog.some(
+      (record) => record.reasonCategory === 'stale-source' && record.title === 'Community Server FAQ',
+    ),
+  );
 });
 
 test('mod-scene-radar suppresses stale fallback clusters with no fresh signal', async () => {

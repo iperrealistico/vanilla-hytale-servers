@@ -2,6 +2,7 @@ import type { DiscoveryFamily } from '@/lib/content-ops/discovery/families/types
 import { evaluateCandidateDuplication } from '@/lib/content-ops/discovery/dedupe';
 import { parseHytaleArticlePage, parseHytaleNewsIndex } from '@/lib/content-ops/discovery/parsers/hytale';
 import { buildOfficialUpdatePrimaryKeyword } from '@/lib/content-ops/editorialSeo';
+import type { DiscoveryFamilyContext } from '@/lib/content-ops/discovery/families/types';
 import type {
   SourceLedgerRecord,
   SuppressionLogRecord,
@@ -27,6 +28,187 @@ function buildNoveltyFingerprint(title: string, sourceTitle: string) {
 
 function isRelevantOfficialUpdate(bodyText: string, title: string) {
   return /update|patch|server|mod|plugin|creative|world|builder|combat|social|tool/i.test(`${title} ${bodyText}`);
+}
+
+interface OfficialSequenceMarker {
+  key: string;
+  number: number;
+}
+
+interface OfficialCoverageSignal {
+  label: string;
+  title: string;
+  canonicalUrl: string | null;
+  sourceDate: string | null;
+  sourceTime: number | null;
+  sequence: OfficialSequenceMarker | null;
+}
+
+function parseTimelineTime(value: string | null | undefined) {
+  if (!value) {
+    return null;
+  }
+
+  const time = Date.parse(value);
+  return Number.isNaN(time) ? null : time;
+}
+
+function extractOfficialSequenceMarker(title: string): OfficialSequenceMarker | null {
+  const normalized = title.toLowerCase();
+  const match = normalized.match(/\bupdate\s*\(?\s*(\d+)\)?\b/);
+  if (!match) {
+    return null;
+  }
+
+  const number = Number(match[1]);
+  if (!Number.isFinite(number)) {
+    return null;
+  }
+
+  if (/patch\s+notes/i.test(title)) {
+    return { key: 'patch-notes-update', number };
+  }
+
+  return { key: 'update', number };
+}
+
+function collectOfficialCoverageSignals(context: DiscoveryFamilyContext): OfficialCoverageSignal[] {
+  const signals: OfficialCoverageSignal[] = [];
+  const seen = new Set<string>();
+
+  const addSignal = (signal: OfficialCoverageSignal) => {
+    const dedupeKey = `${signal.canonicalUrl ?? 'no-url'}::${signal.title}::${signal.sourceDate ?? 'no-date'}::${signal.label}`;
+    if (seen.has(dedupeKey)) {
+      return;
+    }
+
+    seen.add(dedupeKey);
+    signals.push(signal);
+  };
+
+  for (const record of context.queueRecords) {
+    if (record.familyId !== context.familyId || record.workflowStatus === 'blocked') {
+      continue;
+    }
+
+    const officialSources = record.sourceRefs.filter((source) => source.sourceKind === 'hytale-news-post');
+    if (officialSources.length === 0) {
+      addSignal({
+        label: record.publishedSlug ?? record.queueId,
+        title: record.title,
+        canonicalUrl: null,
+        sourceDate: null,
+        sourceTime: null,
+        sequence: extractOfficialSequenceMarker(record.title),
+      });
+      continue;
+    }
+
+    for (const source of officialSources) {
+      const sourceDate = source.publishedAt ?? source.updatedAt ?? null;
+      addSignal({
+        label: record.publishedSlug ?? record.queueId,
+        title: source.title,
+        canonicalUrl: source.canonicalUrl,
+        sourceDate,
+        sourceTime: parseTimelineTime(sourceDate),
+        sequence: extractOfficialSequenceMarker(source.title),
+      });
+    }
+  }
+
+  for (const record of context.sourceConsumption) {
+    if (record.familyId !== context.familyId) {
+      continue;
+    }
+
+    const officialSources = record.sourceRefs.filter((source) => source.sourceKind === 'hytale-news-post');
+    if (officialSources.length === 0) {
+      addSignal({
+        label: record.articleSlug ?? record.queueId ?? record.consumptionId,
+        title: record.title,
+        canonicalUrl: null,
+        sourceDate: record.publishedAt,
+        sourceTime: parseTimelineTime(record.publishedAt),
+        sequence: extractOfficialSequenceMarker(record.title),
+      });
+      continue;
+    }
+
+    for (const source of officialSources) {
+      const sourceDate = source.publishedAt ?? source.updatedAt ?? null;
+      addSignal({
+        label: record.articleSlug ?? record.queueId ?? record.consumptionId,
+        title: source.title,
+        canonicalUrl: source.canonicalUrl,
+        sourceDate,
+        sourceTime: parseTimelineTime(sourceDate),
+        sequence: extractOfficialSequenceMarker(source.title),
+      });
+    }
+  }
+
+  for (const article of context.recentPublished) {
+    if (article.category !== 'official-updates') {
+      continue;
+    }
+
+    addSignal({
+      label: article.slug,
+      title: article.title,
+      canonicalUrl: null,
+      sourceDate: null,
+      sourceTime: null,
+      sequence: extractOfficialSequenceMarker(article.title),
+    });
+  }
+
+  return signals;
+}
+
+function findOlderCoveredOfficialReason(
+  article: ReturnType<typeof parseHytaleArticlePage>,
+  indexEntry: ReturnType<typeof parseHytaleNewsIndex>[number],
+  context: DiscoveryFamilyContext,
+) {
+  const signals = collectOfficialCoverageSignals(context).filter((signal) => signal.canonicalUrl !== article.canonicalUrl);
+  const candidateSequence = extractOfficialSequenceMarker(article.title);
+  const candidateDate = article.publishedAt ?? indexEntry.publishedAt ?? article.latestRevisionDate;
+  const candidateTime = parseTimelineTime(candidateDate);
+
+  if (candidateSequence) {
+    const newerSeriesSignal = signals
+      .filter(
+        (signal) =>
+          signal.sequence &&
+          signal.sequence.key === candidateSequence.key &&
+          signal.sequence.number > candidateSequence.number,
+      )
+      .sort((left, right) => (right.sequence?.number ?? 0) - (left.sequence?.number ?? 0))[0];
+
+    if (newerSeriesSignal) {
+      return {
+        reason: `A newer official ${newerSeriesSignal.title} is already covered, so older update-line entry ${article.title} should stay suppressed.`,
+        comparedAgainst: [newerSeriesSignal.label],
+      };
+    }
+  }
+
+  if (candidateTime !== null) {
+    const newerDatedSignal = signals
+      .filter((signal) => signal.sourceTime !== null && signal.sourceTime > candidateTime)
+      .sort((left, right) => (right.sourceTime ?? 0) - (left.sourceTime ?? 0))[0];
+
+    if (newerDatedSignal) {
+      const newerDateLabel = newerDatedSignal.sourceDate ? ` (${newerDatedSignal.sourceDate})` : '';
+      return {
+        reason: `A more recent official Hytale news post${newerDateLabel} is already covered, so older entry ${article.title} should not re-enter discovery.`,
+        comparedAgainst: [newerDatedSignal.label],
+      };
+    }
+  }
+
+  return null;
 }
 
 export const officialUpdateBriefingFamily: DiscoveryFamily = {
@@ -125,6 +307,23 @@ export const officialUpdateBriefingFamily: DiscoveryFamily = {
           reasonCategory: 'low-relevance',
           reason: 'Official post does not appear relevant to vanilla-first server selection, operators, or mod users.',
           comparedAgainst: [],
+          createdAt: context.nowIso,
+        });
+        continue;
+      }
+
+      const olderCoveredReason = findOlderCoveredOfficialReason(article, entry, context);
+      if (olderCoveredReason) {
+        suppressionLog.push({
+          suppressionId: `${context.familyId}:older-covered:${shortHash(article.canonicalUrl)}`,
+          familyId: context.familyId,
+          candidateId: null,
+          title: article.title,
+          sourceFingerprint,
+          noveltyFingerprint: buildNoveltyFingerprint(article.title, article.title),
+          reasonCategory: 'stale-source',
+          reason: olderCoveredReason.reason,
+          comparedAgainst: olderCoveredReason.comparedAgainst,
           createdAt: context.nowIso,
         });
         continue;
