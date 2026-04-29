@@ -5,6 +5,8 @@ import Script from "next/script";
 
 import { getSiteContent } from "@/lib/content";
 
+const ICON_VERSION = "20260429";
+
 export async function generateMetadata(): Promise<Metadata> {
   const content = await getSiteContent();
   return {
@@ -39,14 +41,14 @@ export default function RootLayout({
             `,
           }}
         />
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="shortcut icon" href="/favicon.ico" />
-        <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-        <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="icon" href={`/favicon.ico?v=${ICON_VERSION}`} sizes="any" />
+        <link rel="shortcut icon" href={`/favicon.ico?v=${ICON_VERSION}`} />
+        <link rel="icon" type="image/png" sizes="48x48" href={`/favicon-48x48.png?v=${ICON_VERSION}`} />
+        <link rel="icon" type="image/png" sizes="32x32" href={`/favicon-32x32.png?v=${ICON_VERSION}`} />
+        <link rel="icon" type="image/png" sizes="16x16" href={`/favicon-16x16.png?v=${ICON_VERSION}`} />
+        <link rel="icon" type="image/png" sizes="192x192" href={`/android-chrome-192x192.png?v=${ICON_VERSION}`} />
+        <link rel="apple-touch-icon" sizes="180x180" href={`/apple-touch-icon.png?v=${ICON_VERSION}`} />
+        <link rel="manifest" href={`/site.webmanifest?v=${ICON_VERSION}`} />
         <link rel="stylesheet" href="/vendor/fonts.css" />
         <link rel="stylesheet" href="/vendor/font-awesome.min.css" />
       </head>
