@@ -479,7 +479,7 @@ section {
   grid-template-columns: 1.35fr 0.65fr;
   gap: 18px;
   padding: 22px;
-  align-items: start;
+  align-items: stretch;
 }
 
 h1 {
@@ -539,6 +539,7 @@ h1 {
   flex-direction: column;
   gap: 10px;
   align-items: flex-start;
+  justify-content: center;
 }
 
 .hero-cta .btn {

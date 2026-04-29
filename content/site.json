@@ -36,7 +36,7 @@
   "hero": {
     "title": "Vanilla Hytale Servers",
     "description": "\n                A curated <strong>vanilla Hytale server list</strong> with five editor-ranked picks. Discover the <strong>best vanilla Hytale servers</strong> for SMP and survival,\n                compare rules and gameplay footprint, check monetization and <strong>no pay-to-win</strong> notes, and use the listed <strong>join info</strong> to get in.\n                Every listing includes an editor score, a last-checked date, and a clear review of what stays vanilla and what is changed.\n                When players search for <strong>vanilla Hytale servers</strong>, they usually want the real experience: explore, gather, craft, and build, without mods replacing survival.\n                This list focuses on <strong>vanilla-first</strong> servers and clearly documents each server’s gameplay footprint so you can pick the right <strong>vanilla Hytale server</strong> fast.\n              ",
-    "lastUpdated": "2025-12-19",
+    "lastUpdated": "2026-04-29",
     "backgroundFloats": [
       {
         "src": "/img/hytale/hytale_vanilla_servers_list_11.jpeg",
@@ -125,7 +125,7 @@
           "<i class=\"fa-solid fa-language\" aria-hidden=\"true\"></i><strong>Language:</strong>&nbsp;EN",
           "<i class=\"fa-solid fa-tree\" aria-hidden=\"true\"></i><strong>Playstyle:</strong>&nbsp;Vanilla SMP",
           "<i class=\"fa-solid fa-user-shield\" aria-hidden=\"true\"></i><strong>Whitelist:</strong>&nbsp;No",
-          "<i class=\"fa-regular fa-clock\" aria-hidden=\"true\"></i><strong>Last checked:</strong>&nbsp;2025-12-19"
+          "<i class=\"fa-regular fa-clock\" aria-hidden=\"true\"></i><strong>Last checked:</strong>&nbsp;2026-04-29"
         ],
         "ip": "",
         "discordUrl": "https://discord.gg/2d9wPbrpEU",
