@@ -107,7 +107,7 @@ export default function ClientEffects() {
                         navigator.clipboard.writeText(text).then(() => {
                             const toast = document.getElementById('toast');
                             if (toast) {
-                                toast.textContent = 'IP Copied!';
+                                toast.textContent = btn.getAttribute('data-copy-success') || 'Copied!';
                                 toast.classList.add('show');
                                 setTimeout(() => toast.classList.remove('show'), 2000);
                             }

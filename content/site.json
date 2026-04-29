@@ -1,12 +1,12 @@
 {
   "meta": {
-    "title": "Best Vanilla Hytale Servers (2026) | Curated List + IPs",
-    "description": "Editor-ranked vanilla Hytale servers. Curated vanilla Hytale server list with IPs, rules, gameplay footprint, no pay-to-win notes, and last-checked dates.",
+    "title": "Best Vanilla Hytale Servers (2026) | Curated List + Reviews",
+    "description": "Editor-ranked vanilla Hytale servers. Curated vanilla Hytale server list with join info, rules, gameplay footprint, no pay-to-win notes, and last-checked dates.",
     "ogTitle": "Vanilla Hytale Servers | Curated Editor Picks",
-    "ogDescription": "Editor-ranked vanilla Hytale servers with IPs, rules, gameplay footprint, monetization notes, and last-checked dates.",
+    "ogDescription": "Editor-ranked vanilla Hytale servers with join info, rules, gameplay footprint, monetization notes, and last-checked dates.",
     "ogImage": "https://www.vanillahytaleservers.com/img/vanillahytaleservers.jpg",
     "twitterTitle": "Vanilla Hytale Servers | Curated Editor Picks",
-    "twitterDescription": "Editor-ranked vanilla Hytale servers with IPs, rules, gameplay footprint, monetization notes, and last-checked dates.",
+    "twitterDescription": "Editor-ranked vanilla Hytale servers with join info, rules, gameplay footprint, monetization notes, and last-checked dates.",
     "twitterImage": "https://www.vanillahytaleservers.com/img/vanillahytaleservers.jpg"
   },
   "header": {
@@ -35,7 +35,7 @@
   },
   "hero": {
     "title": "Vanilla Hytale Servers",
-    "description": "\n                A curated <strong>vanilla Hytale server list</strong> with five editor-ranked picks. Discover the <strong>best vanilla Hytale servers</strong> for SMP and survival,\n                compare rules and gameplay footprint, check monetization and <strong>no pay-to-win</strong> notes, and copy the <strong>Hytale server IP</strong> to join.\n                Every listing includes an editor score, a last-checked date, and a clear review of what stays vanilla and what is changed.\n                When players search for <strong>vanilla Hytale servers</strong>, they usually want the real experience: explore, gather, craft, and build, without mods replacing survival.\n                This list focuses on <strong>vanilla-first</strong> servers and clearly documents each server’s gameplay footprint so you can pick the right <strong>vanilla Hytale server</strong> fast.\n              ",
+    "description": "\n                A curated <strong>vanilla Hytale server list</strong> with five editor-ranked picks. Discover the <strong>best vanilla Hytale servers</strong> for SMP and survival,\n                compare rules and gameplay footprint, check monetization and <strong>no pay-to-win</strong> notes, and use the listed <strong>join info</strong> to get in.\n                Every listing includes an editor score, a last-checked date, and a clear review of what stays vanilla and what is changed.\n                When players search for <strong>vanilla Hytale servers</strong>, they usually want the real experience: explore, gather, craft, and build, without mods replacing survival.\n                This list focuses on <strong>vanilla-first</strong> servers and clearly documents each server’s gameplay footprint so you can pick the right <strong>vanilla Hytale server</strong> fast.\n              ",
     "lastUpdated": "2025-12-19",
     "backgroundFloats": [
       {
@@ -115,7 +115,7 @@
         "disabled": false,
         "id": "pvc",
         "rank": "1",
-        "title": "Peaceful Vanilla Club (Hytale)",
+        "title": "Peaceful Vanilla Club: Hytale",
         "subtitle": "Peaceful vanilla survival SMP with a semi-vanilla approach: no grief, no random PvP, no pay to win.",
         "score": "92",
         "highlight": true,
@@ -127,7 +127,7 @@
           "<i class=\"fa-solid fa-user-shield\" aria-hidden=\"true\"></i><strong>Whitelist:</strong>&nbsp;No",
           "<i class=\"fa-regular fa-clock\" aria-hidden=\"true\"></i><strong>Last checked:</strong>&nbsp;2025-12-19"
         ],
-        "ip": "hy.peacefulvanilla.club",
+        "ip": "",
         "discordUrl": "https://discord.gg/2d9wPbrpEU",
         "websiteUrl": "https://hytale.peacefulvanilla.club/",
         "scoreBreakdown": [
@@ -197,67 +197,67 @@
       },
       {
         "type": "slot",
-        "disabled": true,
+        "disabled": false,
         "rank": "2",
-        "title": "Open Review Slot",
-        "subtitle": "Submit your <strong>vanilla Hytale server</strong> for review for a chance to be featured here.",
-        "status": "Open",
+        "title": "Available Review Spot",
+        "subtitle": "Submit your <strong>vanilla Hytale server</strong> for review and this shortlist slot can become your live listing.",
+        "status": "Available",
         "facts": [
-          "<i class=\"fa-solid fa-globe\" aria-hidden=\"true\"></i><strong>Region:</strong>&nbsp;Global",
+          "<i class=\"fa-solid fa-globe\" aria-hidden=\"true\"></i><strong>Region:</strong>&nbsp;Any",
           "<i class=\"fa-solid fa-language\" aria-hidden=\"true\"></i><strong>Language:</strong>&nbsp;Any",
           "<i class=\"fa-solid fa-tree\" aria-hidden=\"true\"></i><strong>Playstyle:</strong>&nbsp;Vanilla-first",
-          "<i class=\"fa-solid fa-user-shield\" aria-hidden=\"true\"></i><strong>Fairness:</strong>&nbsp;No P2W",
-          "<i class=\"fa-regular fa-clock\" aria-hidden=\"true\"></i><strong>Last checked:</strong>&nbsp;Pending"
+          "<i class=\"fa-solid fa-list-check\" aria-hidden=\"true\"></i><strong>Review:</strong>&nbsp;Open",
+          "<i class=\"fa-solid fa-circle-plus\" aria-hidden=\"true\"></i><strong>Slot:</strong>&nbsp;Available"
         ],
-        "ipText": "Claim this slot: submit for review"
+        "ipText": "Your server could appear here next"
       },
       {
         "type": "slot",
-        "disabled": true,
+        "disabled": false,
         "rank": "3",
-        "title": "Open Review Slot",
-        "subtitle": "Submit your <strong>vanilla Hytale server</strong> for review for a chance to be featured here.",
-        "status": "Open",
+        "title": "Available Review Spot",
+        "subtitle": "Clear rules, no pay-to-win, and a readable vanilla-first description make this spot easier to claim.",
+        "status": "Available",
         "facts": [
-          "<i class=\"fa-solid fa-globe\" aria-hidden=\"true\"></i><strong>Region:</strong>&nbsp;Global",
+          "<i class=\"fa-solid fa-globe\" aria-hidden=\"true\"></i><strong>Region:</strong>&nbsp;Any",
           "<i class=\"fa-solid fa-language\" aria-hidden=\"true\"></i><strong>Language:</strong>&nbsp;Any",
           "<i class=\"fa-solid fa-tree\" aria-hidden=\"true\"></i><strong>Playstyle:</strong>&nbsp;Vanilla-first",
-          "<i class=\"fa-solid fa-user-shield\" aria-hidden=\"true\"></i><strong>Fairness:</strong>&nbsp;No P2W",
-          "<i class=\"fa-regular fa-clock\" aria-hidden=\"true\"></i><strong>Last checked:</strong>&nbsp;Pending"
+          "<i class=\"fa-solid fa-list-check\" aria-hidden=\"true\"></i><strong>Review:</strong>&nbsp;Open",
+          "<i class=\"fa-solid fa-circle-plus\" aria-hidden=\"true\"></i><strong>Slot:</strong>&nbsp;Available"
         ],
-        "ipText": "Claim this slot: submit for review"
+        "ipText": "This open slot is ready for submissions"
       },
       {
         "type": "slot",
-        "disabled": true,
+        "disabled": false,
         "rank": "4",
-        "title": "Open Review Slot",
-        "subtitle": "Submit your <strong>vanilla Hytale server</strong> for review for a chance to be featured here.",
-        "status": "Open",
+        "title": "Available Review Spot",
+        "subtitle": "If your server keeps the vanilla gameplay footprint small and fair, it can fill this shortlist position.",
+        "status": "Available",
         "facts": [
-          "<i class=\"fa-solid fa-globe\" aria-hidden=\"true\"></i><strong>Region:</strong>&nbsp;Global",
+          "<i class=\"fa-solid fa-globe\" aria-hidden=\"true\"></i><strong>Region:</strong>&nbsp;Any",
           "<i class=\"fa-solid fa-language\" aria-hidden=\"true\"></i><strong>Language:</strong>&nbsp;Any",
           "<i class=\"fa-solid fa-tree\" aria-hidden=\"true\"></i><strong>Playstyle:</strong>&nbsp;Vanilla-first",
-          "<i class=\"fa-solid fa-user-shield\" aria-hidden=\"true\"></i><strong>Fairness:</strong>&nbsp;No P2W",
-          "<i class=\"fa-regular fa-clock\" aria-hidden=\"true\"></i><strong>Last checked:</strong>&nbsp;Pending"
+          "<i class=\"fa-solid fa-list-check\" aria-hidden=\"true\"></i><strong>Review:</strong>&nbsp;Open",
+          "<i class=\"fa-solid fa-circle-plus\" aria-hidden=\"true\"></i><strong>Slot:</strong>&nbsp;Available"
         ],
-        "ipText": "Claim this slot: submit for review"
+        "ipText": "More verified servers can fit here"
       },
       {
         "type": "slot",
-        "disabled": true,
+        "disabled": false,
         "rank": "5",
-        "title": "Open Review Slot",
-        "subtitle": "Submit your <strong>vanilla Hytale server</strong> for review for a chance to be featured here.",
-        "status": "Open",
+        "title": "Available Review Spot",
+        "subtitle": "We still have shortlist capacity, so polished submissions can turn this template into a featured card.",
+        "status": "Available",
         "facts": [
-          "<i class=\"fa-solid fa-globe\" aria-hidden=\"true\"></i><strong>Region:</strong>&nbsp;Global",
+          "<i class=\"fa-solid fa-globe\" aria-hidden=\"true\"></i><strong>Region:</strong>&nbsp;Any",
           "<i class=\"fa-solid fa-language\" aria-hidden=\"true\"></i><strong>Language:</strong>&nbsp;Any",
           "<i class=\"fa-solid fa-tree\" aria-hidden=\"true\"></i><strong>Playstyle:</strong>&nbsp;Vanilla-first",
-          "<i class=\"fa-solid fa-user-shield\" aria-hidden=\"true\"></i><strong>Fairness:</strong>&nbsp;No P2W",
-          "<i class=\"fa-regular fa-clock\" aria-hidden=\"true\"></i><strong>Last checked:</strong>&nbsp;Pending"
+          "<i class=\"fa-solid fa-list-check\" aria-hidden=\"true\"></i><strong>Review:</strong>&nbsp;Open",
+          "<i class=\"fa-solid fa-circle-plus\" aria-hidden=\"true\"></i><strong>Slot:</strong>&nbsp;Available"
         ],
-        "ipText": "Claim this slot: submit for review"
+        "ipText": "Claim this final open spot"
       }
     ]
   },
@@ -269,7 +269,7 @@
       "<strong>Clear vanilla-first statement:</strong> changes and additions must be disclosed.",
       "<strong>Public rules:</strong> griefing, PvP, resets, and moderation expectations.",
       "<strong>Contact exists:</strong> at least an active Discord or website.",
-      "<strong>Verifiable access:</strong> IP and availability can be checked (we show “last checked”)."
+      "<strong>Verifiable access:</strong> join info and availability can be checked (we show “last checked”)."
     ],
     "contact": {
       "label": "Doubts?",
@@ -342,7 +342,7 @@
       },
       {
         "question": "Can I suggest a server?",
-        "answer": "\n              <p>\n                Yes. Send the server name, IP, region, language, and links to rules and monetization policy. If it passes the exclusion rules, we review it for a chance to be featured here.\n              </p>\n            "
+        "answer": "\n              <p>\n                Yes. Send the server name, join info (public IP or Discord invite), region, language, and links to rules and monetization policy. If it passes the exclusion rules, we review it for a chance to be featured here.\n              </p>\n            "
       }
     ]
   },
@@ -351,7 +351,7 @@
     "description": "\n              If you want to be listed, make it easy for us to verify the server’s vanilla gameplay footprint, rules, stability, and monetization policy.\n              Submit your <strong>vanilla Hytale server</strong> and we will review it for a chance to be featured in this vanilla Hytale servers list.\n              Clear submissions are faster to review: link directly to rules and monetization, and state if you run any convenience systems that affect progression or fairness.\n              If everything checks out, your server can replace an open review slot.\n            ",
     "requirementsTitle": "Requirements",
     "requirements": [
-      "Server name and IP",
+      "Server name and join info (public IP or Discord invite)",
       "Region and primary language",
       "Website and Discord link",
       "Rules link (grief, PvP, resets)",

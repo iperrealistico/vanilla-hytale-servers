@@ -6,7 +6,7 @@ export default function ServerCard({ item }: { item: any }) {
     if (item.type === 'slot') {
         return (
             <article className="card slot tilt idle" data-tilt-strength="1.00" id={`slot${item.rank}`} data-reveal>
-                <span className="rank-badge" aria-hidden="true"><i className="fa-solid fa-medal"></i>#{item.rank}</span>
+                <span className="rank-badge" aria-hidden="true"><i className="fa-solid fa-sparkles"></i>#{item.rank}</span>
 
                 <div className="card-head">
                     <div className="card-title-row">
@@ -15,7 +15,8 @@ export default function ServerCard({ item }: { item: any }) {
                             <p className="subtitle" dangerouslySetInnerHTML={{ __html: item.subtitle }}></p>
                         </div>
                         <div className="badges">
-                            <span className="badge score"><i className="fa-solid fa-clipboard-check" aria-hidden="true"></i>Status: <strong>{item.status}</strong></span>
+                            <span className="badge template"><i className="fa-solid fa-layer-group" aria-hidden="true"></i>Template</span>
+                            <span className="badge score"><i className="fa-solid fa-clipboard-check" aria-hidden="true"></i>Spot: <strong>{item.status}</strong></span>
                         </div>
                     </div>
 
@@ -26,11 +27,13 @@ export default function ServerCard({ item }: { item: any }) {
                     </div>
 
                     <div className="cta-row">
-                        <div className="ip-box" aria-label="Submit your server">
-                            <i className="fa-solid fa-flag-checkered" aria-hidden="true"></i>
-                            <code>{item.ipText}</code>
+                        <div className="ip-box ip-box--slot" aria-label="Submit your server">
+                            <div className="field-copy">
+                                <span className="field-kicker">Available spot</span>
+                                <code>{item.ipText}</code>
+                            </div>
                             <a className="btn-slot pressable" href="#suggest" data-tilt-strength="0.40">
-                                <i className="fa-solid fa-paper-plane" aria-hidden="true"></i>Submit
+                                <i className="fa-solid fa-paper-plane" aria-hidden="true"></i>Submit yours
                             </a>
                         </div>
                     </div>
@@ -44,7 +47,7 @@ export default function ServerCard({ item }: { item: any }) {
                         </summary>
                         <div className="details-content">
                             <ul>
-                                <li>Server name and IP (plus region and primary language).</li>
+                                <li>Server name and join info (public IP or Discord-first access), plus region and primary language.</li>
                                 <li>Rules link: grief, PvP, resets, moderation expectations.</li>
                                 <li>Monetization policy link: confirm no pay-to-win advantages.</li>
                                 <li>Short vanilla-first statement: what is changed, if anything.</li>
@@ -81,18 +84,23 @@ export default function ServerCard({ item }: { item: any }) {
                 </div>
 
                 <div className="cta-row">
-                    <div className="ip-box" aria-label="Server IP">
-                        <i className="fa-solid fa-network-wired" aria-hidden="true"></i>
-                        <code>{item.ip}</code>
-                        <button className="btn-copy pressable" type="button" data-copy={item.ip} data-tilt-strength="0.40">
-                            <i className="fa-regular fa-copy" aria-hidden="true"></i>Copy
+                    <div className="ip-box ip-box--discord" aria-label="Discord invite URL">
+                        <div className="field-copy">
+                            <span className="field-kicker">Discord invite</span>
+                            <code>{item.discordUrl}</code>
+                        </div>
+                        <button
+                            className="btn-copy btn-copy--discord pressable"
+                            type="button"
+                            data-copy={item.discordUrl}
+                            data-copy-success="Discord invite copied!"
+                            data-tilt-strength="0.40"
+                        >
+                            <i className="fa-brands fa-discord" aria-hidden="true"></i>Copy
                         </button>
                     </div>
 
                     <div className="links" aria-label="Server links">
-                        <a className="link-pill tilt pressable" data-tilt-strength="0.55" href={item.discordUrl} target="_blank" rel="noopener noreferrer">
-                            <i className="fa-brands fa-discord" aria-hidden="true"></i>Discord
-                        </a>
                         <a className="link-pill tilt pressable" data-tilt-strength="0.55" href={item.websiteUrl} target="_blank" rel="noopener noreferrer">
                             <i className="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>Website
                         </a>
