@@ -132,6 +132,30 @@ export const imageLibrary = {
     640,
     'blueprint',
   ),
+  'staged-what-hytale-patch-notes-update-4-means-for-vanilla-first-hytale-servers-and-mods-cover': createAsset(
+    'staged-what-hytale-patch-notes-update-4-means-for-vanilla-first-hytale-servers-and-mods-cover',
+    '/images/blog/blueprints/hytale-update-4-vanilla-servers-cover.png',
+    'A blueprint-style Hytale village planning scene with social, block, and server stability diagram marks.',
+    1600,
+    900,
+    'blueprint',
+  ),
+  'staged-what-hytale-patch-notes-update-4-means-for-vanilla-first-hytale-servers-and-mods-ornament-wash': createAsset(
+    'staged-what-hytale-patch-notes-update-4-means-for-vanilla-first-hytale-servers-and-mods-ornament-wash',
+    '/images/blog/blueprints/hytale-update-4-vanilla-servers-wash.png',
+    'A broad blueprint wash with a Hytale village, crop field, torch, and quiet server planning linework.',
+    1600,
+    900,
+    'blueprint',
+  ),
+  'staged-what-hytale-patch-notes-update-4-means-for-vanilla-first-hytale-servers-and-mods-ornament-orbit': createAsset(
+    'staged-what-hytale-patch-notes-update-4-means-for-vanilla-first-hytale-servers-and-mods-ornament-orbit',
+    '/images/blog/blueprints/hytale-update-4-vanilla-servers-orbit.png',
+    'A compact blueprint orbit ornament with a blocky house, crop block, shield, checklist, and gear marks.',
+    640,
+    640,
+    'blueprint',
+  ),
 } as const;
 
 export type ImageAssetId = keyof typeof imageLibrary;
