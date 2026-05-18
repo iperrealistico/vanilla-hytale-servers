@@ -156,6 +156,30 @@ export const imageLibrary = {
     640,
     'blueprint',
   ),
+  'staged-how-hytale-new-worlds-modding-contest-winner-spotlight-affects-vanilla-first-hytale-servers-and-the-wider-ecosystem-cover': createAsset(
+    'staged-how-hytale-new-worlds-modding-contest-winner-spotlight-affects-vanilla-first-hytale-servers-and-the-wider-ecosystem-cover',
+    '/images/blog/blueprints/new-worlds-modding-contest-vanilla-servers-cover.png',
+    'A blueprint-style Hytale modding contest ecosystem scene with portal rings, world fragments, tool marks, and server trust diagrams.',
+    1600,
+    900,
+    'blueprint',
+  ),
+  'staged-how-hytale-new-worlds-modding-contest-winner-spotlight-affects-vanilla-first-hytale-servers-and-the-wider-ecosystem-ornament-wash': createAsset(
+    'staged-how-hytale-new-worlds-modding-contest-winner-spotlight-affects-vanilla-first-hytale-servers-and-the-wider-ecosystem-ornament-wash',
+    '/images/blog/blueprints/new-worlds-modding-contest-vanilla-servers-wash.png',
+    'A broad blueprint wash with faint modding tools, portal arcs, WorldGen markers, and vanilla-first server policy diagrams.',
+    1600,
+    900,
+    'blueprint',
+  ),
+  'staged-how-hytale-new-worlds-modding-contest-winner-spotlight-affects-vanilla-first-hytale-servers-and-the-wider-ecosystem-ornament-orbit': createAsset(
+    'staged-how-hytale-new-worlds-modding-contest-winner-spotlight-affects-vanilla-first-hytale-servers-and-the-wider-ecosystem-ornament-orbit',
+    '/images/blog/blueprints/new-worlds-modding-contest-vanilla-servers-orbit.png',
+    'A compact blueprint orbit ornament with a portal ring, voxel island, tool marks, NPC silhouette, and server shield.',
+    640,
+    640,
+    'blueprint',
+  ),
 } as const;
 
 export type ImageAssetId = keyof typeof imageLibrary;
