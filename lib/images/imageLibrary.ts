@@ -180,6 +180,30 @@ export const imageLibrary = {
     640,
     'blueprint',
   ),
+  'staged-best-quality-of-life-hytale-mods-this-month-for-vanilla-first-worlds-cover': createAsset(
+    'staged-best-quality-of-life-hytale-mods-this-month-for-vanilla-first-worlds-cover',
+    '/images/blog/blueprints/quality-of-life-hytale-mods-cover.png',
+    'A blueprint-style Hytale quality-of-life mod review scene with a market stall, harvesting tool, item chest, generator block, and fairness shield.',
+    1600,
+    900,
+    'blueprint',
+  ),
+  'staged-best-quality-of-life-hytale-mods-this-month-for-vanilla-first-worlds-ornament-wash': createAsset(
+    'staged-best-quality-of-life-hytale-mods-this-month-for-vanilla-first-worlds-ornament-wash',
+    '/images/blog/blueprints/quality-of-life-hytale-mods-wash.png',
+    'A broad blueprint wash with faint quality-of-life mod silhouettes, item blocks, harvesting tools, and server-policy linework.',
+    1600,
+    900,
+    'blueprint',
+  ),
+  'staged-best-quality-of-life-hytale-mods-this-month-for-vanilla-first-worlds-ornament-orbit': createAsset(
+    'staged-best-quality-of-life-hytale-mods-this-month-for-vanilla-first-worlds-ornament-orbit',
+    '/images/blog/blueprints/quality-of-life-hytale-mods-orbit.png',
+    'A compact blueprint orbit ornament with an item chest, harvesting tool, disclosure checklist, shield, and recipe-book marks.',
+    640,
+    640,
+    'blueprint',
+  ),
 } as const;
 
 export type ImageAssetId = keyof typeof imageLibrary;
