@@ -204,6 +204,30 @@ export const imageLibrary = {
     640,
     'blueprint',
   ),
+  'staged-what-pre-release-patch-notes-update-6-means-for-vanilla-first-hytale-servers-and-mods-cover': createAsset(
+    'staged-what-pre-release-patch-notes-update-6-means-for-vanilla-first-hytale-servers-and-mods-cover',
+    '/images/blog/blueprints/pre-release-update-6-vanilla-servers-cover.png',
+    'A blueprint-style Hytale server planning scene with builders, a notice board, block palette tools, and update validation diagrams.',
+    1600,
+    900,
+    'blueprint',
+  ),
+  'staged-what-pre-release-patch-notes-update-6-means-for-vanilla-first-hytale-servers-and-mods-ornament-wash': createAsset(
+    'staged-what-pre-release-patch-notes-update-6-means-for-vanilla-first-hytale-servers-and-mods-ornament-wash',
+    '/images/blog/blueprints/pre-release-update-6-vanilla-servers-wash.png',
+    'A broad blueprint wash with faint server notice board, block palette, workbench, settlement, and update-planning linework.',
+    1600,
+    900,
+    'blueprint',
+  ),
+  'staged-what-pre-release-patch-notes-update-6-means-for-vanilla-first-hytale-servers-and-mods-ornament-orbit': createAsset(
+    'staged-what-pre-release-patch-notes-update-6-means-for-vanilla-first-hytale-servers-and-mods-ornament-orbit',
+    '/images/blog/blueprints/pre-release-update-6-vanilla-servers-orbit.png',
+    'A compact blueprint orbit ornament with a server notice board, validation check, block stack, and operations gear.',
+    640,
+    640,
+    'blueprint',
+  ),
 } as const;
 
 export type ImageAssetId = keyof typeof imageLibrary;
