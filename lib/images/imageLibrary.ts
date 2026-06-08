@@ -228,6 +228,30 @@ export const imageLibrary = {
     640,
     'blueprint',
   ),
+  'staged-best-quality-of-life-hytale-mods-this-month-after-pre-release-patch-notes-update-6-cover': createAsset(
+    'staged-best-quality-of-life-hytale-mods-this-month-after-pre-release-patch-notes-update-6-cover',
+    '/images/blog/blueprints/quality-of-life-hytale-mods-update-6-cover.png',
+    'A blueprint-style Hytale quality-of-life mod review scene with utility crate, storage, visibility, mining, and fairness motifs.',
+    1600,
+    900,
+    'blueprint',
+  ),
+  'staged-best-quality-of-life-hytale-mods-this-month-after-pre-release-patch-notes-update-6-ornament-wash': createAsset(
+    'staged-best-quality-of-life-hytale-mods-this-month-after-pre-release-patch-notes-update-6-ornament-wash',
+    '/images/blog/blueprints/quality-of-life-hytale-mods-update-6-wash.png',
+    'A broad blueprint wash with faint utility crate, backpack, zoom, mining, checklist, and server-policy linework.',
+    1600,
+    900,
+    'blueprint',
+  ),
+  'staged-best-quality-of-life-hytale-mods-this-month-after-pre-release-patch-notes-update-6-ornament-orbit': createAsset(
+    'staged-best-quality-of-life-hytale-mods-this-month-after-pre-release-patch-notes-update-6-ornament-orbit',
+    '/images/blog/blueprints/quality-of-life-hytale-mods-update-6-orbit.png',
+    'A compact blueprint orbit ornament with a storage backpack, utility crate, mining tool, zoom lens, and fairness shield.',
+    640,
+    640,
+    'blueprint',
+  ),
 } as const;
 
 export type ImageAssetId = keyof typeof imageLibrary;
