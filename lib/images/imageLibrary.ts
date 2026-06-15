@@ -252,6 +252,30 @@ export const imageLibrary = {
     640,
     'blueprint',
   ),
+  'staged-best-farming-and-food-expansion-hytale-mods-this-month-after-pre-release-patch-notes-update-6-cover': createAsset(
+    'staged-best-farming-and-food-expansion-hytale-mods-this-month-after-pre-release-patch-notes-update-6-cover',
+    '/images/blog/blueprints/farming-food-expansion-hytale-mods-update-6-cover.png',
+    'A blueprint-style Hytale farming and food expansion mod review scene with crop beds, cooking stations, recipe sheets, crates, and server-policy marks.',
+    1600,
+    900,
+    'blueprint',
+  ),
+  'staged-best-farming-and-food-expansion-hytale-mods-this-month-after-pre-release-patch-notes-update-6-ornament-wash': createAsset(
+    'staged-best-farming-and-food-expansion-hytale-mods-this-month-after-pre-release-patch-notes-update-6-ornament-wash',
+    '/images/blog/blueprints/farming-food-expansion-hytale-mods-update-6-wash.png',
+    'A broad blueprint wash with faint crop rows, cooking station silhouettes, recipe diagrams, ingredient crates, and server-selection linework.',
+    1600,
+    900,
+    'blueprint',
+  ),
+  'staged-best-farming-and-food-expansion-hytale-mods-this-month-after-pre-release-patch-notes-update-6-ornament-orbit': createAsset(
+    'staged-best-farming-and-food-expansion-hytale-mods-this-month-after-pre-release-patch-notes-update-6-ornament-orbit',
+    '/images/blog/blueprints/farming-food-expansion-hytale-mods-update-6-orbit.png',
+    'A compact blueprint orbit ornament with crop blocks, a cooking pot, a pie, ingredient crates, and a server-disclosure shield.',
+    640,
+    640,
+    'blueprint',
+  ),
 } as const;
 
 export type ImageAssetId = keyof typeof imageLibrary;
