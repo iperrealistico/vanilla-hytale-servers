@@ -276,6 +276,30 @@ export const imageLibrary = {
     640,
     'blueprint',
   ),
+  'staged-best-multiplayer-must-hytale-mods-this-month-after-pre-release-patch-notes-update-6-cover': createAsset(
+    'staged-best-multiplayer-must-hytale-mods-this-month-after-pre-release-patch-notes-update-6-cover',
+    '/images/blog/blueprints/multiplayer-must-hytale-mods-update-6-cover.png',
+    'A blueprint-style Hytale multiplayer mod review scene with grouped players, faction banners, a secure vault, revive marks, and server-policy diagrams.',
+    1600,
+    900,
+    'blueprint',
+  ),
+  'staged-best-multiplayer-must-hytale-mods-this-month-after-pre-release-patch-notes-update-6-ornament-wash': createAsset(
+    'staged-best-multiplayer-must-hytale-mods-this-month-after-pre-release-patch-notes-update-6-ornament-wash',
+    '/images/blog/blueprints/multiplayer-must-hytale-mods-update-6-wash.png',
+    'A broad blueprint wash with faint grouped players, faction banners, vault storage, revive symbols, and server-selection linework.',
+    1600,
+    900,
+    'blueprint',
+  ),
+  'staged-best-multiplayer-must-hytale-mods-this-month-after-pre-release-patch-notes-update-6-ornament-orbit': createAsset(
+    'staged-best-multiplayer-must-hytale-mods-this-month-after-pre-release-patch-notes-update-6-ornament-orbit',
+    '/images/blog/blueprints/multiplayer-must-hytale-mods-update-6-orbit.png',
+    'A compact blueprint orbit ornament with a secure vault, party cubes, revive crosses, and faction markers.',
+    640,
+    640,
+    'blueprint',
+  ),
 } as const;
 
 export type ImageAssetId = keyof typeof imageLibrary;
