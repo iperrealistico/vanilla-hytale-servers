@@ -300,6 +300,30 @@ export const imageLibrary = {
     640,
     'blueprint',
   ),
+  'staged-best-multiplayer-must-hytale-mods-this-month-for-vanilla-first-worlds-cover': createAsset(
+    'staged-best-multiplayer-must-hytale-mods-this-month-for-vanilla-first-worlds-cover',
+    '/images/blog/blueprints/multiplayer-must-hytale-mods-vanilla-first-worlds-cover.png',
+    'A blueprint-style Hytale multiplayer mod review scene with a communication hub, grouped players, gear, and cooperative world silhouettes.',
+    1600,
+    900,
+    'blueprint',
+  ),
+  'staged-best-multiplayer-must-hytale-mods-this-month-for-vanilla-first-worlds-ornament-wash': createAsset(
+    'staged-best-multiplayer-must-hytale-mods-this-month-for-vanilla-first-worlds-ornament-wash',
+    '/images/blog/blueprints/multiplayer-must-hytale-mods-vanilla-first-worlds-wash.png',
+    'A broad ambient blueprint wash with a communication hub, signal rings, settlement geometry, and quiet multiplayer drafting marks.',
+    1600,
+    900,
+    'blueprint',
+  ),
+  'staged-best-multiplayer-must-hytale-mods-this-month-for-vanilla-first-worlds-ornament-orbit': createAsset(
+    'staged-best-multiplayer-must-hytale-mods-this-month-for-vanilla-first-worlds-ornament-orbit',
+    '/images/blog/blueprints/multiplayer-must-hytale-mods-vanilla-first-worlds-orbit.png',
+    'A compact blueprint orbit ornament with a cooperative armor crest, orbit rings, and multiplayer construction marks.',
+    640,
+    640,
+    'blueprint',
+  ),
 } as const;
 
 export type ImageAssetId = keyof typeof imageLibrary;
