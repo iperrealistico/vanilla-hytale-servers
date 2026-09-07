@@ -324,6 +324,30 @@ export const imageLibrary = {
     640,
     'blueprint',
   ),
+  'staged-best-dungeon-delvers-hytale-mods-this-month-for-vanilla-first-worlds-cover': createAsset(
+    'staged-best-dungeon-delvers-hytale-mods-this-month-for-vanilla-first-worlds-cover',
+    '/images/blog/blueprints/dungeon-delvers-hytale-mods-vanilla-first-worlds-cover.png',
+    'A blueprint-style Hytale dungeon exploration scene with a gateway, branching floor plans, chambers, and a cooperative delver party.',
+    1600,
+    900,
+    'blueprint',
+  ),
+  'staged-best-dungeon-delvers-hytale-mods-this-month-for-vanilla-first-worlds-ornament-wash': createAsset(
+    'staged-best-dungeon-delvers-hytale-mods-this-month-for-vanilla-first-worlds-ornament-wash',
+    '/images/blog/blueprints/dungeon-delvers-hytale-mods-vanilla-first-worlds-wash.png',
+    'A broad ambient blueprint wash with dungeon rooms, corridors, archways, chests, and low-contrast exploration linework.',
+    1600,
+    900,
+    'blueprint',
+  ),
+  'staged-best-dungeon-delvers-hytale-mods-this-month-for-vanilla-first-worlds-ornament-orbit': createAsset(
+    'staged-best-dungeon-delvers-hytale-mods-this-month-for-vanilla-first-worlds-ornament-orbit',
+    '/images/blog/blueprints/dungeon-delvers-hytale-mods-vanilla-first-worlds-orbit.png',
+    'A compact blueprint orbit ornament with a centered dungeon gateway, measured geometry, and orbit construction marks.',
+    640,
+    640,
+    'blueprint',
+  ),
 } as const;
 
 export type ImageAssetId = keyof typeof imageLibrary;
